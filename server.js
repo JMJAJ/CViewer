@@ -1,44 +1,54 @@
 const express = require('express');
 const fs = require('fs');
-
-const PORT = process.env.PORT || 8080;
 const app = express();
 
-// Load RTSP URLs from JSON file
-function loadURLsFromJSON(filename) {
+// Load RTSP URLs from file
+function loadURLsFromFile(filename) {
     try {
         const data = fs.readFileSync(filename, 'utf8');
-        return JSON.parse(data);
+        return data.split('\n').filter(url => url.trim() !== '');
     } catch (err) {
         console.error('Error loading URLs:', err);
         return [];
     }
 }
 
-const urls = loadURLsFromJSON('db.json');
+const urls = loadURLsFromFile('rtsp_url.txt');
 
-// Serve index.html when root URL is requested
+// Middleware to set CSP headers allowing HTTP requests
+app.use((req, res, next) => {
+    res.setHeader('Content-Security-Policy', 'upgrade-insecure-requests');
+    next();
+});
+
 app.get('/', (req, res) => {
     fs.readFile(__dirname + '/index.html', (err, data) => {
         if (err) {
-            res.status(500).send('Error loading index.html');
+            res.writeHead(500);
+            res.end('Error loading index.html');
             return;
         }
-        res.status(200).type('text/html').send(data);
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(data);
     });
 });
 
-// Serve RTSP URLs as JSON when /cameras endpoint is requested
 app.get('/cameras', (req, res) => {
-    res.status(200).json(urls);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(urls));
 });
 
-// Handle other requests with a 404 response
-app.use((req, res) => {
-    res.status(404).send('Not Found');
+app.get('/play', (req, res) => {
+    const rtspURL = req.query.url;
+    console.log(`Playing RTSP stream from ${rtspURL}`);
+    // Implement RTSP stream playing logic here
+    // For demonstration, we just print the URL
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end(`Playing RTSP stream from ${rtspURL}`);
 });
 
 // Start the server
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
