@@ -16,7 +16,7 @@
 
         .window {
             position: absolute;
-            background-color: #f4f4f4;
+            background-color: #f9ffdc;
             border: 1px solid #ccc;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
             overflow: hidden;
@@ -38,7 +38,7 @@
             max-width: 100%;
             margin-bottom: 5px;
             padding: 5px;
-            background-color: #f0f0f0;
+            background-color: #a5ff93;
             /* Button background color */
             border: 1px solid #ccc;
             /* Button border */
@@ -51,18 +51,18 @@
         }
 
         .camera-list-item:hover {
-            background-color: #e0e0e0;
+            background-color: #e1e174;
             /* Button background color on hover */
         }
 
         .video-container {
-            resize: both;
+            resize: vertical;
             overflow: hidden;
             /* Disable scrolling */
         }
 
         .window-titlebar {
-            background-color: #ddd;
+            background-color: #c3c3c3;
             padding: 5px;
             cursor: move;
             display: flex;
@@ -83,8 +83,8 @@
 
         .ip-info {
             padding: 10px;
-            background-color: #f9f9f9;
-            border-top: 1px solid #ddd;
+            background-color: #e6dbbf;
+            border-top: 1px solid #8c8c8c;
             font-size: 12px;
         }
 
@@ -125,48 +125,22 @@
     </div>
 
     <script>
-        function loadURLsFromJSON(filename) {
-            return fetch(filename)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Failed to load JSON file');
-                    }
-                    return response.json();
-                })
-                .catch(error => {
-                    console.error('Error loading JSON file:', error);
-                    return [];
-                });
-        }
-
-        let urls = loadURLsFromJSON('https://raw.githubusercontent.com/JMJAJ/CViewer/main/db.json')
+        // JavaScript code to fetch and display online RTSP IP addresses
+        fetch('/cameras') // Assumes Go server exposes a /cameras endpoint
+            .then(response => response.json())
             .then(data => {
-                // Extract URLs from the data
-                const urls = Object.values(data);
-                console.log(urls);
-
-                // Check if urls is an array
-                if (Array.isArray(urls)) {
-                    urls.forEach(url => {
-                        console.log(url);
+                const cameraList = document.getElementById('cameraList');
+                data.forEach(camera => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = camera;
+                    listItem.className = 'camera-list-item';
+                    listItem.addEventListener('click', () => {
+                        openVideoWindow(camera);
                     });
-                } else {
-                    console.error('Data is not an array');
-                }
-            });
-
-        
-        // Fetch and display online RTSP IP addresses
-        urls.forEach(ip => {
-            const cameraList = document.getElementById('cameraList');
-            const listItem = document.createElement('li');
-            listItem.textContent = ip;
-            listItem.className = 'camera-list-item';
-            listItem.addEventListener('click', () => {
-                openVideoWindow(ip);
-            });
-            cameraList.appendChild(listItem);
-        });
+                    cameraList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error fetching online cameras:', error));
 
         // Function to open a new video container window with the selected RTSP stream
         function openVideoWindow(rtspUrl) {
@@ -238,7 +212,7 @@
             const ip = rtspUrl.match(/(\d+\.\d+\.\d+\.\d+)/)[0];
             fetch(
                     `http://ip-api.com/json/${ip}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query`
-                )
+                    )
                 .then(response => response.json())
                 .then(data => {
                     const ipInfo = document.getElementById('ipInfo');
@@ -281,9 +255,9 @@
                 });
         }
 
-        // Function to add a new IP address to the list
-        document.getElementById('addIpForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent form submission
+        // Function to add a new IP address
+        const addIpButton = document.getElementById('addIpButton');
+        addIpButton.addEventListener('click', () => {
             const addIpInput = document.getElementById('addIpInput');
             const newIp = addIpInput.value.trim();
             if (newIp) {
@@ -296,6 +270,54 @@
                 });
                 cameraList.appendChild(listItem);
                 addIpInput.value = '';
+            }
+        });
+        // Function to update the camera list with new IP addresses
+        function updateCameraList(ipList) {
+            const cameraList = document.getElementById('cameraList');
+            cameraList.innerHTML = ''; // Clear previous list
+            ipList.forEach(ip => {
+                const listItem = document.createElement('li');
+                listItem.textContent = ip;
+                listItem.className = 'camera-list-item';
+                listItem.addEventListener('click', () => {
+                    openVideoWindow(ip);
+                });
+                cameraList.appendChild(listItem);
+            });
+        }
+
+        // Function to add a new IP address to the list
+        document.getElementById('addIpForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+            const addIpInput = document.getElementById('addIpInput');
+            const newIp = addIpInput.value.trim();
+            if (newIp) {
+                // Add new IP address to the list
+                fetch('/add-ip', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'text/plain'
+                        },
+                        body: newIp
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.text();
+                        } else {
+                            throw new Error('Failed to add IP address');
+                        }
+                    })
+                    .then(() => {
+                        // Update UI with the new IP address
+                        updateCameraList([...document.querySelectorAll('.camera-list-item')].map(item =>
+                            item.textContent).concat(newIp));
+                        addIpInput.value = ''; // Clear input field
+                    })
+                    .catch(error => {
+                        console.error('Error adding IP address:', error);
+                        // Handle error
+                    });
             }
         });
     </script>
