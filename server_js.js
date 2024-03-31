@@ -3,36 +3,36 @@ const fs = require('fs');
 
 const PORT = process.env.PORT || 8080;
 
-// Load RTSP URLs from file
-function loadURLsFromFile(filename) {
+// Load IP addresses from JSON file
+function loadIPAddressesFromFile(filename) {
     try {
         const data = fs.readFileSync(filename, 'utf8');
-        return data.split('\n').filter(url => url.trim() !== '');
+        const jsonData = JSON.parse(data);
+        return jsonData.IPAddresses;
     } catch (err) {
-        console.error('Error loading URLs:', err);
+        console.error('Error loading IP addresses:', err);
         return [];
     }
 }
 
-const urls = loadURLsFromFile('rtsp_url.txt');
+const urls = loadIPAddressesFromFile('urls.json');
 
 const server = http.createServer((req, res) => {
     if (req.url === '/') {
-        // Serve index.html
         fs.readFile(__dirname + '/index.html', (err, data) => {
             if (err) {
                 res.writeHead(500);
-                return res.end('Error loading index.html');
+                res.end('Error loading index.html');
+                return;
             }
             res.writeHead(200, { 'Content-Type': 'text/html' });
             res.end(data);
         });
     } else if (req.url === '/cameras') {
-        // Return RTSP IP addresses as JSON
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify(urls));
-    } else if (req.url.startsWith('/play?url=')) {
-        const rtspURL = decodeURIComponent(req.url.slice(10));
+    } else if (req.url.startsWith('/play')) {
+        const rtspURL = req.url.split('=')[1];
         console.log(`Playing RTSP stream from ${rtspURL}`);
         // Implement RTSP stream playing logic here
         // For demonstration, we just print the URL
