@@ -155,10 +155,9 @@
                 }
             });
 
-        var urlArray = urls.split(',');
-
+        
         // Fetch and display online RTSP IP addresses
-        urlArray.forEach(ip => {
+        urls.forEach(ip => {
             const cameraList = document.getElementById('cameraList');
             const listItem = document.createElement('li');
             listItem.textContent = ip;
