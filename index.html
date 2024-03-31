@@ -113,6 +113,10 @@
         <div class="window sidebar" id="sidebar">
             <div class="window-titlebar">Online IP Cameras</div>
             <div class="window-content">
+                <form id="addIpForm">
+                    <input type="text" id="addIpInput" placeholder="Enter IP address">
+                    <button type="submit" id="addIpButton">Add IP</button>
+                </form>
                 <ul class="camera-list" id="cameraList">
                     <!-- Online RTSP IP addresses will be inserted here dynamically -->
                 </ul>
@@ -122,7 +126,7 @@
 
     <script>
         // JavaScript code to fetch and display online RTSP IP addresses
-        fetch('/cameras') // Fetch RTSP URLs from the server
+        fetch('/cameras') // Assumes Go server exposes a /cameras endpoint
             .then(response => response.json())
             .then(data => {
                 const cameraList = document.getElementById('cameraList');
@@ -130,7 +134,6 @@
                     const listItem = document.createElement('li');
                     listItem.textContent = camera;
                     listItem.className = 'camera-list-item';
-                    // Add click event listener to open video window
                     listItem.addEventListener('click', () => {
                         openVideoWindow(camera);
                     });
