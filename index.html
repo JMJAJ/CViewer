@@ -212,7 +212,7 @@
         function fetchIPInfo(rtspUrl) {
             // Extract IP address from RTSP URL
             const ip = rtspUrl.match(/(\d+\.\d+\.\d+\.\d+)/)[0];
-            fetch(`https://jxint-server-api.fly.dev/api/ip-info/${ip}`)
+            fetch(`/api/ip-info/${ip}`) // fetch(`https://jxint-server-api.fly.dev/api/ip-info/${ip}`)
                 .then(response => response.json())
                 .then(data => {
                     const ipInfo = document.getElementById('ipInfo');
