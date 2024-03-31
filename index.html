@@ -126,21 +126,23 @@
 
     <script>
         // JavaScript code to fetch and display online RTSP IP addresses
-        fetch('/cameras') // Assumes Go server exposes a /cameras endpoint
-            .then(response => response.json())
+        fetch('rtsp_url.txt') // Assuming rtsp_url.txt is in the same directory as your HTML file
+            .then(response => response.text()) // Read the text file
             .then(data => {
+                const rtspUrls = data.split('\n').map(url => url.trim()); // Split by newline and remove whitespace
                 const cameraList = document.getElementById('cameraList');
-                data.forEach(camera => {
+                rtspUrls.forEach(url => {
                     const listItem = document.createElement('li');
-                    listItem.textContent = camera;
+                    listItem.textContent = url;
                     listItem.className = 'camera-list-item';
                     listItem.addEventListener('click', () => {
-                        openVideoWindow(camera);
+                        openVideoWindow(url);
                     });
                     cameraList.appendChild(listItem);
                 });
             })
             .catch(error => console.error('Error fetching online cameras:', error));
+
 
         // Function to open a new video container window with the selected RTSP stream
         function openVideoWindow(rtspUrl) {
@@ -212,7 +214,7 @@
             const ip = rtspUrl.match(/(\d+\.\d+\.\d+\.\d+)/)[0];
             fetch(
                     `http://ip-api.com/json/${ip}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query`
-                    )
+                )
                 .then(response => response.json())
                 .then(data => {
                     const ipInfo = document.getElementById('ipInfo');
