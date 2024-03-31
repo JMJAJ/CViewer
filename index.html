@@ -125,22 +125,31 @@
     </div>
 
     <script>
-        // JavaScript code to fetch and display online RTSP IP addresses
-        fetch('/cameras') // Assumes Go server exposes a /cameras endpoint
-            .then(response => response.json())
-            .then(data => {
-                const cameraList = document.getElementById('cameraList');
-                data.forEach(camera => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = camera;
-                    listItem.className = 'camera-list-item';
-                    listItem.addEventListener('click', () => {
-                        openVideoWindow(camera);
-                    });
-                    cameraList.appendChild(listItem);
-                });
-            })
-            .catch(error => console.error('Error fetching online cameras:', error));
+        // JavaScript code
+        // Load RTSP URLs from file
+        function loadURLsFromFile(filename) {
+            try {
+                const data = fs.readFileSync(filename, 'utf8');
+                return data.split('\n').filter(url => url.trim() !== '');
+            } catch (err) {
+                console.error('Error loading URLs:', err);
+                return [];
+            }
+        }
+
+        let urls = loadURLsFromFile('rtsp_url.txt');
+
+        // Fetch and display online RTSP IP addresses
+        urls.forEach(ip => {
+            const cameraList = document.getElementById('cameraList');
+            const listItem = document.createElement('li');
+            listItem.textContent = ip;
+            listItem.className = 'camera-list-item';
+            listItem.addEventListener('click', () => {
+                openVideoWindow(ip);
+            });
+            cameraList.appendChild(listItem);
+        });
 
         // Function to open a new video container window with the selected RTSP stream
         function openVideoWindow(rtspUrl) {
@@ -254,9 +263,9 @@
                 });
         }
 
-        // Function to add a new IP address
-        const addIpButton = document.getElementById('addIpButton');
-        addIpButton.addEventListener('click', () => {
+        // Function to add a new IP address to the list
+        document.getElementById('addIpForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
             const addIpInput = document.getElementById('addIpInput');
             const newIp = addIpInput.value.trim();
             if (newIp) {
@@ -269,54 +278,6 @@
                 });
                 cameraList.appendChild(listItem);
                 addIpInput.value = '';
-            }
-        });
-        // Function to update the camera list with new IP addresses
-        function updateCameraList(ipList) {
-            const cameraList = document.getElementById('cameraList');
-            cameraList.innerHTML = ''; // Clear previous list
-            ipList.forEach(ip => {
-                const listItem = document.createElement('li');
-                listItem.textContent = ip;
-                listItem.className = 'camera-list-item';
-                listItem.addEventListener('click', () => {
-                    openVideoWindow(ip);
-                });
-                cameraList.appendChild(listItem);
-            });
-        }
-
-        // Function to add a new IP address to the list
-        document.getElementById('addIpForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent form submission
-            const addIpInput = document.getElementById('addIpInput');
-            const newIp = addIpInput.value.trim();
-            if (newIp) {
-                // Add new IP address to the list
-                fetch('/add-ip', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'text/plain'
-                        },
-                        body: newIp
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            return response.text();
-                        } else {
-                            throw new Error('Failed to add IP address');
-                        }
-                    })
-                    .then(() => {
-                        // Update UI with the new IP address
-                        updateCameraList([...document.querySelectorAll('.camera-list-item')].map(item =>
-                            item.textContent).concat(newIp));
-                        addIpInput.value = ''; // Clear input field
-                    })
-                    .catch(error => {
-                        console.error('Error adding IP address:', error);
-                        // Handle error
-                    });
             }
         });
     </script>
