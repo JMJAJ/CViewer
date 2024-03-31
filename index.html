@@ -125,22 +125,40 @@
     </div>
 
     <script>
-        // JavaScript code
-        // Load RTSP URLs from file
-        function loadURLsFromFile(filename) {
-            try {
-                const data = fs.readFileSync(filename, 'utf8');
-                return data.split('\n').filter(url => url.trim() !== '');
-            } catch (err) {
-                console.error('Error loading URLs:', err);
-                return [];
-            }
+        function loadURLsFromJSON(filename) {
+            return fetch(filename)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to load JSON file');
+                    }
+                    return response.json();
+                })
+                .catch(error => {
+                    console.error('Error loading JSON file:', error);
+                    return [];
+                });
         }
 
-        let urls = loadURLsFromFile('rtsp_url.txt');
+        let urls = loadURLsFromJSON('https://raw.githubusercontent.com/JMJAJ/CViewer/main/db.json')
+            .then(data => {
+                // Extract URLs from the data
+                const urls = Object.values(data);
+                console.log(urls);
+
+                // Check if urls is an array
+                if (Array.isArray(urls)) {
+                    urls.forEach(url => {
+                        console.log(url);
+                    });
+                } else {
+                    console.error('Data is not an array');
+                }
+            });
+
+        var urlArray = urls.split(',');
 
         // Fetch and display online RTSP IP addresses
-        urls.forEach(ip => {
+        urlArray.forEach(ip => {
             const cameraList = document.getElementById('cameraList');
             const listItem = document.createElement('li');
             listItem.textContent = ip;
@@ -220,7 +238,8 @@
             // Extract IP address from RTSP URL
             const ip = rtspUrl.match(/(\d+\.\d+\.\d+\.\d+)/)[0];
             fetch(
-                    `http://ip-api.com/json/${ip}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query`)
+                    `http://ip-api.com/json/${ip}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query`
+                )
                 .then(response => response.json())
                 .then(data => {
                     const ipInfo = document.getElementById('ipInfo');
