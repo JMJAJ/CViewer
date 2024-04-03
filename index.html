@@ -305,9 +305,6 @@
             if (globalLatitude && globalLongitude) {
                 fetchWeather(globalLatitude, globalLongitude);
             }
-            // Fetch nearby IPs and display them
-            fetchNearbyIPs(globalLatitude, globalLongitude)
-                .then(ipList => displayNearbyIPs(ipList));
         }
 
         // Function to close a video container window
@@ -360,7 +357,7 @@
             // Extract IP address from RTSP URL
             const ip = rtspUrl.match(/(\d+\.\d+\.\d+\.\d+)/)[0];
             fetch(
-                    `https://cors-anywhere.herokuapp.com/http://ip-api.com/json/${ip}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query`
+                    `http://ip-api.com/json/${ip}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query`
                 )
                 .then(response => response.json())
                 .then(data => {
