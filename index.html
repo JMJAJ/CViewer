@@ -454,58 +454,6 @@
             }
         }
 
-        // Function to fetch nearby IPs based on latitude and longitude
-        async function fetchNearbyIPs(latitude, longitude) {
-            const ip = rtspUrl.match(/(\d+\.\d+\.\d+\.\d+)/)[0];
-            try {
-                const response = await fetch(
-                    `https://api.ipgeolocation.io/ipgeo?apiKey=89d5d153f6fa4fb7be56776e54eedef1&ip${ip}&fields=geo&include=useragent`
-                );
-                const data = await response.json();
-                return data.ipList;
-            } catch (error) {
-                console.error('Error fetching nearby IPs:', error);
-                return [];
-            }
-        }
-
-        function displayNearbyIPs(ipList) {
-            const nearbyIPsContainer = document.getElementById('nearbyIPs');
-            if (nearbyIPsContainer) {
-                nearbyIPsContainer.innerHTML = '<h2>Funny things</h2>';
-                const ul = document.createElement('ul');
-                ipList.forEach(ipData => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `
-                <p><strong>IP:</strong> ${ipData.ip}</p>
-                <p><strong>Country:</strong> ${ipData.country_name} (${ipData.country_code2})</p>
-                <p><strong>State/Province:</strong> ${ipData.state_prov}</p>
-                <p><strong>District:</strong> ${ipData.district}</p>
-                <p><strong>City:</strong> ${ipData.city}</p>
-                <p><strong>Zip Code:</strong> ${ipData.zipcode}</p>
-                <p><strong>Latitude:</strong> ${ipData.latitude}</p>
-                <p><strong>Longitude:</strong> ${ipData.longitude}</p>
-                <p><strong>User Agent:</strong> ${ipData.user_agent.userAgentString}</p>
-                <p><strong>User Agent Name:</strong> ${ipData.user_agent.name}</p>
-                <p><strong>User Agent Type:</strong> ${ipData.user_agent.type}</p>
-                <p><strong>User Agent Version:</strong> ${ipData.user_agent.version}</p>
-                <p><strong>User Agent Device Name:</strong> ${ipData.user_agent.device.name}</p>
-                <p><strong>User Agent Device Type:</strong> ${ipData.user_agent.device.type}</p>
-                <p><strong>User Agent Device Brand:</strong> ${ipData.user_agent.device.brand}</p>
-                <p><strong>User Agent Device CPU:</strong> ${ipData.user_agent.device.CPU}</p>
-                <p><strong>User Agent Engine Name:</strong> ${ipData.user_agent.engine.name}</p>
-                <p><strong>User Agent Engine Type:</strong> ${ipData.user_agent.engine.type}</p>
-                <p><strong>User Agent Engine Version:</strong> ${ipData.user_agent.engine.version}</p>
-                <p><strong>User Agent Operating System Name:</strong> ${ipData.user_agent.operatingSystem.name}</p>
-                <p><strong>User Agent Operating System Type:</strong> ${ipData.user_agent.operatingSystem.type}</p>
-                <p><strong>User Agent Operating System Version:</strong> ${ipData.user_agent.operatingSystem.version}</p>
-            `;
-                    ul.appendChild(li);
-                });
-                nearbyIPsContainer.appendChild(ul);
-            }
-        }
-
         // Function to add a new RTSP URL
         const addIpButton = document.getElementById('addIpButton');
         addIpButton.addEventListener('click', () => {
