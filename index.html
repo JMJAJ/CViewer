@@ -241,7 +241,7 @@ const API_ENDPOINTS = {
     IP_INFO: 'http://ip-api.com/json/',
     IP_INFO_FIELDS: 'status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query',
     PASTEBIN: 'https://pastebin.com/raw/UuJZFNxF',
-    CORS_PROXY: 'https://serverless-api-bay.vercel.app/api/proxy',
+    CORS_PROXY: 'https://serverless-api-jnzf.vercel.app/api/proxy',
     ASN_INFO: 'https://ipinfo.io/'
 };
 
@@ -422,20 +422,39 @@ const createVideoWindow = (rtspUrl) => {
     return newWindow;
 };
 
-const fetchIPInfo = async (rtspUrl) => {
+async function fetchIPInfo(rtspUrl) {
     const ip = extractIpFromRtsp(rtspUrl);
-    try {
-        const data = await fetchJson(`${API_ENDPOINTS.IP_INFO}${ip}?fields=${API_ENDPOINTS.IP_INFO_FIELDS}`);
-        updateIPInfoUI(data);
-        updateGoogleMaps(data.lat, data.lon, data.district, data.city, data.regionName);
-        globalState.latitude = data.lat;
-        globalState.longitude = data.lon;
-        globalState.asn = data.as.split(' ')[0];
-    } catch (error) {
-        console.error('Error fetching IP information:', error);
-        document.getElementById('ipInfo').textContent = 'Error fetching IP information';
+    if (!ip) {
+        console.error('Invalid IP address extracted from RTSP URL.');
+        return;
     }
-};
+    console.log(`Extracted IP: ${ip}`);
+    try {
+        const response = await fetch(`${API_ENDPOINTS.CORS_PROXY}?url=${API_ENDPOINTS.IP_INFO}${ip}&fields=${API_ENDPOINTS.IP_INFO_FIELDS}`);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+        const ipInfo = await response.json();
+        console.log('IP Info Response:', ipInfo); // Add logging here
+
+        if (!ipInfo || !ipInfo.query) {
+            console.error('IP information not found or invalid structure:', ipInfo);
+            return;
+        }
+
+        updateIPInfoUI(ipInfo);
+        globalState.ip = ipInfo.query;
+        globalState.latitude = ipInfo.lat;
+        globalState.longitude = ipInfo.lon;
+
+        // Fetch weather only after setting latitude and longitude
+        if (globalState.latitude && globalState.longitude) {
+            await fetchWeather(globalState.latitude, globalState.longitude); // Ensure this is awaited if it's async
+        }
+
+    } catch (error) {
+        console.error('Failed to fetch IP information:', error);
+    }
+}
 
 const updateIPInfoUI = (data) => {
     const ipInfo = document.getElementById('ipInfo');
@@ -474,17 +493,20 @@ const updateGoogleMaps = (lat, lon, district, city, regionName) => {
     `;
 };
 
-const fetchAndUpdateASN = () => {
-    setInterval(async () => {
-        try {
-            const response = await fetch(`${API_ENDPOINTS.ASN_INFO}${globalState.asn}`);
-            const html = await response.text();
-            const asnDetails = parseASNDetails(html);
-            updateAsnDetails(asnDetails);
-        } catch (error) {
-            console.error('Error fetching and updating ASN details:', error);
-        }
-    }, 1000);
+async function  fetchAndUpdateASN() {
+    const ip = globalState.ip;
+    if (!ip) {
+        console.error('No IP address available for ASN lookup.');
+        return;
+    }
+    console.log(`Fetching ASN for IP: ${ip}`); // Debugging log
+    try {
+        const asnInfo = await fetchJson(`${API_ENDPOINTS.CORS_PROXY}?url=${API_ENDPOINTS.ASN_INFO}${ip}/json`);
+        updateAsnInfo(asnInfo);
+        globalState.asn = asnInfo.asn;
+    } catch (error) {
+        console.error('Failed to fetch ASN information:', error);
+    }
 };
 
 const parseASNDetails = (html) => {
