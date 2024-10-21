@@ -417,12 +417,28 @@ const createVideoWindow = (rtspUrl) => {
 const fetchIPInfo = async (rtspUrl) => {
     const ip = extractIpFromRtsp(rtspUrl);
     try {
-        const data = await fetchJson(`${API_ENDPOINTS.IP_INFO}${ip}?fields=${API_ENDPOINTS.IP_INFO_FIELDS}`);
-        updateIPInfoUI(data);
-        updateGoogleMaps(data.lat, data.lon, data.district, data.city, data.regionName);
-        globalState.latitude = data.lat;
-        globalState.longitude = data.lon;
-        globalState.asn = data.as.split(' ')[0];
+        const response = await fetch('https://serverless-api-bay.vercel.app/api/proxy.js', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                targetUrl: `${API_ENDPOINTS.IP_INFO}${ip}?fields=${API_ENDPOINTS.IP_INFO_FIELDS}`
+            })
+        });
+
+        const data = await response.json();
+        
+        if (response.ok) {
+            updateIPInfoUI(data);
+            updateGoogleMaps(data.lat, data.lon, data.district, data.city, data.regionName);
+            globalState.latitude = data.lat;
+            globalState.longitude = data.lon;
+            globalState.asn = data.as.split(' ')[0];
+        } else {
+            console.error('Error fetching IP information:', data);
+            document.getElementById('ipInfo').textContent = `Error: ${data.message}`;
+        }
     } catch (error) {
         console.error('Error fetching IP information:', error);
         document.getElementById('ipInfo').textContent = 'Error fetching IP information';
@@ -469,7 +485,7 @@ const updateGoogleMaps = (lat, lon, district, city, regionName) => {
 const fetchAndUpdateASN = () => {
     setInterval(async () => {
         try {
-            const response = await fetch(`${API_ENDPOINTS.ASN_INFO}${globalState.asn}`, {headers: {'Access-Control-Allow-Origin': 'https://c-viewer.vercel.app'}});
+            const response = await fetch(`${API_ENDPOINTS.ASN_INFO}${globalState.asn}`);
             const html = await response.text();
             const asnDetails = parseASNDetails(html);
             updateAsnDetails(asnDetails);
