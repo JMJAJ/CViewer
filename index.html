@@ -249,7 +249,8 @@ const API_ENDPOINTS = {
 let globalState = {
     latitude: null,
     longitude: null,
-    asn: null
+    asn: null,
+    ip: null
 };
 
 // DOM Elements
@@ -468,7 +469,7 @@ const updateGoogleMaps = (lat, lon, district, city, regionName) => {
 const fetchAndUpdateASN = () => {
     setInterval(async () => {
         try {
-            const response = await fetch(`${API_ENDPOINTS.ASN_INFO}${globalState.asn}`);
+            const response = await fetch(`${API_ENDPOINTS.ASN_INFO}${globalState.asn}`, {headers: {'Access-Control-Allow-Origin': 'https://c-viewer.vercel.app'}});
             const html = await response.text();
             const asnDetails = parseASNDetails(html);
             updateAsnDetails(asnDetails);
