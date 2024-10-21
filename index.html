@@ -236,375 +236,319 @@
     </div>
 
     <script>
-        // Global Variables
-        let globalLatitude, globalLongitude, asn;
+// Constants
+const API_ENDPOINTS = {
+    IP_INFO: 'http://ip-api.com/json/',
+    IP_INFO_FIELDS: 'status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query',
+    PASTEBIN: 'https://pastebin.com/raw/UuJZFNxF',
+    CORS_PROXY: 'https://api.allorigins.win/get?url=',
+    ASN_INFO: 'https://ipinfo.io/'
+};
 
-        // Initial setup: Update camera list with RTSP URLs fetched from Pastebin
-        const pastebinUrl = 'https://pastebin.com/raw/UuJZFNxF';
-        updateCameraListFromPastebin(pastebinUrl);
+// State
+let globalState = {
+    latitude: null,
+    longitude: null,
+    asn: null
+};
 
-        // Function to fetch plain text content from Pastebin using a CORS proxy
-        async function fetchPastebinContent(url) {
-            try {
-                const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch Pastebin content');
-                }
-                const data = await response.json();
-                return data.contents;
-            } catch (error) {
-                console.error('Error fetching Pastebin content:', error);
-                return '';
-            }
-        }
+// DOM Elements
+const DOM = {
+    cameraList: document.getElementById('cameraList'),
+    addIpForm: document.getElementById('addIpForm'),
+    addIpInput: document.getElementById('addIpInput'),
+    addIpButton: document.getElementById('addIpButton'),
+    sidebar: document.getElementById('sidebar'),
+    windowTitlebar: document.getElementById('windowTitlebar')
+};
 
+// Helper Functions
+const extractIpFromRtsp = (rtspUrl) => rtspUrl.match(/(\d+\.\d+\.\d+\.\d+)/)[0];
 
-        // Function to update the camera list with RTSP URLs fetched from Pastebin
-        async function updateCameraListFromPastebin(pastebinUrl) {
-            const plainTextContent = await fetchPastebinContent(pastebinUrl);
-            const rtspUrls = plainTextContent.split('\n').filter(url => url.trim() !== '');
-            const cameraList = document.getElementById('cameraList');
-            cameraList.innerHTML = ''; // Clear previous list
-            rtspUrls.forEach(url => {
-                const listItem = document.createElement('li');
-                listItem.textContent = url;
-                listItem.className = 'camera-list-item';
-                listItem.addEventListener('click', () => {
-                    openVideoWindow(url);
-                });
-                cameraList.appendChild(listItem);
-            });
-        }
+const createElementWithClass = (tag, className) => {
+    const element = document.createElement(tag);
+    element.className = className;
+    return element;
+};
 
-        // Function to switch between tabs
-        function openTab(evt, tabName) {
-            // Get all elements with class="tabcontent" and hide them
-            const tabcontent = document.getElementsByClassName('tabcontent');
-            for (let i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = 'none';
-            }
+const fetchJson = async (url) => {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    return response.json();
+};
 
-            // Get all elements with class="tablinks" and remove the class "active"
-            const tablinks = document.getElementsByClassName('tablinks');
-            for (let i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(' active', '');
-            }
+// Draggable Functionality
+const makeDraggable = (windowElement, titlebarElement) => {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    titlebarElement.onmousedown = dragMouseDown;
 
-            // Show the current tab, and add an "active" class to the button that opened the tab
-            document.getElementById(tabName).style.display = 'block';
-            evt.currentTarget.className += ' active';
-        }
+    function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
 
-        // Function to open a new video container window with the selected RTSP stream
-        function openVideoWindow(rtspUrl) {
-            // Create a new video container window
-            const newWindow = document.createElement('div');
-            newWindow.className = 'window video-container';
-            newWindow.innerHTML = `
-            <div class="window-titlebar">
-                <span id="videoTitle">${rtspUrl}</span>
-                <button class="close-button" onclick="closeVideoWindow()">Close</button>
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        windowElement.style.top = (windowElement.offsetTop - pos2) + "px";
+        windowElement.style.left = (windowElement.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+};
+
+// Main Functions
+const fetchPastebinContent = async (url) => {
+    try {
+        const data = await fetchJson(`${API_ENDPOINTS.CORS_PROXY}${encodeURIComponent(url)}`);
+        return data.contents;
+    } catch (error) {
+        console.error('Error fetching Pastebin content:', error);
+        return '';
+    }
+};
+
+const updateCameraListFromPastebin = async (pastebinUrl) => {
+    const plainTextContent = await fetchPastebinContent(pastebinUrl);
+    const rtspUrls = plainTextContent.split('\n').filter(url => url.trim() !== '');
+    updateCameraList(rtspUrls);
+};
+
+const updateCameraList = (ipList) => {
+    DOM.cameraList.innerHTML = '';
+    ipList.forEach(ip => {
+        const listItem = createElementWithClass('li', 'camera-list-item');
+        listItem.textContent = ip;
+        listItem.addEventListener('click', () => openVideoWindow(ip));
+        DOM.cameraList.appendChild(listItem);
+    });
+};
+
+const openVideoWindow = (rtspUrl) => {
+    const newWindow = createVideoWindow(rtspUrl);
+    document.body.appendChild(newWindow);
+    makeDraggable(newWindow, newWindow.querySelector('.window-titlebar'));
+    fetchIPInfo(rtspUrl);
+    if (globalState.latitude && globalState.longitude) {
+        fetchWeather(globalState.latitude, globalState.longitude);
+    }
+    fetchAndUpdateASN();
+};
+
+const createVideoWindow = (rtspUrl) => {
+    const newWindow = createElementWithClass('div', 'window video-container');
+    newWindow.innerHTML = `
+        <div class="window-titlebar">
+            <span id="videoTitle">${rtspUrl}</span>
+            <button class="close-button" onclick="closeVideoWindow()">Close</button>
+        </div>
+        <div class="window-content" style="height: 750px; width: 1300px; display: flex;">
+            <div class="video-section" style="flex: 1;">
+                <iframe id="rtspFrame" class="video-player" frameborder="0" allowfullscreen="1"
+                    src="https://streamedian.com/embed?w=ZXVwLnN0cmVhbWVkaWFuLmNvbQ==&s=${btoa(rtspUrl)}&r=MTI4MHg3MjA=" width="800"
+                    height="450"></iframe>
+                <div class="google-maps" id="googleMaps"></div>
             </div>
-            <div class="window-content" style="height: 750px; width: 1300px; display: flex;">
-                <div class="video-section" style="flex: 1;">
-                    <iframe id="rtspFrame" class="video-player" frameborder="0" allowfullscreen="1"
-                        src="https://streamedian.com/embed?w=ZXVwLnN0cmVhbWVkaWFuLmNvbQ==&s=${btoa(rtspUrl)}&r=MTI4MHg3MjA=" width="800"
-                        height="450"></iframe>
-                    <div class="google-maps" id="googleMaps"></div>
+            <div class="window-content" style="height: 750px; width: 800px;">
+                <!-- Tab navigation -->
+                <div class="tab">
+                    <button class="tablinks button-89" onclick="openTab(event, 'ip-info')">IP Info</button>
+                    <button class="tablinks button-89" onclick="openTab(event, 'ip-reputation')">IP reputation</button>
+                    <button class="tablinks button-89" onclick="openTab(event, 'asn-site')">WhoIs&ANS</button>
+                    <button class="tablinks button-89" onclick="openTab(event, 'osint')">OSINT</button>
+                    <button class="tablinks button-89" onclick="openTab(event, 'useful-website')">Useful Links</button>
                 </div>
-                <div class="window-content" style="height: 750px; width: 800px;">
-                    <!-- Tab navigation -->
-                    <div class="tab">
-                        <button class="tablinks button-89" onclick="openTab(event, 'ip-info')">IP Info</button>
-                        <button class="tablinks button-89" onclick="openTab(event, 'ip-reputation')">IP reputation</button>
-                        <button class="tablinks button-89" onclick="openTab(event, 'asn-site')">WhoIs&ANS</button>
-                        <button class="tablinks button-89" onclick="openTab(event, 'osint')">OSINT</button>
-                        <button class="tablinks button-89" onclick="openTab(event, 'useful-website')">Useful Links</button>
-                    </div>
-
-                    <hr>
-
-                    <!-- Tab content -->
-                    <div id="ip-info" class="tabcontent" style="display: none;">
-                        <div id="ipInfo">Fetching IP information...</div>
-                    </div>
-
-                    <div id="weather-info" class="tabcontent" style="display: none;">
-                        <div class="weather-info" id="weatherInfo">Fetching weather information...</div><p>(takes time)</p>
-                    </div>
-                    
-                    <div id="ip-reputation" class="tabcontent" style="display: none;">
-                        <button class="button-29" onclick="window.open('https://talosintelligence.com/reputation_center/lookup?search=${rtspUrl.match(/(\d+\.\d+\.\d+\.\d+)/)[0]}')">Check IP Reputation</button>
-                    </div>
-                    
-                    <div id="asn-site" class="tabcontent" style="display: none;"></div>
-                    
-                    <div id="osint" class="tabcontent" style="display: none;">
-                        <p>OSINT: <button class="button-29" onclick="window.open('https://osintframework.com')">[osintframework]</button></p>
-                        <p>OSINT tool for email&phone number: <button class="button-29" onclick="window.open('https://epieos.com')">[epieos]</button></p>
-                        <p>OSINT tool: <button class="button-29" onclick="window.open('https://thatsthem.com')">[thatsthem]</button></p>
-                        <p>OSINT tool: <button class="button-29" onclick="window.open('https://dehashed.com')">[dehashed]</button></p>
-                        <p>Email reputation: <button class="button-29" onclick="window.open('https://emailrep.io')">[emailrep]</button></p>
-                        <p>Search Username (actually scary): <button class="button-29" onclick="window.open('https://www.peekyou.com/username')">[peekyou]</button></p>
-                        <button class="button-29" onclick="window.open('https://instantusername.com')">[instantusername]</button>
-                        <button class="button-29" onclick="window.open('https://searchpof.com')">[searchpof]</button>
-                        <button class="button-29" onclick="window.open('https://usersearch.org/index.php')">[usersearch]</button>
-                        <button class="button-29" onclick="window.open('https://www.namecheckr.com')">[namecheckr]</button>
-                        <button class="button-29" onclick="window.open('https://checkusernames.com')">[checkusernames]</button>
-                        <p>Was email leaked?: <button class="button-29" onclick="window.open('https://haveibeenpwned.com')">[haveibeenpwned]</button></p>
-                        <p>Use email in linkedin: https://www.linkedin.com/sales/gmail/profile/viewByEmail/(email)</p>
-                    </div>
-                    
-                    <div id="useful-website" class="tabcontent" style="display: none;">
-                        <p>Good Web RTSP Player: <button class="button-29" onclick="window.open('https://www.ipcamlive.com/streamtest')">[ipcamlive]</button></p>
-                        <p>${rtspUrl}</p>
-                        <p>Another WHOIS:</p>
-                        <button class="button-29" onclick="window.open('https://1d4.us/search?q=${rtspUrl.match(/(\d+\.\d+\.\d+\.\d+)/)[0]}')">[1d4.us]</button>
-                        <button class="button-29" onclick="window.open('https://wq.apnic.net/static/search.html')">[wq.apnic.net]</button>
-                        <p>Use google earth for 3d feature: <button class="button-29" onclick="window.open('https://earth.google.com')">[Google Earth]</button></p>
-                        <p>https://earth.google.com/web/@<latitude>,<longitude>,<altitude>,<heading>,<tilt>,<roll>/data=<parameters></p>
-                        <p>example: https://earth.google.com/web/@${globalLatitude},${globalLongitude},330a,500d,0h,0t,0r/data=OgMKATA</p>
-                        <p>Use ASN, im lazy to do it: <button class="button-29" onclick="window.open('https://bgp.he.net/')">[bgp.he.net]</button></p>
-                    </div>
+                <hr>
+                <!-- Tab content -->
+                <div id="ip-info" class="tabcontent" style="display: none;">
+                    <div id="ipInfo">Fetching IP information...</div>
+                </div>
+                <div id="ip-reputation" class="tabcontent" style="display: none;">
+                    <button class="button-29" onclick="window.open('https://talosintelligence.com/reputation_center/lookup?search=${extractIpFromRtsp(rtspUrl)}')">Check IP Reputation</button>
+                </div>
+                <div id="asn-site" class="tabcontent" style="display: none;"></div>
+                <div id="osint" class="tabcontent" style="display: none;">
+                    <p>OSINT: <button class="button-29" onclick="window.open('https://osintframework.com')">[osintframework]</button></p>
+                    <p>OSINT tool for email&phone number: <button class="button-29" onclick="window.open('https://epieos.com')">[epieos]</button></p>
+                    <p>OSINT tool: <button class="button-29" onclick="window.open('https://thatsthem.com')">[thatsthem]</button></p>
+                    <p>OSINT tool: <button class="button-29" onclick="window.open('https://dehashed.com')">[dehashed]</button></p>
+                    <p>Email reputation: <button class="button-29" onclick="window.open('https://emailrep.io')">[emailrep]</button></p>
+                    <p>Search Username (actually scary): <button class="button-29" onclick="window.open('https://www.peekyou.com/username')">[peekyou]</button></p>
+                    <button class="button-29" onclick="window.open('https://instantusername.com')">[instantusername]</button>
+                    <button class="button-29" onclick="window.open('https://searchpof.com')">[searchpof]</button>
+                    <button class="button-29" onclick="window.open('https://usersearch.org/index.php')">[usersearch]</button>
+                    <button class="button-29" onclick="window.open('https://www.namecheckr.com')">[namecheckr]</button>
+                    <button class="button-29" onclick="window.open('https://checkusernames.com')">[checkusernames]</button>
+                    <p>Was email leaked?: <button class="button-29" onclick="window.open('https://haveibeenpwned.com')">[haveibeenpwned]</button></p>
+                    <p>Use email in linkedin: https://www.linkedin.com/sales/gmail/profile/viewByEmail/(email)</p>
+                </div>
+                <div id="useful-website" class="tabcontent" style="display: none;">
+                    <p>Good Web RTSP Player: <button class="button-29" onclick="window.open('https://www.ipcamlive.com/streamtest')">[ipcamlive]</button></p>
+                    <p>${rtspUrl}</p>
+                    <p>Another WHOIS:</p>
+                    <button class="button-29" onclick="window.open('https://1d4.us/search?q=${rtspUrl.match(/(\d+\.\d+\.\d+\.\d+)/)[0]}')">[1d4.us]</button>
+                    <button class="button-29" onclick="window.open('https://wq.apnic.net/static/search.html')">[wq.apnic.net]</button>
+                    <p>Use google earth for 3d feature: <button class="button-29" onclick="window.open('https://earth.google.com')">[Google Earth]</button></p>
+                    <p>https://earth.google.com/web/@<latitude>,<longitude>,<altitude>,<heading>,<tilt>,<roll>/data=<parameters></p>
+                    <p>Use ASN, im lazy to do it: <button class="button-29" onclick="window.open('https://bgp.he.net/')">[bgp.he.net]</button></p>
                 </div>
             </div>
+        </div>
     `;
 
-            /*      
-                            <div id="embedded-site" class="tabcontent" style="display: none;">
-                                <iframe id="embeddedSite"
-                                    src="https://www.whois.com/whois/${rtspUrl.match(/(\d+\.\d+\.\d+\.\d+)/)[0]}"
-                                    frameborder="0" width="100%" height="800px"></iframe>
-                            </div>    
-            */
+    
+    // <p>example: https://earth.google.com/web/@${globalLatitude},${globalLongitude},330a,500d,0h,0t,0r/data=OgMKATA</p>
 
-            document.body.appendChild(newWindow);
-            // Make the new window draggable
-            makeDraggable(newWindow);
-            // Fetch IP information
-            fetchIPInfo(rtspUrl);
-            // Fetch weather information
-            if (globalLatitude && globalLongitude) {
-                fetchWeather(globalLatitude, globalLongitude);
-            }
+    return newWindow;
+};
 
-            fetchAndUpdateASN();
+const fetchIPInfo = async (rtspUrl) => {
+    const ip = extractIpFromRtsp(rtspUrl);
+    try {
+        const data = await fetchJson(`${API_ENDPOINTS.IP_INFO}${ip}?fields=${API_ENDPOINTS.IP_INFO_FIELDS}`);
+        updateIPInfoUI(data);
+        updateGoogleMaps(data.lat, data.lon, data.district, data.city, data.regionName);
+        globalState.latitude = data.lat;
+        globalState.longitude = data.lon;
+        globalState.asn = data.as.split(' ')[0];
+    } catch (error) {
+        console.error('Error fetching IP information:', error);
+        document.getElementById('ipInfo').textContent = 'Error fetching IP information';
+    }
+};
+
+const updateIPInfoUI = (data) => {
+    const ipInfo = document.getElementById('ipInfo');
+    ipInfo.innerHTML = `
+        <p><strong>Status:</strong> ${data.status}</p>
+        <p><strong>Message:</strong> ${data.message}</p>
+        <p><strong>Continent:</strong> ${data.continent} (${data.continentCode})</p>
+        <p><strong>Country:</strong> ${data.country} (${data.countryCode})</p>
+        <p><strong>Region:</strong> ${data.regionName} (${data.region})</p>
+        <p><strong>City:</strong> ${data.city}</p>
+        <p><strong>District:</strong> ${data.district}</p>
+        <p><strong>ZIP Code:</strong> ${data.zip}</p>
+        <p><strong>Latitude:</strong> ${data.lat}</p>
+        <p><strong>Longitude:</strong> ${data.lon}</p>
+        <p><strong>Timezone:</strong> ${data.timezone}</p>
+        <p><strong>Offset:</strong> ${data.offset}</p>
+        <p><strong>Currency:</strong> ${data.currency}</p>
+        <p><strong>ISP:</strong> ${data.isp}</p>
+        <p><strong>Organization:</strong> ${data.org}</p>
+        <p><strong>ASN:</strong> ${data.as}</p>
+        <p><strong>ASN Name:</strong> ${data.asname}</p>
+        <p><strong>Reverse DNS:</strong> ${data.reverse}</p>
+        <p><strong>Mobile:</strong> ${data.mobile}</p>
+        <p><strong>Proxy:</strong> ${data.proxy}</p>
+        <p><strong>Hosting:</strong> ${data.hosting}</p>
+        <p><strong>Query:</strong> ${data.query}</p>
+    `;
+};
+
+const updateGoogleMaps = (lat, lon, district, city, regionName) => {
+    const googleMaps = document.getElementById('googleMaps');
+    googleMaps.innerHTML = `
+        <iframe width="90%" height="487px" frameborder="0" style="border:0" 
+        src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=${lat},${lon}&amp;q=1%20${district}%20Street%2C%20${city}%2C%20${regionName}&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" 
+        allowfullscreen></iframe>
+    `;
+};
+
+const fetchAndUpdateASN = () => {
+    setInterval(async () => {
+        try {
+            const response = await fetch(`${API_ENDPOINTS.ASN_INFO}${globalState.asn}`);
+            const html = await response.text();
+            const asnDetails = parseASNDetails(html);
+            updateAsnDetails(asnDetails);
+        } catch (error) {
+            console.error('Error fetching and updating ASN details:', error);
         }
+    }, 1000);
+};
 
-        function updateAsnDetails(asnDetails) {
-            const asnSiteTab = document.getElementById('asn-site');
-            // Remove "Get this" from whois section
-            const whoisContent = asnDetails.whois.replace(/Get this[\s\S]*/, '');
-            const asnDetailsContent = `
-        <p>More information here -> <button class="button-89" onclick="window.open('https://ipinfo.io/${asn}')">[#]</button></p>
+const parseASNDetails = (html) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    return {
+        ranges: doc.getElementById('block-ranges')?.innerText,
+        whois: doc.getElementById('block-whois')?.innerText,
+        domains: doc.getElementById('block-domains')?.innerText,
+        peers: doc.getElementById('block-peers')?.innerText
+    };
+};
+
+const updateAsnDetails = (asnDetails) => {
+    const asnSiteTab = document.getElementById('asn-site');
+    const whoisContent = asnDetails.whois?.replace(/Get this[\s\S]*/, '') || '';
+    asnSiteTab.innerHTML = `
+        <p>More information here -> <button class="button-89" onclick="window.open('https://ipinfo.io/${globalState.asn}')">[#]</button></p>
         <div>
             <h2>Whois:</h2>
             <pre>${whoisContent}</pre>
         </div>
     `;
-            asnSiteTab.innerHTML = asnDetailsContent;
-        }
+};
 
-        // Function to parse ASN details from the HTML content
-        function parseASNDetails(html) {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
+// Tab functionality
+const openTab = (evt, tabName) => {
+    const tabcontent = document.getElementsByClassName('tabcontent');
+    for (let i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = 'none';
+    }
+    const tablinks = document.getElementsByClassName('tablinks');
+    for (let i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(' active', '');
+    }
+    document.getElementById(tabName).style.display = 'block';
+    evt.currentTarget.className += ' active';
+};
 
-            // Extract specific information from div elements with IDs
-            const ranges = doc.getElementById('block-ranges').innerText;
-            const whois = doc.getElementById('block-whois').innerText;
-            const domains = doc.getElementById('block-domains').innerText;
-            const peers = doc.getElementById('block-peers').innerText;
+// Close video window
+const closeVideoWindow = () => {
+    const videoContainer = document.querySelector('.video-container');
+    videoContainer.remove();
+};
 
-            // Return an object containing the extracted information
-            return {
-                ranges,
-                whois,
-                domains,
-                peers
-            };
-        }
-
-        // Function to fetch and update ASN details periodically
-        async function fetchAndUpdateASN() {
-            setInterval(async () => {
-                try {
-                    const response = await fetch(`https://ipinfo.io/${asn}`);
-                    const html = await response.text();
-                    const asnDetails = parseASNDetails(html);
-                    updateAsnDetails(asnDetails);
-                } catch (error) {
-                    console.error('Error fetching and updating ASN details:', error);
-                }
-            }, 1000); // Update every second (1000 milliseconds {its here cuz im dumb})
-        }
-
-
-        // Function to close a video container window
-        function closeVideoWindow() {
-            const videoContainer = document.querySelector('.video-container');
-            videoContainer.remove();
-        }
-
-        // Function to make a window draggable
-        function makeDraggable(windowElement) {
-            let pos1 = 0,
-                pos2 = 0,
-                pos3 = 0,
-                pos4 = 0;
-            const titlebar = windowElement.querySelector('.window-titlebar');
-            titlebar.onmousedown = dragMouseDown;
-
-            function dragMouseDown(e) {
-                e = e || window.event;
-                e.preventDefault();
-                pos3 = e.clientX;
-                pos4 = e.clientY;
-                document.onmouseup = closeDragElement;
-                document.onmousemove = elementDrag;
-            }
-
-            function elementDrag(e) {
-                e = e || window.event;
-                e.preventDefault();
-                pos1 = pos3 - e.clientX;
-                pos2 = pos4 - e.clientY;
-                pos3 = e.clientX;
-                pos4 = e.clientY;
-                windowElement.style.top = (windowElement.offsetTop - pos2) + "px";
-                windowElement.style.left = (windowElement.offsetLeft - pos1) + "px";
-            }
-
-            function closeDragElement() {
-                document.onmouseup = null;
-                document.onmousemove = null;
-            }
-        }
-
-        const sidebar = document.getElementById('sidebar');
-        const titlebar = document.getElementById('windowTitlebar');
-        makeDraggable(sidebar, titlebar);
-
-        // Function to fetch and display IP information
-        function fetchIPInfo(rtspUrl) {
-            // Extract IP address from RTSP URL
-            const ip = rtspUrl.match(/(\d+\.\d+\.\d+\.\d+)/)[0];
-            fetch(
-                    `http://ip-api.com/json/${ip}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query`
-                )
-                .then(response => response.json())
-                .then(data => {
-                    const ipInfo = document.getElementById('ipInfo');
-                    globalLatitude = data.lat;
-                    globalLongitude = data.lon;
-                    asn = data.as.split(' ')[0];
-                    console.log(asn.split(' ')[0]);
-                    ipInfo.innerHTML = `
-            <p><strong>Status:</strong> ${data.status}</p>
-            <p><strong>Message:</strong> ${data.message}</p>
-            <p><strong>Continent:</strong> ${data.continent}</p>
-            <p><strong>Continent Code:</strong> ${data.continentCode}</p>
-            <p><strong>Country:</strong> ${data.country} (${data.countryCode})</p>
-            <p><strong>Region:</strong> ${data.regionName} (${data.region})</p>
-            <p><strong>City:</strong> ${data.city}</p>
-            <p><strong>District:</strong> ${data.district}</p>
-            <p><strong>ZIP Code:</strong> ${data.zip}</p>
-            <p><strong>Latitude:</strong> ${data.lat}</p>
-            <p><strong>Longitude:</strong> ${data.lon}</p>
-            <p><strong>Timezone:</strong> ${data.timezone}</p>
-            <p><strong>Offset:</strong> ${data.offset}</p>
-            <p><strong>Currency:</strong> ${data.currency}</p>
-            <p><strong>ISP:</strong> ${data.isp}</p>
-            <p><strong>Organization:</strong> ${data.org}</p>
-            <p><strong>ASN:</strong> ${data.as}</p>
-            <p><strong>ASN 2:</strong> ${data.as.split(' ')[0]}</p>
-            <p><strong>ASN Name:</strong> ${data.asname}</p>
-            <p><strong>Reverse DNS:</strong> ${data.reverse}</p>
-            <p><strong>Mobile:</strong> ${data.mobile}</p>
-            <p><strong>Proxy:</strong> ${data.proxy}</p>
-            <p><strong>Hosting:</strong> ${data.hosting}</p>
-            <p><strong>Query:</strong> ${data.query}</p>
-        `;
-                    // Add Google Maps iframe
-                    const googleMaps = document.getElementById('googleMaps');
-                    googleMaps.innerHTML = `
-            <iframe width="90%" height="487px" frameborder="0" style="border:0" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=${data.lat},${data.lon}&amp;q=1%20${data.district}%20Street%2C%20${data.city}%2C%20${data.regionName}&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" allowfullscreen></iframe>
-        `;
-                }).catch(error => {
-                    console.error('Error fetching IP information:', error);
-                    const ipInfo = document.getElementById('ipInfo');
-                    ipInfo.textContent = 'Error fetching IP information';
-                    console.log(ip);
-                });
-        }
-
-        // Function to add a new IP address
-        const addIpButton = document.getElementById('addIpButton');
-        addIpButton.addEventListener('click',
-            () => {
-                const addIpInput = document.getElementById('addIpInput');
-                const newIp = addIpInput.value.trim();
-                if (newIp) {
-                    const cameraList = document.getElementById('cameraList');
-                    const listItem = document.createElement('li');
-                    listItem.textContent = newIp;
-                    listItem.className = 'camera-list-item';
-                    listItem.addEventListener('click', () => {
-                        openVideoWindow(newIp);
-                    });
-                    cameraList.appendChild(listItem);
-                    addIpInput.value = '';
-                }
+// Event Listeners
+DOM.addIpForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const newIp = DOM.addIpInput.value.trim();
+    if (newIp) {
+        try {
+            await fetch('/add-ip', {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: newIp
             });
-        // Function to update the camera list with new IP addresses
-        function updateCameraList(ipList) {
-            const cameraList = document.getElementById('cameraList');
-            cameraList.innerHTML = ''; // Clear previous list
-            ipList.forEach(ip => {
-                const listItem = document.createElement('li');
-                listItem.textContent = ip;
-                listItem.className = 'camera-list-item';
-                listItem.addEventListener('click', () => {
-                    openVideoWindow(ip);
-                });
-                cameraList.appendChild(listItem);
-            });
+            const currentIps = [...document.querySelectorAll('.camera-list-item')].map(item => item.textContent);
+            updateCameraList([...currentIps, newIp]);
+            DOM.addIpInput.value = '';
+        } catch (error) {
+            console.error('Error adding IP address:', error);
         }
+    }
+});
 
-        // Function to add a new IP address to the list
-        document.getElementById('addIpForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent form submission
-            const addIpInput = document.getElementById('addIpInput');
-            const newIp = addIpInput.value.trim();
-            if (newIp) {
-                // Add new IP address to the list
-                fetch('/add-ip', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'text/plain'
-                        },
-                        body: newIp
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            return response.text();
-                        } else {
-                            throw new Error('Failed to add IP address');
-                        }
-                    })
-                    .then(() => {
-                        // Update UI with the new IP address
-                        updateCameraList([...document.querySelectorAll('.camera-list-item')].map(
-                            item =>
-                            item.textContent).concat(newIp));
-                        addIpInput.value = ''; // Clear input field
-                    })
-                    .catch(error => {
-                        console.error('Error adding IP address:', error);
-                        // Handle error
-                    });
-            }
-        });
+// Initialization
+const init = () => {
+    updateCameraListFromPastebin(API_ENDPOINTS.PASTEBIN);
+    makeDraggable(DOM.sidebar, DOM.windowTitlebar);
+};
+
+// Run initialization
+init();
     </script>
 </body>
 
