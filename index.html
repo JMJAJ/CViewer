@@ -360,7 +360,7 @@ const createVideoWindow = (rtspUrl) => {
             <span id="videoTitle">${rtspUrl}</span>
             <button class="close-button" onclick="closeVideoWindow()">Close</button>
         </div>
-        <div class="window-content" style="height: 900px; width: 1300px; display: flex;">
+        <div class="window-content" style="height: 950px; width: 1300px; display: flex;">
             <div class="video-section" style="flex: 1;">
                 <iframe id="rtspFrame" class="video-player" frameborder="0" allowfullscreen="1"
                     src="https://streamedian.com/embed?w=ZXVwLnN0cmVhbWVkaWFuLmNvbQ==&s=${btoa(rtspUrl)}&r=MTI4MHg3MjA=" width="800"
@@ -534,6 +534,8 @@ const updateIPInfoUI = (data) => {
     ipInfo.style.display = 'block';  // Set to 'block' to make it visible
     const loadingMessage = document.getElementById('loadingMessage');
     loadingMessage.style.display = 'none'; // Hide loading message
+
+    updateGoogleMaps(data.lat, data.lon, data.district, data.city, data.region);
 };
 
 const updateGoogleMaps = (lat, lon, district, city, regionName) => {
