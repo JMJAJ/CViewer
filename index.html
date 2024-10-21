@@ -272,11 +272,14 @@ const createElementWithClass = (tag, className) => {
     return element;
 };
 
-const fetchJson = async (url) => {
+async function fetchJson(url) {
     const response = await fetch(url);
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    if (!response.ok) {
+        const errorMessage = await response.text(); // Capture error message from response
+        throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorMessage}`);
+    }
     return response.json();
-};
+}
 
 // Draggable Functionality
 const makeDraggable = (windowElement, titlebarElement) => {
@@ -349,9 +352,6 @@ const openVideoWindow = (rtspUrl) => {
     document.body.appendChild(newWindow);
     makeDraggable(newWindow, newWindow.querySelector('.window-titlebar'));
     fetchIPInfo(rtspUrl);
-    if (globalState.latitude && globalState.longitude) {
-        fetchWeather(globalState.latitude, globalState.longitude);
-    }
     fetchAndUpdateASN();
 };
 
@@ -374,14 +374,15 @@ const createVideoWindow = (rtspUrl) => {
                 <div class="tab">
                     <button class="tablinks button-89" onclick="openTab(event, 'ip-info')">IP Info</button>
                     <button class="tablinks button-89" onclick="openTab(event, 'ip-reputation')">IP reputation</button>
-                    <button class="tablinks button-89" onclick="openTab(event, 'asn-site')">WhoIs&ANS</button>
+                    <button class="tablinks button-89" onclick="openTab(event, 'asn-site')">WhoIs&ASN</button>
                     <button class="tablinks button-89" onclick="openTab(event, 'osint')">OSINT</button>
                     <button class="tablinks button-89" onclick="openTab(event, 'useful-website')">Useful Links</button>
                 </div>
                 <hr>
                 <!-- Tab content -->
                 <div id="ip-info" class="tabcontent" style="display: none;">
-                    <div id="ipInfo">Fetching IP information...</div>
+                    <div id="loadingMessage">Fetching IP information...</div>
+                    <div id="ipInfo" style="display: none;"></div>
                 </div>
                 <div id="ip-reputation" class="tabcontent" style="display: none;">
                     <button class="button-29" onclick="window.open('https://talosintelligence.com/reputation_center/lookup?search=${extractIpFromRtsp(rtspUrl)}')">Check IP Reputation</button>
@@ -408,9 +409,9 @@ const createVideoWindow = (rtspUrl) => {
                     <p>Another WHOIS:</p>
                     <button class="button-29" onclick="window.open('https://1d4.us/search?q=${rtspUrl.match(/(\d+\.\d+\.\d+\.\d+)/)[0]}')">[1d4.us]</button>
                     <button class="button-29" onclick="window.open('https://wq.apnic.net/static/search.html')">[wq.apnic.net]</button>
-                    <p>Use google earth for 3d feature: <button class="button-29" onclick="window.open('https://earth.google.com')">[Google Earth]</button></p>
+                    <p>Use google earth for 3D feature: <button class="button-29" onclick="window.open('https://earth.google.com')">[Google Earth]</button></p>
                     <p>https://earth.google.com/web/@<latitude>,<longitude>,<altitude>,<heading>,<tilt>,<roll>/data=<parameters></p>
-                    <p>Use ASN, im lazy to do it: <button class="button-29" onclick="window.open('https://bgp.he.net/')">[bgp.he.net]</button></p>
+                    <p>Use ASN, I'm lazy to do it: <button class="button-29" onclick="window.open('https://bgp.he.net/')">[bgp.he.net]</button></p>
                 </div>
             </div>
         </div>
@@ -422,6 +423,15 @@ const createVideoWindow = (rtspUrl) => {
     return newWindow;
 };
 
+function showLoadingMessage(isLoading) {
+    const loadingElement = document.getElementById('loadingMessage'); // Ensure you have an element for this
+    if (isLoading) {
+        loadingElement.style.display = 'block'; // Show the loading message
+    } else {
+        loadingElement.style.display = 'none'; // Hide the loading message
+    }
+}
+
 async function fetchIPInfo(rtspUrl) {
     const ip = extractIpFromRtsp(rtspUrl);
     if (!ip) {
@@ -429,33 +439,71 @@ async function fetchIPInfo(rtspUrl) {
         return;
     }
     console.log(`Extracted IP: ${ip}`);
+
+    // Show loading message
+    showLoadingMessage(true);
+    
+    // Start a timer to update the UI every second
+    const intervalId = setInterval(() => {
+        updateLoadingUI();
+    }, 1000);
+
     try {
-        const response = await fetch(`${API_ENDPOINTS.CORS_PROXY}?url=${API_ENDPOINTS.IP_INFO}${ip}&fields=${API_ENDPOINTS.IP_INFO_FIELDS}`);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const url = `${API_ENDPOINTS.IP_INFO}${ip}?fields=${API_ENDPOINTS.IP_INFO_FIELDS}`;
+        console.log(`Constructed URL: ${url}`);
+
+        const response = await fetch(API_ENDPOINTS.CORS_PROXY, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url })
+        });
+
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorMessage}`);
+        }
 
         const ipInfo = await response.json();
-        console.log('IP Info Response:', ipInfo); // Add logging here
+        console.log('IP Info Response:', ipInfo); // Log the response
 
-        if (!ipInfo || !ipInfo.query) {
+        if (!ipInfo || !ipInfo.contents) {
             console.error('IP information not found or invalid structure:', ipInfo);
             return;
         }
 
-        updateIPInfoUI(ipInfo);
-        globalState.ip = ipInfo.query;
-        globalState.latitude = ipInfo.lat;
-        globalState.longitude = ipInfo.lon;
-
-        // Fetch weather only after setting latitude and longitude
-        if (globalState.latitude && globalState.longitude) {
-            await fetchWeather(globalState.latitude, globalState.longitude); // Ensure this is awaited if it's async
+        // Parse the contents of the response
+        const parsedData = JSON.parse(ipInfo.contents);
+        if (!parsedData || !parsedData.query) {
+            console.error('Parsed IP information not found or invalid structure:', parsedData);
+            return;
         }
 
+        // Update the UI with the fetched information
+        updateIPInfoUI(parsedData);
+        globalState.ip = parsedData.query;
+        globalState.latitude = parsedData.lat;
+        globalState.longitude = parsedData.lon;
+
     } catch (error) {
-        console.error('Failed to fetch IP information:', error);
+        console.error('Failed to fetch IP information:', error.message);
+    } finally {
+        // Stop the loading UI update and hide the loading message
+        clearInterval(intervalId);
+        showLoadingMessage(false);
     }
 }
 
+// Function to update the loading UI every second
+const updateLoadingUI = () => {
+    const loadingMessage = document.getElementById('loadingMessage');
+    if (loadingMessage) {
+        loadingMessage.innerText = 'Fetching IP information...';
+    }
+};
+
+// Function to update the UI with fetched IP information
 const updateIPInfoUI = (data) => {
     const ipInfo = document.getElementById('ipInfo');
     ipInfo.innerHTML = `
@@ -482,6 +530,11 @@ const updateIPInfoUI = (data) => {
         <p><strong>Hosting:</strong> ${data.hosting}</p>
         <p><strong>Query:</strong> ${data.query}</p>
     `;
+
+    // Show the IP info and hide the loading message
+    ipInfo.style.display = 'block';  // Set to 'block' to make it visible
+    const loadingMessage = document.getElementById('loadingMessage');
+    loadingMessage.style.display = 'none'; // Hide loading message
 };
 
 const updateGoogleMaps = (lat, lon, district, city, regionName) => {
@@ -493,21 +546,33 @@ const updateGoogleMaps = (lat, lon, district, city, regionName) => {
     `;
 };
 
-async function  fetchAndUpdateASN() {
+async function fetchAndUpdateASN() {
     const ip = globalState.ip;
     if (!ip) {
         console.error('No IP address available for ASN lookup.');
         return;
     }
     console.log(`Fetching ASN for IP: ${ip}`); // Debugging log
+
     try {
-        const asnInfo = await fetchJson(`${API_ENDPOINTS.CORS_PROXY}?url=${API_ENDPOINTS.ASN_INFO}${ip}/json`);
+        // Construct the URL for ASN info API
+        const url = `${API_ENDPOINTS.CORS_PROXY}?url=${API_ENDPOINTS.ASN_INFO}${ip}/json`;
+        console.log(`Constructed ASN URL: ${url}`);
+
+        // Fetch the ASN information
+        const asnInfo = await fetchJson(url);
+
+        // Log the ASN information for debugging
+        console.log('ASN Info Response:', asnInfo);
+
+        // Update the UI and global state with ASN information
         updateAsnInfo(asnInfo);
-        globalState.asn = asnInfo.asn;
+        globalState.asn = asnInfo.asn || 'Unknown ASN'; // Default if ASN is not found
+
     } catch (error) {
-        console.error('Failed to fetch ASN information:', error);
+        console.error('Failed to fetch ASN information:', error.message); // More detailed error logging
     }
-};
+}
 
 const parseASNDetails = (html) => {
     const parser = new DOMParser();
