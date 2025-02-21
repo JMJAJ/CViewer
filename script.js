@@ -54,12 +54,17 @@ document.getElementById('addIpForm').addEventListener('submit', (event) => {
         return;
     }
 
-    // Create a new list item with a button
+    // Create a new list item
     const cameraList = document.getElementById('cameraList');
     const newItem = document.createElement('li');
-    newItem.classList.add('camera-list-item'); // Add a class for styling if needed
-
-    cameraList.appendChild(newItem); // Append the list item to the camera list
+    newItem.classList.add('camera-list-item');
+    newItem.textContent = ipInput;
+    
+    // Add click event listener to the new item
+    newItem.addEventListener('click', () => openVideoWindow(ipInput));
+    
+    // Insert at the beginning of the list
+    cameraList.insertBefore(newItem, cameraList.firstChild);
 
     // Clear the input field
     document.getElementById('addIpInput').value = '';
