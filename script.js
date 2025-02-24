@@ -46,11 +46,12 @@ document.getElementById('addIpForm').addEventListener('submit', (event) => {
     event.preventDefault(); // Prevent the form from submitting normally
     const ipInput = document.getElementById('addIpInput').value.trim();
 
-    // Validate the RTSP URL format (basic validation example)
+    // Validate the RTSP or MJPG URL format (basic validation example)
     const rtspRegex = /^rtsp:\/\/(:\S*)?@?(\d{1,3}\.){3}\d{1,3}:\d{1,5}(\/.*)?$/;
+    const mjpgRegex = /^http:\/\/(:\S*)?@?(\d{1,3}\.){3}\d{1,3}(:\d{1,5})?(\/.*)?$/;
 
-    if (!rtspRegex.test(ipInput)) {
-        alert('Invalid RTSP URL format. Please use the format: rtsp://:@<IP_ADDRESS>:<PORT>/');
+    if (!rtspRegex.test(ipInput) && !mjpgRegex.test(ipInput)) {
+        alert('Invalid URL format. Please use the format: rtsp://:@<IP_ADDRESS>:<PORT>/ or http://:@<IP_ADDRESS>:<PORT>/');
         return;
     }
 
@@ -59,16 +60,17 @@ document.getElementById('addIpForm').addEventListener('submit', (event) => {
     const newItem = document.createElement('li');
     newItem.classList.add('camera-list-item');
     newItem.textContent = ipInput;
-    
+
     // Add click event listener to the new item
     newItem.addEventListener('click', () => openVideoWindow(ipInput));
-    
+
     // Insert at the beginning of the list
     cameraList.insertBefore(newItem, cameraList.firstChild);
 
     // Clear the input field
     document.getElementById('addIpInput').value = '';
 });
+
 
 // Function to remove the overlay link
 function removeOverlay() {
@@ -159,25 +161,32 @@ const updateCameraList = (ipList) => {
     });
 };
 
-const openVideoWindow = (rtspUrl) => {
-    const newWindow = createVideoWindow(rtspUrl);
+const openVideoWindow = (url) => {
+    const newWindow = createVideoWindow(url);
     document.body.appendChild(newWindow);
     makeDraggable(newWindow, newWindow.querySelector('.window-titlebar'));
-    fetchIPInfo(rtspUrl);
+    fetchIPInfo(url);
 };
 
-const createVideoWindow = (rtspUrl) => {
+const createVideoWindow = (url) => {
     const newWindow = createElementWithClass('div', 'window video-container');
+    let iframeSrc;
+
+    if (url.startsWith('rtsp://')) {
+        iframeSrc = `https://streamedian.com/embed?w=ZXVwLnN0cmVhbWVkaWFuLmNvbQ==&s=${btoa(url)}&r=MTI4MHg3MjA=`;
+    } else if (url.startsWith('http://')) {
+        iframeSrc = url; // Directly use MJPG URL
+    }
+
     newWindow.innerHTML = `
         <div class="window-titlebar">
-            <span id="videoTitle">${rtspUrl}</span>
+            <span id="videoTitle">${url}</span>
             <button class="close-button" onclick="closeVideoWindow()">Close</button>
         </div>
         <div class="window-content" style="height: 950px; width: 1300px; display: flex;">
             <div class="video-section" style="flex: 1;">
-                <iframe id="rtspFrame" class="video-player" frameborder="0" allowfullscreen="1"
-                    src="https://streamedian.com/embed?w=ZXVwLnN0cmVhbWVkaWFuLmNvbQ==&s=${btoa(rtspUrl)}&r=MTI4MHg3MjA=" width="800"
-                    height="450"></iframe>
+                <iframe id="videoFrame" class="video-player" frameborder="0" allowfullscreen="1"
+                    src="${iframeSrc}" width="800" height="450"></iframe>
                 <div class="google-maps" id="googleMaps"></div>
             </div>
             <div class="window-content" style="height: 750px; width: 800px;">
@@ -196,7 +205,7 @@ const createVideoWindow = (rtspUrl) => {
                     <div id="ipInfo" style="display: none;"></div>
                 </div>
                 <div id="ip-reputation" class="tabcontent" style="display: none;">
-                    <button class="button-29" onclick="window.open('https://talosintelligence.com/reputation_center/lookup?search=${extractIpFromRtsp(rtspUrl)}')">Check IP Reputation</button>
+                    <button class="button-29" onclick="window.open('https://talosintelligence.com/reputation_center/lookup?search=${extractIpFromRtsp(url)}')">Check IP Reputation</button>
                 </div>
                 <div id="asn-site" class="tabcontent" style="display: none;"></div>
                 <div id="osint" class="tabcontent" style="display: none;">
@@ -208,7 +217,6 @@ const createVideoWindow = (rtspUrl) => {
                     <p>Search Username (actually scary): <button class="button-29" onclick="window.open('https://www.peekyou.com/username')">[peekyou]</button></p>
                     <button class="button-29" onclick="window.open('https://instantusername.com')">[instantusername]</button>
                     <button class="button-29" onclick="window.open('https://searchpof.com')">[searchpof]</button>
-                    <button class="button-29" onclick="window.open('https://usersearch.org/index.php')">[usersearch]</button>
                     <button class="button-29" onclick="window.open('https://www.namecheckr.com')">[namecheckr]</button>
                     <button class="button-29" onclick="window.open('https://checkusernames.com')">[checkusernames]</button>
                     <p>Was email leaked?: <button class="button-29" onclick="window.open('https://haveibeenpwned.com')">[haveibeenpwned]</button></p>
@@ -216,9 +224,9 @@ const createVideoWindow = (rtspUrl) => {
                 </div>
                 <div id="useful-website" class="tabcontent" style="display: none;">
                     <p>Good Web RTSP Player: <button class="button-29" onclick="window.open('https://www.ipcamlive.com/streamtest')">[ipcamlive]</button></p>
-                    <p>${rtspUrl}</p>
+                    <p>${url}</p>
                     <p>Another WHOIS:</p>
-                    <button class="button-29" onclick="window.open('https://1d4.us/search?q=${rtspUrl.match(/(\d+\.\d+\.\d+\.\d+)/)[0]}')">[1d4.us]</button>
+                    <button class="button-29" onclick="window.open('https://1d4.us/search?q=${url.match(/(\d+\.\d+\.\d+\.\d+)/)[0]}')">[1d4.us]</button>
                     <button class="button-29" onclick="window.open('https://wq.apnic.net/static/search.html')">[wq.apnic.net]</button>
                     <p>Use google earth for 3D feature: <button class="button-29" onclick="window.open('https://earth.google.com')">[Google Earth]</button></p>
                     <p>https://earth.google.com/web/@<latitude>,<longitude>,<altitude>,<heading>,<tilt>,<roll>/data=<parameters></p>
@@ -227,9 +235,6 @@ const createVideoWindow = (rtspUrl) => {
             </div>
         </div>
     `;
-
-    
-    // <p>example: https://earth.google.com/web/@${globalLatitude},${globalLongitude},330a,500d,0h,0t,0r/data=OgMKATA</p>
 
     return newWindow;
 };
