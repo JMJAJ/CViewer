@@ -48,10 +48,10 @@ document.getElementById('addIpForm').addEventListener('submit', (event) => {
 
     // Validate the RTSP or MJPG URL format (basic validation example)
     const rtspRegex = /^rtsp:\/\/(:\S*)?@?(\d{1,3}\.){3}\d{1,3}:\d{1,5}(\/.*)?$/;
-    const mjpgRegex = /^http:\/\/(:\S*)?@?(\d{1,3}\.){3}\d{1,3}(:\d{1,5})?(\/.*)?$/;
+    const mjpgRegex = /^https?:\/\/(:\S*)?@?(\d{1,3}\.){3}\d{1,3}(:\d{1,5})?(\/.*)?\.mjpg$/;
 
     if (!rtspRegex.test(ipInput) && !mjpgRegex.test(ipInput)) {
-        alert('Invalid URL format. Please use the format: rtsp://:@<IP_ADDRESS>:<PORT>/ or http://:@<IP_ADDRESS>:<PORT>/');
+        alert('Invalid URL format. Please use the format: rtsp://:@<IP_ADDRESS>:<PORT>/ or http(s)://:@<IP_ADDRESS>:<PORT>/<path>.mjpg');
         return;
     }
 
