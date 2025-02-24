@@ -170,12 +170,17 @@ const openVideoWindow = (url) => {
 
 const createVideoWindow = (url) => {
     const newWindow = createElementWithClass('div', 'window video-container');
-    let iframeSrc;
+    let videoContent;
 
     if (url.startsWith('rtsp://')) {
-        iframeSrc = `https://streamedian.com/embed?w=ZXVwLnN0cmVhbWVkaWFuLmNvbQ==&s=${btoa(url)}&r=MTI4MHg3MjA=`;
-    } else if (url.startsWith('http://')) {
-        iframeSrc = url; // Directly use MJPG URL
+        // For RTSP streams, use Streamedian
+        videoContent = `<iframe id="videoFrame" class="video-player" frameborder="0" allowfullscreen="1"
+            src="https://streamedian.com/embed?w=ZXVwLnN0cmVhbWVkaWFuLmNvbQ==&s=${btoa(url)}&r=MTI4MHg3MjA=" 
+            width="800" height="450"></iframe>`;
+    } else {
+        // For MJPG streams, use direct video element
+        const streamUrl = url.includes('mjpg/video.mjpg') ? url : `${url}/mjpg/video.mjpg`;
+        videoContent = `<img src="${streamUrl}" alt="${streamUrl}" width="800" height="450">`;
     }
 
     newWindow.innerHTML = `
@@ -185,8 +190,7 @@ const createVideoWindow = (url) => {
         </div>
         <div class="window-content" style="height: 950px; width: 1300px; display: flex;">
             <div class="video-section" style="flex: 1;">
-                <iframe id="videoFrame" class="video-player" frameborder="0" allowfullscreen="1"
-                    src="${iframeSrc}" width="800" height="450"></iframe>
+                ${videoContent}
                 <div class="google-maps" id="googleMaps"></div>
             </div>
             <div class="window-content" style="height: 750px; width: 800px;">
