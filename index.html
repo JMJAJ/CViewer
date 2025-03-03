@@ -4,29 +4,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Windows-style Interface</title>
+    <title>IP Camera Viewer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="window sidebar" id="sidebar">
-            <div class="window-titlebar">Online IP Cameras</div>
-            <div class="window-content">
-                <form id="addIpForm">
-                    <input type="text" id="addIpInput" placeholder="Enter IP address">
-                    <button type="submit" id="addIpButton">Add IP</button>
-                </form>
-                <ul class="camera-list" id="cameraList">
-                    <!-- Online RTSP IP addresses will be inserted here dynamically -->
-                </ul>
+    <div class="app-container">
+        <!-- Taskbar -->
+        <div class="taskbar">
+            <div class="start-menu">
+                <i class="fas fa-video"></i>
+                <span>IP Camera Viewer</span>
+            </div>
+            <div class="taskbar-right">
+                <button id="advancedModeButton" class="taskbar-button">
+                    <i class="fas fa-terminal"></i>
+                    <span>Advanced</span>
+                </button>
+                <div class="clock" id="clock"></div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="content-area">
+            <!-- Camera Sidebar Window -->
+            <div class="window sidebar" id="sidebar">
+                <div class="window-titlebar">
+                    <div class="window-title">
+                        <i class="fas fa-camera"></i>
+                        <span>Camera List</span>
+                    </div>
+                    <div class="window-controls">
+                        <button class="window-control minimize"><i class="fas fa-minus"></i></button>
+                        <button class="window-control maximize"><i class="fas fa-expand"></i></button>
+                    </div>
+                </div>
+                <div class="window-content">
+                    <div class="search-container">
+                        <form id="addIpForm">
+                            <div class="input-group">
+                                <input type="text" id="addIpInput" placeholder="Enter RTSP or HTTP stream URL">
+                                <button type="submit" id="addIpButton">
+                                    <i class="fas fa-plus"></i> Add
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="camera-container">
+                        <h3><i class="fas fa-list"></i> Available Cameras</h3>
+                        <ul class="camera-list" id="cameraList">
+                            <!-- Camera list will be populated dynamically -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="window-statusbar">
+                    <span id="cameraCount">0 cameras</span>
+                    <span class="connection-status"><i class="fas fa-circle"></i> Online</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <script defer src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
+    <!-- Templates for dynamically created elements -->
+    <template id="videoWindowTemplate">
+        <div class="window video-window">
+            <div class="window-titlebar">
+                <div class="window-title">
+                    <i class="fas fa-video"></i>
+                    <span class="video-title"></span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-control minimize"><i class="fas fa-minus"></i></button>
+                    <button class="window-control maximize"><i class="fas fa-expand"></i></button>
+                    <button class="window-control close"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="video-container">
+                    <!-- Video content will be inserted here -->
+                </div>
+                <div class="info-panel">
+                    <div class="info-tabs">
+                        <button class="tab-button active" data-tab="camera-info">Info</button>
+                        <button class="tab-button" data-tab="camera-location">Location</button>
+                        <button class="tab-button" data-tab="camera-settings">Settings</button>
+                    </div>
+                    <div class="tab-content active" id="camera-info">
+                        <div class="info-card">
+                            <h3>Camera Information</h3>
+                            <div id="ipInfoContainer">Loading information...</div>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="camera-location">
+                        <div class="map-container" id="googleMaps"></div>
+                    </div>
+                    <div class="tab-content" id="camera-settings">
+                        <div class="settings-container">
+                            <h3>Camera Settings</h3>
+                            <div class="setting-group">
+                                <label>Face Detection</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="faceDetectionToggle">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="setting-group">
+                                <label>Auto Refresh</label>
+                                <label class="switch">
+                                    <input type="checkbox" checked id="autoRefreshToggle">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            
+                            <!-- Advanced Mode Panels -->
+                            <div class="advanced-mode-panel raw-ip-info">
+                                <h4>Original Format - IP Information</h4>
+                                <pre class="raw-ip-data"></pre>
+                            </div>
+                            <div class="advanced-mode-panel raw-asn-info">
+                                <h4>Original Format - ASN Information</h4>
+                                <pre class="raw-asn-data"></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="window-statusbar">
+                <span class="stream-status"><i class="fas fa-circle"></i> Connected</span>
+                <span class="stream-resolution">800x450</span>
+            </div>
+        </div>
+    </template>
 
-    <script src="script.js"></script>
+    <!-- Advanced Dashboard Template -->
+    <template id="advancedDashboardTemplate">
+        <div class="window advanced-dashboard" id="advancedDashboard">
+            <div class="window-titlebar">
+                <div class="window-title">
+                    <i class="fas fa-terminal"></i>
+                    <span>Advanced Technical Dashboard</span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-control minimize"><i class="fas fa-minus"></i></button>
+                    <button class="window-control maximize"><i class="fas fa-expand"></i></button>
+                    <button class="window-control close"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="advanced-dashboard-layout">
+                    <div class="dashboard-sidebar">
+                        <div class="dashboard-nav">
+                            <div class="nav-item active" data-section="api-endpoints">
+                                <i class="fas fa-server"></i>
+                                <span>API Endpoints</span>
+                            </div>
+                            <div class="nav-item" data-section="state-viewer">
+                                <i class="fas fa-database"></i>
+                                <span>State</span>
+                            </div>
+                            <div class="nav-item" data-section="camera-data">
+                                <i class="fas fa-camera"></i>
+                                <span>Camera Data</span>
+                            </div>
+                            <div class="nav-item" data-section="console">
+                                <i class="fas fa-terminal"></i>
+                                <span>Console</span>
+                            </div>
+                            <div class="nav-item" data-section="original-code">
+                                <i class="fas fa-code"></i>
+                                <span>Original Code</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-content">
+                        <div class="dashboard-section active" id="api-endpoints">
+                            <h3>API Endpoints Configuration</h3>
+                            <div class="endpoint-card">
+                                <div class="endpoint-header">
+                                    <span class="http-method">GET</span>
+                                    <span class="endpoint-url">IP_INFO</span>
+                                </div>
+                                <div class="endpoint-content">
+                                    <div class="code-block">
+                                        <pre id="ipInfoEndpoint"></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="endpoint-card">
+                                <div class="endpoint-header">
+                                    <span class="http-method">GET</span>
+                                    <span class="endpoint-url">ASN_INFO</span>
+                                </div>
+                                <div class="endpoint-content">
+                                    <div class="code-block">
+                                        <pre id="asnInfoEndpoint"></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="endpoint-card">
+                                <div class="endpoint-header">
+                                    <span class="http-method">GET</span>
+                                    <span class="endpoint-url">PASTEBIN</span>
+                                </div>
+                                <div class="endpoint-content">
+                                    <div class="code-block">
+                                        <pre id="pastebinEndpoint"></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dashboard-section" id="state-viewer">
+                            <h3>Application State</h3>
+                            <div class="state-tree">
+                                <div class="code-block">
+                                    <pre id="globalStateView"></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dashboard-section" id="camera-data">
+                            <h3>Active Camera Data</h3>
+                            <div class="camera-data-container" id="camerasDataList">
+                                <!-- Camera data will be populated here -->
+                            </div>
+                        </div>
+                        <div class="dashboard-section" id="console">
+                            <h3>Console Output</h3>
+                            <div class="console-container">
+                                <div class="console-output" id="consoleOutput">
+                                    <!-- Console output will be displayed here -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dashboard-section" id="original-code">
+                            <h3>Original Code Structure</h3>
+                            <div class="code-container">
+                                <pre id="originalCodeContent">
+// Constants
+const API_ENDPOINTS = {
+    IP_INFO: 'http://ip-api.com/json/',
+    IP_INFO_FIELDS: 'status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query',
+    PASTEBIN: 'https://pastebin.com/raw/UuJZFNxF',
+    CORS_PROXY: 'https://serverless-api-jnzf.vercel.app/api/proxy',
+    ASN_INFO: 'https://ipinfo.io/'
+};
+
+// State
+let globalState = {
+    latitude: null,
+    longitude: null,
+    asn: null,
+};
+
+// DOM Elements
+const DOM = {
+    cameraList: document.getElementById('cameraList'),
+    addIpForm: document.getElementById('addIpForm'),
+    addIpInput: document.getElementById('addIpInput'),
+    addIpButton: document.getElementById('addIpButton'),
+    sidebar: document.getElementById('sidebar'),
+    windowTitlebar: document.getElementById('windowTitlebar')
+};</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="window-statusbar">
+                <span class="dashboard-status">
+                    <i class="fas fa-circle"></i> Advanced Mode Active
+                </span>
+                <span id="advancedModeTime"></span>
+            </div>
+        </div>
+    </template>
+
+    <script defer src="script.js"></script>
 </body>
 
 </html>
