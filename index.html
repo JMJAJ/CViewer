@@ -156,6 +156,10 @@
                 <div class="advanced-dashboard-layout">
                     <div class="dashboard-sidebar">
                         <div class="dashboard-nav">
+                            <div class="nav-item" data-section="current-ip">
+                                <i class="fas fa-crosshairs"></i>
+                                <span>Current IP</span>
+                            </div>
                             <div class="nav-item active" data-section="api-endpoints">
                                 <i class="fas fa-server"></i>
                                 <span>API Endpoints</span>
@@ -179,6 +183,89 @@
                         </div>
                     </div>
                     <div class="dashboard-content">
+                        <div class="dashboard-section" id="current-ip">
+                            <h3>Current IP Details</h3>
+                            <div class="current-ip-selector">
+                                <label>Select Active Camera:</label>
+                                <select id="currentIpSelector">
+                                    <option value="">Select a camera...</option>
+                                </select>
+                                <button id="refreshCurrentIp" class="refresh-button">
+                                    <i class="fas fa-sync-alt"></i> Refresh
+                                </button>
+                            </div>
+                            <div class="current-ip-actions">
+                                <button id="viewCurrentWindow">
+                                    <i class="fas fa-eye"></i> View Window
+                                </button>
+                                <button id="refreshIpData">
+                                    <i class="fas fa-sync-alt"></i> Refresh IP Data
+                                </button>
+                            </div>
+                            <div class="current-ip-details">
+                                <div class="ip-details-container">
+                                    <div class="ip-main-info">
+                                        <div class="ip-address-display" id="currentIpAddress">No camera selected</div>
+                                        <div class="ip-location-display" id="currentIpLocation"></div>
+                                    </div>
+                                    <div class="ip-details-grid">
+                                        <div class="detail-card">
+                                            <div class="detail-header">Network</div>
+                                            <div class="detail-content" id="currentIpNetwork">
+                                                <!-- Network details will be inserted here -->
+                                            </div>
+                                        </div>
+                                        <div class="detail-card">
+                                            <div class="detail-header">Location</div>
+                                            <div class="detail-content" id="currentIpLocationDetails">
+                                                <!-- Location details will be inserted here -->
+                                            </div>
+                                        </div>
+                                        <div class="detail-card">
+                                            <div class="detail-header">ASN</div>
+                                            <div class="detail-content" id="currentIpAsn">
+                                                <!-- ASN details will be inserted here -->
+                                            </div>
+                                        </div>
+                                        <div class="detail-card">
+                                            <div class="detail-header">Stream</div>
+                                            <div class="detail-content" id="currentIpStreamDetails">
+                                                <!-- Stream details will be inserted here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ip-map" id="currentIpMap">
+                                    <!-- Map will be inserted here -->
+                                </div>
+                                <div class="resolution-settings">
+                                    <h4>Resolution Settings</h4>
+                                    <div class="resolution-options">
+                                        <div class="setting-group">
+                                            <label>Auto Resolution</label>
+                                            <label class="switch">
+                                                <input type="checkbox" checked id="autoResolutionGlobal">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                        <div class="resolution-selector" id="manualResolutionControls" style="display: none;">
+                                            <label>Set Resolution:</label>
+                                            <select id="manualResolution">
+                                                <option value="1280x720">1280×720 (720p)</option>
+                                                <option value="1920x1080">1920×1080 (1080p)</option>
+                                                <option value="854x480">854×480 (480p)</option>
+                                                <option value="640x360">640×360 (360p)</option>
+                                                <option value="720x420">720×420 (Custom)</option>
+                                            </select>
+                                            <button id="applyResolution" class="action-button">
+                                                Apply
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="dashboard-section active" id="api-endpoints">
                             <h3>API Endpoints Configuration</h3>
                             <div class="endpoint-card">
