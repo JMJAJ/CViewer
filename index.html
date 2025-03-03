@@ -85,6 +85,12 @@
                 <div class="video-container">
                     <!-- Video content will be inserted here -->
                 </div>
+                <div class="player-controls">
+                    <select class="player-select">
+                        <option value="streamedian">Streamedian Player</option>
+                        <option value="flashphoner">Flashphoner Player</option>
+                    </select>
+                </div>
                 <div class="info-panel">
                     <div class="info-tabs">
                         <button class="tab-button active" data-tab="camera-info">Info</button>
@@ -103,6 +109,13 @@
                     <div class="tab-content" id="camera-settings">
                         <div class="settings-container">
                             <h3>Camera Settings</h3>
+                            <div class="setting-group">
+                                <label>Player Type</label>
+                                <select class="player-select">
+                                    <option value="streamedian">Streamedian Player</option>
+                                    <option value="flashphoner">Flashphoner Player</option>
+                                </select>
+                            </div>
                             <div class="setting-group">
                                 <label>Face Detection</label>
                                 <label class="switch">

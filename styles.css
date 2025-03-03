@@ -1419,3 +1419,60 @@ input:checked + .slider:before {
 .current-ip-actions button i {
     margin-right: 6px;
 }
+
+.player-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.player-select {
+    background: #2c3e50;
+    color: white;
+    border: 1px solid #34495e;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.player-select:hover {
+    background: #34495e;
+}
+
+.player-select option {
+    background: #2c3e50;
+    color: white;
+}
+
+.settings-container .player-select {
+    width: 200px;
+    background: var(--darker-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.settings-container .player-select:hover {
+    border-color: var(--primary-color);
+}
+
+.settings-container .player-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(225, 29, 72, 0.2);
+}
+
+.settings-container .player-select option {
+    background: var(--darker-bg);
+    color: var(--text-color);
+    padding: 8px;
+}
