@@ -1476,3 +1476,205 @@ input:checked + .slider:before {
     color: var(--text-color);
     padding: 8px;
 }
+
+/* Metadata Tab Styles */
+.metadata-container {
+    padding: 15px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.metadata-container h3 {
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.metadata-container h3:before {
+    content: '\f05a';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+}
+
+.metadata-status {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.extract-metadata-btn {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+}
+
+.extract-metadata-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+.metadata-loading {
+    padding: 20px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.metadata-loading i {
+    font-size: 24px;
+    color: var(--accent-color);
+}
+
+.metadata-section {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+}
+
+.metadata-section h4 {
+    font-size: 14px;
+    margin-bottom: 12px;
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.metadata-item {
+    display: flex;
+    margin-bottom: 8px;
+    font-size: 13px;
+    align-items: center;
+}
+
+.metadata-label {
+    flex: 0 0 40%;
+    color: var(--text-muted);
+}
+
+.metadata-value {
+    flex: 0 0 60%;
+    font-weight: 500;
+}
+
+.security-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rating-value {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--text-muted);
+    color: var(--dark-bg);
+    font-weight: bold;
+}
+
+.rating-value.high {
+    background-color: var(--success-color);
+}
+
+.rating-value.medium {
+    background-color: var(--warning-color);
+}
+
+.rating-value.low {
+    background-color: var(--danger-color);
+}
+
+.rating-description {
+    font-size: 12px;
+}
+
+.metadata-raw {
+    margin-top: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+}
+
+.metadata-raw h4 {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: var(--accent-color);
+}
+
+.raw-metadata-data {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 12px;
+    white-space: pre-wrap;
+    color: var(--text-muted);
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* Camera model specific styles */
+.camera-model-hikvision {
+    color: #4ade80;
+}
+
+.camera-model-dahua {
+    color: #60a5fa;
+}
+
+.camera-model-axis {
+    color: #f97316;
+}
+
+.camera-model-generic {
+    color: var(--text-color);
+}
+
+/* Security indicators */
+.security-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.security-indicator.secure {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: #4ade80;
+}
+
+.security-indicator.warning {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+}
+
+.security-indicator.danger {
+    background-color: rgba(220, 38, 38, 0.2);
+    color: #f87171;
+}
+
+.security-indicator i {
+    font-size: 10px;
+}

@@ -95,6 +95,7 @@
                     <div class="info-tabs">
                         <button class="tab-button active" data-tab="camera-info">Info</button>
                         <button class="tab-button" data-tab="camera-location">Location</button>
+                        <button class="tab-button" data-tab="camera-metadata">Metadata</button>
                         <button class="tab-button" data-tab="camera-settings">Settings</button>
                     </div>
                     <div class="tab-content active" id="camera-info">
@@ -105,6 +106,73 @@
                     </div>
                     <div class="tab-content" id="camera-location">
                         <div class="map-container" id="googleMaps"></div>
+                    </div>
+                    <div class="tab-content" id="camera-metadata">
+                        <div class="metadata-container">
+                            <h3>Camera Metadata</h3>
+                            <div class="metadata-status">
+                                <button class="extract-metadata-btn"><i class="fas fa-search"></i> Extract Metadata</button>
+                            </div>
+                            <div class="metadata-content">
+                                <div class="metadata-loading" style="display: none;">
+                                    <i class="fas fa-circle-notch fa-spin"></i> Analyzing camera stream...
+                                </div>
+                                <div class="metadata-results">
+                                    <div class="metadata-section">
+                                        <h4><i class="fas fa-info-circle"></i> Camera Details</h4>
+                                        <div class="metadata-item">
+                                            <span class="metadata-label">Camera Model:</span>
+                                            <span class="metadata-value camera-model">Unknown</span>
+                                        </div>
+                                        <div class="metadata-item">
+                                            <span class="metadata-label">Firmware Version:</span>
+                                            <span class="metadata-value firmware-version">Unknown</span>
+                                        </div>
+                                        <div class="metadata-item">
+                                            <span class="metadata-label">Manufacturer:</span>
+                                            <span class="metadata-value manufacturer">Unknown</span>
+                                        </div>
+                                    </div>
+                                    <div class="metadata-section">
+                                        <h4><i class="fas fa-video"></i> Stream Information</h4>
+                                        <div class="metadata-item">
+                                            <span class="metadata-label">Codec:</span>
+                                            <span class="metadata-value stream-codec">Unknown</span>
+                                        </div>
+                                        <div class="metadata-item">
+                                            <span class="metadata-label">Framerate:</span>
+                                            <span class="metadata-value stream-framerate">Unknown</span>
+                                        </div>
+                                        <div class="metadata-item">
+                                            <span class="metadata-label">Bitrate:</span>
+                                            <span class="metadata-value stream-bitrate">Unknown</span>
+                                        </div>
+                                    </div>
+                                    <div class="metadata-section">
+                                        <h4><i class="fas fa-shield-alt"></i> Security Assessment</h4>
+                                        <div class="metadata-item">
+                                            <span class="metadata-label">Authentication:</span>
+                                            <span class="metadata-value auth-status">Unknown</span>
+                                        </div>
+                                        <div class="metadata-item">
+                                            <span class="metadata-label">Default Credentials:</span>
+                                            <span class="metadata-value default-creds">Unknown</span>
+                                        </div>
+                                        <div class="metadata-item">
+                                            <span class="metadata-label">Security Rating:</span>
+                                            <div class="security-rating">
+                                                <span class="rating-value">?</span>
+                                                <div class="rating-description">Not analyzed</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="metadata-raw">
+                                    <h4>Raw Metadata</h4>
+                                    <pre class="raw-metadata-data"></pre>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-content" id="camera-settings">
                         <div class="settings-container">
