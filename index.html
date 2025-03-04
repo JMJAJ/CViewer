@@ -166,6 +166,74 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                    <!-- New Credentials Section -->
+                                    <div class="metadata-section credentials-section">
+                                        <h4><i class="fas fa-key"></i> Credential Analysis</h4>
+                                        <div class="credential-status">
+                                            <div class="credential-summary">
+                                                <span class="credential-count">0</span> potential default credentials found
+                                            </div>
+                                            <button class="toggle-credentials-btn">
+                                                <i class="fas fa-chevron-down"></i> Show Details
+                                            </button>
+                                        </div>
+                                        <div class="credentials-list" style="display: none;">
+                                            <div class="credentials-table-container">
+                                                <table class="credentials-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Username</th>
+                                                            <th>Password</th>
+                                                            <th>Notes</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="credentials-table-body">
+                                                        <!-- Will be populated dynamically -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="credential-test-container">
+                                            <h5><i class="fas fa-vial"></i> Credential Testing</h5>
+                                            <div class="credential-test-controls">
+                                                <button class="test-credentials-btn" disabled>
+                                                    <i class="fas fa-play"></i> Test Credentials
+                                                </button>
+                                                <div class="test-progress" style="display: none;">
+                                                    <div class="progress-bar">
+                                                        <div class="progress-fill"></div>
+                                                    </div>
+                                                    <div class="progress-text">Testing credentials (0/0)</div>
+                                                </div>
+                                            </div>
+                                            <div class="test-results" style="display: none;">
+                                                <h6>Test Results</h6>
+                                                <div class="test-results-content">
+                                                    <!-- Will be populated dynamically -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Known Vulnerabilities Section -->
+                                    <div class="metadata-section vulnerabilities-section">
+                                        <h4><i class="fas fa-bug"></i> Known Vulnerabilities</h4>
+                                        <div class="vulnerability-status">
+                                            <div class="vulnerability-summary">
+                                                <span class="vulnerability-count">0</span> potential vulnerabilities found
+                                            </div>
+                                            <button class="toggle-vulnerabilities-btn">
+                                                <i class="fas fa-chevron-down"></i> Show Details
+                                            </button>
+                                        </div>
+                                        <div class="vulnerabilities-list" style="display: none;">
+                                            <ul class="vulnerabilities-items">
+                                                <!-- Will be populated dynamically -->
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="metadata-raw">
                                     <h4>Raw Metadata</h4>

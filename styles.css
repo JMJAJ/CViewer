@@ -1678,3 +1678,251 @@ input:checked + .slider:before {
 .security-indicator i {
     font-size: 10px;
 }
+
+/* Credentials Section Styles */
+.credentials-section, .vulnerabilities-section {
+    position: relative;
+}
+
+.credential-status, .vulnerability-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.credential-summary, .vulnerability-summary {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.credential-count, .vulnerability-count {
+    font-weight: bold;
+    color: var(--text-color);
+    background-color: rgba(229, 62, 62, 0.2);
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+.toggle-credentials-btn, .toggle-vulnerabilities-btn {
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.toggle-credentials-btn:hover, .toggle-vulnerabilities-btn:hover {
+    text-decoration: underline;
+}
+
+.credentials-table-container {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.credentials-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.credentials-table th {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: var(--accent-color);
+    text-align: left;
+    padding: 8px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.credentials-table td {
+    padding: 6px 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.credentials-table tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.credential-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.credential-action-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 12px;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.credential-action-btn:hover {
+    color: var(--text-color);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.credential-test-container {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.credential-test-container h5 {
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.credential-test-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.test-credentials-btn {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+}
+
+.test-credentials-btn:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+}
+
+.test-credentials-btn:disabled {
+    background-color: rgba(229, 62, 62, 0.3);
+    cursor: not-allowed;
+}
+
+.progress-bar {
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--accent-color);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.test-results {
+    margin-top: 15px;
+}
+
+.test-results h6 {
+    font-size: 12px;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.test-results-content {
+    font-size: 12px;
+    color: var(--text-muted);
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.test-result-item {
+    padding: 6px 8px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.test-result-success {
+    background-color: rgba(16, 185, 129, 0.1);
+    border-left: 3px solid var(--success-color);
+}
+
+.test-result-failure {
+    background-color: rgba(229, 62, 62, 0.1);
+    border-left: 3px solid var(--danger-color);
+}
+
+.vulnerabilities-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.vulnerabilities-list li {
+    padding: 8px 10px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    background-color: rgba(229, 62, 62, 0.1);
+    border-left: 3px solid var(--danger-color);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vulnerabilities-list li:before {
+    content: '\f188';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: var(--danger-color);
+}
+
+.credential-copy {
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+
+.credential-copy:hover {
+    color: var(--accent-color);
+}
+
+.credential-notes {
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+/* Credential testing animation */
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+.testing-animation {
+    animation: pulse 1.5s infinite;
+}
