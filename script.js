@@ -1032,17 +1032,9 @@ const createMjpgImagePlayer = (url) => {
     const img = document.createElement('img');
     img.className = 'mjpg-image-player';
 
-    // Check if we need to use proxy for CORS
-    const needsProxy = window.location.protocol === 'https:' || window.location.hostname !== 'localhost';
-    const proxyUrl = 'https://serverless-api-jnzf.vercel.app/api/proxy';
+    // Handle mixed content by trying HTTPS first if we're on HTTPS
     let imageUrl = url;
-
-    if (needsProxy && url.startsWith('http://')) {
-        // Use the existing proxy for CORS issues
-        imageUrl = `${proxyUrl}?url=${encodeURIComponent(url)}`;
-        console.log('Using proxy for MJPG image due to CORS:', imageUrl);
-    } else if (window.location.protocol === 'https:' && url.startsWith('http:')) {
-        // Fallback: try HTTPS conversion
+    if (window.location.protocol === 'https:' && url.startsWith('http:')) {
         imageUrl = url.replace('http:', 'https:');
         console.log('Converting HTTP to HTTPS for mixed content:', imageUrl);
     }
@@ -1061,19 +1053,8 @@ const createMjpgImagePlayer = (url) => {
 
     const refreshImage = () => {
         const newTimestamp = Date.now();
-        let refreshUrl;
-
-        if (needsProxy && url.startsWith('http://')) {
-            // Use proxy with cache-busting
-            const originalWithTimestamp = url + (url.includes('?') ? '&' : '?') + 't=' + newTimestamp;
-            refreshUrl = `${proxyUrl}?url=${encodeURIComponent(originalWithTimestamp)}`;
-        } else {
-            // Direct URL with cache-busting
-            const baseUrl = imageUrl.split('?')[0].split('&')[0];
-            refreshUrl = baseUrl + separator + 't=' + newTimestamp;
-        }
-
-        img.src = refreshUrl;
+        const baseUrl = imageUrl.split('?')[0].split('&')[0];
+        img.src = baseUrl + separator + 't=' + newTimestamp;
     };
 
     // Add error handling
@@ -1176,16 +1157,8 @@ const createMjpgIframePlayer = (url) => {
     container.style.height = '100%';
     container.style.position = 'relative';
 
-    // Check if we need to use proxy for CORS
-    const needsProxy = window.location.protocol === 'https:' || window.location.hostname !== 'localhost';
-    const proxyUrl = 'https://serverless-api-jnzf.vercel.app/api/proxy';
+    // Use the URL directly for iframe
     let iframeUrl = url;
-
-    if (needsProxy && url.startsWith('http://')) {
-        // Use the existing proxy for CORS issues
-        iframeUrl = `${proxyUrl}?url=${encodeURIComponent(url)}`;
-        console.log('Using proxy for MJPG iframe due to CORS:', iframeUrl);
-    }
 
     const iframe = document.createElement('iframe');
     iframe.className = 'mjpg-iframe-player';
@@ -1202,20 +1175,8 @@ const createMjpgIframePlayer = (url) => {
     const refreshRate = 3000; // 3 seconds
 
     const refreshIframe = () => {
-        const timestamp = Date.now();
-        let refreshUrl;
-
-        if (needsProxy && url.startsWith('http://')) {
-            // Use proxy with cache-busting
-            const originalWithTimestamp = url + (url.includes('?') ? '&' : '?') + 't=' + timestamp;
-            refreshUrl = `${proxyUrl}?url=${encodeURIComponent(originalWithTimestamp)}`;
-        } else {
-            // Direct URL with cache-busting
-            const separator = url.includes('?') ? '&' : '?';
-            refreshUrl = url + separator + 't=' + timestamp;
-        }
-
-        iframe.src = refreshUrl;
+        const separator = url.includes('?') ? '&' : '?';
+        iframe.src = url + separator + 't=' + Date.now();
         console.log('🔄 Refreshed MJPG iframe');
     };
 
