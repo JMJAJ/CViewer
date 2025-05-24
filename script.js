@@ -1157,6 +1157,66 @@ const createMjpgIframePlayer = (url) => {
     container.style.height = '100%';
     container.style.position = 'relative';
 
+    // Check if we're on HTTPS and the URL is HTTP (mixed content)
+    const isHttpsPage = window.location.protocol === 'https:';
+    const isHttpUrl = url.startsWith('http:');
+    const isMixedContent = isHttpsPage && isHttpUrl;
+
+    if (isMixedContent) {
+        // Show mixed content warning and fallback to image player
+        console.warn('🚫 Mixed content detected - HTTPS page trying to load HTTP MJPG stream');
+        container.innerHTML = `
+            <div class="video-error">
+                <i class="fas fa-shield-alt"></i>
+                <p>Mixed Content Blocked</p>
+                <small>HTTPS page cannot load HTTP stream: ${url}</small>
+                <div style="margin-top: 15px;">
+                    <button class="switch-to-image-btn" style="padding: 8px 16px; background: #e11d48; color: white; border: none; border-radius: 4px; cursor: pointer; margin-right: 8px;">
+                        Try Image Player
+                    </button>
+                    <button class="copy-url-btn" style="padding: 8px 16px; background: #374151; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                        Copy URL
+                    </button>
+                </div>
+                <p style="margin-top: 10px; font-size: 11px; color: #94a3b8;">
+                    💡 Tip: Use HTTPS URLs or serve the app over HTTP for HTTP streams
+                </p>
+            </div>
+        `;
+
+        // Add event listeners for buttons
+        const switchBtn = container.querySelector('.switch-to-image-btn');
+        const copyBtn = container.querySelector('.copy-url-btn');
+
+        if (switchBtn) {
+            switchBtn.addEventListener('click', () => {
+                // Switch to image player
+                const imagePlayer = createMjpgImagePlayer(url);
+                container.parentElement.replaceChild(imagePlayer, container);
+                showNotification('<i class="fas fa-exchange-alt"></i> Switched to Image Player');
+            });
+        }
+
+        if (copyBtn) {
+            copyBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(url).then(() => {
+                    showNotification('<i class="fas fa-copy"></i> URL copied to clipboard');
+                }).catch(() => {
+                    // Fallback for older browsers
+                    const textarea = document.createElement('textarea');
+                    textarea.value = url;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    showNotification('<i class="fas fa-copy"></i> URL copied to clipboard');
+                });
+            });
+        }
+
+        return container;
+    }
+
     const iframe = document.createElement('iframe');
     iframe.className = 'mjpg-iframe-player';
     iframe.frameBorder = '0';
@@ -3722,6 +3782,14 @@ const init = () => {
 
         // Add cleanup on page unload
         window.addEventListener('unload', cleanup);
+
+    // Show mixed content warning if on HTTPS
+        if (window.location.protocol === 'https:') {
+            const warningElement = document.getElementById('mixed-content-warning');
+            if (warningElement) {
+                warningElement.style.display = 'block';
+            }
+        }
 
     console.info('Application initialized successfully');
         return true;

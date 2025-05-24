@@ -47,6 +47,9 @@
                         <form id="addIpForm">
                             <div class="input-group">
                                 <input type="text" id="addIpInput" placeholder="Enter RTSP or MJPG/HTTP stream URL">
+                                <div id="mixed-content-warning" style="display: none; margin-top: 8px; padding: 8px; background-color: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 4px; font-size: 12px; color: #f59e0b;">
+                                    <i class="fas fa-shield-alt"></i> <strong>HTTPS Notice:</strong> HTTP streams may be blocked by browser security. Use HTTPS URLs when possible.
+                                </div>
                                 <button type="submit" id="addIpButton">
                                     <i class="fas fa-plus"></i> Add
                                 </button>
