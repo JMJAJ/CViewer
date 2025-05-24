@@ -1157,66 +1157,76 @@ const createMjpgIframePlayer = (url) => {
     container.style.height = '100%';
     container.style.position = 'relative';
 
-    // Check if we're on HTTPS and the URL is HTTP (mixed content)
+    // Check if we're on HTTPS and the URL is HTTP
     const isHttpsPage = window.location.protocol === 'https:';
     const isHttpUrl = url.startsWith('http:');
-    const isMixedContent = isHttpsPage && isHttpUrl;
 
-    if (isMixedContent) {
-        // Show mixed content warning and fallback to image player
-        console.warn('🚫 Mixed content detected - HTTPS page trying to load HTTP MJPG stream');
+    if (isHttpsPage && isHttpUrl) {
+        // Create a warning message for mixed content
         container.innerHTML = `
-            <div class="video-error">
+            <div class="mixed-content-warning">
                 <i class="fas fa-shield-alt"></i>
-                <p>Mixed Content Blocked</p>
-                <small>HTTPS page cannot load HTTP stream: ${url}</small>
-                <div style="margin-top: 15px;">
-                    <button class="switch-to-image-btn" style="padding: 8px 16px; background: #e11d48; color: white; border: none; border-radius: 4px; cursor: pointer; margin-right: 8px;">
-                        Try Image Player
-                    </button>
-                    <button class="copy-url-btn" style="padding: 8px 16px; background: #374151; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                        Copy URL
-                    </button>
+                <h3>Mixed Content Blocked</h3>
+                <p>This HTTPS page cannot load HTTP MJPG streams due to browser security.</p>
+                <div class="solutions">
+                    <h4>Solutions:</h4>
+                    <ul>
+                        <li><strong>Use HTTP version:</strong> Access this app via HTTP instead of HTTPS</li>
+                        <li><strong>HTTPS stream:</strong> Use HTTPS version of the stream if available</li>
+                        <li><strong>Local testing:</strong> Run a local HTTP server</li>
+                    </ul>
                 </div>
-                <p style="margin-top: 10px; font-size: 11px; color: #94a3b8;">
-                    💡 Tip: Use HTTPS URLs or serve the app over HTTP for HTTP streams
-                </p>
+                <div class="url-info">
+                    <strong>Stream URL:</strong> <code>${url}</code>
+                </div>
+                <button class="try-https-btn" onclick="this.parentElement.parentElement.tryHttpsVersion('${url}')">
+                    Try HTTPS Version
+                </button>
             </div>
         `;
 
-        // Add event listeners for buttons
-        const switchBtn = container.querySelector('.switch-to-image-btn');
-        const copyBtn = container.querySelector('.copy-url-btn');
+        // Add method to try HTTPS version
+        container.tryHttpsVersion = (originalUrl) => {
+            const httpsUrl = originalUrl.replace('http:', 'https:');
+            console.log('Trying HTTPS version:', httpsUrl);
 
-        if (switchBtn) {
-            switchBtn.addEventListener('click', () => {
-                // Switch to image player
-                const imagePlayer = createMjpgImagePlayer(url);
-                container.parentElement.replaceChild(imagePlayer, container);
-                showNotification('<i class="fas fa-exchange-alt"></i> Switched to Image Player');
-            });
-        }
+            // Create iframe with HTTPS URL
+            const iframe = document.createElement('iframe');
+            iframe.className = 'mjpg-iframe-player';
+            iframe.frameBorder = '0';
+            iframe.width = '100%';
+            iframe.height = '100%';
+            iframe.src = httpsUrl;
+            iframe.allowFullscreen = true;
+            iframe.style.border = 'none';
+            iframe.style.display = 'block';
 
-        if (copyBtn) {
-            copyBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText(url).then(() => {
-                    showNotification('<i class="fas fa-copy"></i> URL copied to clipboard');
-                }).catch(() => {
-                    // Fallback for older browsers
-                    const textarea = document.createElement('textarea');
-                    textarea.value = url;
-                    document.body.appendChild(textarea);
-                    textarea.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(textarea);
-                    showNotification('<i class="fas fa-copy"></i> URL copied to clipboard');
-                });
-            });
-        }
+            iframe.onload = () => {
+                console.log('✅ HTTPS MJPG stream loaded successfully');
+            };
 
+            iframe.onerror = () => {
+                container.innerHTML = `
+                    <div class="video-error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>HTTPS version also failed</p>
+                        <small>Neither HTTP nor HTTPS versions work</small>
+                        <p style="margin-top: 10px; font-size: 12px; color: #94a3b8;">
+                            Try accessing this app via HTTP instead of HTTPS
+                        </p>
+                    </div>
+                `;
+            };
+
+            container.innerHTML = '';
+            container.appendChild(iframe);
+        };
+
+        console.log('⚠️ Mixed content detected - showing warning instead of iframe');
         return container;
     }
 
+    // Normal iframe creation for HTTP pages or HTTPS URLs
     const iframe = document.createElement('iframe');
     iframe.className = 'mjpg-iframe-player';
     iframe.frameBorder = '0';
@@ -1243,11 +1253,6 @@ const createMjpgIframePlayer = (url) => {
         const containerWidth = containerRect.width;
         const containerHeight = containerRect.height;
 
-        // Skip if container has no size yet
-        if (containerWidth === 0 || containerHeight === 0) {
-            return;
-        }
-
         // Assume 640x480 for MJPG streams (common default)
         const streamWidth = 640;
         const streamHeight = 480;
@@ -1256,14 +1261,14 @@ const createMjpgIframePlayer = (url) => {
         const scaleX = containerWidth / streamWidth;
         const scaleY = containerHeight / streamHeight;
 
-        // Use the smaller scale to maintain aspect ratio and fit within container
-        const scaleFactor = Math.min(scaleX, scaleY);
+        // Use the smaller scale to maintain aspect ratio, or larger to fill completely
+        const scaleFactor = Math.max(scaleX, scaleY); // Fill container completely
 
         // Apply scaling
         container.style.setProperty('--scale-factor', scaleFactor);
         container.classList.add('scale-to-fit');
 
-        console.log(`📐 MJPG scaling: container(${containerWidth.toFixed(0)}x${containerHeight.toFixed(0)}) stream(${streamWidth}x${streamHeight}) scale(${scaleFactor.toFixed(2)})`);
+        console.log(`📐 MJPG scaling: container(${containerWidth}x${containerHeight}) stream(${streamWidth}x${streamHeight}) scale(${scaleFactor.toFixed(2)})`);
     };
 
     // Start refresh after initial load
@@ -3782,14 +3787,6 @@ const init = () => {
 
         // Add cleanup on page unload
         window.addEventListener('unload', cleanup);
-
-    // Show mixed content warning if on HTTPS
-        if (window.location.protocol === 'https:') {
-            const warningElement = document.getElementById('mixed-content-warning');
-            if (warningElement) {
-                warningElement.style.display = 'block';
-            }
-        }
 
     console.info('Application initialized successfully');
         return true;
