@@ -501,7 +501,15 @@ body {
     word-break: break-all;
 }
 
-.try-https-btn {
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.try-https-btn,
+.try-proxy-btn {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
     border: none;
@@ -512,11 +520,71 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+    flex: 1;
+    min-width: 140px;
+}
+
+.try-proxy-btn {
+    background: linear-gradient(135deg, var(--secondary-color), #10b981);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.try-https-btn:hover,
+.try-proxy-btn:hover {
+    transform: translateY(-2px);
 }
 
 .try-https-btn:hover {
-    transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(225, 29, 72, 0.4);
+}
+
+.try-proxy-btn:hover {
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+}
+
+/* Proxy Loading */
+.proxy-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 40px;
+    color: var(--text-color);
+}
+
+.proxy-loading .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid var(--secondary-color);
+    animation: spin 1s linear infinite;
+}
+
+.proxy-loading p {
+    font-size: 16px;
+    color: var(--text-muted);
+}
+
+/* Snapshot Container */
+.mjpg-snapshot-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.mjpg-snapshot-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+    transition: opacity 0.3s ease;
 }
 
 .info-panel {

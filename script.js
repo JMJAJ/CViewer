@@ -1179,11 +1179,127 @@ const createMjpgIframePlayer = (url) => {
                 <div class="url-info">
                     <strong>Stream URL:</strong> <code>${url}</code>
                 </div>
-                <button class="try-https-btn" onclick="this.parentElement.parentElement.tryHttpsVersion('${url}')">
-                    Try HTTPS Version
-                </button>
+                <div class="action-buttons">
+                    <button class="try-https-btn" onclick="this.parentElement.parentElement.parentElement.tryHttpsVersion('${url}')">
+                        Try HTTPS Version
+                    </button>
+                    <button class="try-proxy-btn" onclick="this.parentElement.parentElement.parentElement.tryProxyMode('${url}')">
+                        Try Snapshot Mode
+                    </button>
+                </div>
             </div>
         `;
+
+        // Add method to try proxy mode (snapshot mode)
+        container.tryProxyMode = (originalUrl) => {
+            console.log('Trying proxy snapshot mode for:', originalUrl);
+
+            container.innerHTML = `
+                <div class="proxy-loading">
+                    <div class="spinner"></div>
+                    <p>Loading snapshot mode...</p>
+                </div>
+            `;
+
+            // Create snapshot player using your serverless proxy
+            const snapshotContainer = document.createElement('div');
+            snapshotContainer.className = 'mjpg-snapshot-container';
+            snapshotContainer.style.width = '100%';
+            snapshotContainer.style.height = '100%';
+            snapshotContainer.style.display = 'flex';
+            snapshotContainer.style.alignItems = 'center';
+            snapshotContainer.style.justifyContent = 'center';
+            snapshotContainer.style.backgroundColor = '#000';
+
+            const img = document.createElement('img');
+            img.className = 'mjpg-snapshot-image';
+            img.style.maxWidth = '100%';
+            img.style.maxHeight = '100%';
+            img.style.objectFit = 'contain';
+            img.alt = 'MJPG Snapshot';
+
+            // Use your serverless proxy
+            const proxyUrl = 'https://serverless-api-jnzf.vercel.app/api/proxy';
+
+            let refreshInterval;
+            const refreshRate = 2000; // 2 seconds for snapshots
+
+            const loadSnapshot = async () => {
+                try {
+                    const response = await fetch(proxyUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            url: originalUrl,
+                            method: 'GET'
+                        })
+                    });
+
+                    if (response.ok) {
+                        const blob = await response.blob();
+                        const imageUrl = URL.createObjectURL(blob);
+
+                        // Clean up previous URL
+                        if (img.src && img.src.startsWith('blob:')) {
+                            URL.revokeObjectURL(img.src);
+                        }
+
+                        img.src = imageUrl;
+                        console.log('📸 Snapshot loaded via proxy');
+                    } else {
+                        throw new Error(`Proxy returned ${response.status}`);
+                    }
+                } catch (error) {
+                    console.error('Snapshot failed:', error);
+                    snapshotContainer.innerHTML = `
+                        <div class="video-error">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>Snapshot mode failed</p>
+                            <small>Proxy error: ${error.message}</small>
+                        </div>
+                    `;
+                    if (refreshInterval) {
+                        clearInterval(refreshInterval);
+                        refreshInterval = null;
+                    }
+                }
+            };
+
+            // Initial load
+            loadSnapshot();
+
+            // Set up refresh interval
+            refreshInterval = setInterval(loadSnapshot, refreshRate);
+
+            img.onload = () => {
+                console.log('✅ Snapshot mode working');
+                if (container.querySelector('.proxy-loading')) {
+                    container.innerHTML = '';
+                    container.appendChild(snapshotContainer);
+                }
+            };
+
+            img.onerror = () => {
+                console.error('Snapshot image failed to display');
+            };
+
+            snapshotContainer.appendChild(img);
+
+            // Store cleanup function
+            container.cleanup = () => {
+                if (refreshInterval) {
+                    clearInterval(refreshInterval);
+                    refreshInterval = null;
+                    console.log('🛑 Stopped snapshot refresh');
+                }
+                // Clean up blob URLs
+                if (img.src && img.src.startsWith('blob:')) {
+                    URL.revokeObjectURL(img.src);
+                }
+            };
+        };
 
         // Add method to try HTTPS version
         container.tryHttpsVersion = (originalUrl) => {
