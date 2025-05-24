@@ -1032,9 +1032,17 @@ const createMjpgImagePlayer = (url) => {
     const img = document.createElement('img');
     img.className = 'mjpg-image-player';
 
-    // Handle mixed content by trying HTTPS first if we're on HTTPS
+    // Check if we need to use proxy for CORS
+    const needsProxy = window.location.protocol === 'https:' || window.location.hostname !== 'localhost';
+    const proxyUrl = 'https://serverless-api-jnzf.vercel.app/api/proxy';
     let imageUrl = url;
-    if (window.location.protocol === 'https:' && url.startsWith('http:')) {
+
+    if (needsProxy && url.startsWith('http://')) {
+        // Use the existing proxy for CORS issues
+        imageUrl = `${proxyUrl}?url=${encodeURIComponent(url)}`;
+        console.log('Using proxy for MJPG image due to CORS:', imageUrl);
+    } else if (window.location.protocol === 'https:' && url.startsWith('http:')) {
+        // Fallback: try HTTPS conversion
         imageUrl = url.replace('http:', 'https:');
         console.log('Converting HTTP to HTTPS for mixed content:', imageUrl);
     }
@@ -1053,8 +1061,19 @@ const createMjpgImagePlayer = (url) => {
 
     const refreshImage = () => {
         const newTimestamp = Date.now();
-        const baseUrl = imageUrl.split('?')[0].split('&')[0];
-        img.src = baseUrl + separator + 't=' + newTimestamp;
+        let refreshUrl;
+
+        if (needsProxy && url.startsWith('http://')) {
+            // Use proxy with cache-busting
+            const originalWithTimestamp = url + (url.includes('?') ? '&' : '?') + 't=' + newTimestamp;
+            refreshUrl = `${proxyUrl}?url=${encodeURIComponent(originalWithTimestamp)}`;
+        } else {
+            // Direct URL with cache-busting
+            const baseUrl = imageUrl.split('?')[0].split('&')[0];
+            refreshUrl = baseUrl + separator + 't=' + newTimestamp;
+        }
+
+        img.src = refreshUrl;
     };
 
     // Add error handling
@@ -1157,198 +1176,23 @@ const createMjpgIframePlayer = (url) => {
     container.style.height = '100%';
     container.style.position = 'relative';
 
-    // Check if we're on HTTPS and the URL is HTTP
-    const isHttpsPage = window.location.protocol === 'https:';
-    const isHttpUrl = url.startsWith('http:');
+    // Check if we need to use proxy for CORS
+    const needsProxy = window.location.protocol === 'https:' || window.location.hostname !== 'localhost';
+    const proxyUrl = 'https://serverless-api-jnzf.vercel.app/api/proxy';
+    let iframeUrl = url;
 
-    if (isHttpsPage && isHttpUrl) {
-        // Create a warning message for mixed content
-        container.innerHTML = `
-            <div class="mixed-content-warning">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Mixed Content Blocked</h3>
-                <p>This HTTPS page cannot load HTTP MJPG streams due to browser security.</p>
-                <div class="solutions">
-                    <h4>Solutions:</h4>
-                    <ul>
-                        <li><strong>Use HTTP version:</strong> Access this app via HTTP instead of HTTPS</li>
-                        <li><strong>HTTPS stream:</strong> Use HTTPS version of the stream if available</li>
-                        <li><strong>Local testing:</strong> Run a local HTTP server</li>
-                    </ul>
-                </div>
-                <div class="url-info">
-                    <strong>Stream URL:</strong> <code>${url}</code>
-                </div>
-                <div class="action-buttons">
-                    <button class="try-https-btn" onclick="this.parentElement.parentElement.parentElement.tryHttpsVersion('${url}')">
-                        Try HTTPS Version
-                    </button>
-                    <button class="try-proxy-btn" onclick="this.parentElement.parentElement.parentElement.tryProxyMode('${url}')">
-                        Try Snapshot Mode
-                    </button>
-                </div>
-            </div>
-        `;
-
-        // Add method to try proxy mode (snapshot mode)
-        container.tryProxyMode = (originalUrl) => {
-            console.log('Trying proxy snapshot mode for:', originalUrl);
-
-            container.innerHTML = `
-                <div class="proxy-loading">
-                    <div class="spinner"></div>
-                    <p>Loading snapshot mode...</p>
-                </div>
-            `;
-
-            // Create snapshot player using your serverless proxy
-            const snapshotContainer = document.createElement('div');
-            snapshotContainer.className = 'mjpg-snapshot-container';
-            snapshotContainer.style.width = '100%';
-            snapshotContainer.style.height = '100%';
-            snapshotContainer.style.display = 'flex';
-            snapshotContainer.style.alignItems = 'center';
-            snapshotContainer.style.justifyContent = 'center';
-            snapshotContainer.style.backgroundColor = '#000';
-
-            const img = document.createElement('img');
-            img.className = 'mjpg-snapshot-image';
-            img.style.maxWidth = '100%';
-            img.style.maxHeight = '100%';
-            img.style.objectFit = 'contain';
-            img.alt = 'MJPG Snapshot';
-
-            // Use your serverless proxy
-            const proxyUrl = 'https://serverless-api-jnzf.vercel.app/api/proxy';
-
-            let refreshInterval;
-            const refreshRate = 2000; // 2 seconds for snapshots
-
-            const loadSnapshot = async () => {
-                try {
-                    const response = await fetch(proxyUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            url: originalUrl,
-                            method: 'GET'
-                        })
-                    });
-
-                    if (response.ok) {
-                        const blob = await response.blob();
-                        const imageUrl = URL.createObjectURL(blob);
-
-                        // Clean up previous URL
-                        if (img.src && img.src.startsWith('blob:')) {
-                            URL.revokeObjectURL(img.src);
-                        }
-
-                        img.src = imageUrl;
-                        console.log('📸 Snapshot loaded via proxy');
-                    } else {
-                        throw new Error(`Proxy returned ${response.status}`);
-                    }
-                } catch (error) {
-                    console.error('Snapshot failed:', error);
-                    snapshotContainer.innerHTML = `
-                        <div class="video-error">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <p>Snapshot mode failed</p>
-                            <small>Proxy error: ${error.message}</small>
-                        </div>
-                    `;
-                    if (refreshInterval) {
-                        clearInterval(refreshInterval);
-                        refreshInterval = null;
-                    }
-                }
-            };
-
-            // Initial load
-            loadSnapshot();
-
-            // Set up refresh interval
-            refreshInterval = setInterval(loadSnapshot, refreshRate);
-
-            img.onload = () => {
-                console.log('✅ Snapshot mode working');
-                if (container.querySelector('.proxy-loading')) {
-                    container.innerHTML = '';
-                    container.appendChild(snapshotContainer);
-                }
-            };
-
-            img.onerror = () => {
-                console.error('Snapshot image failed to display');
-            };
-
-            snapshotContainer.appendChild(img);
-
-            // Store cleanup function
-            container.cleanup = () => {
-                if (refreshInterval) {
-                    clearInterval(refreshInterval);
-                    refreshInterval = null;
-                    console.log('🛑 Stopped snapshot refresh');
-                }
-                // Clean up blob URLs
-                if (img.src && img.src.startsWith('blob:')) {
-                    URL.revokeObjectURL(img.src);
-                }
-            };
-        };
-
-        // Add method to try HTTPS version
-        container.tryHttpsVersion = (originalUrl) => {
-            const httpsUrl = originalUrl.replace('http:', 'https:');
-            console.log('Trying HTTPS version:', httpsUrl);
-
-            // Create iframe with HTTPS URL
-            const iframe = document.createElement('iframe');
-            iframe.className = 'mjpg-iframe-player';
-            iframe.frameBorder = '0';
-            iframe.width = '100%';
-            iframe.height = '100%';
-            iframe.src = httpsUrl;
-            iframe.allowFullscreen = true;
-            iframe.style.border = 'none';
-            iframe.style.display = 'block';
-
-            iframe.onload = () => {
-                console.log('✅ HTTPS MJPG stream loaded successfully');
-            };
-
-            iframe.onerror = () => {
-                container.innerHTML = `
-                    <div class="video-error">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <p>HTTPS version also failed</p>
-                        <small>Neither HTTP nor HTTPS versions work</small>
-                        <p style="margin-top: 10px; font-size: 12px; color: #94a3b8;">
-                            Try accessing this app via HTTP instead of HTTPS
-                        </p>
-                    </div>
-                `;
-            };
-
-            container.innerHTML = '';
-            container.appendChild(iframe);
-        };
-
-        console.log('⚠️ Mixed content detected - showing warning instead of iframe');
-        return container;
+    if (needsProxy && url.startsWith('http://')) {
+        // Use the existing proxy for CORS issues
+        iframeUrl = `${proxyUrl}?url=${encodeURIComponent(url)}`;
+        console.log('Using proxy for MJPG iframe due to CORS:', iframeUrl);
     }
 
-    // Normal iframe creation for HTTP pages or HTTPS URLs
     const iframe = document.createElement('iframe');
     iframe.className = 'mjpg-iframe-player';
     iframe.frameBorder = '0';
     iframe.width = '100%';
     iframe.height = '100%';
-    iframe.src = url;
+    iframe.src = iframeUrl;
     iframe.allowFullscreen = true;
     iframe.style.border = 'none';
     iframe.style.display = 'block';
@@ -1358,8 +1202,20 @@ const createMjpgIframePlayer = (url) => {
     const refreshRate = 3000; // 3 seconds
 
     const refreshIframe = () => {
-        const separator = url.includes('?') ? '&' : '?';
-        iframe.src = url + separator + 't=' + Date.now();
+        const timestamp = Date.now();
+        let refreshUrl;
+
+        if (needsProxy && url.startsWith('http://')) {
+            // Use proxy with cache-busting
+            const originalWithTimestamp = url + (url.includes('?') ? '&' : '?') + 't=' + timestamp;
+            refreshUrl = `${proxyUrl}?url=${encodeURIComponent(originalWithTimestamp)}`;
+        } else {
+            // Direct URL with cache-busting
+            const separator = url.includes('?') ? '&' : '?';
+            refreshUrl = url + separator + 't=' + timestamp;
+        }
+
+        iframe.src = refreshUrl;
         console.log('🔄 Refreshed MJPG iframe');
     };
 
@@ -1369,6 +1225,11 @@ const createMjpgIframePlayer = (url) => {
         const containerWidth = containerRect.width;
         const containerHeight = containerRect.height;
 
+        // Skip if container has no size yet
+        if (containerWidth === 0 || containerHeight === 0) {
+            return;
+        }
+
         // Assume 640x480 for MJPG streams (common default)
         const streamWidth = 640;
         const streamHeight = 480;
@@ -1377,14 +1238,14 @@ const createMjpgIframePlayer = (url) => {
         const scaleX = containerWidth / streamWidth;
         const scaleY = containerHeight / streamHeight;
 
-        // Use the smaller scale to maintain aspect ratio, or larger to fill completely
-        const scaleFactor = Math.max(scaleX, scaleY); // Fill container completely
+        // Use the smaller scale to maintain aspect ratio and fit within container
+        const scaleFactor = Math.min(scaleX, scaleY);
 
         // Apply scaling
         container.style.setProperty('--scale-factor', scaleFactor);
         container.classList.add('scale-to-fit');
 
-        console.log(`📐 MJPG scaling: container(${containerWidth}x${containerHeight}) stream(${streamWidth}x${streamHeight}) scale(${scaleFactor.toFixed(2)})`);
+        console.log(`📐 MJPG scaling: container(${containerWidth.toFixed(0)}x${containerHeight.toFixed(0)}) stream(${streamWidth}x${streamHeight}) scale(${scaleFactor.toFixed(2)})`);
     };
 
     // Start refresh after initial load
