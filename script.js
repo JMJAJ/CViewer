@@ -1029,19 +1029,32 @@ const createMjpgImagePlayer = (url) => {
     const container = document.createElement('div');
     container.className = 'mjpg-image-container';
 
+    // Check for mixed content issues
+    const isHttpsPage = window.location.protocol === 'https:';
+    const isHttpUrl = url.startsWith('http:');
+
+    if (isHttpsPage && isHttpUrl) {
+        // Show mixed content warning for image player too
+        container.innerHTML = `
+            <div class="video-error">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Mixed Content Blocked</h3>
+                <p>HTTP images are blocked on HTTPS pages.</p>
+                <small>${url}</small>
+                <div style="margin-top: 15px;">
+                    <p><strong>Try:</strong> Switch to iframe player or use HTTP version of this app</p>
+                </div>
+            </div>
+        `;
+        return container;
+    }
+
     const img = document.createElement('img');
     img.className = 'mjpg-image-player';
 
-    // Handle mixed content by trying HTTPS first if we're on HTTPS
-    let imageUrl = url;
-    if (window.location.protocol === 'https:' && url.startsWith('http:')) {
-        imageUrl = url.replace('http:', 'https:');
-        console.log('Converting HTTP to HTTPS for mixed content:', imageUrl);
-    }
-
     // Add cache-busting parameter for better refresh
-    const separator = imageUrl.includes('?') ? '&' : '?';
-    img.src = imageUrl + separator + 't=' + Date.now();
+    const separator = url.includes('?') ? '&' : '?';
+    img.src = url + separator + 't=' + Date.now();
     img.style.width = '100%';
     img.style.height = '100%';
     img.style.objectFit = 'contain';
@@ -1157,15 +1170,43 @@ const createMjpgIframePlayer = (url) => {
     container.style.height = '100%';
     container.style.position = 'relative';
 
-    // Use the URL directly for iframe
-    let iframeUrl = url;
+    // Check if we're on HTTPS and the URL is HTTP
+    const isHttpsPage = window.location.protocol === 'https:';
+    const isHttpUrl = url.startsWith('http:');
+
+    if (isHttpsPage && isHttpUrl) {
+        // Show mixed content warning and provide alternatives
+        container.innerHTML = `
+            <div class="video-error">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Mixed Content Blocked</h3>
+                <p>Your browser blocked this HTTP stream because you're on an HTTPS page.</p>
+                <small>${url}</small>
+                <div style="margin-top: 15px; text-align: left;">
+                    <p><strong>Solutions:</strong></p>
+                    <ul style="text-align: left; margin: 10px 0;">
+                        <li>Use an HTTPS version of the stream if available</li>
+                        <li>Access this app via HTTP instead of HTTPS</li>
+                        <li>Use a local server (python -m http.server)</li>
+                    </ul>
+                </div>
+                <div style="margin-top: 15px;">
+                    <button onclick="window.open('${url}', '_blank')"
+                            style="padding: 8px 16px; background: #e11d48; color: white; border: none; border-radius: 4px; cursor: pointer; margin: 5px;">
+                        Open in New Tab
+                    </button>
+                </div>
+            </div>
+        `;
+        return container;
+    }
 
     const iframe = document.createElement('iframe');
     iframe.className = 'mjpg-iframe-player';
     iframe.frameBorder = '0';
     iframe.width = '100%';
     iframe.height = '100%';
-    iframe.src = iframeUrl;
+    iframe.src = url;
     iframe.allowFullscreen = true;
     iframe.style.border = 'none';
     iframe.style.display = 'block';
