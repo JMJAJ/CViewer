@@ -1,6 +1,5 @@
 {
-  "_comment": "Temporarily disabled for MJPG testing",
-  "_headers": [
+  "headers": [
     {
       "source": "/(.*)",
       "headers": [
