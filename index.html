@@ -97,6 +97,10 @@
                         <button class="tab-button active" data-tab="camera-info">Info</button>
                         <button class="tab-button" data-tab="camera-location">Location</button>
                         <button class="tab-button" data-tab="camera-metadata">Metadata</button>
+                        <button class="tab-button" data-tab="network-discovery">Network</button>
+                        <button class="tab-button" data-tab="threat-intel">Threat In.</button>
+                        <button class="tab-button" data-tab="camera-fingerprint">Fingerprint</button>
+                        <button class="tab-button" data-tab="data-export">Export</button>
                         <button class="tab-button" data-tab="camera-settings">Settings</button>
                     </div>
                     <div class="tab-content active" id="camera-info">
@@ -239,6 +243,445 @@
                                 <div class="metadata-raw">
                                     <h4>Raw Metadata</h4>
                                     <pre class="raw-metadata-data"></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="network-discovery">
+                        <div class="metadata-container">
+                            <h3><i class="fas fa-network-wired"></i> Network Discovery & Reconnaissance</h3>
+
+                            <!-- Subnet Scanner Section -->
+                            <div class="metadata-section">
+                                <h4><i class="fas fa-search"></i> Subnet Scanner</h4>
+                                <div class="setting-group">
+                                    <div class="input-group">
+                                        <input type="text" class="subnet-target-ip" placeholder="Target IP"
+                                               style="flex: 1; padding: 6px 8px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--darker-bg); color: var(--text-color); margin-right: 6px; font-size: 12px;">
+                                        <select class="subnet-mask" style="padding: 6px 8px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--darker-bg); color: var(--text-color); margin-right: 6px; font-size: 12px;">
+                                            <option value="24">/24</option>
+                                            <option value="16">/16</option>
+                                            <option value="8">/8</option>
+                                        </select>
+                                        <button class="scan-subnet-btn extract-metadata-btn" style="padding: 6px 10px; font-size: 12px;">
+                                            <i class="fas fa-search"></i> Scan
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="scan-progress metadata-loading" style="display: none;">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill"></div>
+                                    </div>
+                                    <div class="progress-text">Scanning network...</div>
+                                </div>
+                                <div class="scan-results">
+                                    <div class="metadata-item">
+                                        <span class="metadata-label">Devices Found:</span>
+                                        <span class="metadata-value devices-found">0</span>
+                                    </div>
+                                    <div class="devices-list">
+                                        <!-- Discovered devices will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Port Scanner Section -->
+                            <div class="metadata-section">
+                                <h4><i class="fas fa-door-open"></i> Port Scanner</h4>
+                                <div class="setting-group">
+                                    <div class="input-group">
+                                        <input type="text" class="port-target-ip" placeholder="Target IP"
+                                               style="flex: 1; padding: 6px 8px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--darker-bg); color: var(--text-color); margin-right: 6px; font-size: 12px;">
+                                        <select class="port-range" style="padding: 6px 8px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--darker-bg); color: var(--text-color); margin-right: 6px; font-size: 12px;">
+                                            <option value="common">Common</option>
+                                            <option value="camera">Camera</option>
+                                            <option value="custom">Custom</option>
+                                        </select>
+                                        <button class="scan-ports-btn extract-metadata-btn" style="padding: 6px 10px; font-size: 12px;">
+                                            <i class="fas fa-search"></i> Scan
+                                        </button>
+                                    </div>
+                                    <div class="input-group custom-ports" style="display: none; margin-top: 6px;">
+                                        <input type="text" class="custom-port-list" placeholder="80,443,554,8080"
+                                               style="width: 100%; padding: 6px 8px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--darker-bg); color: var(--text-color); font-size: 12px;">
+                                    </div>
+                                </div>
+                                <div class="port-scan-results">
+                                    <div class="metadata-item">
+                                        <span class="metadata-label">Open Ports:</span>
+                                        <span class="metadata-value open-ports-count">0</span>
+                                    </div>
+                                    <div class="ports-list">
+                                        <!-- Open ports will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Network Topology Section -->
+                            <div class="metadata-section">
+                                <h4><i class="fas fa-project-diagram"></i> Network Topology</h4>
+                                <div class="current-ip-actions">
+                                    <button class="generate-topology-btn">
+                                        <i class="fas fa-sitemap"></i> Generate Topology
+                                    </button>
+                                    <button class="export-topology-btn" disabled>
+                                        <i class="fas fa-download"></i> Export Data
+                                    </button>
+                                </div>
+                                <div class="topology-visualization">
+                                    <div class="error-message topology-placeholder">
+                                        <i class="fas fa-project-diagram"></i>
+                                        <p>Click "Generate Topology" to visualize network relationships</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="threat-intel">
+                        <div class="metadata-container">
+                            <h3><i class="fas fa-shield-alt"></i> Threat Intelligence</h3>
+
+                            <!-- IP Reputation Section -->
+                            <div class="metadata-section">
+                                <h4><i class="fas fa-exclamation-triangle"></i> IP Reputation Analysis</h4>
+                                <div class="setting-group">
+                                    <div class="input-group">
+                                        <input type="text" class="reputation-target-ip" placeholder="Target IP"
+                                               style="flex: 1; padding: 6px 8px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--darker-bg); color: var(--text-color); margin-right: 6px; font-size: 12px;">
+                                        <button class="check-reputation-btn extract-metadata-btn" style="padding: 6px 10px; font-size: 12px;">
+                                            <i class="fas fa-search"></i> Check
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="reputation-results">
+                                    <div class="metadata-item">
+                                        <span class="metadata-label">Risk Score:</span>
+                                        <span class="metadata-value">
+                                            <span class="rating-value score-value">?</span>
+                                            <span class="rating-description score-label">Unknown</span>
+                                        </span>
+                                    </div>
+                                    <div class="score-breakdown">
+                                        <!-- Risk factors will be populated here -->
+                                    </div>
+                                    <div class="threat-sources">
+                                        <!-- Threat intelligence sources will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Malware/Botnet Detection Section -->
+                            <div class="metadata-section">
+                                <h4><i class="fas fa-bug"></i> Malware & Botnet Detection</h4>
+                                <div class="malware-status">
+                                    <div class="metadata-item">
+                                        <span class="metadata-label">Status:</span>
+                                        <span class="metadata-value">
+                                            <span class="security-indicator status-indicator unknown">
+                                                <i class="fas fa-question-circle"></i>
+                                                <span>Not analyzed</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="malware-details">
+                                    <!-- Malware analysis details will be populated here -->
+                                </div>
+                            </div>
+
+                            <!-- Weather Correlation Section -->
+                            <div class="metadata-section">
+                                <h4><i class="fas fa-cloud-sun"></i> Weather Correlation</h4>
+                                <div class="weather-correlation">
+                                    <div class="metadata-item">
+                                        <span class="metadata-label">Authenticity:</span>
+                                        <span class="metadata-value weather-authenticity">Not verified</span>
+                                    </div>
+                                    <div class="weather-details">
+                                        <!-- Weather correlation details will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="camera-fingerprint">
+                        <div class="metadata-container">
+                            <h3><i class="fas fa-fingerprint"></i> Advanced Camera Fingerprinting</h3>
+
+                            <!-- HTTP Header Analysis Section -->
+                            <div class="metadata-section">
+                                <h4><i class="fas fa-server"></i> HTTP Header Analysis</h4>
+                                <div class="setting-group">
+                                    <div class="input-group">
+                                        <input type="text" class="fingerprint-target-ip" placeholder="Target IP"
+                                               style="flex: 1; padding: 6px 8px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--darker-bg); color: var(--text-color); margin-right: 6px; font-size: 12px;">
+                                        <select class="fingerprint-port" style="padding: 6px 8px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--darker-bg); color: var(--text-color); margin-right: 6px; font-size: 12px;">
+                                            <option value="80">Port 80</option>
+                                            <option value="443">Port 443</option>
+                                            <option value="8080">Port 8080</option>
+                                            <option value="8000">Port 8000</option>
+                                        </select>
+                                        <button class="analyze-headers-btn extract-metadata-btn" style="padding: 6px 10px; font-size: 12px;">
+                                            <i class="fas fa-search"></i> Analyze
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="header-analysis-results">
+                                    <div class="metadata-item">
+                                        <span class="metadata-label">Camera Model:</span>
+                                        <span class="metadata-value camera-model-result">Not analyzed</span>
+                                    </div>
+                                    <div class="metadata-item">
+                                        <span class="metadata-label">Firmware:</span>
+                                        <span class="metadata-value firmware-result">Not analyzed</span>
+                                    </div>
+                                    <div class="metadata-item">
+                                        <span class="metadata-label">Confidence:</span>
+                                        <span class="metadata-value confidence-result">0%</span>
+                                    </div>
+                                    <div class="http-headers-details">
+                                        <!-- HTTP headers will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- URL Pattern Recognition Section -->
+                            <div class="metadata-section">
+                                <h4><i class="fas fa-link"></i> URL Pattern Recognition</h4>
+                                <div class="current-ip-actions">
+                                    <button class="analyze-urls-btn">
+                                        <i class="fas fa-search"></i> Analyze URL Patterns
+                                    </button>
+                                    <button class="test-paths-btn">
+                                        <i class="fas fa-route"></i> Test Common Paths
+                                    </button>
+                                </div>
+                                <div class="url-analysis-results">
+                                    <div class="metadata-item">
+                                        <span class="metadata-label">Detected Paths:</span>
+                                        <span class="metadata-value detected-paths-count">0</span>
+                                    </div>
+                                    <div class="detected-paths-list">
+                                        <!-- Detected URL patterns will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SSL Certificate Analysis Section -->
+                            <div class="metadata-section">
+                                <h4><i class="fas fa-certificate"></i> SSL Certificate Analysis</h4>
+                                <div class="setting-group">
+                                    <div class="input-group">
+                                        <input type="text" class="cert-target-ip" placeholder="Target IP"
+                                               style="flex: 1; padding: 6px 8px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--darker-bg); color: var(--text-color); margin-right: 6px; font-size: 12px;">
+                                        <select class="cert-port" style="padding: 6px 8px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--darker-bg); color: var(--text-color); margin-right: 6px; font-size: 12px;">
+                                            <option value="443">Port 443</option>
+                                            <option value="8443">Port 8443</option>
+                                        </select>
+                                        <button class="analyze-cert-btn extract-metadata-btn" style="padding: 6px 10px; font-size: 12px;">
+                                            <i class="fas fa-search"></i> Analyze
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="cert-analysis-results">
+                                    <div class="metadata-item">
+                                        <span class="metadata-label">Trust Score:</span>
+                                        <span class="metadata-value">
+                                            <span class="rating-value cert-trust-score">?</span>
+                                            <span class="rating-description cert-trust-description">Not analyzed</span>
+                                        </span>
+                                    </div>
+                                    <div class="cert-details">
+                                        <!-- Certificate details will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Vulnerability Assessment Section -->
+                            <div class="metadata-section">
+                                <h4><i class="fas fa-shield-alt"></i> Vulnerability Assessment</h4>
+                                <div class="vulnerability-summary">
+                                    <div class="metadata-item">
+                                        <span class="metadata-label">Known Vulnerabilities:</span>
+                                        <span class="metadata-value vuln-count">0</span>
+                                    </div>
+                                </div>
+                                <div class="vulnerabilities-list">
+                                    <!-- Vulnerabilities will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="data-export">
+                        <div class="metadata-container">
+                            <h3><i class="fas fa-download"></i> Data Export & Reporting</h3>
+
+                            <!-- Export Options Section -->
+                            <div class="metadata-section">
+                                <h4><i class="fas fa-file-export"></i> Export Options</h4>
+                                <div class="export-options">
+                                    <div class="export-format-selector">
+                                        <label>Export Format:</label>
+                                        <select class="export-format" style="padding: 6px 8px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--darker-bg); color: var(--text-color); margin-left: 8px; font-size: 12px;">
+                                            <option value="json">JSON Report</option>
+                                            <option value="csv">CSV Data</option>
+                                            <option value="xml">XML Report</option>
+                                            <option value="pdf">PDF Report</option>
+                                            <option value="html">HTML Report</option>
+                                        </select>
+                                    </div>
+                                    <div class="export-scope">
+                                        <label>Include Data:</label>
+                                        <div class="export-checkboxes">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="export-include-basic" checked> Basic Info
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="export-include-location" checked> Location Data
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="export-include-metadata" checked> Metadata
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="export-include-network" checked> Network Discovery
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="export-include-threats" checked> Threat Intelligence
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="export-include-fingerprint" checked> Fingerprinting
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="current-ip-actions">
+                                    <button class="export-data-btn">
+                                        <i class="fas fa-download"></i> Export Data
+                                    </button>
+                                    <button class="generate-report-btn">
+                                        <i class="fas fa-file-alt"></i> Generate Report
+                                    </button>
+                                    <button class="export-all-btn">
+                                        <i class="fas fa-archive"></i> Export All
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Report Templates Section -->
+                            <div class="metadata-section">
+                                <h4><i class="fas fa-file-contract"></i> Report Templates</h4>
+                                <div class="template-selector">
+                                    <select class="report-template" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--darker-bg); color: var(--text-color); font-size: 12px;">
+                                        <option value="security-audit">Security Audit Report</option>
+                                        <option value="network-assessment">Network Assessment</option>
+                                        <option value="vulnerability-scan">Vulnerability Scan Report</option>
+                                        <option value="compliance-check">Compliance Check</option>
+                                        <option value="forensic-analysis">Forensic Analysis</option>
+                                        <option value="custom">Custom Report</option>
+                                    </select>
+                                </div>
+                                <div class="template-preview">
+                                    <div class="metadata-item">
+                                        <span class="metadata-label">Template Description:</span>
+                                        <span class="metadata-value template-description">Comprehensive security audit including vulnerabilities, network topology, and threat analysis</span>
+                                    </div>
+                                </div>
+                                <div class="current-ip-actions">
+                                    <button class="preview-template-btn">
+                                        <i class="fas fa-eye"></i> Preview Template
+                                    </button>
+                                    <button class="customize-template-btn">
+                                        <i class="fas fa-edit"></i> Customize
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Export History Section -->
+                            <div class="metadata-section">
+                                <h4><i class="fas fa-history"></i> Export History</h4>
+                                <div class="export-history-list">
+                                    <div class="metadata-item">
+                                        <span class="metadata-label">Recent Exports:</span>
+                                        <span class="metadata-value export-count">0</span>
+                                    </div>
+                                    <div class="export-history-items">
+                                        <!-- Export history will be populated here -->
+                                    </div>
+                                </div>
+                                <div class="current-ip-actions">
+                                    <button class="clear-history-btn">
+                                        <i class="fas fa-trash"></i> Clear History
+                                    </button>
+                                    <button class="export-history-btn">
+                                        <i class="fas fa-download"></i> Export History
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Data Statistics Section -->
+                            <div class="metadata-section">
+                                <h4><i class="fas fa-chart-bar"></i> Data Statistics</h4>
+                                <div class="data-stats">
+                                    <div class="metadata-item">
+                                        <span class="metadata-label">Total Data Points:</span>
+                                        <span class="metadata-value total-data-points">0</span>
+                                    </div>
+                                    <div class="metadata-item">
+                                        <span class="metadata-label">Vulnerabilities Found:</span>
+                                        <span class="metadata-value total-vulnerabilities">0</span>
+                                    </div>
+                                    <div class="metadata-item">
+                                        <span class="metadata-label">Network Devices:</span>
+                                        <span class="metadata-value total-devices">0</span>
+                                    </div>
+                                    <div class="metadata-item">
+                                        <span class="metadata-label">Threat Score:</span>
+                                        <span class="metadata-value total-threat-score">0</span>
+                                    </div>
+                                </div>
+                                <div class="data-summary-chart">
+                                    <!-- Chart placeholder -->
+                                    <div class="chart-placeholder">
+                                        <i class="fas fa-chart-pie"></i>
+                                        <p>Data visualization will appear here</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Automated Reporting Section -->
+                            <div class="metadata-section">
+                                <h4><i class="fas fa-robot"></i> Automated Reporting</h4>
+                                <div class="automation-settings">
+                                    <div class="setting-group">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" class="auto-export-enabled"> Enable Auto-Export
+                                        </label>
+                                    </div>
+                                    <div class="setting-group">
+                                        <label>Export Frequency:</label>
+                                        <select class="auto-export-frequency" style="padding: 6px 8px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--darker-bg); color: var(--text-color); margin-left: 8px; font-size: 12px;">
+                                            <option value="immediate">Immediate</option>
+                                            <option value="hourly">Hourly</option>
+                                            <option value="daily">Daily</option>
+                                            <option value="weekly">Weekly</option>
+                                        </select>
+                                    </div>
+                                    <div class="setting-group">
+                                        <label>Auto-Export Format:</label>
+                                        <select class="auto-export-format" style="padding: 6px 8px; border-radius: 4px; border: 1px solid var(--border-color); background-color: var(--darker-bg); color: var(--text-color); margin-left: 8px; font-size: 12px;">
+                                            <option value="json">JSON</option>
+                                            <option value="csv">CSV</option>
+                                            <option value="pdf">PDF</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="current-ip-actions">
+                                    <button class="save-automation-btn">
+                                        <i class="fas fa-save"></i> Save Settings
+                                    </button>
+                                    <button class="test-automation-btn">
+                                        <i class="fas fa-play"></i> Test Export
+                                    </button>
                                 </div>
                             </div>
                         </div>

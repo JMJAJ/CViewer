@@ -425,10 +425,33 @@ body {
 .info-tabs {
     display: flex;
     border-bottom: 1px solid var(--border-color);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--darker-bg);
+    position: relative;
+}
+
+.info-tabs::-webkit-scrollbar {
+    height: 4px;
+}
+
+.info-tabs::-webkit-scrollbar-track {
+    background: var(--darker-bg);
+}
+
+.info-tabs::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+.info-tabs::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-hover);
 }
 
 .tab-button {
     flex: 1;
+    min-width: 80px;
     padding: 12px;
     background: transparent;
     border: none;
@@ -437,6 +460,7 @@ body {
     font-size: 14px;
     transition: all 0.2s ease;
     border-bottom: 2px solid transparent;
+    white-space: nowrap;
 }
 
 .tab-button:hover {
@@ -835,6 +859,26 @@ input:checked + .slider:before {
         min-height: 300px;
         border-left: none;
         border-top: 1px solid var(--border-color);
+    }
+
+    /* Compact tabs for mobile */
+    .tab-button {
+        min-width: 60px;
+        padding: 8px 6px;
+        font-size: 12px;
+    }
+}
+
+/* Very small screens - even more compact tabs */
+@media (max-width: 480px) {
+    .tab-button {
+        min-width: 50px;
+        padding: 6px 4px;
+        font-size: 11px;
+    }
+
+    .info-tabs::-webkit-scrollbar {
+        height: 2px;
     }
 }
 
@@ -2006,4 +2050,778 @@ input:checked + .slider:before {
 
 .testing-animation {
     animation: pulse 1.5s infinite;
+}
+
+/* OSINT Features Styling */
+.network-discovery-container,
+.threat-intel-container {
+    padding: 15px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.discovery-section,
+.threat-section {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+}
+
+.scanner-controls,
+.reputation-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.scanner-controls .input-group,
+.reputation-controls .input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.scanner-controls label,
+.reputation-controls label {
+    font-size: 12px;
+    color: var(--text-muted);
+    min-width: 80px;
+}
+
+.scanner-controls input,
+.scanner-controls select,
+.reputation-controls input {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background-color: var(--darker-bg);
+    color: var(--text-color);
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.scanner-controls input:focus,
+.scanner-controls select:focus,
+.reputation-controls input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(225, 29, 72, 0.2);
+}
+
+/* Device and Port Cards */
+.device-card,
+.port-card {
+    background-color: var(--darker-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+}
+
+.device-card:hover,
+.port-card:hover {
+    border-color: var(--primary-color);
+    background-color: rgba(225, 29, 72, 0.05);
+}
+
+.device-header,
+.port-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.device-ip,
+.port-number {
+    color: var(--primary-color);
+    font-family: monospace;
+}
+
+.device-type,
+.port-service {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.device-details,
+.port-details {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.device-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.device-ports {
+    font-family: monospace;
+    color: var(--text-color);
+}
+
+/* Topology Visualization */
+.topology-visualization {
+    min-height: 200px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    padding: 15px;
+}
+
+.topology-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.topology-placeholder i {
+    font-size: 48px;
+    margin-bottom: 12px;
+    color: var(--primary-color);
+}
+
+.topology-results {
+    width: 100%;
+}
+
+.topology-stats {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.topology-stats span {
+    background-color: var(--darker-bg);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.topology-nodes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.topology-node {
+    background-color: var(--darker-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.topology-node:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.topology-node.camera {
+    border-left: 3px solid var(--success-color);
+}
+
+.topology-node.router {
+    border-left: 3px solid var(--warning-color);
+}
+
+.topology-node.switch {
+    border-left: 3px solid var(--primary-color);
+}
+
+.node-ip {
+    font-family: monospace;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 4px;
+}
+
+.node-type {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: capitalize;
+}
+
+.node-manufacturer {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* Threat Intelligence Styling */
+.reputation-score {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.score-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--darker-bg);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    justify-content: center;
+    border: 2px solid var(--border-color);
+}
+
+.score-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.score-value.high-risk {
+    color: var(--danger-color);
+}
+
+.score-value.medium-risk {
+    color: var(--warning-color);
+}
+
+.score-value.low-risk {
+    color: var(--success-color);
+}
+
+.score-value.clean {
+    color: var(--success-color);
+}
+
+.score-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+.sources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.source-card {
+    background-color: var(--darker-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+}
+
+.source-card.error {
+    border-color: var(--danger-color);
+    background-color: rgba(220, 38, 38, 0.1);
+}
+
+.source-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 4px;
+}
+
+.source-score {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.source-confidence {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* Status Indicators */
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-indicator.unknown {
+    background-color: rgba(156, 163, 175, 0.2);
+    color: #9ca3af;
+}
+
+.status-indicator.clean {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.status-indicator.high-risk {
+    background-color: rgba(220, 38, 38, 0.2);
+    color: #dc2626;
+}
+
+.status-indicator.medium-risk {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+}
+
+.status-indicator.low-risk {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+/* Weather Correlation */
+.weather-correlation {
+    margin-top: 10px;
+}
+
+.weather-details {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+/* Responsive Design for OSINT Features */
+/* Small video windows (not fullscreen) */
+.video-window:not(.maximized) .scanner-controls .input-group,
+.video-window:not(.maximized) .reputation-controls .input-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+}
+
+.video-window:not(.maximized) .scanner-controls input,
+.video-window:not(.maximized) .scanner-controls select,
+.video-window:not(.maximized) .reputation-controls input {
+    width: 100%;
+    margin-right: 0 !important;
+    margin-bottom: 6px;
+}
+
+.video-window:not(.maximized) .extract-metadata-btn {
+    width: 100%;
+    justify-content: center;
+}
+
+.video-window:not(.maximized) .current-ip-actions {
+    flex-direction: column !important;
+    gap: 6px;
+}
+
+.video-window:not(.maximized) .current-ip-actions button {
+    width: 100% !important;
+    flex: none !important;
+}
+
+.video-window:not(.maximized) .ip-details-grid {
+    grid-template-columns: 1fr !important;
+}
+
+.video-window:not(.maximized) .topology-nodes {
+    grid-template-columns: 1fr !important;
+}
+
+.video-window:not(.maximized) .sources-grid {
+    grid-template-columns: 1fr !important;
+}
+
+.video-window:not(.maximized) .detail-content {
+    padding: 8px 10px;
+}
+
+.video-window:not(.maximized) .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 6px;
+}
+
+.video-window:not(.maximized) .detail-label {
+    margin-bottom: 2px;
+    font-weight: 600;
+}
+
+.video-window:not(.maximized) .metadata-section {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.video-window:not(.maximized) .metadata-section h4 {
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.video-window:not(.maximized) .security-indicator {
+    font-size: 10px;
+    padding: 2px 6px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    display: inline-block;
+}
+
+.video-window:not(.maximized) .topology-visualization {
+    min-height: 150px;
+    padding: 10px;
+}
+
+.video-window:not(.maximized) .reputation-score {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+}
+
+.video-window:not(.maximized) .score-display {
+    width: 60px;
+    height: 60px;
+}
+
+.video-window:not(.maximized) .score-value {
+    font-size: 18px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .scanner-controls .input-group,
+    .reputation-controls .input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .scanner-controls label,
+    .reputation-controls label {
+        min-width: auto;
+        margin-bottom: 4px;
+    }
+
+    .topology-nodes {
+        grid-template-columns: 1fr;
+    }
+
+    .sources-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .reputation-score {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .current-ip-actions {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .current-ip-actions button {
+        width: 100%;
+    }
+}
+
+/* Compact mode for narrow info panels */
+.info-panel {
+    min-width: 280px;
+}
+
+.info-panel .scanner-controls .input-group {
+    flex-wrap: wrap;
+}
+
+.info-panel .scanner-controls input,
+.info-panel .scanner-controls select {
+    min-width: 0;
+    flex: 1;
+}
+
+.info-panel .extract-metadata-btn {
+    white-space: nowrap;
+    min-width: 120px;
+}
+
+/* Very narrow panels (less than 320px) */
+@container (max-width: 320px) {
+    .scanner-controls .input-group {
+        flex-direction: column;
+    }
+
+    .current-ip-actions {
+        flex-direction: column;
+    }
+}
+
+/* Data Export & Reporting Styles */
+.export-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.export-format-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.export-format-selector label {
+    font-size: 12px;
+    color: var(--text-muted);
+    min-width: 80px;
+}
+
+.export-scope {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.export-scope > label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.export-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    accent-color: var(--primary-color);
+}
+
+.template-selector {
+    margin-bottom: 10px;
+}
+
+.template-preview {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.template-description {
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+.export-history-items {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+
+.export-history-item {
+    background-color: var(--darker-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.export-history-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.export-history-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.export-history-details {
+    font-size: 10px;
+    color: var(--text-muted);
+}
+
+.export-history-actions {
+    display: flex;
+    gap: 4px;
+}
+
+.export-history-actions button {
+    padding: 2px 6px;
+    font-size: 10px;
+    border: 1px solid var(--border-color);
+    background-color: var(--darker-bg);
+    color: var(--text-color);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.export-history-actions button:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.data-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.chart-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.chart-placeholder i {
+    font-size: 48px;
+    margin-bottom: 12px;
+    color: var(--primary-color);
+}
+
+.chart-placeholder p {
+    font-size: 12px;
+    margin: 0;
+}
+
+.automation-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.automation-settings .setting-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.automation-settings .setting-group label {
+    font-size: 12px;
+    color: var(--text-muted);
+    min-width: 100px;
+}
+
+/* Export Progress Indicator */
+.export-progress {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.export-progress.active {
+    display: block;
+}
+
+.export-progress-bar {
+    width: 100%;
+    height: 6px;
+    background-color: var(--darker-bg);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.export-progress-fill {
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+.export-progress-text {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+/* Export Status Indicators */
+.export-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.export-status.success {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.export-status.error {
+    background-color: rgba(220, 38, 38, 0.2);
+    color: #dc2626;
+}
+
+.export-status.pending {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+}
+
+/* Responsive Export Styles */
+@media (max-width: 768px) {
+    .export-checkboxes {
+        grid-template-columns: 1fr;
+    }
+
+    .data-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .automation-settings .setting-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .automation-settings .setting-group label {
+        min-width: auto;
+        margin-bottom: 4px;
+    }
 }
