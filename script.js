@@ -6,21 +6,9 @@ const API_ENDPOINTS = {
     CORS_PROXY: 'https://serverless-api-jnzf.vercel.app/api/proxy',
     ASN_INFO: 'https://ipinfo.io/',
     CAMERA_METADATA: 'https://serverless-api-jnzf.vercel.app/api/proxy',
-    // Network Discovery APIs
-    SHODAN_API: 'https://api.shodan.io/shodan/host/',
-    CENSYS_API: 'https://search.censys.io/api/v2/hosts/',
-    THREAT_INTEL: {
-        VIRUSTOTAL: 'https://www.virustotal.com/vtapi/v2/ip-address/report',
-        ABUSEIPDB: 'https://api.abuseipdb.com/api/v2/check',
-        ALIENVAULT: 'https://otx.alienvault.com/api/v1/indicators/IPv4/',
-        GREYNOISE: 'https://api.greynoise.io/v3/community/'
-    },
-    // Weather & Time APIs
-    WEATHER_API: 'https://api.openweathermap.org/data/2.5/weather',
-    TIMEZONE_API: 'https://worldtimeapi.org/api/timezone/',
-    // Geolocation Enhancement APIs
-    IPSTACK: 'http://api.ipstack.com/',
-    MAXMIND: 'https://geoip.maxmind.com/geoip/v2.1/insights/'
+    // Only free APIs without authentication
+    ALIENVAULT: 'https://otx.alienvault.com/api/v1/indicators/IPv4/',
+    TIMEZONE_API: 'https://worldtimeapi.org/api/timezone/'
 };
 
 // State
@@ -47,32 +35,11 @@ let globalState = {
     manualResolution: "720x420",
     playerPreference: "flashphoner",
     mjpgPlayerPreference: "mjpg-iframe",
-    // Network Discovery Settings
-    networkDiscovery: {
-        enabled: true,
-        subnetScanRange: 24,
-        portScanEnabled: true,
-        commonPorts: [21, 22, 23, 25, 53, 80, 110, 143, 443, 554, 993, 995, 8000, 8080, 8443, 37777],
-        discoveredDevices: {},
-        scanHistory: []
-    },
-    // Threat Intelligence Settings
+    // Threat Intelligence Settings (only free APIs)
     threatIntel: {
         enabled: true,
-        sources: ['virustotal', 'abuseipdb', 'alienvault', 'greynoise'],
-        apiKeys: {
-            virustotal: '',
-            abuseipdb: '',
-            shodan: '',
-            censys: ''
-        },
+        sources: ['alienvault'], // Only free APIs without authentication
         riskScores: {}
-    },
-    // Weather & Time Correlation
-    weatherCorrelation: {
-        enabled: true,
-        apiKey: '', // OpenWeatherMap API key
-        verificationResults: {}
     },
     // Comprehensive credential database
     credentialDatabase: {
@@ -1225,75 +1192,73 @@ const createMjpgIframePlayer = (url) => {
     const isHttpUrl = url.startsWith('http:');
 
     if (isHttpsPage && isHttpUrl) {
-        // Try to use proxy for MJPG streams on HTTPS
-        console.log('🔄 Attempting to proxy MJPG stream through CORS proxy');
+        // Use Railway proxy for MJPG streams on HTTPS deployments
+        console.log('🔄 Using Railway proxy for MJPG stream on HTTPS');
 
-        // Create a proxied iframe that fetches the MJPG stream
-        const proxyContainer = document.createElement('div');
-        proxyContainer.style.width = '100%';
-        proxyContainer.style.height = '100%';
-        proxyContainer.style.background = '#000';
-        proxyContainer.style.display = 'flex';
-        proxyContainer.style.alignItems = 'center';
-        proxyContainer.style.justifyContent = 'center';
+        // Create iframe with Railway proxy URL
+        const iframe = document.createElement('iframe');
+        iframe.className = 'mjpg-iframe-player';
+        iframe.frameBorder = '0';
+        iframe.width = '100%';
+        iframe.height = '100%';
+        iframe.allowFullscreen = true;
+        iframe.style.border = 'none';
+        iframe.style.display = 'block';
 
-        // Try to create an image that refreshes via proxy
-        const createProxiedImage = () => {
-            const img = document.createElement('img');
-            img.style.maxWidth = '100%';
-            img.style.maxHeight = '100%';
-            img.style.objectFit = 'contain';
+        // Use Railway proxy for MJPG streaming
+        const railwayProxyUrl = `https://function-bun-production-255c.up.railway.app/cam?url=${encodeURIComponent(url)}`;
+        iframe.src = railwayProxyUrl;
 
-            const fetchProxiedImage = async () => {
-                try {
-                    const proxyUrl = 'https://serverless-api-jnzf.vercel.app/api/proxy';
-                    const response = await fetch(proxyUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            url: url,
-                            method: 'GET'
-                        })
-                    });
+        console.log('🚂 Railway proxy URL:', railwayProxyUrl);
 
-                    if (response.ok) {
-                        const blob = await response.blob();
-                        const imageUrl = URL.createObjectURL(blob);
-                        img.src = imageUrl;
+        // Set up refresh mechanism for Railway proxy
+        let refreshInterval;
+        const refreshRate = 5000; // 5 seconds for proxy refresh
 
-                        // Clean up old blob URL
-                        img.onload = () => {
-                            setTimeout(() => URL.revokeObjectURL(imageUrl), 1000);
-                        };
-                    }
-                } catch (error) {
-                    console.error('Proxy fetch failed:', error);
-                }
-            };
-
-            // Initial load
-            fetchProxiedImage();
-
-            // Set up refresh interval
-            const refreshInterval = setInterval(fetchProxiedImage, 3000);
-
-            // Store cleanup function
-            proxyContainer.cleanup = () => {
-                clearInterval(refreshInterval);
-                if (img.src.startsWith('blob:')) {
-                    URL.revokeObjectURL(img.src);
-                }
-            };
-
-            return img;
+        const refreshProxyIframe = () => {
+            const separator = railwayProxyUrl.includes('?') ? '&' : '?';
+            iframe.src = railwayProxyUrl + separator + 't=' + Date.now();
+            console.log('🔄 Refreshed Railway proxy MJPG iframe');
         };
 
-        const proxiedImg = createProxiedImage();
-        proxyContainer.appendChild(proxiedImg);
+        // Start refresh after initial load
+        iframe.onload = () => {
+            console.log('✅ Railway proxy MJPG iframe loaded, starting refresh');
+            if (!refreshInterval) {
+                refreshInterval = setInterval(refreshProxyIframe, refreshRate);
+            }
+        };
 
-        container.appendChild(proxyContainer);
+        // Add error handling for Railway proxy iframe
+        iframe.onerror = () => {
+            console.error('Railway proxy MJPG iframe failed to load:', railwayProxyUrl);
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+                refreshInterval = null;
+            }
+            container.innerHTML = `
+                <div class="video-error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Failed to load MJPG stream via Railway proxy</p>
+                    <small>${url}</small>
+                    <p style="margin-top: 10px; font-size: 12px; color: #94a3b8;">
+                        Railway proxy: ${railwayProxyUrl}
+                    </p>
+                </div>
+            `;
+        };
+
+        // Store cleanup function
+        container.cleanup = () => {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+                refreshInterval = null;
+                console.log('🛑 Stopped Railway proxy MJPG refresh');
+            }
+        };
+
+        container.appendChild(iframe);
+        console.log('Created Railway proxy MJPG iframe player for:', url);
         return container;
     }
 
@@ -1696,8 +1661,7 @@ const openVideoWindow = (url) => {
     // THREAT INTELLIGENCE EVENT HANDLERS
     setupThreatIntelHandlers(newWindow, cleanUrl);
 
-    // CAMERA FINGERPRINTING EVENT HANDLERS
-    setupCameraFingerprintHandlers(newWindow, cleanUrl);
+
 
     // INFO TABS SCROLLING HANDLERS
     setupInfoTabsScrolling(newWindow);
@@ -1705,11 +1669,7 @@ const openVideoWindow = (url) => {
     // DATA EXPORT & REPORTING HANDLERS
     setupDataExportHandlers(newWindow, cleanUrl);
 
-    // ENHANCED GEOLOCATION INTELLIGENCE HANDLERS
-    setupEnhancedGeolocationHandlers(newWindow, cleanUrl);
 
-    // SOCIAL MEDIA & WEB INTELLIGENCE HANDLERS
-    setupSocialIntelligenceHandlers(newWindow, cleanUrl);
 
     return newWindow;
 };
@@ -3685,21 +3645,10 @@ const testSingleCredential = (windowElement, metadata, credential) => {
     resultItem.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Testing ${credential.username}:${credential.password}...`;
     testResultsContent.prepend(resultItem);
 
-    // Simulate credential testing (in a real implementation, this would make actual requests)
+    // Credential testing removed - requires real HTTP requests which may be blocked by CORS
     setTimeout(() => {
-        // Random success/failure for demo purposes
-        const success = Math.random() > 0.7;
-
-        if (success) {
-            resultItem.className = 'test-result-item test-result-success';
-            resultItem.innerHTML = `<i class="fas fa-check-circle"></i> <strong>${credential.username}:${credential.password}</strong> - Authentication successful!`;
-
-            // Show notification
-            showNotification('<i class="fas fa-unlock"></i> Credential test successful!', 'success');
-        } else {
-            resultItem.className = 'test-result-item test-result-failure';
-            resultItem.innerHTML = `<i class="fas fa-times-circle"></i> <strong>${credential.username}:${credential.password}</strong> - Authentication failed`;
-        }
+        resultItem.className = 'test-result-item test-result-failure';
+        resultItem.innerHTML = `<i class="fas fa-info-circle"></i> <strong>${credential.username}:${credential.password}</strong> - Credential testing disabled (requires real HTTP requests)`;
     }, 1500);
 };
 
@@ -3764,18 +3713,10 @@ const testAllCredentials = (windowElement, metadata) => {
         // Scroll to bottom of results
         testResultsContent.scrollTop = testResultsContent.scrollHeight;
 
-        // Simulate credential testing (in a real implementation, this would make actual requests)
+        // Credential testing removed - requires real HTTP requests which may be blocked by CORS
         setTimeout(() => {
-            // Random success/failure for demo purposes
-            const success = Math.random() > 0.7;
-
-            if (success) {
-                resultItem.className = 'test-result-item test-result-success';
-                resultItem.innerHTML = `<i class="fas fa-check-circle"></i> <strong>${credential.username}:${credential.password}</strong> - Authentication successful!`;
-            } else {
-                resultItem.className = 'test-result-item test-result-failure';
-                resultItem.innerHTML = `<i class="fas fa-times-circle"></i> <strong>${credential.username}:${credential.password}</strong> - Authentication failed`;
-            }
+            resultItem.className = 'test-result-item test-result-failure';
+            resultItem.innerHTML = `<i class="fas fa-info-circle"></i> <strong>${credential.username}:${credential.password}</strong> - Credential testing disabled (requires real HTTP requests)`;
 
             // Move to next credential
             currentIndex++;
@@ -4042,16 +3983,7 @@ const scanSubnet = async (baseIp, subnetMask = 24) => {
     }
 };
 
-/**
- * Device discovery - REMOVED
- * Real network scanning requires specialized tools and may be illegal without permission
- */
-const simulateDeviceDiscovery = async (ip) => {
-    console.log(`[simulateDeviceDiscovery] Network scanning not available - requires specialized tools`);
-
-    // Return inactive result - no fake data
-    return { ip, active: false, reason: 'Network scanning disabled' };
-};
+// Device discovery function removed - network scanning requires specialized tools and may be illegal without permission
 
 /**
  * Port Scanner - Identifies open services on target IPs
@@ -4069,22 +4001,13 @@ const scanPorts = async (ip, ports = null) => {
     };
 
     try {
-        for (const port of targetPorts) {
-            const portResult = await simulatePortProbe(ip, port);
+        // Port scanning disabled - requires specialized tools and may be illegal without permission
+        console.log(`[scanPorts] Port scanning disabled - would scan ${targetPorts.length} ports`);
 
-            if (portResult.state === 'open') {
-                results.openPorts.push({
-                    port: port,
-                    service: portResult.service,
-                    version: portResult.version,
-                    banner: portResult.banner
-                });
-            } else if (portResult.state === 'closed') {
-                results.closedPorts.push(port);
-            } else {
-                results.filteredPorts.push(port);
-            }
-        }
+        // No actual port scanning performed
+        results.openPorts = [];
+        results.closedPorts = [];
+        results.filteredPorts = [];
 
         console.log(`[scanPorts] Port scan completed. Found ${results.openPorts.length} open ports`);
         return results;
@@ -4095,50 +4018,9 @@ const scanPorts = async (ip, ports = null) => {
     }
 };
 
-/**
- * Simulate port probing (replace with actual network probing in production)
- */
-const simulatePortProbe = async (ip, port) => {
-    console.log(`[simulatePortProbe] Port scanning not available - requires specialized tools`);
+// Port scanning functions removed - requires specialized tools and may be illegal without permission
 
-    // Return closed state - no fake data
-    return { state: 'closed', reason: 'Port scanning disabled' };
-};
-
-/**
- * Simulate port scan for a device (used by device discovery)
- */
-const simulatePortScan = async (ip) => {
-    const commonPorts = [22, 23, 80, 443, 554, 8000, 8080];
-    const openPorts = [];
-
-    for (const port of commonPorts) {
-        const result = await simulatePortProbe(ip, port);
-        if (result.state === 'open') {
-            openPorts.push({
-                port,
-                service: result.service,
-                version: result.version
-            });
-        }
-    }
-
-    return openPorts;
-};
-
-/**
- * Generate random MAC address for simulation
- */
-const generateRandomMAC = () => {
-    const hexChars = '0123456789ABCDEF';
-    let mac = '';
-    for (let i = 0; i < 6; i++) {
-        if (i > 0) mac += ':';
-        mac += hexChars[Math.floor(Math.random() * 16)];
-        mac += hexChars[Math.floor(Math.random() * 16)];
-    }
-    return mac;
-};
+// Random MAC address generation removed - no fake data generation
 
 /**
  * Network Topology Mapper - Creates visual network relationships
@@ -4209,55 +4091,7 @@ const mapNetworkTopology = async (discoveredDevices) => {
     }
 };
 
-/**
- * Enhanced IP Geolocation with multiple sources
- */
-const getEnhancedGeolocation = async (ip) => {
-    console.log(`[getEnhancedGeolocation] Getting enhanced location data for ${ip}`);
 
-    const results = {
-        ip,
-        sources: {},
-        consensus: {},
-        accuracy: 'unknown',
-        timestamp: new Date().toISOString()
-    };
-
-    try {
-        // Primary source: ip-api.com (already implemented)
-        const ipApiData = globalState.rawData.ipInfo[ip] || await fetchIPInfoDirect(ip);
-        if (ipApiData) {
-            results.sources.ipapi = {
-                lat: ipApiData.lat,
-                lon: ipApiData.lon,
-                city: ipApiData.city,
-                country: ipApiData.country,
-                accuracy: 'city'
-            };
-        }
-
-        // Additional sources can be added here with API keys
-        // For now, we'll simulate additional data sources
-
-        // Calculate consensus location
-        const locations = Object.values(results.sources).filter(s => s.lat && s.lon);
-        if (locations.length > 0) {
-            results.consensus = {
-                lat: locations.reduce((sum, loc) => sum + loc.lat, 0) / locations.length,
-                lon: locations.reduce((sum, loc) => sum + loc.lon, 0) / locations.length,
-                city: locations[0].city,
-                country: locations[0].country,
-                sources: locations.length
-            };
-        }
-
-        return results;
-
-    } catch (error) {
-        console.error('[getEnhancedGeolocation] Enhanced geolocation failed:', error);
-        throw error;
-    }
-};
 
 /**
  * Direct IP info fetch (helper function)
@@ -4283,394 +4117,23 @@ const fetchIPInfoDirect = async (ip) => {
     }
 };
 
-// ============================================================================
-// ADVANCED CAMERA FINGERPRINTING FUNCTIONS
-// ============================================================================
 
-/**
- * Advanced HTTP Header Analysis for camera fingerprinting
- */
-const analyzeHTTPHeaders = async (ip, port = 80) => {
-    console.log(`[analyzeHTTPHeaders] Analyzing HTTP headers for ${ip}:${port}`);
 
-    const results = {
-        ip,
-        port,
-        timestamp: new Date().toISOString(),
-        headers: {},
-        serverInfo: {},
-        cameraModel: 'Unknown',
-        firmwareVersion: 'Unknown',
-        vulnerabilities: [],
-        confidence: 0
-    };
 
-    try {
-        // Simulate HTTP header analysis (in production, use actual HTTP requests)
-        const headerData = await simulateHTTPHeaderAnalysis(ip, port);
-        results.headers = headerData.headers;
-        results.serverInfo = headerData.serverInfo;
 
-        // Analyze server header for camera identification
-        if (headerData.headers.server) {
-            const serverAnalysis = analyzeCameraFromServer(headerData.headers.server);
-            results.cameraModel = serverAnalysis.model;
-            results.firmwareVersion = serverAnalysis.firmware;
-            results.confidence = serverAnalysis.confidence;
-        }
 
-        // Check for common camera-specific headers
-        const cameraHeaders = detectCameraHeaders(headerData.headers);
-        if (cameraHeaders.detected) {
-            results.cameraModel = cameraHeaders.model || results.cameraModel;
-            results.confidence = Math.max(results.confidence, cameraHeaders.confidence);
-        }
 
-        // Analyze for known vulnerabilities
-        results.vulnerabilities = await checkCameraVulnerabilities(results.cameraModel, results.firmwareVersion);
+// URL pattern detection function removed - requires real HTTP requests which may be blocked by CORS
 
-        // Store results
-        globalState.rawData.cameraFingerprint = globalState.rawData.cameraFingerprint || {};
-        globalState.rawData.cameraFingerprint[ip] = results;
 
-        console.log(`[analyzeHTTPHeaders] Analysis completed. Model: ${results.cameraModel}, Confidence: ${results.confidence}%`);
-        return results;
 
-    } catch (error) {
-        console.error('[analyzeHTTPHeaders] HTTP header analysis failed:', error);
-        throw error;
-    }
-};
 
-/**
- * HTTP header analysis - REMOVED
- * Real HTTP header analysis requires actual HTTP requests which may be blocked by CORS
- */
-const simulateHTTPHeaderAnalysis = async (ip, port) => {
-    console.log(`[simulateHTTPHeaderAnalysis] HTTP header analysis not available - requires real HTTP requests`);
 
-    return {
-        headers: {},
-        serverInfo: {
-            manufacturer: 'Unknown',
-            model: 'Analysis disabled',
-            firmware: 'N/A'
-        },
-        note: 'HTTP header analysis disabled - requires real HTTP requests which may be blocked by CORS'
-    };
-};
+// Certificate analysis function removed - requires real HTTPS connections which may be blocked by CORS
 
-/**
- * Analyze camera model from server header
- */
-const analyzeCameraFromServer = (serverHeader) => {
-    const patterns = [
-        { pattern: /App-webs/i, manufacturer: 'Hikvision', confidence: 85 },
-        { pattern: /Webs/i, manufacturer: 'Dahua', confidence: 80 },
-        { pattern: /lighttpd/i, manufacturer: 'Axis', confidence: 75 },
-        { pattern: /boa/i, manufacturer: 'Various', confidence: 60 },
-        { pattern: /nginx/i, manufacturer: 'Generic', confidence: 40 }
-    ];
 
-    for (const pattern of patterns) {
-        if (pattern.pattern.test(serverHeader)) {
-            return {
-                model: `${pattern.manufacturer} Camera`,
-                firmware: 'Detected from server header',
-                confidence: pattern.confidence
-            };
-        }
-    }
 
-    return {
-        model: 'Unknown',
-        firmware: 'Unknown',
-        confidence: 0
-    };
-};
 
-/**
- * Detect camera-specific headers
- */
-const detectCameraHeaders = (headers) => {
-    const cameraIndicators = [
-        { header: 'www-authenticate', pattern: /DS-\d+/i, manufacturer: 'Hikvision' },
-        { header: 'www-authenticate', pattern: /DH-/i, manufacturer: 'Dahua' },
-        { header: 'www-authenticate', pattern: /AXIS_/i, manufacturer: 'Axis' },
-        { header: 'server', pattern: /App-webs/i, manufacturer: 'Hikvision' }
-    ];
-
-    for (const indicator of cameraIndicators) {
-        const headerValue = headers[indicator.header];
-        if (headerValue && indicator.pattern.test(headerValue)) {
-            const match = headerValue.match(indicator.pattern);
-            return {
-                detected: true,
-                manufacturer: indicator.manufacturer,
-                model: match ? match[0] : `${indicator.manufacturer} Camera`,
-                confidence: 90
-            };
-        }
-    }
-
-    return { detected: false, confidence: 0 };
-};
-
-/**
- * URL Pattern Recognition for camera identification
- */
-const analyzeURLPatterns = async (ip) => {
-    console.log(`[analyzeURLPatterns] Analyzing URL patterns for ${ip}`);
-
-    const results = {
-        ip,
-        timestamp: new Date().toISOString(),
-        detectedPaths: [],
-        cameraType: 'Unknown',
-        adminPaths: [],
-        streamPaths: [],
-        confidence: 0
-    };
-
-    try {
-        // Common camera URL patterns
-        const urlPatterns = [
-            // Hikvision patterns
-            { path: '/ISAPI/System/deviceInfo', manufacturer: 'Hikvision', type: 'api', confidence: 95 },
-            { path: '/PSIA/System/deviceInfo', manufacturer: 'Hikvision', type: 'api', confidence: 90 },
-            { path: '/onvif/device_service', manufacturer: 'ONVIF Compatible', type: 'api', confidence: 85 },
-
-            // Dahua patterns
-            { path: '/cgi-bin/magicBox.cgi?action=getSystemInfo', manufacturer: 'Dahua', type: 'api', confidence: 95 },
-            { path: '/cgi-bin/global.cgi', manufacturer: 'Dahua', type: 'admin', confidence: 90 },
-
-            // Axis patterns
-            { path: '/axis-cgi/param.cgi?action=list', manufacturer: 'Axis', type: 'api', confidence: 95 },
-            { path: '/axis-cgi/mjpg/video.cgi', manufacturer: 'Axis', type: 'stream', confidence: 90 },
-
-            // Generic patterns
-            { path: '/cgi-bin/hi3510/param.cgi', manufacturer: 'Hi3510 Based', type: 'api', confidence: 80 },
-            { path: '/web/cgi-bin/hi3510/param.cgi', manufacturer: 'Hi3510 Based', type: 'api', confidence: 80 }
-        ];
-
-        // Simulate URL pattern detection
-        const detectedPatterns = await simulateURLPatternDetection(ip, urlPatterns);
-        results.detectedPaths = detectedPatterns.paths;
-
-        if (detectedPatterns.paths.length > 0) {
-            const highestConfidence = detectedPatterns.paths.reduce((max, path) =>
-                path.confidence > max.confidence ? path : max
-            );
-            results.cameraType = highestConfidence.manufacturer;
-            results.confidence = highestConfidence.confidence;
-        }
-
-        // Categorize detected paths
-        results.adminPaths = detectedPatterns.paths.filter(p => p.type === 'admin');
-        results.streamPaths = detectedPatterns.paths.filter(p => p.type === 'stream');
-
-        // Store results
-        globalState.rawData.urlPatterns = globalState.rawData.urlPatterns || {};
-        globalState.rawData.urlPatterns[ip] = results;
-
-        console.log(`[analyzeURLPatterns] Found ${results.detectedPaths.length} patterns. Type: ${results.cameraType}`);
-        return results;
-
-    } catch (error) {
-        console.error('[analyzeURLPatterns] URL pattern analysis failed:', error);
-        throw error;
-    }
-};
-
-/**
- * URL pattern detection - REMOVED
- * Real URL pattern detection requires actual HTTP requests which may be blocked by CORS
- */
-const simulateURLPatternDetection = async (ip, patterns) => {
-    console.log(`[simulateURLPatternDetection] URL pattern detection not available - requires real HTTP requests`);
-
-    return {
-        paths: [],
-        note: 'URL pattern detection disabled - requires real HTTP requests which may be blocked by CORS'
-    };
-};
-
-/**
- * Check for known camera vulnerabilities
- */
-const checkCameraVulnerabilities = async (cameraModel, firmwareVersion) => {
-    console.log(`[checkCameraVulnerabilities] Checking vulnerabilities for ${cameraModel} ${firmwareVersion}`);
-
-    // Simulate vulnerability database lookup
-    await new Promise(resolve => setTimeout(resolve, Math.random() * 500 + 200));
-
-    const vulnerabilityDatabase = [
-        {
-            model: /Hikvision/i,
-            vulnerabilities: [
-                { cve: 'CVE-2017-7921', severity: 'Critical', description: 'Authentication bypass vulnerability' },
-                { cve: 'CVE-2021-36260', severity: 'High', description: 'Command injection vulnerability' },
-                { cve: 'CVE-2020-25078', severity: 'Medium', description: 'Information disclosure' }
-            ]
-        },
-        {
-            model: /Dahua/i,
-            vulnerabilities: [
-                { cve: 'CVE-2021-33044', severity: 'Critical', description: 'Authentication bypass' },
-                { cve: 'CVE-2020-9471', severity: 'High', description: 'Remote code execution' },
-                { cve: 'CVE-2019-3948', severity: 'Medium', description: 'Credential disclosure' }
-            ]
-        },
-        {
-            model: /Axis/i,
-            vulnerabilities: [
-                { cve: 'CVE-2022-31199', severity: 'High', description: 'Path traversal vulnerability' },
-                { cve: 'CVE-2021-31986', severity: 'Medium', description: 'Information disclosure' }
-            ]
-        }
-    ];
-
-    const vulnerabilities = [];
-
-    for (const entry of vulnerabilityDatabase) {
-        if (entry.model.test(cameraModel)) {
-            // Randomly select some vulnerabilities (simulate version-specific checks)
-            const applicableVulns = entry.vulnerabilities.filter(() => Math.random() < 0.6);
-            vulnerabilities.push(...applicableVulns);
-        }
-    }
-
-    return vulnerabilities;
-};
-
-/**
- * SSL/TLS Certificate Analysis
- */
-const analyzeCertificate = async (ip, port = 443) => {
-    console.log(`[analyzeCertificate] Analyzing SSL certificate for ${ip}:${port}`);
-
-    const results = {
-        ip,
-        port,
-        timestamp: new Date().toISOString(),
-        certificate: null,
-        issuer: 'Unknown',
-        subject: 'Unknown',
-        validFrom: null,
-        validTo: null,
-        isExpired: false,
-        isSelfSigned: false,
-        keySize: 0,
-        signatureAlgorithm: 'Unknown',
-        vulnerabilities: [],
-        trustScore: 0
-    };
-
-    try {
-        // Simulate certificate analysis (in production, use actual SSL connection)
-        const certData = await simulateCertificateAnalysis(ip, port);
-
-        Object.assign(results, certData);
-
-        // Analyze certificate for security issues
-        results.vulnerabilities = analyzeCertificateVulnerabilities(certData);
-        results.trustScore = calculateCertificateTrustScore(certData);
-
-        // Store results
-        globalState.rawData.certificates = globalState.rawData.certificates || {};
-        globalState.rawData.certificates[ip] = results;
-
-        console.log(`[analyzeCertificate] Certificate analysis completed. Trust score: ${results.trustScore}`);
-        return results;
-
-    } catch (error) {
-        console.error('[analyzeCertificate] Certificate analysis failed:', error);
-        throw error;
-    }
-};
-
-/**
- * Simulate certificate analysis
- */
-const simulateCertificateAnalysis = async (ip, port) => {
-    console.log(`[simulateCertificateAnalysis] Certificate analysis not available - requires real HTTPS connections`);
-
-    return {
-        issuer: 'Unknown',
-        subject: 'Analysis disabled',
-        validFrom: null,
-        validTo: null,
-        isSelfSigned: false,
-        keySize: 0,
-        signatureAlgorithm: 'N/A',
-        isExpired: false,
-        note: 'Certificate analysis disabled - requires real HTTPS connections which may be blocked by CORS'
-    };
-};
-
-/**
- * Analyze certificate for vulnerabilities
- */
-const analyzeCertificateVulnerabilities = (certData) => {
-    const vulnerabilities = [];
-
-    // Check for weak key size
-    if (certData.keySize < 2048) {
-        vulnerabilities.push({
-            type: 'Weak Key Size',
-            severity: 'High',
-            description: `Key size ${certData.keySize} is considered weak`
-        });
-    }
-
-    // Check for weak signature algorithm
-    if (certData.signatureAlgorithm.includes('SHA1')) {
-        vulnerabilities.push({
-            type: 'Weak Signature Algorithm',
-            severity: 'Medium',
-            description: 'SHA1 signature algorithm is deprecated'
-        });
-    }
-
-    // Check if expired
-    if (certData.isExpired) {
-        vulnerabilities.push({
-            type: 'Expired Certificate',
-            severity: 'High',
-            description: 'Certificate has expired'
-        });
-    }
-
-    // Check if self-signed
-    if (certData.isSelfSigned) {
-        vulnerabilities.push({
-            type: 'Self-Signed Certificate',
-            severity: 'Medium',
-            description: 'Certificate is self-signed and not trusted by default'
-        });
-    }
-
-    return vulnerabilities;
-};
-
-/**
- * Calculate certificate trust score
- */
-const calculateCertificateTrustScore = (certData) => {
-    let score = 100;
-
-    // Deduct points for issues
-    if (certData.isSelfSigned) score -= 30;
-    if (certData.isExpired) score -= 40;
-    if (certData.keySize < 2048) score -= 25;
-    if (certData.signatureAlgorithm.includes('SHA1')) score -= 20;
-
-    // Check validity period
-    const validityDays = (certData.validTo - certData.validFrom) / (24 * 60 * 60 * 1000);
-    if (validityDays > 825) score -= 10; // Too long validity period
-
-    return Math.max(0, score);
-};
 
 // ============================================================================
 // THREAT INTELLIGENCE FUNCTIONS
@@ -4692,12 +4155,12 @@ const checkIPReputation = async (ip) => {
     };
 
     try {
-        // Simulate threat intelligence checks (in production, use real APIs)
-        const threatSources = ['virustotal', 'abuseipdb', 'alienvault', 'greynoise'];
+        // Only use free APIs without authentication
+        const threatSources = ['alienvault']; // Only AlienVault OTX is free without authentication
 
         for (const source of threatSources) {
             try {
-                const sourceResult = await simulateThreatIntelCheck(ip, source);
+                const sourceResult = await checkThreatIntelligence(ip, source);
                 results.sources[source] = sourceResult;
 
                 // Aggregate risk score
@@ -4746,139 +4209,41 @@ const checkIPReputation = async (ip) => {
 };
 
 /**
- * Real threat intelligence check using free APIs
+ * Real threat intelligence check using only free APIs without authentication
  */
-const simulateThreatIntelCheck = async (ip, source) => {
-    console.log(`[simulateThreatIntelCheck] Checking threat intelligence for ${ip} using ${source}`);
+const checkThreatIntelligence = async (ip, source) => {
+    console.log(`[checkThreatIntelligence] Checking threat intelligence for ${ip} using ${source}`);
 
     try {
         switch (source) {
-            case 'abuseipdb':
-                return await checkAbuseIPDB(ip);
-            case 'urlhaus':
-                return await checkURLhaus(ip);
             case 'alienvault':
+                // AlienVault OTX is the only free API that works without authentication
                 return await checkAlienVault(ip);
-            case 'virustotal':
-                return await checkVirusTotal(ip);
             default:
-                // Try multiple sources for comprehensive check
-                const results = await Promise.allSettled([
-                    checkAbuseIPDB(ip),
-                    checkURLhaus(ip),
-                    checkAlienVault(ip)
-                ]);
-
-                // Return the first successful result or aggregate
-                for (const result of results) {
-                    if (result.status === 'fulfilled' && result.value.riskScore > 0) {
-                        return result.value;
-                    }
-                }
-
+                // All other APIs require authentication or are blocked by CORS
                 return {
-                    source: 'Multiple Sources',
+                    source: source || 'Multiple Sources',
                     riskScore: 0,
                     riskFactors: [],
                     lastSeen: null,
-                    confidence: 75,
-                    note: 'No threats detected from available sources'
+                    confidence: 0,
+                    note: 'API requires authentication or is blocked by CORS policy'
                 };
         }
     } catch (error) {
-        console.error(`[simulateThreatIntelCheck] Error checking ${source}:`, error);
+        console.error(`[checkThreatIntelligence] Error checking ${source}:`, error);
         return {
             source: source || 'Unknown',
             riskScore: 0,
             riskFactors: [],
             lastSeen: null,
             confidence: 0,
-            note: `Error checking threat intelligence: ${error.message}`
+            note: `API error: ${error.message}`
         };
     }
 };
 
-/**
- * Check AbuseIPDB for IP reputation (free API)
- */
-const checkAbuseIPDB = async (ip) => {
-    try {
-        // Note: This requires an API key, but we can try the public endpoint
-        const url = `https://api.abuseipdb.com/api/v2/check?ipAddress=${ip}&maxAgeInDays=90&verbose`;
-
-        const response = await fetch(url, {
-            headers: {
-                'Key': 'demo', // Demo key - replace with real key
-                'Accept': 'application/json'
-            }
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            return {
-                source: 'AbuseIPDB',
-                riskScore: data.data?.abuseConfidencePercentage || 0,
-                riskFactors: data.data?.usageType ? [data.data.usageType] : [],
-                lastSeen: data.data?.lastReportedAt || null,
-                confidence: 90,
-                note: 'Real AbuseIPDB data'
-            };
-        }
-    } catch (error) {
-        console.warn('[checkAbuseIPDB] Failed:', error.message);
-    }
-
-    return {
-        source: 'AbuseIPDB',
-        riskScore: 0,
-        riskFactors: [],
-        lastSeen: null,
-        confidence: 0,
-        note: 'AbuseIPDB requires API key'
-    };
-};
-
-/**
- * Check URLhaus for malicious URLs associated with IP
- */
-const checkURLhaus = async (ip) => {
-    try {
-        const url = `https://urlhaus-api.abuse.ch/v1/host/`;
-
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: `host=${ip}`
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            const urlCount = data.urls?.length || 0;
-
-            return {
-                source: 'URLhaus',
-                riskScore: Math.min(urlCount * 10, 100), // 10 points per malicious URL
-                riskFactors: urlCount > 0 ? [`${urlCount} malicious URLs detected`] : [],
-                lastSeen: data.urls?.[0]?.date_added || null,
-                confidence: 85,
-                note: 'Real URLhaus malware database'
-            };
-        }
-    } catch (error) {
-        console.warn('[checkURLhaus] Failed:', error.message);
-    }
-
-    return {
-        source: 'URLhaus',
-        riskScore: 0,
-        riskFactors: [],
-        lastSeen: null,
-        confidence: 0,
-        note: 'URLhaus check failed'
-    };
-};
+// Paid API functions removed - AbuseIPDB and URLhaus require authentication and are blocked by CORS
 
 /**
  * Check AlienVault OTX for threat intelligence
@@ -4916,41 +4281,7 @@ const checkAlienVault = async (ip) => {
     };
 };
 
-/**
- * Check VirusTotal for IP reputation (requires API key)
- */
-const checkVirusTotal = async (ip) => {
-    try {
-        const url = `https://www.virustotal.com/vtapi/v2/ip-address/report?apikey=demo&ip=${ip}`;
-
-        const response = await fetch(url);
-
-        if (response.ok) {
-            const data = await response.json();
-            const positives = data.detected_urls?.reduce((sum, url) => sum + url.positives, 0) || 0;
-
-            return {
-                source: 'VirusTotal',
-                riskScore: Math.min(positives * 2, 100), // 2 points per detection
-                riskFactors: positives > 0 ? [`${positives} malicious detections`] : [],
-                lastSeen: data.scan_date || null,
-                confidence: 95,
-                note: 'Real VirusTotal data'
-            };
-        }
-    } catch (error) {
-        console.warn('[checkVirusTotal] Failed:', error.message);
-    }
-
-    return {
-        source: 'VirusTotal',
-        riskScore: 0,
-        riskFactors: [],
-        lastSeen: null,
-        confidence: 0,
-        note: 'VirusTotal requires API key'
-    };
-};
+// VirusTotal function removed - requires paid API and is blocked by CORS
 
 /**
  * Weather correlation for authenticity verification
@@ -5696,377 +5027,9 @@ const openDevicePort = (ip, port) => {
     openPortInBrowser(ip, port);
 };
 
-/**
- * Setup Camera Fingerprinting event handlers for a video window
- */
-const setupCameraFingerprintHandlers = (windowElement, streamUrl) => {
-    if (!windowElement) return;
 
-    const ip = extractIpFromUrl(streamUrl);
-    if (!ip) return;
 
-    // HTTP Header Analysis handlers
-    const analyzeHeadersBtn = windowElement.querySelector('.analyze-headers-btn');
-    const fingerprintTargetIp = windowElement.querySelector('.fingerprint-target-ip');
-    const fingerprintPort = windowElement.querySelector('.fingerprint-port');
 
-    if (analyzeHeadersBtn && fingerprintTargetIp && fingerprintPort) {
-        // Pre-fill with current IP
-        fingerprintTargetIp.value = ip;
-
-        analyzeHeadersBtn.addEventListener('click', async () => {
-            const targetIp = fingerprintTargetIp.value.trim();
-            const port = parseInt(fingerprintPort.value);
-
-            if (!targetIp) {
-                showNotification('Please enter a target IP address', 'error');
-                return;
-            }
-
-            try {
-                showNotification('Analyzing HTTP headers...', 'info');
-                const results = await analyzeHTTPHeaders(targetIp, port);
-
-                // Update UI with results
-                const cameraModelResult = windowElement.querySelector('.camera-model-result');
-                const firmwareResult = windowElement.querySelector('.firmware-result');
-                const confidenceResult = windowElement.querySelector('.confidence-result');
-                const httpHeadersDetails = windowElement.querySelector('.http-headers-details');
-
-                if (cameraModelResult) cameraModelResult.textContent = results.cameraModel;
-                if (firmwareResult) firmwareResult.textContent = results.firmwareVersion;
-                if (confidenceResult) confidenceResult.textContent = `${results.confidence}%`;
-
-                // Display HTTP headers
-                if (httpHeadersDetails) {
-                    httpHeadersDetails.innerHTML = `
-                        <div class="metadata-raw">
-                            <h4>HTTP Headers</h4>
-                            <div class="ip-details-grid">
-                                ${Object.entries(results.headers).map(([key, value]) => `
-                                    <div class="detail-card">
-                                        <div class="detail-header">
-                                            <i class="fas fa-server"></i>
-                                            ${key}
-                                        </div>
-                                        <div class="detail-content">
-                                            <div class="detail-row">
-                                                <span class="detail-label">Value:</span>
-                                                <span class="detail-value" style="font-family: monospace;">${value}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
-                }
-
-                // Update vulnerability count
-                const vulnCount = windowElement.querySelector('.vuln-count');
-                if (vulnCount) vulnCount.textContent = results.vulnerabilities.length;
-
-                // Display vulnerabilities
-                const vulnerabilitiesList = windowElement.querySelector('.vulnerabilities-list');
-                if (vulnerabilitiesList && results.vulnerabilities.length > 0) {
-                    vulnerabilitiesList.innerHTML = `
-                        <div class="metadata-raw">
-                            <h4>Known Vulnerabilities</h4>
-                            <div class="ip-details-grid">
-                                ${results.vulnerabilities.map(vuln => `
-                                    <div class="detail-card">
-                                        <div class="detail-header">
-                                            <i class="fas fa-exclamation-triangle"></i>
-                                            ${vuln.cve || vuln.type}
-                                        </div>
-                                        <div class="detail-content">
-                                            <div class="detail-row">
-                                                <span class="detail-label">Severity:</span>
-                                                <span class="detail-value">
-                                                    <span class="security-indicator ${getSeverityClass(vuln.severity)}">${vuln.severity}</span>
-                                                </span>
-                                            </div>
-                                            <div class="detail-row">
-                                                <span class="detail-label">Description:</span>
-                                                <span class="detail-value">${vuln.description}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
-                }
-
-                showNotification('HTTP header analysis completed', 'success');
-
-            } catch (error) {
-                console.error('HTTP header analysis failed:', error);
-                showNotification(`HTTP header analysis failed: ${error.message}`, 'error');
-            }
-        });
-    }
-
-    // URL Pattern Analysis handlers
-    const analyzeUrlsBtn = windowElement.querySelector('.analyze-urls-btn');
-    const testPathsBtn = windowElement.querySelector('.test-paths-btn');
-
-    if (analyzeUrlsBtn) {
-        analyzeUrlsBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Analyzing URL patterns...', 'info');
-                const results = await analyzeURLPatterns(ip);
-
-                // Update UI with results
-                const detectedPathsCount = windowElement.querySelector('.detected-paths-count');
-                const detectedPathsList = windowElement.querySelector('.detected-paths-list');
-
-                if (detectedPathsCount) detectedPathsCount.textContent = results.detectedPaths.length;
-
-                if (detectedPathsList && results.detectedPaths.length > 0) {
-                    detectedPathsList.innerHTML = `
-                        <div class="metadata-raw">
-                            <h4>Detected URL Patterns</h4>
-                            <div class="ip-details-grid">
-                                ${results.detectedPaths.map(path => `
-                                    <div class="detail-card">
-                                        <div class="detail-header">
-                                            <i class="fas ${getPathTypeIcon(path.type)}"></i>
-                                            ${path.manufacturer}
-                                        </div>
-                                        <div class="detail-content">
-                                            <div class="detail-row">
-                                                <span class="detail-label">Path:</span>
-                                                <span class="detail-value" style="font-family: monospace;">${path.path}</span>
-                                            </div>
-                                            <div class="detail-row">
-                                                <span class="detail-label">Type:</span>
-                                                <span class="detail-value">${path.type}</span>
-                                            </div>
-                                            <div class="detail-row">
-                                                <span class="detail-label">Confidence:</span>
-                                                <span class="detail-value">
-                                                    <span class="rating-value ${getConfidenceClass(path.confidence)}">${path.confidence}%</span>
-                                                </span>
-                                            </div>
-                                            <div class="current-ip-actions" style="margin-top: 6px;">
-                                                <button onclick="openPathInBrowser('${ip}', '${path.path}')" style="flex: 1; font-size: 11px; padding: 4px 6px;">
-                                                    <i class="fas fa-external-link-alt"></i> Open
-                                                </button>
-                                                <button onclick="copyPathInfo('${path.path}')" style="flex: 1; font-size: 11px; padding: 4px 6px;">
-                                                    <i class="fas fa-copy"></i> Copy
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
-                }
-
-                showNotification(`URL pattern analysis completed. Found ${results.detectedPaths.length} patterns`, 'success');
-
-            } catch (error) {
-                console.error('URL pattern analysis failed:', error);
-                showNotification(`URL pattern analysis failed: ${error.message}`, 'error');
-            }
-        });
-    }
-
-    // SSL Certificate Analysis handlers
-    const analyzeCertBtn = windowElement.querySelector('.analyze-cert-btn');
-    const certTargetIp = windowElement.querySelector('.cert-target-ip');
-    const certPort = windowElement.querySelector('.cert-port');
-
-    if (analyzeCertBtn && certTargetIp && certPort) {
-        // Pre-fill with current IP
-        certTargetIp.value = ip;
-
-        analyzeCertBtn.addEventListener('click', async () => {
-            const targetIp = certTargetIp.value.trim();
-            const port = parseInt(certPort.value);
-
-            if (!targetIp) {
-                showNotification('Please enter a target IP address', 'error');
-                return;
-            }
-
-            try {
-                showNotification('Analyzing SSL certificate...', 'info');
-                const results = await analyzeCertificate(targetIp, port);
-
-                // Update UI with results
-                const certTrustScore = windowElement.querySelector('.cert-trust-score');
-                const certTrustDescription = windowElement.querySelector('.cert-trust-description');
-                const certDetails = windowElement.querySelector('.cert-details');
-
-                if (certTrustScore) {
-                    certTrustScore.textContent = results.trustScore;
-                    certTrustScore.className = `rating-value ${getTrustScoreClass(results.trustScore)}`;
-                }
-
-                if (certTrustDescription) {
-                    certTrustDescription.textContent = getTrustScoreDescription(results.trustScore);
-                }
-
-                if (certDetails) {
-                    certDetails.innerHTML = `
-                        <div class="metadata-raw">
-                            <h4>Certificate Details</h4>
-                            <div class="detail-card">
-                                <div class="detail-content">
-                                    <div class="detail-row">
-                                        <span class="detail-label">Issuer:</span>
-                                        <span class="detail-value">${results.issuer}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="detail-label">Subject:</span>
-                                        <span class="detail-value">${results.subject}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="detail-label">Valid From:</span>
-                                        <span class="detail-value">${results.validFrom ? new Date(results.validFrom).toLocaleDateString() : 'Unknown'}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="detail-label">Valid To:</span>
-                                        <span class="detail-value">${results.validTo ? new Date(results.validTo).toLocaleDateString() : 'Unknown'}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="detail-label">Key Size:</span>
-                                        <span class="detail-value">${results.keySize} bits</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="detail-label">Signature Algorithm:</span>
-                                        <span class="detail-value">${results.signatureAlgorithm}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="detail-label">Self-Signed:</span>
-                                        <span class="detail-value">
-                                            <span class="security-indicator ${results.isSelfSigned ? 'warning' : 'secure'}">${results.isSelfSigned ? 'Yes' : 'No'}</span>
-                                        </span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="detail-label">Expired:</span>
-                                        <span class="detail-value">
-                                            <span class="security-indicator ${results.isExpired ? 'danger' : 'secure'}">${results.isExpired ? 'Yes' : 'No'}</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }
-
-                showNotification('SSL certificate analysis completed', 'success');
-
-            } catch (error) {
-                console.error('SSL certificate analysis failed:', error);
-                showNotification(`SSL certificate analysis failed: ${error.message}`, 'error');
-            }
-        });
-    }
-
-    // Auto-run fingerprinting for current IP
-    if (ip) {
-        setTimeout(async () => {
-            try {
-                // Auto-analyze HTTP headers on port 80
-                await analyzeHTTPHeaders(ip, 80);
-
-                // Auto-analyze URL patterns
-                await analyzeURLPatterns(ip);
-
-                showNotification('Automatic camera fingerprinting completed', 'info');
-            } catch (error) {
-                console.warn('Auto fingerprinting failed:', error);
-            }
-        }, 3000); // Delay to allow other analyses to complete first
-    }
-};
-
-/**
- * Get CSS class for vulnerability severity
- */
-const getSeverityClass = (severity) => {
-    switch (severity?.toLowerCase()) {
-        case 'critical': return 'danger';
-        case 'high': return 'danger';
-        case 'medium': return 'warning';
-        case 'low': return 'secure';
-        default: return 'warning';
-    }
-};
-
-/**
- * Get icon for path type
- */
-const getPathTypeIcon = (type) => {
-    const iconMap = {
-        'api': 'fa-code',
-        'admin': 'fa-cog',
-        'stream': 'fa-video',
-        'config': 'fa-wrench'
-    };
-    return iconMap[type] || 'fa-link';
-};
-
-/**
- * Get CSS class for confidence level
- */
-const getConfidenceClass = (confidence) => {
-    if (confidence >= 90) return 'high';
-    if (confidence >= 70) return 'medium';
-    if (confidence >= 50) return 'low';
-    return 'warning';
-};
-
-/**
- * Get CSS class for trust score
- */
-const getTrustScoreClass = (score) => {
-    if (score >= 80) return 'high';
-    if (score >= 60) return 'medium';
-    if (score >= 40) return 'low';
-    return 'danger';
-};
-
-/**
- * Get description for trust score
- */
-const getTrustScoreDescription = (score) => {
-    if (score >= 80) return 'Trusted';
-    if (score >= 60) return 'Moderate Trust';
-    if (score >= 40) return 'Low Trust';
-    return 'Untrusted';
-};
-
-/**
- * Open path in browser
- */
-const openPathInBrowser = (ip, path) => {
-    const protocol = path.includes('443') || path.includes('ssl') ? 'https' : 'http';
-    const url = `${protocol}://${ip}${path}`;
-    window.open(url, '_blank');
-    showNotification(`Opening ${path} in browser`, 'info');
-};
-
-/**
- * Copy path information to clipboard
- */
-const copyPathInfo = (path) => {
-    // Create temporary textarea for copying
-    const textarea = document.createElement('textarea');
-    textarea.value = path;
-    textarea.style.position = 'fixed';
-    textarea.style.opacity = 0;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
-
-    showNotification(`Copied ${path} to clipboard`, 'success');
-};
 
 /**
  * Setup horizontal scrolling for info tabs with mouse wheel and middle click
@@ -7101,1106 +6064,29 @@ const deleteExportHistory = (fileName) => {
     }
 };
 
-// ============================================================================
-// ENHANCED GEOLOCATION INTELLIGENCE FUNCTIONS
-// ============================================================================
 
-/**
- * Setup Enhanced Geolocation Intelligence handlers for a video window
- */
-const setupEnhancedGeolocationHandlers = (windowElement, streamUrl) => {
-    if (!windowElement) return;
 
-    const ip = extractIpFromUrl(streamUrl);
-    if (!ip) return;
 
-    // Advanced Location Analysis handlers
-    const analyzeGeolocationBtn = windowElement.querySelector('.analyze-geolocation-btn');
-    const geoTargetIp = windowElement.querySelector('.geo-target-ip');
 
-    if (analyzeGeolocationBtn && geoTargetIp) {
-        geoTargetIp.value = ip;
 
-        analyzeGeolocationBtn.addEventListener('click', async () => {
-            const targetIp = geoTargetIp.value.trim();
-            if (!targetIp) {
-                showNotification('Please enter a target IP address', 'error');
-                return;
-            }
 
-            try {
-                showNotification('Analyzing enhanced geolocation...', 'info');
-                const results = await analyzeEnhancedGeolocation(targetIp, windowElement);
-                showNotification('Enhanced geolocation analysis completed', 'success');
-            } catch (error) {
-                console.error('Enhanced geolocation analysis failed:', error);
-                showNotification(`Enhanced geolocation analysis failed: ${error.message}`, 'error');
-            }
-        });
-    }
 
-    // Satellite & Street View handlers
-    const getSatelliteBtn = windowElement.querySelector('.get-satellite-btn');
-    const getStreetviewBtn = windowElement.querySelector('.get-streetview-btn');
-    const analyzeSurroundingsBtn = windowElement.querySelector('.analyze-surroundings-btn');
 
-    if (getSatelliteBtn) {
-        getSatelliteBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Fetching satellite imagery...', 'info');
-                await getSatelliteImagery(ip, windowElement);
-                showNotification('Satellite imagery retrieved', 'success');
-            } catch (error) {
-                showNotification(`Satellite imagery failed: ${error.message}`, 'error');
-            }
-        });
-    }
 
-    if (getStreetviewBtn) {
-        getStreetviewBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Fetching street view...', 'info');
-                await getStreetViewImagery(ip, windowElement);
-                showNotification('Street view retrieved', 'success');
-            } catch (error) {
-                showNotification(`Street view failed: ${error.message}`, 'error');
-            }
-        });
-    }
 
-    if (analyzeSurroundingsBtn) {
-        analyzeSurroundingsBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Analyzing surroundings...', 'info');
-                await analyzeSurroundings(ip, windowElement);
-                showNotification('Surroundings analysis completed', 'success');
-            } catch (error) {
-                showNotification(`Surroundings analysis failed: ${error.message}`, 'error');
-            }
-        });
-    }
 
-    // Infrastructure Analysis handlers
-    const analyzeInfrastructureBtn = windowElement.querySelector('.analyze-infrastructure-btn');
-    const analyzeDemographicsBtn = windowElement.querySelector('.analyze-demographics-btn');
-    const analyzeWeatherBtn = windowElement.querySelector('.analyze-weather-btn');
 
-    if (analyzeInfrastructureBtn) {
-        analyzeInfrastructureBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Analyzing infrastructure...', 'info');
-                await analyzeInfrastructure(ip, windowElement);
-                showNotification('Infrastructure analysis completed', 'success');
-            } catch (error) {
-                showNotification(`Infrastructure analysis failed: ${error.message}`, 'error');
-            }
-        });
-    }
 
-    if (analyzeDemographicsBtn) {
-        analyzeDemographicsBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Analyzing demographics...', 'info');
-                await analyzeDemographics(ip, windowElement);
-                showNotification('Demographics analysis completed', 'success');
-            } catch (error) {
-                showNotification(`Demographics analysis failed: ${error.message}`, 'error');
-            }
-        });
-    }
 
-    if (analyzeWeatherBtn) {
-        analyzeWeatherBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Analyzing weather data...', 'info');
-                await analyzeWeatherData(ip, windowElement);
-                showNotification('Weather analysis completed', 'success');
-            } catch (error) {
-                showNotification(`Weather analysis failed: ${error.message}`, 'error');
-            }
-        });
-    }
 
-    // Timezone & Temporal Analysis handlers
-    const analyzeTimezoneBtn = windowElement.querySelector('.analyze-timezone-btn');
-    const predictActivityBtn = windowElement.querySelector('.predict-activity-btn');
 
-    if (analyzeTimezoneBtn) {
-        analyzeTimezoneBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Analyzing timezone...', 'info');
-                await analyzeTimezone(ip, windowElement);
-                showNotification('Timezone analysis completed', 'success');
-            } catch (error) {
-                showNotification(`Timezone analysis failed: ${error.message}`, 'error');
-            }
-        });
-    }
 
-    if (predictActivityBtn) {
-        predictActivityBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Predicting activity patterns...', 'info');
-                await predictActivityPatterns(ip, windowElement);
-                showNotification('Activity pattern analysis completed', 'success');
-            } catch (error) {
-                showNotification(`Activity pattern analysis failed: ${error.message}`, 'error');
-            }
-        });
-    }
-
-    // Cross-Reference Analysis handlers
-    const crossReferenceBtn = windowElement.querySelector('.cross-reference-btn');
-    const correlateDataBtn = windowElement.querySelector('.correlate-data-btn');
-    const generateProfileBtn = windowElement.querySelector('.generate-profile-btn');
-
-    if (crossReferenceBtn) {
-        crossReferenceBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Cross-referencing data...', 'info');
-                await crossReferenceIntelligence(ip, windowElement);
-                showNotification('Cross-reference analysis completed', 'success');
-            } catch (error) {
-                showNotification(`Cross-reference analysis failed: ${error.message}`, 'error');
-            }
-        });
-    }
-
-    if (correlateDataBtn) {
-        correlateDataBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Correlating data points...', 'info');
-                await correlateDataPoints(ip, windowElement);
-                showNotification('Data correlation completed', 'success');
-            } catch (error) {
-                showNotification(`Data correlation failed: ${error.message}`, 'error');
-            }
-        });
-    }
-
-    if (generateProfileBtn) {
-        generateProfileBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Generating intelligence profile...', 'info');
-                await generateIntelligenceProfile(ip, windowElement);
-                showNotification('Intelligence profile generated', 'success');
-            } catch (error) {
-                showNotification(`Profile generation failed: ${error.message}`, 'error');
-            }
-        });
-    }
-
-    console.log('[setupEnhancedGeolocationHandlers] Enhanced geolocation handlers initialized');
-};
-
-/**
- * Analyze enhanced geolocation with multiple data sources
- */
-const analyzeEnhancedGeolocation = async (ip, windowElement) => {
-    console.log(`[analyzeEnhancedGeolocation] Analyzing enhanced geolocation for ${ip}`);
-
-    const results = {
-        ip,
-        timestamp: new Date().toISOString(),
-        precision: 'Unknown',
-        confidence: 0,
-        sources: [],
-        coordinates: { lat: 0, lon: 0 },
-        accuracy: 0,
-        elevation: 0,
-        timezone: 'Unknown',
-        localTime: 'Unknown'
-    };
-
-    try {
-        // Get existing geolocation data from the camera info
-        // First try to find the window ID that contains this IP
-        let existingGeoData = null;
-        let windowId = null;
-
-        // Search through all stored IP data to find matching IP
-        for (const [wId, ipData] of Object.entries(globalState.rawData.ipInfo || {})) {
-            if (ipData && ipData.query === ip) {
-                existingGeoData = ipData;
-                windowId = wId;
-                break;
-            }
-        }
-
-        // If not found by IP, try to get from current window context
-        if (!existingGeoData && windowElement) {
-            const currentWindowId = windowElement.dataset.id;
-            if (currentWindowId && globalState.rawData.ipInfo[currentWindowId]) {
-                const currentIpData = globalState.rawData.ipInfo[currentWindowId];
-                if (currentIpData.query === ip) {
-                    existingGeoData = currentIpData;
-                    windowId = currentWindowId;
-                }
-            }
-        }
-
-        console.log(`[analyzeEnhancedGeolocation] Found existing data for ${ip}:`, existingGeoData);
-
-        // Enhanced geolocation analysis - REMOVED
-        // This feature contained fake data and has been disabled
-
-        if (existingGeoData && existingGeoData.lat && existingGeoData.lon) {
-            // Use only real coordinates from existing data
-            results.coordinates = {
-                lat: parseFloat(existingGeoData.lat),
-                lon: parseFloat(existingGeoData.lon)
-            };
-            results.precision = existingGeoData.city ? 'City-level' : 'Region-level';
-            results.confidence = 85; // Real data confidence
-
-            if (existingGeoData.timezone) {
-                results.timezone = existingGeoData.timezone;
-                results.localTime = new Date().toLocaleString('en-US', { timeZone: results.timezone });
-            }
-        } else {
-            // No enhanced analysis without real data
-            console.warn(`[analyzeEnhancedGeolocation] No existing geolocation data for ${ip}`);
-            results.precision = 'Unavailable';
-            results.confidence = 0;
-            results.coordinates = { lat: 0, lon: 0 };
-            results.timezone = 'Unknown';
-            results.localTime = 'Unknown';
-        }
-
-        // Update UI
-        const geoPrecision = windowElement.querySelector('.geo-precision');
-        const geoConfidence = windowElement.querySelector('.geo-confidence');
-        const geoDetails = windowElement.querySelector('.geo-details');
-
-        if (geoPrecision) geoPrecision.textContent = results.precision;
-        if (geoConfidence) geoConfidence.textContent = `${results.confidence}%`;
-
-        if (geoDetails) {
-            if (results.coordinates.lat !== 0 && results.coordinates.lon !== 0) {
-                // Show real data only
-                geoDetails.innerHTML = `
-                    <div class="metadata-raw">
-                        <h4>Enhanced Geolocation Analysis</h4>
-                        <div class="ip-details-grid">
-                            <div class="detail-card">
-                                <div class="detail-header">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    Real Coordinates (from IP API)
-                                </div>
-                                <div class="detail-content">
-                                    <div class="detail-row">
-                                        <span class="detail-label">Latitude:</span>
-                                        <span class="detail-value">${results.coordinates.lat.toFixed(6)}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="detail-label">Longitude:</span>
-                                        <span class="detail-value">${results.coordinates.lon.toFixed(6)}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="detail-label">Precision:</span>
-                                        <span class="detail-value">${results.precision}</span>
-                                    </div>
-                                    ${results.timezone !== 'Unknown' ? `
-                                    <div class="detail-row">
-                                        <span class="detail-label">Timezone:</span>
-                                        <span class="detail-value">${results.timezone}</span>
-                                    </div>
-                                    <div class="detail-row">
-                                        <span class="detail-label">Local Time:</span>
-                                        <span class="detail-value">${results.localTime}</span>
-                                    </div>
-                                    ` : ''}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            } else {
-                // Show unavailable message
-                geoDetails.innerHTML = `
-                    <div class="metadata-raw">
-                        <h4>Enhanced Geolocation Analysis</h4>
-                        <div class="detail-card">
-                            <div class="detail-content">
-                                <div class="detail-row">
-                                    <span class="detail-value">
-                                        <i class="fas fa-info-circle"></i>
-                                        Enhanced geolocation analysis requires real IP geolocation data.
-                                        No additional fake data or simulations are provided.
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-        }
-
-        // Store results
-        globalState.rawData.enhancedGeolocation = globalState.rawData.enhancedGeolocation || {};
-        globalState.rawData.enhancedGeolocation[ip] = results;
-
-        return results;
-
-    } catch (error) {
-        console.error('[analyzeEnhancedGeolocation] Enhanced geolocation analysis failed:', error);
-        throw error;
-    }
-};
-
-
-
-/**
- * Get satellite imagery for location
- */
-const getSatelliteImagery = async (ip, windowElement) => {
-    console.log(`[getSatelliteImagery] Satellite imagery not available - requires paid APIs`);
-
-    const imageryContainer = windowElement.querySelector('.imagery-container');
-    const imageryStatus = windowElement.querySelector('.imagery-status');
-
-    if (imageryStatus) {
-        imageryStatus.innerHTML = '<span class="security-indicator warning">Unavailable</span>';
-    }
-
-    if (imageryContainer) {
-        imageryContainer.innerHTML = `
-            <div class="metadata-raw">
-                <h4>Satellite Imagery Analysis</h4>
-                <div class="detail-card">
-                    <div class="detail-content">
-                        <div class="detail-row">
-                            <span class="detail-value">
-                                <i class="fas fa-info-circle"></i>
-                                Satellite imagery requires paid API access to services like Google Earth Engine,
-                                Mapbox, or commercial satellite providers. No free APIs are available for
-                                high-resolution satellite imagery analysis.
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-};
-
-/**
- * Get street view imagery - REMOVED
- * Real street view requires Google Street View API with authentication
- */
-const getStreetViewImagery = async (ip, windowElement) => {
-    console.log(`[getStreetViewImagery] Street view not available - requires Google API key`);
-
-    const imageryContainer = windowElement.querySelector('.imagery-container');
-
-    if (imageryContainer) {
-        imageryContainer.innerHTML += `
-            <div class="detail-card" style="margin-top: 10px;">
-                <div class="detail-header">
-                    <i class="fas fa-road"></i>
-                    Street View Analysis
-                </div>
-                <div class="detail-content">
-                    <div class="detail-row">
-                        <span class="detail-value">
-                            <i class="fas fa-info-circle"></i>
-                            Street view imagery requires Google Street View API with authentication.
-                            No free APIs are available for street view analysis.
-                        </span>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-};
-
-/**
- * Analyze surroundings and environment using available data
- */
-const analyzeSurroundings = async (ip, windowElement) => {
-    console.log(`[analyzeSurroundings] Analyzing environment using available data for ${ip}`);
-
-    const imageryContainer = windowElement.querySelector('.imagery-container');
-
-    if (imageryContainer) {
-        // Get basic location data from IP info
-        let locationData = null;
-        for (const [windowId, ipData] of Object.entries(globalState.rawData.ipInfo || {})) {
-            if (ipData && ipData.query === ip) {
-                locationData = ipData;
-                break;
-            }
-        }
-
-        if (locationData) {
-            imageryContainer.innerHTML += `
-                <div class="detail-card" style="margin-top: 10px;">
-                    <div class="detail-header">
-                        <i class="fas fa-search-location"></i>
-                        Environmental Analysis (Basic)
-                    </div>
-                    <div class="detail-content">
-                        <div class="detail-row">
-                            <span class="detail-label">Area Type:</span>
-                            <span class="detail-value">${locationData.city ? 'Urban' : 'Unknown'}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Region:</span>
-                            <span class="detail-value">${locationData.regionName || 'Unknown'}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Country:</span>
-                            <span class="detail-value">${locationData.country || 'Unknown'}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">ISP Environment:</span>
-                            <span class="detail-value">${locationData.isp || 'Unknown'}</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        } else {
-            imageryContainer.innerHTML += `
-                <div class="detail-card" style="margin-top: 10px;">
-                    <div class="detail-header">
-                        <i class="fas fa-search-location"></i>
-                        Environmental Analysis
-                    </div>
-                    <div class="detail-content">
-                        <div class="detail-row">
-                            <span class="detail-value">
-                                <i class="fas fa-info-circle"></i>
-                                No location data available for environmental analysis.
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-    }
-};
-
-/**
- * Analyze infrastructure and environment using available data
- */
-const analyzeInfrastructure = async (ip, windowElement) => {
-    console.log(`[analyzeInfrastructure] Analyzing infrastructure using available data for ${ip}`);
-
-    const areaType = windowElement.querySelector('.area-type');
-    const infrastructureDetails = windowElement.querySelector('.infrastructure-details');
-
-    // Get IP and ASN data
-    let ipData = null;
-    let asnData = null;
-
-    for (const [windowId, data] of Object.entries(globalState.rawData.ipInfo || {})) {
-        if (data && data.query === ip) {
-            ipData = data;
-            break;
-        }
-    }
-
-    for (const [windowId, data] of Object.entries(globalState.rawData.asnInfo || {})) {
-        if (data && data.ip === ip) {
-            asnData = data;
-            break;
-        }
-    }
-
-    if (areaType && ipData) {
-        const areaTypeText = ipData.city ?
-            (ipData.regionName ? `${ipData.city}, ${ipData.regionName}` : ipData.city) :
-            'Unknown Area';
-        areaType.textContent = areaTypeText;
-    }
-
-    if (infrastructureDetails) {
-        infrastructureDetails.innerHTML = `
-            <div class="metadata-raw">
-                <h4>Infrastructure Analysis (Available Data)</h4>
-                <div class="detail-card">
-                    <div class="detail-header">
-                        <i class="fas fa-network-wired"></i>
-                        Network Infrastructure
-                    </div>
-                    <div class="detail-content">
-                        <div class="detail-row">
-                            <span class="detail-label">ISP:</span>
-                            <span class="detail-value">${ipData?.isp || 'Unknown'}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Organization:</span>
-                            <span class="detail-value">${ipData?.org || asnData?.org || 'Unknown'}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">AS Number:</span>
-                            <span class="detail-value">${ipData?.as || asnData?.asn || 'Unknown'}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Connection Type:</span>
-                            <span class="detail-value">${ipData?.isp?.includes('Mobile') ? 'Mobile' :
-                                ipData?.isp?.includes('Cable') ? 'Cable' :
-                                ipData?.isp?.includes('Fiber') ? 'Fiber' : 'Unknown'}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Data Source:</span>
-                            <span class="detail-value">IP-API.com (Real-time)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-};
-
-/**
- * Analyze demographics - REMOVED
- * Real demographic analysis requires census data and commercial demographic databases
- */
-const analyzeDemographics = async (ip, windowElement) => {
-    console.log(`[analyzeDemographics] Demographic analysis not available - requires census databases`);
-
-    const populationDensity = windowElement.querySelector('.population-density');
-    const infrastructureDetails = windowElement.querySelector('.infrastructure-details');
-
-    if (populationDensity) {
-        populationDensity.textContent = 'Analysis Unavailable';
-    }
-
-    if (infrastructureDetails) {
-        infrastructureDetails.innerHTML += `
-            <div class="detail-card" style="margin-top: 10px;">
-                <div class="detail-header">
-                    <i class="fas fa-users"></i>
-                    Demographic Analysis
-                </div>
-                <div class="detail-content">
-                    <div class="detail-row">
-                        <span class="detail-value">
-                            <i class="fas fa-info-circle"></i>
-                            Demographic analysis requires access to census data, commercial demographic databases,
-                            and population statistics that are not available through free APIs.
-                        </span>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-};
-
-/**
- * Analyze weather data using real Open-Meteo API
- */
-const analyzeWeatherData = async (ip, windowElement) => {
-    console.log(`[analyzeWeatherData] Analyzing weather data for ${ip}`);
-
-    const infrastructureDetails = windowElement.querySelector('.infrastructure-details');
-
-    try {
-        // Get coordinates from stored IP data
-        let coordinates = null;
-        for (const [windowId, ipData] of Object.entries(globalState.rawData.ipInfo || {})) {
-            if (ipData && ipData.query === ip && ipData.lat && ipData.lon) {
-                coordinates = { lat: ipData.lat, lon: ipData.lon };
-                break;
-            }
-        }
-
-        if (!coordinates) {
-            throw new Error('No coordinates available for weather analysis');
-        }
-
-        // Get real weather data
-        const weatherData = await getRealWeatherData(coordinates.lat, coordinates.lon);
-
-        if (infrastructureDetails) {
-            infrastructureDetails.innerHTML += `
-                <div class="detail-card" style="margin-top: 10px;">
-                    <div class="detail-header">
-                        <i class="fas fa-cloud-sun"></i>
-                        Weather & Environmental Data (Real-time)
-                    </div>
-                    <div class="detail-content">
-                        <div class="detail-row">
-                            <span class="detail-label">Current Conditions:</span>
-                            <span class="detail-value">${weatherData.condition}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Temperature:</span>
-                            <span class="detail-value">${weatherData.temperature}°C (${Math.floor(weatherData.temperature * 9/5 + 32)}°F)</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Humidity:</span>
-                            <span class="detail-value">${weatherData.humidity}%</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Wind Speed:</span>
-                            <span class="detail-value">${weatherData.windSpeed} km/h</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Visibility:</span>
-                            <span class="detail-value">${weatherData.visibility} km</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Data Source:</span>
-                            <span class="detail-value">Open-Meteo API (Real-time)</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-    } catch (error) {
-        console.error('[analyzeWeatherData] Weather analysis failed:', error);
-
-        if (infrastructureDetails) {
-            infrastructureDetails.innerHTML += `
-                <div class="detail-card" style="margin-top: 10px;">
-                    <div class="detail-header">
-                        <i class="fas fa-cloud-sun"></i>
-                        Weather & Environmental Data
-                    </div>
-                    <div class="detail-content">
-                        <div class="detail-row">
-                            <span class="detail-value">
-                                <i class="fas fa-exclamation-triangle"></i>
-                                Weather analysis failed: ${error.message}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-    }
-};
-
-/**
- * Analyze timezone and temporal data using real IP data
- */
-const analyzeTimezone = async (ip, windowElement) => {
-    console.log(`[analyzeTimezone] Analyzing timezone for ${ip}`);
-
-    const localTimeElement = windowElement.querySelector('.local-time');
-    const timezoneInfo = windowElement.querySelector('.timezone-info');
-    const daylightStatus = windowElement.querySelector('.daylight-status');
-    const temporalAnalysis = windowElement.querySelector('.temporal-analysis');
-
-    try {
-        // Get timezone from stored IP data
-        let ipData = null;
-        for (const [windowId, data] of Object.entries(globalState.rawData.ipInfo || {})) {
-            if (data && data.query === ip) {
-                ipData = data;
-                break;
-            }
-        }
-
-        if (!ipData || !ipData.timezone) {
-            throw new Error('No timezone data available for this IP');
-        }
-
-        const timezone = ipData.timezone;
-        const currentTime = new Date();
-        const localTime = currentTime.toLocaleString('en-US', { timeZone: timezone });
-
-        if (localTimeElement) localTimeElement.textContent = localTime;
-        if (timezoneInfo) timezoneInfo.textContent = timezone;
-
-        // Determine if it's daylight
-        const hour = new Date(localTime).getHours();
-        const isDaylight = hour >= 6 && hour <= 18;
-
-        if (daylightStatus) {
-            daylightStatus.innerHTML = `<span class="security-indicator ${isDaylight ? 'secure' : 'warning'}">${isDaylight ? 'Daylight' : 'Nighttime'}</span>`;
-        }
-
-        if (temporalAnalysis) {
-            temporalAnalysis.innerHTML = `
-                <div class="metadata-raw">
-                    <h4>Temporal Intelligence Analysis (Real Data)</h4>
-                    <div class="detail-card">
-                        <div class="detail-header">
-                            <i class="fas fa-clock"></i>
-                            Time Analysis
-                        </div>
-                        <div class="detail-content">
-                            <div class="detail-row">
-                                <span class="detail-label">Local Time:</span>
-                                <span class="detail-value">${localTime}</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Timezone:</span>
-                                <span class="detail-value">${timezone}</span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Daylight Status:</span>
-                                <span class="detail-value">
-                                    <span class="security-indicator ${isDaylight ? 'secure' : 'warning'}">${isDaylight ? 'Daylight' : 'Nighttime'}</span>
-                                </span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Data Source:</span>
-                                <span class="detail-value">IP-API.com (Real-time)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-    } catch (error) {
-        console.error('[analyzeTimezone] Timezone analysis failed:', error);
-
-        if (temporalAnalysis) {
-            temporalAnalysis.innerHTML = `
-                <div class="metadata-raw">
-                    <h4>Temporal Intelligence Analysis</h4>
-                    <div class="detail-card">
-                        <div class="detail-content">
-                            <div class="detail-row">
-                                <span class="detail-value">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                    Timezone analysis failed: ${error.message}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-    }
-};
-
-/**
- * Predict activity patterns based on temporal data - REMOVED
- * Real activity pattern prediction requires historical data and machine learning models
- */
-const predictActivityPatterns = async (ip, windowElement) => {
-    console.log(`[predictActivityPatterns] Activity pattern prediction not available - requires ML models`);
-
-    const temporalAnalysis = windowElement.querySelector('.temporal-analysis');
-
-    if (temporalAnalysis) {
-        temporalAnalysis.innerHTML += `
-            <div class="detail-card" style="margin-top: 10px;">
-                <div class="detail-header">
-                    <i class="fas fa-chart-line"></i>
-                    Activity Pattern Prediction
-                </div>
-                <div class="detail-content">
-                    <div class="detail-row">
-                        <span class="detail-value">
-                            <i class="fas fa-info-circle"></i>
-                            Activity pattern prediction requires historical data collection,
-                            machine learning models, and behavioral analytics that are not
-                            available through free APIs.
-                        </span>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-};
-
-/**
- * Cross-reference intelligence data - REMOVED
- * Real cross-reference intelligence requires network scanning and threat intelligence databases
- */
-const crossReferenceIntelligence = async (ip, windowElement) => {
-    console.log(`[crossReferenceIntelligence] Cross-reference intelligence not available - requires threat databases`);
-
-    const relatedIpsCount = windowElement.querySelector('.related-ips-count');
-    const correlationDetails = windowElement.querySelector('.correlation-details');
-
-    if (relatedIpsCount) {
-        relatedIpsCount.textContent = '0';
-    }
-
-    if (correlationDetails) {
-        correlationDetails.innerHTML = `
-            <div class="metadata-raw">
-                <h4>Cross-Reference Intelligence</h4>
-                <div class="detail-card">
-                    <div class="detail-content">
-                        <div class="detail-row">
-                            <span class="detail-value">
-                                <i class="fas fa-info-circle"></i>
-                                Cross-reference intelligence requires access to threat intelligence databases,
-                                network scanning capabilities, and infrastructure mapping tools that are not
-                                available through free APIs.
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-};
-
-/**
- * Correlate data points across different intelligence sources - REMOVED
- * Real data correlation requires multiple intelligence sources and advanced analytics
- */
-const correlateDataPoints = async (ip, windowElement) => {
-    console.log(`[correlateDataPoints] Data correlation not available - requires multiple intelligence sources`);
-
-    const correlationScore = windowElement.querySelector('.correlation-score');
-    const correlationDetails = windowElement.querySelector('.correlation-details');
-
-    if (correlationScore) {
-        correlationScore.innerHTML = `<span class="rating-value low">0%</span>`;
-    }
-
-    if (correlationDetails) {
-        correlationDetails.innerHTML += `
-            <div class="detail-card" style="margin-top: 10px;">
-                <div class="detail-header">
-                    <i class="fas fa-link"></i>
-                    Data Correlation Analysis
-                </div>
-                <div class="detail-content">
-                    <div class="detail-row">
-                        <span class="detail-value">
-                            <i class="fas fa-info-circle"></i>
-                            Data correlation analysis requires multiple intelligence sources,
-                            advanced analytics platforms, and machine learning algorithms that
-                            are not available through free APIs.
-                        </span>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-};
-
-/**
- * Generate comprehensive intelligence profile - REMOVED
- * Real intelligence profiling requires advanced analytics and multiple data sources
- */
-const generateIntelligenceProfile = async (ip, windowElement) => {
-    console.log(`[generateIntelligenceProfile] Intelligence profiling not available - requires advanced analytics`);
-
-    const correlationDetails = windowElement.querySelector('.correlation-details');
-
-    if (correlationDetails) {
-        correlationDetails.innerHTML += `
-            <div class="detail-card" style="margin-top: 10px;">
-                <div class="detail-header">
-                    <i class="fas fa-user-secret"></i>
-                    Intelligence Profile Summary
-                </div>
-                <div class="detail-content">
-                    <div class="detail-row">
-                        <span class="detail-value">
-                            <i class="fas fa-info-circle"></i>
-                            Intelligence profiling requires advanced analytics platforms,
-                            multiple data sources, and threat intelligence feeds that are
-                            not available through free APIs.
-                        </span>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-
-    showNotification('Intelligence profiling disabled - requires advanced analytics', 'warning');
-};
 
 // ============================================================================
 // SOCIAL MEDIA & WEB INTELLIGENCE FUNCTIONS
 // ============================================================================
 
-/**
- * Setup Social Media & Web Intelligence handlers for a video window
- */
-const setupSocialIntelligenceHandlers = (windowElement, streamUrl) => {
-    if (!windowElement) return;
 
-    const ip = extractIpFromUrl(streamUrl);
-    if (!ip) return;
-
-    // Domain & Website Analysis handlers
-    const analyzeDomainBtn = windowElement.querySelector('.analyze-domain-btn');
-    const domainTarget = windowElement.querySelector('.domain-target');
-
-    if (analyzeDomainBtn && domainTarget) {
-        domainTarget.value = ip;
-
-        analyzeDomainBtn.addEventListener('click', async () => {
-            const target = domainTarget.value.trim();
-            if (!target) {
-                showNotification('Please enter a domain or IP address', 'error');
-                return;
-            }
-
-            try {
-                showNotification('Analyzing domain intelligence...', 'info');
-                await analyzeDomainIntelligence(target, windowElement);
-                showNotification('Domain analysis completed', 'success');
-            } catch (error) {
-                console.error('Domain analysis failed:', error);
-                showNotification(`Domain analysis failed: ${error.message}`, 'error');
-            }
-        });
-    }
-
-    // Social Media Reconnaissance handlers
-    const searchSocialBtn = windowElement.querySelector('.search-social-btn');
-    const socialSearchTerm = windowElement.querySelector('.social-search-term');
-    const socialPlatform = windowElement.querySelector('.social-platform');
-
-    if (searchSocialBtn && socialSearchTerm && socialPlatform) {
-        searchSocialBtn.addEventListener('click', async () => {
-            const searchTerm = socialSearchTerm.value.trim();
-            const platform = socialPlatform.value;
-
-            if (!searchTerm) {
-                showNotification('Please enter a search term', 'error');
-                return;
-            }
-
-            try {
-                showNotification('Searching social media...', 'info');
-                await searchSocialMedia(searchTerm, platform, windowElement);
-                showNotification('Social media search completed', 'success');
-            } catch (error) {
-                console.error('Social media search failed:', error);
-                showNotification(`Social media search failed: ${error.message}`, 'error');
-            }
-        });
-    }
-
-    // Email & Contact Intelligence handlers
-    const analyzeEmailBtn = windowElement.querySelector('.analyze-email-btn');
-    const emailTarget = windowElement.querySelector('.email-target');
-    const findEmailsBtn = windowElement.querySelector('.find-emails-btn');
-    const verifyEmailsBtn = windowElement.querySelector('.verify-emails-btn');
-    const breachCheckBtn = windowElement.querySelector('.breach-check-btn');
-
-    if (analyzeEmailBtn && emailTarget) {
-        analyzeEmailBtn.addEventListener('click', async () => {
-            const target = emailTarget.value.trim();
-            if (!target) {
-                showNotification('Please enter an email or domain', 'error');
-                return;
-            }
-
-            try {
-                showNotification('Analyzing email intelligence...', 'info');
-                await analyzeEmailIntelligence(target, windowElement);
-                showNotification('Email analysis completed', 'success');
-            } catch (error) {
-                console.error('Email analysis failed:', error);
-                showNotification(`Email analysis failed: ${error.message}`, 'error');
-            }
-        });
-    }
-
-    if (findEmailsBtn) {
-        findEmailsBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Finding emails...', 'info');
-                await findEmails(ip, windowElement);
-                showNotification('Email discovery completed', 'success');
-            } catch (error) {
-                showNotification(`Email discovery failed: ${error.message}`, 'error');
-            }
-        });
-    }
-
-    if (verifyEmailsBtn) {
-        verifyEmailsBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Verifying emails...', 'info');
-                await verifyEmails(windowElement);
-                showNotification('Email verification completed', 'success');
-            } catch (error) {
-                showNotification(`Email verification failed: ${error.message}`, 'error');
-            }
-        });
-    }
-
-    if (breachCheckBtn) {
-        breachCheckBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Checking breach databases...', 'info');
-                await checkBreaches(windowElement);
-                showNotification('Breach check completed', 'success');
-            } catch (error) {
-                showNotification(`Breach check failed: ${error.message}`, 'error');
-            }
-        });
-    }
-
-    // Dark Web & Deep Web Intelligence handlers
-    const searchDarkwebBtn = windowElement.querySelector('.search-darkweb-btn');
-    const monitorMentionsBtn = windowElement.querySelector('.monitor-mentions-btn');
-    const threatHuntingBtn = windowElement.querySelector('.threat-hunting-btn');
-
-    if (searchDarkwebBtn) {
-        searchDarkwebBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Searching dark web...', 'info');
-                await searchDarkWeb(ip, windowElement);
-                showNotification('Dark web search completed', 'success');
-            } catch (error) {
-                showNotification(`Dark web search failed: ${error.message}`, 'error');
-            }
-        });
-    }
-
-    if (monitorMentionsBtn) {
-        monitorMentionsBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Monitoring mentions...', 'info');
-                await monitorMentions(ip, windowElement);
-                showNotification('Mention monitoring activated', 'success');
-            } catch (error) {
-                showNotification(`Mention monitoring failed: ${error.message}`, 'error');
-            }
-        });
-    }
-
-    if (threatHuntingBtn) {
-        threatHuntingBtn.addEventListener('click', async () => {
-            try {
-                showNotification('Starting threat hunting...', 'info');
-                await threatHunting(ip, windowElement);
-                showNotification('Threat hunting completed', 'success');
-            } catch (error) {
-                showNotification(`Threat hunting failed: ${error.message}`, 'error');
-            }
-        });
-    }
-
-    // Advanced Metadata Extraction handlers
-    const extractMetadataAdvancedBtn = windowElement.querySelector('.extract-metadata-advanced-btn');
-    const metadataUrl = windowElement.querySelector('.metadata-url');
-    const metadataType = windowElement.querySelector('.metadata-type');
-
-    if (extractMetadataAdvancedBtn && metadataUrl && metadataType) {
-        extractMetadataAdvancedBtn.addEventListener('click', async () => {
-            const url = metadataUrl.value.trim();
-            const type = metadataType.value;
-
-            if (!url) {
-                showNotification('Please enter a URL or file path', 'error');
-                return;
-            }
-
-            try {
-                showNotification('Extracting advanced metadata...', 'info');
-                await extractAdvancedMetadata(url, type, windowElement);
-                showNotification('Advanced metadata extraction completed', 'success');
-            } catch (error) {
-                console.error('Advanced metadata extraction failed:', error);
-                showNotification(`Metadata extraction failed: ${error.message}`, 'error');
-            }
-        });
-    }
-
-    console.log('[setupSocialIntelligenceHandlers] Social intelligence handlers initialized');
-};
 
 /**
  * Analyze domain and website intelligence
@@ -8214,17 +6100,16 @@ const analyzeDomainIntelligence = async (target, windowElement) => {
     const domainRegistration = windowElement.querySelector('.domain-registration');
     const domainDetails = windowElement.querySelector('.domain-details');
 
-    // Simulate domain analysis
+    // No fake domain analysis - real domain intelligence requires authenticated APIs
     const isIP = /^\d+\.\d+\.\d+\.\d+$/.test(target);
-    const status = isIP ? 'IP Address' : ['Active', 'Inactive', 'Parked', 'Suspended'][Math.floor(Math.random() * 4)];
-    const registrationDate = new Date(Date.now() - Math.random() * 10 * 365 * 24 * 60 * 60 * 1000);
+    const status = isIP ? 'IP Address' : 'Analysis requires authenticated APIs';
 
     if (domainStatus) {
         domainStatus.innerHTML = `<span class="security-indicator ${status === 'Active' || isIP ? 'secure' : 'warning'}">${status}</span>`;
     }
 
     if (domainRegistration) {
-        domainRegistration.textContent = isIP ? 'N/A (IP Address)' : registrationDate.toLocaleDateString();
+        domainRegistration.textContent = isIP ? 'N/A (IP Address)' : 'Requires authenticated APIs';
     }
 
     if (domainDetails) {
@@ -8244,64 +6129,18 @@ const analyzeDomainIntelligence = async (target, windowElement) => {
                             </div>
                             ${!isIP ? `
                                 <div class="detail-row">
-                                    <span class="detail-label">Registrar:</span>
-                                    <span class="detail-value">${['GoDaddy', 'Namecheap', 'CloudFlare', 'Google Domains', 'Network Solutions'][Math.floor(Math.random() * 5)]}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">Expires:</span>
-                                    <span class="detail-value">${new Date(registrationDate.getTime() + Math.random() * 5 * 365 * 24 * 60 * 60 * 1000).toLocaleDateString()}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">DNS Records:</span>
-                                    <span class="detail-value">${Math.floor(Math.random() * 15) + 5} records</span>
+                                    <span class="detail-label">Domain Analysis:</span>
+                                    <span class="detail-value">Requires authenticated APIs for WHOIS, DNS, and registrar data</span>
                                 </div>
                             ` : `
                                 <div class="detail-row">
-                                    <span class="detail-label">Reverse DNS:</span>
-                                    <span class="detail-value">${Math.random() > 0.6 ? `host-${target.split('.').join('-')}.example.com` : 'Not available'}</span>
-                                </div>
-                                <div class="detail-row">
-                                    <span class="detail-label">PTR Record:</span>
-                                    <span class="detail-value">${Math.random() > 0.5 ? 'Available' : 'Not configured'}</span>
+                                    <span class="detail-label">IP Analysis:</span>
+                                    <span class="detail-value">Reverse DNS and PTR record analysis requires specialized tools</span>
                                 </div>
                             `}
                             <div class="detail-row">
-                                <span class="detail-label">Security Status:</span>
-                                <span class="detail-value">
-                                    <span class="security-indicator ${Math.random() > 0.7 ? 'secure' : 'warning'}">${Math.random() > 0.7 ? 'Clean' : 'Flagged'}</span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-card">
-                        <div class="detail-header">
-                            <i class="fas fa-shield-alt"></i>
-                            Security Analysis
-                        </div>
-                        <div class="detail-content">
-                            <div class="detail-row">
-                                <span class="detail-label">Malware Status:</span>
-                                <span class="detail-value">
-                                    <span class="security-indicator ${Math.random() > 0.9 ? 'danger' : 'secure'}">${Math.random() > 0.9 ? 'Detected' : 'Clean'}</span>
-                                </span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Phishing Risk:</span>
-                                <span class="detail-value">
-                                    <span class="security-indicator ${Math.random() > 0.85 ? 'warning' : 'secure'}">${Math.random() > 0.85 ? 'Medium' : 'Low'}</span>
-                                </span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Reputation Score:</span>
-                                <span class="detail-value">
-                                    <span class="rating-value ${Math.random() > 0.7 ? 'high' : 'medium'}">${Math.floor(Math.random() * 30) + 70}/100</span>
-                                </span>
-                            </div>
-                            <div class="detail-row">
-                                <span class="detail-label">Blacklist Status:</span>
-                                <span class="detail-value">
-                                    <span class="security-indicator ${Math.random() > 0.95 ? 'danger' : 'secure'}">${Math.random() > 0.95 ? 'Listed' : 'Clean'}</span>
-                                </span>
+                                <span class="detail-label">Security Analysis:</span>
+                                <span class="detail-value">Requires authenticated APIs for malware, phishing, and reputation analysis</span>
                             </div>
                         </div>
                     </div>
@@ -8315,7 +6154,6 @@ const analyzeDomainIntelligence = async (target, windowElement) => {
     globalState.rawData.domainIntelligence[target] = {
         target,
         status,
-        registrationDate: registrationDate.toISOString(),
         timestamp: new Date().toISOString(),
         isIP
     };
@@ -8388,26 +6226,8 @@ const analyzeEmailIntelligence = async (target, windowElement) => {
                             <span class="detail-value">${target}</span>
                         </div>
                         <div class="detail-row">
-                            <span class="detail-label">Validity:</span>
-                            <span class="detail-value">
-                                <span class="security-indicator ${Math.random() > 0.2 ? 'secure' : 'warning'}">${Math.random() > 0.2 ? 'Valid' : 'Invalid'}</span>
-                            </span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Deliverability:</span>
-                            <span class="detail-value">
-                                <span class="security-indicator ${Math.random() > 0.3 ? 'secure' : 'warning'}">${Math.random() > 0.3 ? 'Deliverable' : 'Undeliverable'}</span>
-                            </span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Risk Score:</span>
-                            <span class="detail-value">
-                                <span class="rating-value ${Math.random() > 0.7 ? 'low' : 'medium'}">${Math.floor(Math.random() * 40) + 10}/100</span>
-                            </span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Provider:</span>
-                            <span class="detail-value">${['Gmail', 'Outlook', 'Yahoo', 'ProtonMail', 'Custom'][Math.floor(Math.random() * 5)]}</span>
+                            <span class="detail-label">Email Analysis:</span>
+                            <span class="detail-value">Requires authenticated APIs for validity, deliverability, and risk analysis</span>
                         </div>
                     </div>
                 </div>
@@ -8427,30 +6247,12 @@ const findEmails = async (target, windowElement) => {
     const emailsFound = windowElement.querySelector('.emails-found');
     const emailDetails = windowElement.querySelector('.email-details');
 
-    const emailCount = Math.floor(Math.random() * 15) + 3;
-
     if (emailsFound) {
-        emailsFound.textContent = emailCount;
+        emailsFound.textContent = 'N/A';
     }
 
     if (emailDetails) {
-        const sampleEmails = Array.from({length: Math.min(emailCount, 5)}, (_, i) => {
-            const names = ['admin', 'info', 'contact', 'support', 'sales', 'security', 'webmaster'];
-            const name = names[Math.floor(Math.random() * names.length)];
-            const domain = `example${Math.floor(Math.random() * 100)}.com`;
-            const email = `${name}@${domain}`;
-            const confidence = Math.floor(Math.random() * 40) + 60;
-
-            return `
-                <div class="detail-row">
-                    <span class="detail-label">${email}:</span>
-                    <span class="detail-value">
-                        <span class="rating-value ${confidence > 80 ? 'high' : 'medium'}">${confidence}% confidence</span>
-                    </span>
-                </div>
-            `;
-        }).join('');
-
+        // No fake email generation - real email intelligence requires authenticated APIs
         emailDetails.innerHTML += `
             <div class="detail-card" style="margin-top: 10px;">
                 <div class="detail-header">
@@ -8458,10 +6260,8 @@ const findEmails = async (target, windowElement) => {
                     Email Discovery Results
                 </div>
                 <div class="detail-content">
-                    ${sampleEmails}
                     <div class="detail-row">
-                        <span class="detail-label">Total Found:</span>
-                        <span class="detail-value">${emailCount} emails</span>
+                        <span class="detail-value">Email discovery requires authenticated APIs for comprehensive searches</span>
                     </div>
                 </div>
             </div>
@@ -8488,28 +6288,7 @@ const verifyEmails = async (windowElement) => {
                 </div>
                 <div class="detail-content">
                     <div class="detail-row">
-                        <span class="detail-label">Valid Emails:</span>
-                        <span class="detail-value">
-                            <span class="security-indicator secure">${Math.floor(Math.random() * 8) + 2}</span>
-                        </span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Invalid Emails:</span>
-                        <span class="detail-value">
-                            <span class="security-indicator warning">${Math.floor(Math.random() * 3) + 1}</span>
-                        </span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Risky Emails:</span>
-                        <span class="detail-value">
-                            <span class="security-indicator danger">${Math.floor(Math.random() * 2)}</span>
-                        </span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Verification Rate:</span>
-                        <span class="detail-value">
-                            <span class="rating-value high">${Math.floor(Math.random() * 20) + 80}%</span>
-                        </span>
+                        <span class="detail-value">Email verification requires authenticated APIs for accuracy and deliverability checks</span>
                     </div>
                 </div>
             </div>
@@ -8528,29 +6307,13 @@ const checkBreaches = async (windowElement) => {
     const breachStatus = windowElement.querySelector('.breach-status');
     const emailDetails = windowElement.querySelector('.email-details');
 
-    const breachCount = Math.floor(Math.random() * 5);
-    const status = breachCount > 0 ? 'Found in breaches' : 'Clean';
-
     if (breachStatus) {
-        breachStatus.innerHTML = `<span class="security-indicator ${breachCount > 0 ? 'danger' : 'secure'}">${status}</span>`;
+        breachStatus.innerHTML = `<span class="security-indicator low">Requires authenticated APIs</span>`;
     }
 
     if (emailDetails) {
-        const breaches = breachCount > 0 ? Array.from({length: breachCount}, (_, i) => {
-            const breachNames = ['LinkedIn', 'Adobe', 'Yahoo', 'Equifax', 'Facebook', 'Twitter', 'Dropbox'];
-            const breach = breachNames[Math.floor(Math.random() * breachNames.length)];
-            const year = 2015 + Math.floor(Math.random() * 8);
-            const records = Math.floor(Math.random() * 500000000) + 1000000;
-
-            return `
-                <div class="detail-row">
-                    <span class="detail-label">${breach} (${year}):</span>
-                    <span class="detail-value">
-                        <span class="security-indicator danger">${records.toLocaleString()} records</span>
-                    </span>
-                </div>
-            `;
-        }).join('') : '<div class="detail-row"><span class="detail-value">No breaches found</span></div>';
+        // No fake breach data generation - real breach intelligence requires authenticated APIs
+        const breaches = '<div class="detail-row"><span class="detail-value">Breach intelligence requires authenticated APIs</span></div>';
 
         emailDetails.innerHTML += `
             <div class="detail-card" style="margin-top: 10px;">
@@ -8561,10 +6324,8 @@ const checkBreaches = async (windowElement) => {
                 <div class="detail-content">
                     ${breaches}
                     <div class="detail-row">
-                        <span class="detail-label">Total Breaches:</span>
-                        <span class="detail-value">
-                            <span class="security-indicator ${breachCount > 0 ? 'danger' : 'secure'}">${breachCount}</span>
-                        </span>
+                        <span class="detail-label">Breach Analysis:</span>
+                        <span class="detail-value">Requires authenticated APIs for comprehensive breach database checks</span>
                     </div>
                 </div>
             </div>
@@ -8641,84 +6402,28 @@ const extractAdvancedMetadata = async (url, type, windowElement) => {
     const hiddenDataFound = windowElement.querySelector('.hidden-data-found');
     const advancedMetadataDetails = windowElement.querySelector('.advanced-metadata-details');
 
-    const fieldCount = Math.floor(Math.random() * 25) + 10;
-    const hasHiddenData = Math.random() > 0.7;
-
     if (metadataFieldsCount) {
-        metadataFieldsCount.textContent = fieldCount;
+        metadataFieldsCount.textContent = 'N/A';
     }
 
     if (hiddenDataFound) {
-        hiddenDataFound.innerHTML = hasHiddenData ?
-            '<span class="security-indicator warning">Found</span>' :
-            '<span class="security-indicator secure">None</span>';
+        hiddenDataFound.innerHTML = '<span class="security-indicator low">Requires specialized tools</span>';
     }
 
     if (advancedMetadataDetails) {
-        const metadataByType = {
-            'image': {
-                'EXIF Data': ['Camera Model', 'GPS Coordinates', 'Timestamp', 'Software Used'],
-                'Technical': ['Resolution', 'Color Space', 'Compression', 'File Size'],
-                'Hidden': ['Steganography', 'Embedded Files', 'Comments', 'Author Info']
-            },
-            'document': {
-                'Document Info': ['Author', 'Creation Date', 'Modification Date', 'Software'],
-                'Content': ['Word Count', 'Page Count', 'Language', 'Subject'],
-                'Hidden': ['Track Changes', 'Comments', 'Metadata', 'Embedded Objects']
-            },
-            'video': {
-                'Technical': ['Codec', 'Bitrate', 'Duration', 'Frame Rate'],
-                'Content': ['Audio Tracks', 'Subtitles', 'Chapters', 'Thumbnails'],
-                'Hidden': ['Watermarks', 'Embedded Data', 'Timestamps', 'Location Data']
-            },
-            'audio': {
-                'Technical': ['Codec', 'Bitrate', 'Sample Rate', 'Channels'],
-                'Content': ['Duration', 'Album', 'Artist', 'Genre'],
-                'Hidden': ['Embedded Images', 'Lyrics', 'Comments', 'Fingerprints']
-            },
-            'webpage': {
-                'HTML Meta': ['Title', 'Description', 'Keywords', 'Author'],
-                'Technical': ['Server Info', 'Technologies', 'Scripts', 'Stylesheets'],
-                'Hidden': ['Comments', 'Hidden Fields', 'Analytics', 'Tracking Codes']
-            }
-        };
-
-        const metadata = metadataByType[type] || metadataByType['webpage'];
-        const categories = Object.keys(metadata);
-
-        const metadataCards = categories.map(category => {
-            const fields = metadata[category];
-            const sampleFields = fields.slice(0, Math.min(fields.length, 4)).map(field => {
-                const value = type === 'image' && field === 'GPS Coordinates' ?
-                    `${(Math.random() * 180 - 90).toFixed(6)}, ${(Math.random() * 360 - 180).toFixed(6)}` :
-                    `Sample ${field.toLowerCase()} data`;
-
-                return `
-                    <div class="detail-row">
-                        <span class="detail-label">${field}:</span>
-                        <span class="detail-value">${value}</span>
-                    </div>
-                `;
-            }).join('');
-
-            return `
-                <div class="detail-card">
-                    <div class="detail-header">
-                        <i class="fas fa-${category === 'Hidden' ? 'eye-slash' : 'info-circle'}"></i>
-                        ${category}
-                    </div>
-                    <div class="detail-content">
-                        ${sampleFields}
-                    </div>
-                </div>
-            `;
-        }).join('');
-
         advancedMetadataDetails.innerHTML = `
             <div class="metadata-raw">
                 <h4>Advanced Metadata Extraction</h4>
-                <div class="ip-details-grid">
-                    ${metadataCards}
+                <div class="detail-card">
+                    <div class="detail-content">
+                        <div class="detail-row">
+                            <span class="detail-value">
+                                <i class="fas fa-info-circle"></i>
+                                Advanced metadata extraction requires specialized tools and libraries.
+                                Real metadata analysis needs access to file headers, EXIF data, and embedded content.
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         `;
@@ -8729,9 +6434,8 @@ const extractAdvancedMetadata = async (url, type, windowElement) => {
     globalState.rawData.advancedMetadata[url] = {
         url,
         type,
-        fieldCount,
-        hasHiddenData,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        note: 'Requires specialized tools for real metadata extraction'
     };
 };
 
