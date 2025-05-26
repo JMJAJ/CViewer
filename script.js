@@ -1221,9 +1221,42 @@ const createMjpgIframePlayer = (url) => {
             console.log('🔄 Refreshed Railway proxy MJPG iframe');
         };
 
+        // Function to calculate and apply scaling for Railway proxy
+        const applyScaling = () => {
+            const containerRect = container.getBoundingClientRect();
+            const containerWidth = containerRect.width;
+            const containerHeight = containerRect.height;
+
+            // Skip if container has no size yet
+            if (containerWidth === 0 || containerHeight === 0) {
+                return;
+            }
+
+            // Assume 640x480 for MJPG streams (common default)
+            const streamWidth = 640;
+            const streamHeight = 480;
+
+            // Calculate scale factors
+            const scaleX = containerWidth / streamWidth;
+            const scaleY = containerHeight / streamHeight;
+
+            // Use the smaller scale to maintain aspect ratio and fit within container
+            const scaleFactor = Math.min(scaleX, scaleY);
+
+            // Apply scaling
+            container.style.setProperty('--scale-factor', scaleFactor);
+            container.classList.add('scale-to-fit');
+
+            console.log(`📐 Railway proxy MJPG scaling: container(${containerWidth.toFixed(0)}x${containerHeight.toFixed(0)}) stream(${streamWidth}x${streamHeight}) scale(${scaleFactor.toFixed(2)})`);
+        };
+
         // Start refresh after initial load
         iframe.onload = () => {
             console.log('✅ Railway proxy MJPG iframe loaded, starting refresh');
+
+            // Apply scaling after a short delay to ensure container is sized
+            setTimeout(applyScaling, 100);
+
             if (!refreshInterval) {
                 refreshInterval = setInterval(refreshProxyIframe, refreshRate);
             }
@@ -1248,12 +1281,25 @@ const createMjpgIframePlayer = (url) => {
             `;
         };
 
+        // Add resize observer to reapply scaling when container size changes
+        let resizeObserver;
+        if (window.ResizeObserver) {
+            resizeObserver = new ResizeObserver(() => {
+                applyScaling();
+            });
+            resizeObserver.observe(container);
+        }
+
         // Store cleanup function
         container.cleanup = () => {
             if (refreshInterval) {
                 clearInterval(refreshInterval);
                 refreshInterval = null;
                 console.log('🛑 Stopped Railway proxy MJPG refresh');
+            }
+            if (resizeObserver) {
+                resizeObserver.disconnect();
+                console.log('🛑 Stopped Railway proxy resize observer');
             }
         };
 
