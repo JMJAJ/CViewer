@@ -762,7 +762,7 @@ console.log = function () {
     globalState.consoleLog.push({
         type: 'log',
         time: new Date(),
-        message: args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg).join(' ')
+        message: args.map(arg => typeof arg === 'object'?JSON.stringify(arg) : arg).join(' ')
     });
     updateConsoleOutput();
     originalConsole.log.apply(console, arguments);
@@ -773,7 +773,7 @@ console.error = function () {
     globalState.consoleLog.push({
         type: 'error',
         time: new Date(),
-        message: args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg).join(' ')
+        message: args.map(arg => typeof arg === 'object'?JSON.stringify(arg) : arg).join(' ')
     });
     updateConsoleOutput();
     originalConsole.error.apply(console, arguments);
@@ -784,7 +784,7 @@ console.warn = function () {
     globalState.consoleLog.push({
         type: 'warn',
         time: new Date(),
-        message: args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg).join(' ')
+        message: args.map(arg => typeof arg === 'object'?JSON.stringify(arg) : arg).join(' ')
     });
     updateConsoleOutput();
     originalConsole.warn.apply(console, arguments);
@@ -795,7 +795,7 @@ console.info = function () {
     globalState.consoleLog.push({
         type: 'info',
         time: new Date(),
-        message: args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg).join(' ')
+        message: args.map(arg => typeof arg === 'object'?JSON.stringify(arg) : arg).join(' ')
     });
     updateConsoleOutput();
     originalConsole.info.apply(console, arguments);
@@ -804,7 +804,7 @@ console.info = function () {
 // Helper Functions
 const extractIpFromUrl = (url) => {
     const match = url.match(/(\d+\.\d+\.\d+\.\d+)/);
-    return match ? match[0] : null;
+    return match?match[0] : null;
 };
 
 const createElementWithClass = (tag, className) => {
@@ -854,7 +854,7 @@ async function fetchJson(url) {
 // UI Update Functions
 const updateCameraCount = () => {
     const count = globalState.cameras.length;
-    DOM.get('cameraCount').textContent = `${count} camera${count !== 1 ? 's' : ''}`;
+    DOM.get('cameraCount').textContent = `${count} camera${count !== 1?'s' : ''}`;
 };
 
 const updateClock = () => {
@@ -1245,41 +1245,48 @@ const formatMjpgUrl = (url) => {
     }
 
     // For non-MJPG URLs, try to construct a common MJPG path
-    const baseUrl = url.endsWith('/') ? url.slice(0, -1) : url;
+    const baseUrl = url.endsWith('/')?url.slice(0, -1) : url;
     return `${baseUrl}/mjpg/video.mjpg`;
 };
 
 // MJPG Player Creation Functions
-const createMjpgImagePlayer = (url) => {
+const createMjpgImagePlayer = (url, useProxy = false) => {
     const container = document.createElement('div');
     container.className = 'mjpg-image-container';
 
     // Check for mixed content issues
     const isHttpsPage = window.location.protocol === 'https:';
     const isHttpUrl = url.startsWith('http:');
+    let finalUrl = url;
 
     if (isHttpsPage && isHttpUrl) {
-        // Show mixed content warning for image player too
-        container.innerHTML = `
-            <div class="video-error">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Mixed Content Blocked</h3>
-                <p>HTTP images are blocked on HTTPS pages.</p>
-                <small>${url}</small>
-                <div style="margin-top: 15px;">
-                    <p><strong>Try:</strong> Switch to iframe player or use HTTP version of this app</p>
+        if (useProxy) {
+            // Use CORS proxy for HTTP streams on HTTPS pages
+            finalUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+            console.log('🔄 Using AllOrigins proxy for HTTP MJPEG stream:', finalUrl);
+        } else {
+            // Show mixed content warning for image player
+            container.innerHTML = `
+                <div class="video-error">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Mixed Content Blocked</h3>
+                    <p>HTTP images are blocked on HTTPS pages.</p>
+                    <small>${url}</small>
+                    <div style="margin-top: 15px;">
+                        <p><strong>Try:</strong> Switch to iframe player or use HTTP version of this app</p>
+                    </div>
                 </div>
-            </div>
-        `;
-        return container;
+            `;
+            return container;
+        }
     }
 
     const img = document.createElement('img');
     img.className = 'mjpg-image-player';
 
     // Add cache-busting parameter for better refresh
-    const separator = url.includes('?') ? '&' : '?';
-    img.src = url + separator + 't=' + Date.now();
+    const separator = finalUrl.includes('?')?'&' : '?';
+    img.src = finalUrl + separator + 't=' + Date.now();
     img.style.width = '100%';
     img.style.height = '100%';
     img.style.objectFit = 'contain';
@@ -1291,7 +1298,7 @@ const createMjpgImagePlayer = (url) => {
 
     const refreshImage = () => {
         const newTimestamp = Date.now();
-        const baseUrl = imageUrl.split('?')[0].split('&')[0];
+        const baseUrl = finalUrl.split('?')[0].split('&')[0];
         img.src = baseUrl + separator + 't=' + newTimestamp;
     };
 
@@ -1310,13 +1317,13 @@ const createMjpgImagePlayer = (url) => {
 
             // Try alternative protocol if current failed
             let retryUrl = url;
-            if (imageUrl.startsWith('https:') && url.startsWith('http:')) {
+            if (finalUrl.startsWith('https:') && url.startsWith('http:')) {
                 // If we tried HTTPS and failed, try original HTTP
-                retryUrl = url + (url.includes('?') ? '&' : '?') + 't=' + Date.now();
+                retryUrl = url + (url.includes('?')?'&' : '?') + 't=' + Date.now();
                 console.log('HTTPS failed, trying original HTTP URL:', retryUrl);
             } else {
                 // Try with cache-busting parameter
-                retryUrl = imageUrl + (imageUrl.includes('?') ? '&' : '?') + 't=' + Date.now();
+                retryUrl = finalUrl + (finalUrl.includes('?')?'&' : '?') + 't=' + Date.now();
                 console.log('Retrying with cache-busting:', retryUrl);
             }
 
@@ -1398,12 +1405,11 @@ const createMjpgIframePlayer = (url) => {
     // Check if we need to proxy HTTP streams on HTTPS
     const isHttpsPage = window.location.protocol === 'https:';
     const isHttpUrl = url.startsWith('http:');
-    let finalUrl = url;
 
     if (isHttpsPage && isHttpUrl) {
-        // Use a CORS proxy for HTTP streams on HTTPS pages
-        finalUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`;
-        console.log('🔄 Using CORS proxy for HTTP MJPEG stream:', finalUrl);
+        // Use image-based player with CORS proxy instead of iframe
+        console.log('🔄 Using image-based CORS proxy for HTTP MJPEG stream');
+        return createMjpgImagePlayer(url, true); // Pass true to indicate proxy usage
     }
 
     const iframe = document.createElement('iframe');
@@ -1411,7 +1417,7 @@ const createMjpgIframePlayer = (url) => {
     iframe.frameBorder = '0';
     iframe.width = '100%';
     iframe.height = '100%';
-    iframe.src = finalUrl;
+    iframe.src = url;
     iframe.allowFullscreen = true;
     iframe.style.border = 'none';
     iframe.style.display = 'block';
@@ -1421,8 +1427,8 @@ const createMjpgIframePlayer = (url) => {
     const refreshRate = 3000; // 3 seconds
 
     const refreshIframe = () => {
-        const separator = finalUrl.includes('?') ? '&' : '?';
-        iframe.src = finalUrl + separator + 't=' + Date.now();
+        const separator = url.includes('?')?'&' : '?';
+        iframe.src = url + separator + 't=' + Date.now();
         console.log('🔄 Refreshed MJPG iframe');
     };
 
@@ -2118,7 +2124,7 @@ const updateIPInfoUI = (data, windowElement) => {
 
     if (ipInfoContainer) {
         const threatStatus = data.proxy || data.hosting;
-        const securityClass = threatStatus ? 'security-alert' : 'security-safe';
+        const securityClass = threatStatus?'security-alert' : 'security-safe';
 
         ipInfoContainer.innerHTML = `
             <div class="ip-header">
@@ -2144,7 +2150,7 @@ const updateIPInfoUI = (data, windowElement) => {
                 </div>
                 <div class="info-row">
                     <span class="info-label">Country:</span>
-                    <span class="info-value">${data.country || 'Unknown'} ${data.countryCode ? `(${data.countryCode})` : ''}</span>
+                    <span class="info-value">${data.country || 'Unknown'} ${data.countryCode?`(${data.countryCode})` : ''}</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Timezone:</span>
@@ -2152,7 +2158,7 @@ const updateIPInfoUI = (data, windowElement) => {
                 </div>
                 <div class="info-row">
                     <span class="info-label">Coordinates:</span>
-                    <span class="info-value">${data.lat ? data.lat.toFixed(4) : '?'}, ${data.lon ? data.lon.toFixed(4) : '?'}</span>
+                    <span class="info-value">${data.lat?data.lat.toFixed(4) : '?'}, ${data.lon?data.lon.toFixed(4) : '?'}</span>
                 </div>
             </div>
 
@@ -2173,10 +2179,10 @@ const updateIPInfoUI = (data, windowElement) => {
                 <div class="info-row ${securityClass}">
                     <span class="info-label">Security:</span>
                     <span class="info-value">
-                        ${threatStatus ? 'Potentially Unsafe' : 'Normal'}
-                        ${data.proxy ? '<i class="fas fa-shield-alt"></i> Proxy' : ''}
-                        ${data.hosting ? '<i class="fas fa-server"></i> Hosting' : ''}
-                        ${data.mobile ? '<i class="fas fa-mobile-alt"></i> Mobile' : ''}
+                        ${threatStatus?'Potentially Unsafe' : 'Normal'}
+                        ${data.proxy?'<i class="fas fa-shield-alt"></i> Proxy' : ''}
+                        ${data.hosting?'<i class="fas fa-server"></i> Hosting' : ''}
+                        ${data.mobile?'<i class="fas fa-mobile-alt"></i> Mobile' : ''}
                     </span>
                 </div>
             </div>
@@ -2590,7 +2596,7 @@ const updateCurrentIpDisplay = () => {
     // Update IP address display
     const ipAddressElement = document.getElementById('currentIpAddress');
     if (ipAddressElement) {
-        ipAddressElement.textContent = ipData ? ipData.query : extractIpFromUrl(streamUrl) || 'Unknown IP';
+        ipAddressElement.textContent = ipData?ipData.query : extractIpFromUrl(streamUrl) || 'Unknown IP';
     }
 
     // Update location display
@@ -2619,15 +2625,15 @@ const updateCurrentIpDisplay = () => {
             </div>
             <div class="detail-row">
                 <span class="detail-label">Mobile:</span>
-                <span class="detail-value">${ipData.mobile ? 'Yes' : 'No'}</span>
+                <span class="detail-value">${ipData.mobile?'Yes' : 'No'}</span>
             </div>
             <div class="detail-row">
                 <span class="detail-label">Proxy:</span>
-                <span class="detail-value">${ipData.proxy ? 'Yes' : 'No'}</span>
+                <span class="detail-value">${ipData.proxy?'Yes' : 'No'}</span>
             </div>
             <div class="detail-row">
                 <span class="detail-label">Hosting:</span>
-                <span class="detail-value">${ipData.hosting ? 'Yes' : 'No'}</span>
+                <span class="detail-value">${ipData.hosting?'Yes' : 'No'}</span>
             </div>
         `;
     } else if (networkElement) {
@@ -2702,7 +2708,7 @@ const updateCurrentIpDisplay = () => {
             </div>
             <div class="detail-row">
                 <span class="detail-label">Type:</span>
-                <span class="detail-value">${streamUrl?.startsWith('rtsp://') ? 'RTSP' : 'MJPG'}</span>
+                <span class="detail-value">${streamUrl?.startsWith('rtsp://')?'RTSP' : 'MJPG'}</span>
             </div>
             <div class="detail-row">
                 <span class="detail-label">Resolution:</span>
@@ -2733,12 +2739,12 @@ const setupResolutionControls = () => {
     if (autoResolutionToggle) {
         // Set initial state
         autoResolutionToggle.checked = globalState.autoResolution;
-        manualControls.style.display = globalState.autoResolution ? 'none' : 'flex';
+        manualControls.style.display = globalState.autoResolution?'none' : 'flex';
 
         // Listen for changes
         autoResolutionToggle.addEventListener('change', (e) => {
             globalState.autoResolution = e.target.checked;
-            manualControls.style.display = globalState.autoResolution ? 'none' : 'flex';
+            manualControls.style.display = globalState.autoResolution?'none' : 'flex';
 
             // If auto resolution is turned on, update all active windows
             if (globalState.autoResolution) {
@@ -2821,7 +2827,7 @@ const updateRtspStreamResolution = (windowElement, streamUrl, resolution) => {
 
     // Get the current player type
     const playerSelect = windowElement.querySelector('.player-select');
-    const currentPlayer = playerSelect ? playerSelect.value : globalState.playerPreference;
+    const currentPlayer = playerSelect?playerSelect.value : globalState.playerPreference;
 
     // Create new player with updated settings
     const newPlayer = currentPlayer === 'streamedian' ?
@@ -3092,7 +3098,7 @@ function extractCameraMetadata(windowElement) {
         console.log(`[extractCameraMetadata] Extracted IP address: ${ipAddress}`);
 
         // Get port from URL or use default
-        const port = urlObj.port || (urlObj.protocol === 'rtsp:' ? '554' : '80');
+        const port = urlObj.port || (urlObj.protocol === 'rtsp:'?'554' : '80');
         console.log(`[extractCameraMetadata] Using port: ${port}`);
 
         // Get path from URL
@@ -3189,7 +3195,7 @@ function generateAlternativeStreams(originalUrl, ipAddress, rtspPaths) {
     try {
         const urlObj = new URL(originalUrl);
         const protocol = urlObj.protocol;
-        const port = urlObj.port || (protocol === 'rtsp:' ? '554' : '80');
+        const port = urlObj.port || (protocol === 'rtsp:'?'554' : '80');
 
         // Add the original URL as the first option
         alternativeStreams.push({
@@ -3209,7 +3215,7 @@ function generateAlternativeStreams(originalUrl, ipAddress, rtspPaths) {
                 if (!path) continue;
 
                 // Create alternative URL
-                const altUrl = `rtsp://${ipAddress}:${port}/${path.startsWith('/') ? path.substring(1) : path}`;
+                const altUrl = `rtsp://${ipAddress}:${port}/${path.startsWith('/')?path.substring(1) : path}`;
 
                 // Skip if it's the same as the original
                 if (altUrl === originalUrl) continue;
@@ -3384,7 +3390,7 @@ function checkDefaultCredentials(manufacturer) {
     };
 
     // Normalize manufacturer name
-    const normalizedManufacturer = manufacturer ? manufacturer.toLowerCase().trim() : '';
+    const normalizedManufacturer = manufacturer?manufacturer.toLowerCase().trim() : '';
     console.log(`[checkDefaultCredentials] Normalized manufacturer: ${normalizedManufacturer}`);
 
     // Check if we have specific credentials for this manufacturer
@@ -3758,7 +3764,7 @@ const updateCredentialsSection = (windowElement, metadata) => {
     if (toggleBtn && credentialsList) {
         toggleBtn.addEventListener('click', () => {
             const isHidden = credentialsList.style.display === 'none';
-            credentialsList.style.display = isHidden ? 'block' : 'none';
+            credentialsList.style.display = isHidden?'block' : 'none';
             toggleBtn.innerHTML = isHidden ?
                 '<i class="fas fa-chevron-up"></i> Hide Details' :
                 '<i class="fas fa-chevron-down"></i> Show Details';
@@ -3806,7 +3812,7 @@ const updateVulnerabilitiesSection = (windowElement, metadata) => {
     if (toggleBtn && vulnerabilitiesListContainer) {
         toggleBtn.addEventListener('click', () => {
             const isHidden = vulnerabilitiesListContainer.style.display === 'none';
-            vulnerabilitiesListContainer.style.display = isHidden ? 'block' : 'none';
+            vulnerabilitiesListContainer.style.display = isHidden?'block' : 'none';
             toggleBtn.innerHTML = isHidden ?
                 '<i class="fas fa-chevron-up"></i> Hide Details' :
                 '<i class="fas fa-chevron-down"></i> Show Details';
@@ -4464,8 +4470,8 @@ const checkAlienVault = async (ip) => {
             return {
                 source: 'AlienVault OTX',
                 riskScore: Math.min(pulseCount * 5, 100), // 5 points per pulse
-                riskFactors: pulseCount > 0 ? [`Found in ${pulseCount} threat pulses`] : [],
-                lastSeen: data.pulse_info?.pulses?.[0]?.created || null,
+                riskFactors: pulseCount > 0?[`Found in ${pulseCount} threat pulses`] : [],
+                lastSeen: data.pulse_info?.pulses?. [0]?.created || null,
                 confidence: 80,
                 note: 'Real AlienVault OTX data'
             };
@@ -4661,7 +4667,7 @@ const setupNetworkDiscoveryHandlers = (windowElement, streamUrl) => {
                         deviceCard.style.marginBottom = '10px';
 
                         const deviceTypeIcon = getDeviceTypeIcon(device.deviceType);
-                        const confidenceClass = device.confidence >= 80 ? 'high' : device.confidence >= 60 ? 'medium' : 'low';
+                        const confidenceClass = device.confidence >= 80?'high' : device.confidence >= 60?'medium' : 'low';
 
                         deviceCard.innerHTML = `
                             <div class="detail-header">
@@ -5006,9 +5012,9 @@ const setupThreatIntelHandlers = (windowElement, streamUrl) => {
                                             </div>
                                             <div class="detail-row">
                                                 <span class="detail-label">Confidence:</span>
-                                                <span class="detail-value">${data.error ? 'N/A' : (data.confidence || 0) + '%'}</span>
+                                                <span class="detail-value">${data.error?'N/A' : (data.confidence || 0) + '%'}</span>
                                             </div>
-                                            ${data.lastSeen ? `
+                                            ${data.lastSeen?`
                                                 <div class="detail-row">
                                                     <span class="detail-label">Last Seen:</span>
                                                     <span class="detail-value">${new Date(data.lastSeen).toLocaleDateString()}</span>
@@ -5612,44 +5618,44 @@ const exportCameraData = async (ip, format, includeOptions, windowElement) => {
     let progress = 10;
 
     if (includeOptions.basic) {
-        exportData.data.basicInfo = globalState.rawData.ipInfo?.[ip] || {};
+        exportData.data.basicInfo = globalState.rawData.ipInfo?. [ip] || {};
         progress += 15;
         showExportProgress(windowElement, progress, 'Collecting basic info...');
     }
 
     if (includeOptions.location) {
-        exportData.data.locationData = globalState.rawData.locationData?.[ip] || {};
+        exportData.data.locationData = globalState.rawData.locationData?. [ip] || {};
         progress += 15;
         showExportProgress(windowElement, progress, 'Collecting location data...');
     }
 
     if (includeOptions.metadata) {
-        exportData.data.metadata = globalState.rawData.metadata?.[ip] || {};
+        exportData.data.metadata = globalState.rawData.metadata?. [ip] || {};
         progress += 15;
         showExportProgress(windowElement, progress, 'Collecting metadata...');
     }
 
     if (includeOptions.network) {
         exportData.data.networkDiscovery = {
-            discoveredDevices: globalState.rawData.networkDiscovery?.[ip]?.discoveredDevices || [],
-            topology: globalState.rawData.topology?.[ip] || {},
-            portScans: globalState.rawData.portScans?.[ip] || {}
+            discoveredDevices: globalState.rawData.networkDiscovery?. [ip]?.discoveredDevices || [],
+            topology: globalState.rawData.topology?. [ip] || {},
+            portScans: globalState.rawData.portScans?. [ip] || {}
         };
         progress += 15;
         showExportProgress(windowElement, progress, 'Collecting network data...');
     }
 
     if (includeOptions.threats) {
-        exportData.data.threatIntelligence = globalState.rawData.threatIntelligence?.[ip] || {};
+        exportData.data.threatIntelligence = globalState.rawData.threatIntelligence?. [ip] || {};
         progress += 15;
         showExportProgress(windowElement, progress, 'Collecting threat data...');
     }
 
     if (includeOptions.fingerprint) {
         exportData.data.fingerprinting = {
-            httpHeaders: globalState.rawData.cameraFingerprint?.[ip] || {},
-            urlPatterns: globalState.rawData.urlPatterns?.[ip] || {},
-            certificates: globalState.rawData.certificates?.[ip] || {}
+            httpHeaders: globalState.rawData.cameraFingerprint?. [ip] || {},
+            urlPatterns: globalState.rawData.urlPatterns?. [ip] || {},
+            certificates: globalState.rawData.certificates?. [ip] || {}
         };
         progress += 15;
         showExportProgress(windowElement, progress, 'Collecting fingerprint data...');
@@ -5791,12 +5797,12 @@ const convertToCSV = (data) => {
     // Flatten data structure
     const flattenObject = (obj, prefix = '', category = '') => {
         for (const [key, value] of Object.entries(obj)) {
-            const fullKey = prefix ? `${prefix}.${key}` : key;
+            const fullKey = prefix?`${prefix}.${key}` : key;
 
             if (value && typeof value === 'object' && !Array.isArray(value)) {
                 flattenObject(value, fullKey, category || key);
             } else {
-                const stringValue = Array.isArray(value) ? value.join('; ') : String(value);
+                const stringValue = Array.isArray(value)?value.join('; ') : String(value);
                 rows.push([fullKey, stringValue, category || 'general']);
             }
         }
@@ -5937,11 +5943,11 @@ const generateHTMLReport = (data) => {
                     <span class="data-value">${formatValue(val, depth + 1)}</span>
                 </div>`;
             }
-            return depth > 0 ? `<div class="object-container">${result}</div>` : result;
+            return depth > 0?`<div class="object-container">${result}</div>` : result;
         }
 
         if (typeof value === 'boolean') {
-            return value ? '<span class="success">Yes</span>' : '<span class="warning">No</span>';
+            return value?'<span class="success">Yes</span>' : '<span class="warning">No</span>';
         }
 
         if (typeof value === 'string' && value.includes('GMT')) {
@@ -6080,22 +6086,22 @@ const updateDataStatistics = (ip, windowElement) => {
 
     // Count data points
     const rawData = globalState.rawData;
-    if (rawData.ipInfo?.[ip]) dataPoints += Object.keys(rawData.ipInfo[ip]).length;
-    if (rawData.locationData?.[ip]) dataPoints += Object.keys(rawData.locationData[ip]).length;
-    if (rawData.metadata?.[ip]) dataPoints += Object.keys(rawData.metadata[ip]).length;
+    if (rawData.ipInfo?. [ip]) dataPoints += Object.keys(rawData.ipInfo[ip]).length;
+    if (rawData.locationData?. [ip]) dataPoints += Object.keys(rawData.locationData[ip]).length;
+    if (rawData.metadata?. [ip]) dataPoints += Object.keys(rawData.metadata[ip]).length;
 
     // Count vulnerabilities
-    if (rawData.cameraFingerprint?.[ip]?.vulnerabilities) {
+    if (rawData.cameraFingerprint?. [ip]?.vulnerabilities) {
         vulnerabilities += rawData.cameraFingerprint[ip].vulnerabilities.length;
     }
 
     // Count devices
-    if (rawData.networkDiscovery?.[ip]?.discoveredDevices) {
+    if (rawData.networkDiscovery?. [ip]?.discoveredDevices) {
         devices = rawData.networkDiscovery[ip].discoveredDevices.length;
     }
 
     // Calculate threat score
-    if (rawData.threatIntelligence?.[ip]?.overallScore) {
+    if (rawData.threatIntelligence?. [ip]?.overallScore) {
         threatScore = rawData.threatIntelligence[ip].overallScore;
     }
 
@@ -6348,14 +6354,14 @@ const analyzeDomainIntelligence = async (target, windowElement) => {
 
     // No fake domain analysis - real domain intelligence requires authenticated APIs
     const isIP = /^\d+\.\d+\.\d+\.\d+$/.test(target);
-    const status = isIP ? 'IP Address' : 'Analysis requires authenticated APIs';
+    const status = isIP?'IP Address' : 'Analysis requires authenticated APIs';
 
     if (domainStatus) {
-        domainStatus.innerHTML = `<span class="security-indicator ${status === 'Active' || isIP ? 'secure' : 'warning'}">${status}</span>`;
+        domainStatus.innerHTML = `<span class="security-indicator ${status === 'Active' || isIP?'secure' : 'warning'}">${status}</span>`;
     }
 
     if (domainRegistration) {
-        domainRegistration.textContent = isIP ? 'N/A (IP Address)' : 'Requires authenticated APIs';
+        domainRegistration.textContent = isIP?'N/A (IP Address)' : 'Requires authenticated APIs';
     }
 
     if (domainDetails) {
@@ -6366,14 +6372,14 @@ const analyzeDomainIntelligence = async (target, windowElement) => {
                     <div class="detail-card">
                         <div class="detail-header">
                             <i class="fas fa-globe"></i>
-                            ${isIP ? 'IP Information' : 'Domain Information'}
+                            ${isIP?'IP Information' : 'Domain Information'}
                         </div>
                         <div class="detail-content">
                             <div class="detail-row">
-                                <span class="detail-label">${isIP ? 'IP Address:' : 'Domain:'}</span>
+                                <span class="detail-label">${isIP?'IP Address:' : 'Domain:'}</span>
                                 <span class="detail-value">${target}</span>
                             </div>
-                            ${!isIP ? `
+                            ${!isIP?`
                                 <div class="detail-row">
                                     <span class="detail-label">Domain Analysis:</span>
                                     <span class="detail-value">Requires authenticated APIs for WHOIS, DNS, and registrar data</span>
@@ -6455,7 +6461,7 @@ const analyzeEmailIntelligence = async (target, windowElement) => {
     const emailDetails = windowElement.querySelector('.email-details');
 
     const isEmail = target.includes('@');
-    const domain = isEmail ? target.split('@')[1] : target;
+    const domain = isEmail?target.split('@')[1] : target;
 
     if (emailDetails) {
         emailDetails.innerHTML = `
@@ -6464,11 +6470,11 @@ const analyzeEmailIntelligence = async (target, windowElement) => {
                 <div class="detail-card">
                     <div class="detail-header">
                         <i class="fas fa-envelope"></i>
-                        ${isEmail ? 'Email Analysis' : 'Domain Email Analysis'}
+                        ${isEmail?'Email Analysis' : 'Domain Email Analysis'}
                     </div>
                     <div class="detail-content">
                         <div class="detail-row">
-                            <span class="detail-label">${isEmail ? 'Email:' : 'Domain:'}</span>
+                            <span class="detail-label">${isEmail?'Email:' : 'Domain:'}</span>
                             <span class="detail-value">${target}</span>
                         </div>
                         <div class="detail-row">
@@ -6798,7 +6804,7 @@ const getTimezoneOffset = (timezone) => {
         const offsetHours = Math.round(offsetMs / (1000 * 60 * 60));
 
         if (offsetHours === 0) return 'UTC+0';
-        return offsetHours > 0 ? `UTC+${offsetHours}` : `UTC${offsetHours}`;
+        return offsetHours > 0?`UTC+${offsetHours}` : `UTC${offsetHours}`;
     } catch (error) {
         console.error('Error calculating timezone offset:', error);
         return 'UTC+0';
