@@ -762,7 +762,7 @@ console.log = function () {
     globalState.consoleLog.push({
         type: 'log',
         time: new Date(),
-        message: args.map(arg => typeof arg === 'object'?JSON.stringify(arg) : arg).join(' ')
+        message: args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg).join(' ')
     });
     updateConsoleOutput();
     originalConsole.log.apply(console, arguments);
@@ -773,7 +773,7 @@ console.error = function () {
     globalState.consoleLog.push({
         type: 'error',
         time: new Date(),
-        message: args.map(arg => typeof arg === 'object'?JSON.stringify(arg) : arg).join(' ')
+        message: args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg).join(' ')
     });
     updateConsoleOutput();
     originalConsole.error.apply(console, arguments);
@@ -784,7 +784,7 @@ console.warn = function () {
     globalState.consoleLog.push({
         type: 'warn',
         time: new Date(),
-        message: args.map(arg => typeof arg === 'object'?JSON.stringify(arg) : arg).join(' ')
+        message: args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg).join(' ')
     });
     updateConsoleOutput();
     originalConsole.warn.apply(console, arguments);
@@ -795,7 +795,7 @@ console.info = function () {
     globalState.consoleLog.push({
         type: 'info',
         time: new Date(),
-        message: args.map(arg => typeof arg === 'object'?JSON.stringify(arg) : arg).join(' ')
+        message: args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : arg).join(' ')
     });
     updateConsoleOutput();
     originalConsole.info.apply(console, arguments);
@@ -804,7 +804,7 @@ console.info = function () {
 // Helper Functions
 const extractIpFromUrl = (url) => {
     const match = url.match(/(\d+\.\d+\.\d+\.\d+)/);
-    return match?match[0] : null;
+    return match ? match[0] : null;
 };
 
 const createElementWithClass = (tag, className) => {
@@ -1245,7 +1245,7 @@ const formatMjpgUrl = (url) => {
     }
 
     // For non-MJPG URLs, try to construct a common MJPG path
-    const baseUrl = url.endsWith('/')?url.slice(0, -1) : url;
+    const baseUrl = url.endsWith('/') ? url.slice(0, -1) : url;
     return `${baseUrl}/mjpg/video.mjpg`;
 };
 
@@ -1261,9 +1261,9 @@ const createMjpgImagePlayer = (url, useProxy = false) => {
 
     if (isHttpsPage && isHttpUrl) {
         if (useProxy) {
-            // Use CORS proxy for HTTP streams on HTTPS pages
-            finalUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-            console.log('🔄 Using AllOrigins proxy for HTTP MJPEG stream:', finalUrl);
+            // Create a blob-based solution for HTTP streams on HTTPS pages
+            console.log('🔄 Using fetch-based proxy for HTTP MJPEG stream');
+            return createFetchBasedMjpgPlayer(url);
         } else {
             // Show mixed content warning for image player
             container.innerHTML = `
@@ -1285,7 +1285,7 @@ const createMjpgImagePlayer = (url, useProxy = false) => {
     img.className = 'mjpg-image-player';
 
     // Add cache-busting parameter for better refresh
-    const separator = finalUrl.includes('?')?'&' : '?';
+    const separator = finalUrl.includes('?') ? '&' : '?';
     img.src = finalUrl + separator + 't=' + Date.now();
     img.style.width = '100%';
     img.style.height = '100%';
@@ -1294,17 +1294,29 @@ const createMjpgImagePlayer = (url, useProxy = false) => {
 
     // Set up automatic refresh for MJPG streams
     let refreshInterval;
-    const refreshRate = 1000; // 1 second refresh rate
+    const refreshRate = useProxy ? 3000 : 1000; // 3 seconds for proxy, 1 second for direct
 
     const refreshImage = () => {
         const newTimestamp = Date.now();
-        const baseUrl = finalUrl.split('?')[0].split('&')[0];
-        img.src = baseUrl + separator + 't=' + newTimestamp;
+        if (useProxy) {
+            // For proxy URLs, we need to add timestamp to original URL
+            const originalUrlWithTimestamp = url + (url.includes('?') ? '&' : '?') + 't=' + newTimestamp;
+            img.src = `https://cors-anywhere.herokuapp.com/${originalUrlWithTimestamp}`;
+        } else {
+            const baseUrl = finalUrl.split('?')[0].split('&')[0];
+            img.src = baseUrl + separator + 't=' + newTimestamp;
+        }
     };
 
     // Add error handling
     img.onerror = (error) => {
         console.error('MJPG image failed to load:', url, error);
+
+        // Stop refresh interval on repeated errors
+        if (refreshInterval) {
+            clearInterval(refreshInterval);
+            refreshInterval = null;
+        }
 
         // Create retry function
         const retryLoad = () => {
@@ -1319,11 +1331,11 @@ const createMjpgImagePlayer = (url, useProxy = false) => {
             let retryUrl = url;
             if (finalUrl.startsWith('https:') && url.startsWith('http:')) {
                 // If we tried HTTPS and failed, try original HTTP
-                retryUrl = url + (url.includes('?')?'&' : '?') + 't=' + Date.now();
+                retryUrl = url + (url.includes('?') ? '&' : '?') + 't=' + Date.now();
                 console.log('HTTPS failed, trying original HTTP URL:', retryUrl);
             } else {
                 // Try with cache-busting parameter
-                retryUrl = finalUrl + (finalUrl.includes('?')?'&' : '?') + 't=' + Date.now();
+                retryUrl = finalUrl + (finalUrl.includes('?') ? '&' : '?') + 't=' + Date.now();
                 console.log('Retrying with cache-busting:', retryUrl);
             }
 
@@ -1427,7 +1439,7 @@ const createMjpgIframePlayer = (url) => {
     const refreshRate = 3000; // 3 seconds
 
     const refreshIframe = () => {
-        const separator = url.includes('?')?'&' : '?';
+        const separator = url.includes('?') ? '&' : '?';
         iframe.src = url + separator + 't=' + Date.now();
         console.log('🔄 Refreshed MJPG iframe');
     };
@@ -1516,6 +1528,83 @@ const createMjpgIframePlayer = (url) => {
 
     container.appendChild(iframe);
     console.log('Created MJPG iframe player with refresh for:', url);
+    return container;
+};
+
+const createFetchBasedMjpgPlayer = (url) => {
+    const container = document.createElement('div');
+    container.className = 'mjpg-fetch-container';
+    container.style.width = '100%';
+    container.style.height = '100%';
+    container.style.position = 'relative';
+    container.style.display = 'flex';
+    container.style.alignItems = 'center';
+    container.style.justifyContent = 'center';
+    container.style.backgroundColor = '#000';
+
+    const img = document.createElement('img');
+    img.className = 'mjpg-fetch-player';
+    img.style.maxWidth = '100%';
+    img.style.maxHeight = '100%';
+    img.style.objectFit = 'contain';
+    img.alt = 'MJPG Stream';
+
+    let refreshInterval;
+    const refreshRate = 2000; // 2 seconds
+
+    const fetchAndDisplayImage = async () => {
+        try {
+            // Add timestamp to prevent caching
+            const urlWithTimestamp = url + (url.includes('?') ? '&' : '?') + 't=' + Date.now();
+
+            // Note: This will still be blocked by CORS, but we'll show a helpful message
+            const response = await fetch(urlWithTimestamp, {
+                mode: 'no-cors',
+                cache: 'no-cache'
+            });
+
+            // Since we can't actually fetch due to CORS, show a helpful message
+            throw new Error('CORS blocked');
+
+        } catch (error) {
+            console.log('Fetch blocked by CORS, showing helpful message');
+
+            // Clear any existing interval
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+                refreshInterval = null;
+            }
+
+            container.innerHTML = `
+                <div class="video-error" style="text-align: center; color: white; padding: 20px;">
+                    <i class="fas fa-shield-alt" style="font-size: 48px; margin-bottom: 15px; color: #f59e0b;"></i>
+                    <h3 style="margin: 10px 0; color: #f3f4f6;">Mixed Content Security</h3>
+                    <p style="margin: 10px 0; color: #d1d5db;">HTTP streams cannot be loaded on HTTPS pages due to browser security.</p>
+                    <div style="margin: 15px 0; padding: 15px; background: rgba(239, 68, 68, 0.1); border-radius: 8px; border-left: 4px solid #ef4444;">
+                        <p style="margin: 5px 0; font-size: 14px; color: #fecaca;"><strong>Solutions:</strong></p>
+                        <ul style="text-align: left; margin: 10px 0; color: #fecaca; font-size: 13px;">
+                            <li>Use the HTTP version of this app (not HTTPS)</li>
+                            <li>Find an HTTPS version of the stream</li>
+                            <li>Use a local proxy server</li>
+                        </ul>
+                    </div>
+                    <small style="color: #9ca3af; font-family: monospace;">${url}</small>
+                </div>
+            `;
+        }
+    };
+
+    // Store cleanup function
+    container.cleanup = () => {
+        if (refreshInterval) {
+            clearInterval(refreshInterval);
+            refreshInterval = null;
+        }
+    };
+
+    // Start the fetch attempt
+    fetchAndDisplayImage();
+
     return container;
 };
 
@@ -2124,7 +2213,7 @@ const updateIPInfoUI = (data, windowElement) => {
 
     if (ipInfoContainer) {
         const threatStatus = data.proxy || data.hosting;
-        const securityClass = threatStatus?'security-alert' : 'security-safe';
+        const securityClass = threatStatus ? 'security-alert' : 'security-safe';
 
         ipInfoContainer.innerHTML = `
             <div class="ip-header">
@@ -2596,7 +2685,7 @@ const updateCurrentIpDisplay = () => {
     // Update IP address display
     const ipAddressElement = document.getElementById('currentIpAddress');
     if (ipAddressElement) {
-        ipAddressElement.textContent = ipData?ipData.query : extractIpFromUrl(streamUrl) || 'Unknown IP';
+        ipAddressElement.textContent = ipData ? ipData.query : extractIpFromUrl(streamUrl) || 'Unknown IP';
     }
 
     // Update location display
@@ -2739,12 +2828,12 @@ const setupResolutionControls = () => {
     if (autoResolutionToggle) {
         // Set initial state
         autoResolutionToggle.checked = globalState.autoResolution;
-        manualControls.style.display = globalState.autoResolution?'none' : 'flex';
+        manualControls.style.display = globalState.autoResolution ? 'none' : 'flex';
 
         // Listen for changes
         autoResolutionToggle.addEventListener('change', (e) => {
             globalState.autoResolution = e.target.checked;
-            manualControls.style.display = globalState.autoResolution?'none' : 'flex';
+            manualControls.style.display = globalState.autoResolution ? 'none' : 'flex';
 
             // If auto resolution is turned on, update all active windows
             if (globalState.autoResolution) {
@@ -2791,7 +2880,7 @@ const setupResolutionControls = () => {
                 if (windowElement) {
                     const streamUrl = windowElement.dataset.streamUrl;
 
-                    if (streamUrl?.startsWith('rtsp://')) {
+                    if (streamUrl ? .startsWith('rtsp://')) {
                         updateRtspStreamResolution(windowElement, streamUrl, globalState.manualResolution);
                     }
                 }
@@ -2827,7 +2916,7 @@ const updateRtspStreamResolution = (windowElement, streamUrl, resolution) => {
 
     // Get the current player type
     const playerSelect = windowElement.querySelector('.player-select');
-    const currentPlayer = playerSelect?playerSelect.value : globalState.playerPreference;
+    const currentPlayer = playerSelect ? playerSelect.value : globalState.playerPreference;
 
     // Create new player with updated settings
     const newPlayer = currentPlayer === 'streamedian' ?
@@ -2865,7 +2954,7 @@ const setupResizeObserver = (windowElement, videoContainer, url) => {
         if (!globalState.autoResolution) return;
 
         // Clear existing timeout
-        if (globalState.resizeObservers[windowId]?.timeout) {
+        if (globalState.resizeObservers[windowId] ? .timeout) {
             clearTimeout(globalState.resizeObservers[windowId].timeout);
         }
 
@@ -3098,7 +3187,7 @@ function extractCameraMetadata(windowElement) {
         console.log(`[extractCameraMetadata] Extracted IP address: ${ipAddress}`);
 
         // Get port from URL or use default
-        const port = urlObj.port || (urlObj.protocol === 'rtsp:'?'554' : '80');
+        const port = urlObj.port || (urlObj.protocol === 'rtsp:' ? '554' : '80');
         console.log(`[extractCameraMetadata] Using port: ${port}`);
 
         // Get path from URL
@@ -3195,7 +3284,7 @@ function generateAlternativeStreams(originalUrl, ipAddress, rtspPaths) {
     try {
         const urlObj = new URL(originalUrl);
         const protocol = urlObj.protocol;
-        const port = urlObj.port || (protocol === 'rtsp:'?'554' : '80');
+        const port = urlObj.port || (protocol === 'rtsp:' ? '554' : '80');
 
         // Add the original URL as the first option
         alternativeStreams.push({
@@ -3336,7 +3425,7 @@ const identifyCameraModel = (url, ipInfo, asnInfo) => {
 
     // If manufacturer still unknown, try to identify from ISP/ASN info
     if (modelInfo.manufacturer === 'Unknown' && (ipInfo || asnInfo)) {
-        const orgInfo = (ipInfo?.org || asnInfo?.org || '').toLowerCase();
+        const orgInfo = (ipInfo ? .org || asnInfo ? .org || '').toLowerCase();
         console.log('Checking organization info:', orgInfo);
 
         for (const [manufacturer, info] of Object.entries(globalState.cameraModels)) {
@@ -3390,7 +3479,7 @@ function checkDefaultCredentials(manufacturer) {
     };
 
     // Normalize manufacturer name
-    const normalizedManufacturer = manufacturer?manufacturer.toLowerCase().trim() : '';
+    const normalizedManufacturer = manufacturer ? manufacturer.toLowerCase().trim() : '';
     console.log(`[checkDefaultCredentials] Normalized manufacturer: ${normalizedManufacturer}`);
 
     // Check if we have specific credentials for this manufacturer
@@ -3764,7 +3853,7 @@ const updateCredentialsSection = (windowElement, metadata) => {
     if (toggleBtn && credentialsList) {
         toggleBtn.addEventListener('click', () => {
             const isHidden = credentialsList.style.display === 'none';
-            credentialsList.style.display = isHidden?'block' : 'none';
+            credentialsList.style.display = isHidden ? 'block' : 'none';
             toggleBtn.innerHTML = isHidden ?
                 '<i class="fas fa-chevron-up"></i> Hide Details' :
                 '<i class="fas fa-chevron-down"></i> Show Details';
@@ -3812,7 +3901,7 @@ const updateVulnerabilitiesSection = (windowElement, metadata) => {
     if (toggleBtn && vulnerabilitiesListContainer) {
         toggleBtn.addEventListener('click', () => {
             const isHidden = vulnerabilitiesListContainer.style.display === 'none';
-            vulnerabilitiesListContainer.style.display = isHidden?'block' : 'none';
+            vulnerabilitiesListContainer.style.display = isHidden ? 'block' : 'none';
             toggleBtn.innerHTML = isHidden ?
                 '<i class="fas fa-chevron-up"></i> Hide Details' :
                 '<i class="fas fa-chevron-down"></i> Show Details';
@@ -3941,7 +4030,7 @@ const init = () => {
 
         // Make sidebar draggable if it exists
         const sidebar = DOM.get('sidebar');
-        const sidebarTitlebar = sidebar?.querySelector('.window-titlebar');
+        const sidebarTitlebar = sidebar ? .querySelector('.window-titlebar');
         if (sidebar && sidebarTitlebar) {
             makeDraggable(sidebar, sidebarTitlebar);
             setupWindowControls(sidebar);
@@ -4465,13 +4554,13 @@ const checkAlienVault = async (ip) => {
 
         if (response.ok) {
             const data = await response.json();
-            const pulseCount = data.pulse_info?.count || 0;
+            const pulseCount = data.pulse_info ? .count || 0;
 
             return {
                 source: 'AlienVault OTX',
                 riskScore: Math.min(pulseCount * 5, 100), // 5 points per pulse
-                riskFactors: pulseCount > 0?[`Found in ${pulseCount} threat pulses`] : [],
-                lastSeen: data.pulse_info?.pulses?. [0]?.created || null,
+                riskFactors: pulseCount > 0 ? [`Found in ${pulseCount} threat pulses`] : [],
+                lastSeen: data.pulse_info ? .pulses ? . [0] ? .created || null,
                 confidence: 80,
                 note: 'Real AlienVault OTX data'
             };
@@ -4578,7 +4667,7 @@ const getRealWeatherData = async (lat, lon) => {
             parser: (data) => {
                 const current = data.current;
                 return {
-                    condition: current.weather[0]?.description || 'Unknown',
+                    condition: current.weather[0] ? .description || 'Unknown',
                     temperature: Math.round(current.temp || 0),
                     humidity: Math.round(current.humidity || 0),
                     windSpeed: Math.round((current.wind_speed || 0) * 3.6), // Convert m/s to km/h
@@ -4667,7 +4756,7 @@ const setupNetworkDiscoveryHandlers = (windowElement, streamUrl) => {
                         deviceCard.style.marginBottom = '10px';
 
                         const deviceTypeIcon = getDeviceTypeIcon(device.deviceType);
-                        const confidenceClass = device.confidence >= 80?'high' : device.confidence >= 60?'medium' : 'low';
+                        const confidenceClass = device.confidence >= 80 ? 'high' : device.confidence >= 60 ? 'medium' : 'low';
 
                         deviceCard.innerHTML = `
                             <div class="detail-header">
@@ -5468,7 +5557,7 @@ const setupDataExportHandlers = (windowElement, streamUrl) => {
 
     if (exportDataBtn) {
         exportDataBtn.addEventListener('click', async () => {
-            const format = exportFormat?.value || 'json';
+            const format = exportFormat ? .value || 'json';
             const includeOptions = getExportIncludeOptions(windowElement);
 
             try {
@@ -5484,7 +5573,7 @@ const setupDataExportHandlers = (windowElement, streamUrl) => {
 
     if (generateReportBtn) {
         generateReportBtn.addEventListener('click', async () => {
-            const template = windowElement.querySelector('.report-template')?.value || 'security-audit';
+            const template = windowElement.querySelector('.report-template') ? .value || 'security-audit';
 
             try {
                 showNotification('Generating report...', 'info');
@@ -5524,14 +5613,14 @@ const setupDataExportHandlers = (windowElement, streamUrl) => {
 
     if (previewTemplateBtn) {
         previewTemplateBtn.addEventListener('click', () => {
-            const template = reportTemplate?.value || 'security-audit';
+            const template = reportTemplate ? .value || 'security-audit';
             previewReportTemplate(template, windowElement);
         });
     }
 
     if (customizeTemplateBtn) {
         customizeTemplateBtn.addEventListener('click', () => {
-            const template = reportTemplate?.value || 'security-audit';
+            const template = reportTemplate ? .value || 'security-audit';
             customizeReportTemplate(template, windowElement);
         });
     }
@@ -5589,12 +5678,12 @@ const setupDataExportHandlers = (windowElement, streamUrl) => {
  */
 const getExportIncludeOptions = (windowElement) => {
     return {
-        basic: windowElement.querySelector('.export-include-basic')?.checked || false,
-        location: windowElement.querySelector('.export-include-location')?.checked || false,
-        metadata: windowElement.querySelector('.export-include-metadata')?.checked || false,
-        network: windowElement.querySelector('.export-include-network')?.checked || false,
-        threats: windowElement.querySelector('.export-include-threats')?.checked || false,
-        fingerprint: windowElement.querySelector('.export-include-fingerprint')?.checked || false
+        basic: windowElement.querySelector('.export-include-basic') ? .checked || false,
+        location: windowElement.querySelector('.export-include-location') ? .checked || false,
+        metadata: windowElement.querySelector('.export-include-metadata') ? .checked || false,
+        network: windowElement.querySelector('.export-include-network') ? .checked || false,
+        threats: windowElement.querySelector('.export-include-threats') ? .checked || false,
+        fingerprint: windowElement.querySelector('.export-include-fingerprint') ? .checked || false
     };
 };
 
@@ -5618,44 +5707,44 @@ const exportCameraData = async (ip, format, includeOptions, windowElement) => {
     let progress = 10;
 
     if (includeOptions.basic) {
-        exportData.data.basicInfo = globalState.rawData.ipInfo?. [ip] || {};
+        exportData.data.basicInfo = globalState.rawData.ipInfo ? . [ip] || {};
         progress += 15;
         showExportProgress(windowElement, progress, 'Collecting basic info...');
     }
 
     if (includeOptions.location) {
-        exportData.data.locationData = globalState.rawData.locationData?. [ip] || {};
+        exportData.data.locationData = globalState.rawData.locationData ? . [ip] || {};
         progress += 15;
         showExportProgress(windowElement, progress, 'Collecting location data...');
     }
 
     if (includeOptions.metadata) {
-        exportData.data.metadata = globalState.rawData.metadata?. [ip] || {};
+        exportData.data.metadata = globalState.rawData.metadata ? . [ip] || {};
         progress += 15;
         showExportProgress(windowElement, progress, 'Collecting metadata...');
     }
 
     if (includeOptions.network) {
         exportData.data.networkDiscovery = {
-            discoveredDevices: globalState.rawData.networkDiscovery?. [ip]?.discoveredDevices || [],
-            topology: globalState.rawData.topology?. [ip] || {},
-            portScans: globalState.rawData.portScans?. [ip] || {}
+            discoveredDevices: globalState.rawData.networkDiscovery ? . [ip] ? .discoveredDevices || [],
+            topology: globalState.rawData.topology ? . [ip] || {},
+            portScans: globalState.rawData.portScans ? . [ip] || {}
         };
         progress += 15;
         showExportProgress(windowElement, progress, 'Collecting network data...');
     }
 
     if (includeOptions.threats) {
-        exportData.data.threatIntelligence = globalState.rawData.threatIntelligence?. [ip] || {};
+        exportData.data.threatIntelligence = globalState.rawData.threatIntelligence ? . [ip] || {};
         progress += 15;
         showExportProgress(windowElement, progress, 'Collecting threat data...');
     }
 
     if (includeOptions.fingerprint) {
         exportData.data.fingerprinting = {
-            httpHeaders: globalState.rawData.cameraFingerprint?. [ip] || {},
-            urlPatterns: globalState.rawData.urlPatterns?. [ip] || {},
-            certificates: globalState.rawData.certificates?. [ip] || {}
+            httpHeaders: globalState.rawData.cameraFingerprint ? . [ip] || {},
+            urlPatterns: globalState.rawData.urlPatterns ? . [ip] || {},
+            certificates: globalState.rawData.certificates ? . [ip] || {}
         };
         progress += 15;
         showExportProgress(windowElement, progress, 'Collecting fingerprint data...');
@@ -5797,12 +5886,12 @@ const convertToCSV = (data) => {
     // Flatten data structure
     const flattenObject = (obj, prefix = '', category = '') => {
         for (const [key, value] of Object.entries(obj)) {
-            const fullKey = prefix?`${prefix}.${key}` : key;
+            const fullKey = prefix ? `${prefix}.${key}` : key;
 
             if (value && typeof value === 'object' && !Array.isArray(value)) {
                 flattenObject(value, fullKey, category || key);
             } else {
-                const stringValue = Array.isArray(value)?value.join('; ') : String(value);
+                const stringValue = Array.isArray(value) ? value.join('; ') : String(value);
                 rows.push([fullKey, stringValue, category || 'general']);
             }
         }
@@ -5943,11 +6032,11 @@ const generateHTMLReport = (data) => {
                     <span class="data-value">${formatValue(val, depth + 1)}</span>
                 </div>`;
             }
-            return depth > 0?`<div class="object-container">${result}</div>` : result;
+            return depth > 0 ? `<div class="object-container">${result}</div>` : result;
         }
 
         if (typeof value === 'boolean') {
-            return value?'<span class="success">Yes</span>' : '<span class="warning">No</span>';
+            return value ? '<span class="success">Yes</span>' : '<span class="warning">No</span>';
         }
 
         if (typeof value === 'string' && value.includes('GMT')) {
@@ -6086,22 +6175,22 @@ const updateDataStatistics = (ip, windowElement) => {
 
     // Count data points
     const rawData = globalState.rawData;
-    if (rawData.ipInfo?. [ip]) dataPoints += Object.keys(rawData.ipInfo[ip]).length;
-    if (rawData.locationData?. [ip]) dataPoints += Object.keys(rawData.locationData[ip]).length;
-    if (rawData.metadata?. [ip]) dataPoints += Object.keys(rawData.metadata[ip]).length;
+    if (rawData.ipInfo ? . [ip]) dataPoints += Object.keys(rawData.ipInfo[ip]).length;
+    if (rawData.locationData ? . [ip]) dataPoints += Object.keys(rawData.locationData[ip]).length;
+    if (rawData.metadata ? . [ip]) dataPoints += Object.keys(rawData.metadata[ip]).length;
 
     // Count vulnerabilities
-    if (rawData.cameraFingerprint?. [ip]?.vulnerabilities) {
+    if (rawData.cameraFingerprint ? . [ip] ? .vulnerabilities) {
         vulnerabilities += rawData.cameraFingerprint[ip].vulnerabilities.length;
     }
 
     // Count devices
-    if (rawData.networkDiscovery?. [ip]?.discoveredDevices) {
+    if (rawData.networkDiscovery ? . [ip] ? .discoveredDevices) {
         devices = rawData.networkDiscovery[ip].discoveredDevices.length;
     }
 
     // Calculate threat score
-    if (rawData.threatIntelligence?. [ip]?.overallScore) {
+    if (rawData.threatIntelligence ? . [ip] ? .overallScore) {
         threatScore = rawData.threatIntelligence[ip].overallScore;
     }
 
@@ -6251,9 +6340,9 @@ const exportExportHistory = (windowElement) => {
  * Save automation settings
  */
 const saveAutomationSettings = (windowElement) => {
-    const autoExportEnabled = windowElement.querySelector('.auto-export-enabled')?.checked || false;
-    const frequency = windowElement.querySelector('.auto-export-frequency')?.value || 'daily';
-    const format = windowElement.querySelector('.auto-export-format')?.value || 'json';
+    const autoExportEnabled = windowElement.querySelector('.auto-export-enabled') ? .checked || false;
+    const frequency = windowElement.querySelector('.auto-export-frequency') ? .value || 'daily';
+    const format = windowElement.querySelector('.auto-export-format') ? .value || 'json';
 
     const settings = {
         enabled: autoExportEnabled,
@@ -6354,14 +6443,14 @@ const analyzeDomainIntelligence = async (target, windowElement) => {
 
     // No fake domain analysis - real domain intelligence requires authenticated APIs
     const isIP = /^\d+\.\d+\.\d+\.\d+$/.test(target);
-    const status = isIP?'IP Address' : 'Analysis requires authenticated APIs';
+    const status = isIP ? 'IP Address' : 'Analysis requires authenticated APIs';
 
     if (domainStatus) {
         domainStatus.innerHTML = `<span class="security-indicator ${status === 'Active' || isIP?'secure' : 'warning'}">${status}</span>`;
     }
 
     if (domainRegistration) {
-        domainRegistration.textContent = isIP?'N/A (IP Address)' : 'Requires authenticated APIs';
+        domainRegistration.textContent = isIP ? 'N/A (IP Address)' : 'Requires authenticated APIs';
     }
 
     if (domainDetails) {
@@ -6461,7 +6550,7 @@ const analyzeEmailIntelligence = async (target, windowElement) => {
     const emailDetails = windowElement.querySelector('.email-details');
 
     const isEmail = target.includes('@');
-    const domain = isEmail?target.split('@')[1] : target;
+    const domain = isEmail ? target.split('@')[1] : target;
 
     if (emailDetails) {
         emailDetails.innerHTML = `
@@ -6804,7 +6893,7 @@ const getTimezoneOffset = (timezone) => {
         const offsetHours = Math.round(offsetMs / (1000 * 60 * 60));
 
         if (offsetHours === 0) return 'UTC+0';
-        return offsetHours > 0?`UTC+${offsetHours}` : `UTC${offsetHours}`;
+        return offsetHours > 0 ? `UTC+${offsetHours}` : `UTC${offsetHours}`;
     } catch (error) {
         console.error('Error calculating timezone offset:', error);
         return 'UTC+0';
