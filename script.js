@@ -326,14 +326,41 @@ let globalState = {
         // Common camera manufacturers and their identifiers
         hikvision: {
             patterns: ['hikvision', 'hikconnect', 'hik-connect', 'ivms', 'ds-'],
-            defaultCredentials: [
-                { username: 'admin', password: '12345', notes: 'Factory default' },
-                { username: 'admin', password: 'admin', notes: 'Common default' },
-                { username: 'admin', password: 'Admin12345', notes: 'Updated default since 2016' },
-                { username: 'admin', password: '', notes: 'Blank password on some models' },
-                { username: 'admin', password: '123456', notes: 'Common variation' },
-                { username: 'admin', password: 'hikvision', notes: 'Brand name as password' },
-                { username: 'operator', password: 'operator', notes: 'Secondary account' }
+            defaultCredentials: [{
+                    username: 'admin',
+                    password: '12345',
+                    notes: 'Factory default'
+                },
+                {
+                    username: 'admin',
+                    password: 'admin',
+                    notes: 'Common default'
+                },
+                {
+                    username: 'admin',
+                    password: 'Admin12345',
+                    notes: 'Updated default since 2016'
+                },
+                {
+                    username: 'admin',
+                    password: '',
+                    notes: 'Blank password on some models'
+                },
+                {
+                    username: 'admin',
+                    password: '123456',
+                    notes: 'Common variation'
+                },
+                {
+                    username: 'admin',
+                    password: 'hikvision',
+                    notes: 'Brand name as password'
+                },
+                {
+                    username: 'operator',
+                    password: 'operator',
+                    notes: 'Secondary account'
+                }
             ],
             webPaths: ['/doc/page/login.asp', '/PSIA/Custom/SelfExt/userCheck', '/ISAPI/Security/userCheck'],
             ports: [80, 443, 554, 8000, 8200],
@@ -345,14 +372,41 @@ let globalState = {
         },
         dahua: {
             patterns: ['dahua', 'dh-', 'ipc-h', 'ipc-d', 'lechange'],
-            defaultCredentials: [
-                { username: 'admin', password: 'admin', notes: 'Factory default' },
-                { username: 'admin', password: 'Admin123', notes: 'Updated default' },
-                { username: 'admin', password: 'password', notes: 'Common variation' },
-                { username: '888888', password: '888888', notes: 'Secondary admin account' },
-                { username: '666666', password: '666666', notes: 'Operator account' },
-                { username: 'default', password: 'default', notes: 'Backup account on some models' },
-                { username: 'root', password: 'vizxv', notes: 'Telnet/SSH access on older models' }
+            defaultCredentials: [{
+                    username: 'admin',
+                    password: 'admin',
+                    notes: 'Factory default'
+                },
+                {
+                    username: 'admin',
+                    password: 'Admin123',
+                    notes: 'Updated default'
+                },
+                {
+                    username: 'admin',
+                    password: 'password',
+                    notes: 'Common variation'
+                },
+                {
+                    username: '888888',
+                    password: '888888',
+                    notes: 'Secondary admin account'
+                },
+                {
+                    username: '666666',
+                    password: '666666',
+                    notes: 'Operator account'
+                },
+                {
+                    username: 'default',
+                    password: 'default',
+                    notes: 'Backup account on some models'
+                },
+                {
+                    username: 'root',
+                    password: 'vizxv',
+                    notes: 'Telnet/SSH access on older models'
+                }
             ],
             webPaths: ['/RPC2_Login', '/RPC2', '/cgi-bin/configManager.cgi'],
             ports: [80, 443, 554, 37777],
@@ -364,12 +418,31 @@ let globalState = {
         },
         axis: {
             patterns: ['axis', 'accc', 'vapix'],
-            defaultCredentials: [
-                { username: 'root', password: 'pass', notes: 'Factory default' },
-                { username: 'admin', password: 'admin', notes: 'Common default' },
-                { username: 'root', password: 'root', notes: 'Alternative default' },
-                { username: 'admin', password: 'axis2022', notes: 'Newer models default' },
-                { username: 'viewer', password: 'viewer', notes: 'View-only account' }
+            defaultCredentials: [{
+                    username: 'root',
+                    password: 'pass',
+                    notes: 'Factory default'
+                },
+                {
+                    username: 'admin',
+                    password: 'admin',
+                    notes: 'Common default'
+                },
+                {
+                    username: 'root',
+                    password: 'root',
+                    notes: 'Alternative default'
+                },
+                {
+                    username: 'admin',
+                    password: 'axis2022',
+                    notes: 'Newer models default'
+                },
+                {
+                    username: 'viewer',
+                    password: 'viewer',
+                    notes: 'View-only account'
+                }
             ],
             webPaths: ['/axis-cgi/admin/param.cgi', '/view/index.shtml', '/axis-cgi/jpg/image.cgi'],
             ports: [80, 443, 554],
@@ -380,12 +453,31 @@ let globalState = {
         },
         foscam: {
             patterns: ['foscam', 'fi9', 'r2', 'c1', 'c2'],
-            defaultCredentials: [
-                { username: 'admin', password: 'admin', notes: 'Factory default' },
-                { username: 'admin', password: '', notes: 'Blank password on some models' },
-                { username: 'admin', password: 'password', notes: 'Common variation' },
-                { username: 'admin', password: 'foscam', notes: 'Brand name as password' },
-                { username: 'visitor', password: 'visitor', notes: 'Guest account' }
+            defaultCredentials: [{
+                    username: 'admin',
+                    password: 'admin',
+                    notes: 'Factory default'
+                },
+                {
+                    username: 'admin',
+                    password: '',
+                    notes: 'Blank password on some models'
+                },
+                {
+                    username: 'admin',
+                    password: 'password',
+                    notes: 'Common variation'
+                },
+                {
+                    username: 'admin',
+                    password: 'foscam',
+                    notes: 'Brand name as password'
+                },
+                {
+                    username: 'visitor',
+                    password: 'visitor',
+                    notes: 'Guest account'
+                }
             ],
             webPaths: ['/cgi-bin/CGIProxy.fcgi', '/cgi-bin/viewer/video.jpg', '/videostream.cgi'],
             ports: [80, 443, 554, 88, 10080],
@@ -398,11 +490,26 @@ let globalState = {
         },
         tplink: {
             patterns: ['tplink', 'tp-link', 'tapo'],
-            defaultCredentials: [
-                { username: 'admin', password: 'admin', notes: 'Factory default' },
-                { username: 'admin', password: 'password', notes: 'Common variation' },
-                { username: 'admin', password: 'tp-link', notes: 'Brand name as password' },
-                { username: 'admin', password: 'tplink', notes: 'Brand name variation' }
+            defaultCredentials: [{
+                    username: 'admin',
+                    password: 'admin',
+                    notes: 'Factory default'
+                },
+                {
+                    username: 'admin',
+                    password: 'password',
+                    notes: 'Common variation'
+                },
+                {
+                    username: 'admin',
+                    password: 'tp-link',
+                    notes: 'Brand name as password'
+                },
+                {
+                    username: 'admin',
+                    password: 'tplink',
+                    notes: 'Brand name variation'
+                }
             ],
             webPaths: ['/webpages/index.html', '/cgi/index.cgi', '/cgi-bin/luci'],
             ports: [80, 443, 554, 2020],
@@ -414,9 +521,16 @@ let globalState = {
         },
         wyze: {
             patterns: ['wyze', 'wyzecam'],
-            defaultCredentials: [
-                { username: 'admin', password: 'admin123', notes: 'Factory default' },
-                { username: 'admin', password: 'admin1234', notes: 'Common variation' }
+            defaultCredentials: [{
+                    username: 'admin',
+                    password: 'admin123',
+                    notes: 'Factory default'
+                },
+                {
+                    username: 'admin',
+                    password: 'admin1234',
+                    notes: 'Common variation'
+                }
             ],
             webPaths: ['/cgi-bin/api.cgi', '/live'],
             ports: [80, 443, 554],
@@ -428,12 +542,31 @@ let globalState = {
         },
         reolink: {
             patterns: ['reolink', 'rlc-'],
-            defaultCredentials: [
-                { username: 'admin', password: 'admin', notes: 'Factory default' },
-                { username: 'admin', password: '', notes: 'Blank password on some models' },
-                { username: 'admin', password: 'reolink', notes: 'Brand name as password' },
-                { username: 'admin', password: 'Reolink123', notes: 'Updated default on newer models' },
-                { username: 'guest', password: 'guest', notes: 'Guest account' }
+            defaultCredentials: [{
+                    username: 'admin',
+                    password: 'admin',
+                    notes: 'Factory default'
+                },
+                {
+                    username: 'admin',
+                    password: '',
+                    notes: 'Blank password on some models'
+                },
+                {
+                    username: 'admin',
+                    password: 'reolink',
+                    notes: 'Brand name as password'
+                },
+                {
+                    username: 'admin',
+                    password: 'Reolink123',
+                    notes: 'Updated default on newer models'
+                },
+                {
+                    username: 'guest',
+                    password: 'guest',
+                    notes: 'Guest account'
+                }
             ],
             webPaths: ['/cgi-bin/api.cgi', '/api/v1/device', '/cgi-bin/ptz.cgi'],
             ports: [80, 443, 554, 9000],
@@ -445,11 +578,26 @@ let globalState = {
         },
         amcrest: {
             patterns: ['amcrest', 'ipc-'],
-            defaultCredentials: [
-                { username: 'admin', password: 'admin', notes: 'Factory default' },
-                { username: 'admin', password: 'password', notes: 'Common variation' },
-                { username: 'admin', password: 'amcrest', notes: 'Brand name as password' },
-                { username: 'admin', password: 'admin123', notes: 'Common variation' }
+            defaultCredentials: [{
+                    username: 'admin',
+                    password: 'admin',
+                    notes: 'Factory default'
+                },
+                {
+                    username: 'admin',
+                    password: 'password',
+                    notes: 'Common variation'
+                },
+                {
+                    username: 'admin',
+                    password: 'amcrest',
+                    notes: 'Brand name as password'
+                },
+                {
+                    username: 'admin',
+                    password: 'admin123',
+                    notes: 'Common variation'
+                }
             ],
             webPaths: ['/cgi-bin/snapshot.cgi', '/cgi-bin/configManager.cgi'],
             ports: [80, 443, 554],
@@ -461,10 +609,21 @@ let globalState = {
         },
         ubiquiti: {
             patterns: ['ubiquiti', 'unifi', 'aircam', 'uvc'],
-            defaultCredentials: [
-                { username: 'ubnt', password: 'ubnt', notes: 'Factory default' },
-                { username: 'admin', password: 'admin', notes: 'Alternative default' },
-                { username: 'root', password: 'ubnt', notes: 'SSH/Telnet default' }
+            defaultCredentials: [{
+                    username: 'ubnt',
+                    password: 'ubnt',
+                    notes: 'Factory default'
+                },
+                {
+                    username: 'admin',
+                    password: 'admin',
+                    notes: 'Alternative default'
+                },
+                {
+                    username: 'root',
+                    password: 'ubnt',
+                    notes: 'SSH/Telnet default'
+                }
             ],
             webPaths: ['/api/2.0/login', '/login', '/manage/account/login'],
             ports: [80, 443, 554, 7080, 7443],
@@ -476,10 +635,21 @@ let globalState = {
         },
         vivotek: {
             patterns: ['vivotek', 'vvtk'],
-            defaultCredentials: [
-                { username: 'root', password: 'root', notes: 'Factory default' },
-                { username: 'admin', password: 'admin', notes: 'Common default' },
-                { username: 'vivotek', password: 'vivotek', notes: 'Brand name credentials' }
+            defaultCredentials: [{
+                    username: 'root',
+                    password: 'root',
+                    notes: 'Factory default'
+                },
+                {
+                    username: 'admin',
+                    password: 'admin',
+                    notes: 'Common default'
+                },
+                {
+                    username: 'vivotek',
+                    password: 'vivotek',
+                    notes: 'Brand name credentials'
+                }
             ],
             webPaths: ['/cgi-bin/viewer/video.jpg', '/cgi-bin/admin/getparam.cgi'],
             ports: [80, 443, 554, 3702],
@@ -491,15 +661,46 @@ let globalState = {
         },
         generic: {
             patterns: ['ipcam', 'netcam', 'webcam', 'ip camera', 'rtsp'],
-            defaultCredentials: [
-                { username: 'admin', password: 'admin', notes: 'Most common default' },
-                { username: 'admin', password: 'password', notes: 'Very common default' },
-                { username: 'admin', password: '1234', notes: 'Simple numeric password' },
-                { username: 'admin', password: '12345', notes: 'Simple numeric password' },
-                { username: 'admin', password: '', notes: 'Blank password' },
-                { username: 'root', password: 'root', notes: 'Common for embedded systems' },
-                { username: 'user', password: 'user', notes: 'Simple user account' },
-                { username: 'guest', password: 'guest', notes: 'Guest account' }
+            defaultCredentials: [{
+                    username: 'admin',
+                    password: 'admin',
+                    notes: 'Most common default'
+                },
+                {
+                    username: 'admin',
+                    password: 'password',
+                    notes: 'Very common default'
+                },
+                {
+                    username: 'admin',
+                    password: '1234',
+                    notes: 'Simple numeric password'
+                },
+                {
+                    username: 'admin',
+                    password: '12345',
+                    notes: 'Simple numeric password'
+                },
+                {
+                    username: 'admin',
+                    password: '',
+                    notes: 'Blank password'
+                },
+                {
+                    username: 'root',
+                    password: 'root',
+                    notes: 'Common for embedded systems'
+                },
+                {
+                    username: 'user',
+                    password: 'user',
+                    notes: 'Simple user account'
+                },
+                {
+                    username: 'guest',
+                    password: 'guest',
+                    notes: 'Guest account'
+                }
             ],
             webPaths: ['/index.html', '/login.html', '/cgi-bin/snapshot.cgi'],
             ports: [80, 443, 554, 8080, 8000],
@@ -556,7 +757,7 @@ const originalConsole = {
 };
 
 // Custom console to track logs
-console.log = function() {
+console.log = function () {
     const args = Array.from(arguments);
     globalState.consoleLog.push({
         type: 'log',
@@ -567,7 +768,7 @@ console.log = function() {
     originalConsole.log.apply(console, arguments);
 };
 
-console.error = function() {
+console.error = function () {
     const args = Array.from(arguments);
     globalState.consoleLog.push({
         type: 'error',
@@ -578,7 +779,7 @@ console.error = function() {
     originalConsole.error.apply(console, arguments);
 };
 
-console.warn = function() {
+console.warn = function () {
     const args = Array.from(arguments);
     globalState.consoleLog.push({
         type: 'warn',
@@ -589,7 +790,7 @@ console.warn = function() {
     originalConsole.warn.apply(console, arguments);
 };
 
-console.info = function() {
+console.info = function () {
     const args = Array.from(arguments);
     globalState.consoleLog.push({
         type: 'info',
@@ -625,13 +826,15 @@ async function fetchJson(url) {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
-        const response = await fetch(url, { signal: controller.signal });
+        const response = await fetch(url, {
+            signal: controller.signal
+        });
         clearTimeout(timeoutId);
 
-    if (!response.ok) {
+        if (!response.ok) {
             const errorMessage = await response.text();
-        throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorMessage}`);
-    }
+            throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorMessage}`);
+        }
 
         const data = await response.json();
         if (!data) {
@@ -674,7 +877,10 @@ const removeOverlay = () => {
 
 // Draggable Functionality
 const makeDraggable = (windowElement, titlebarElement) => {
-    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    let pos1 = 0,
+        pos2 = 0,
+        pos3 = 0,
+        pos4 = 0;
     let isDragging = false;
 
     if (!titlebarElement || !windowElement) return;
@@ -690,7 +896,7 @@ const makeDraggable = (windowElement, titlebarElement) => {
         // Bring window to front
         const highestZIndex = Math.max(
             ...Array.from(document.querySelectorAll('.window'))
-                .map(w => parseInt(getComputedStyle(w).zIndex) || 0)
+            .map(w => parseInt(getComputedStyle(w).zIndex) || 0)
         );
         windowElement.style.zIndex = highestZIndex + 1;
 
@@ -774,7 +980,7 @@ const setupWindowControls = (windowElement) => {
                 const highestZIndex = Math.max(
                     1000,
                     ...Array.from(document.querySelectorAll('.window'))
-                        .map(w => parseInt(getComputedStyle(w).zIndex) || 0)
+                    .map(w => parseInt(getComputedStyle(w).zIndex) || 0)
                 ) + 10;
                 windowElement.style.zIndex = highestZIndex;
             } else {
@@ -915,7 +1121,9 @@ const fetchPastebinContent = async (url) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ url: url }),
+            body: JSON.stringify({
+                url: url
+            }),
             signal: controller.signal
         });
 
@@ -976,13 +1184,13 @@ const updateCameraListFromPastebin = async (pastebinUrl) => {
     }, 10000); // 10 second max loading time
 
     try {
-    const plainTextContent = await fetchPastebinContent(pastebinUrl);
-    const urls = plainTextContent.split('\n')
-        .map(url => url.replace(/[\r\n\t]/g, '').trim())
-        .filter(url => url !== '');
+        const plainTextContent = await fetchPastebinContent(pastebinUrl);
+        const urls = plainTextContent.split('\n')
+            .map(url => url.replace(/[\r\n\t]/g, '').trim())
+            .filter(url => url !== '');
 
         // Clear existing list
-    DOM.get('cameraList').innerHTML = '';
+        DOM.get('cameraList').innerHTML = '';
         globalState.cameras = [];
 
         // Add each camera
@@ -1004,24 +1212,24 @@ const updateCameraListFromPastebin = async (pastebinUrl) => {
 const isMjpgStream = (url) => {
     const lowerUrl = url.toLowerCase();
     return lowerUrl.includes('.mjpg') ||
-           lowerUrl.includes('.mjpeg') ||
-           lowerUrl.includes('mjpg/video') ||
-           lowerUrl.includes('mjpeg/video') ||
-           lowerUrl.includes('video.cgi') ||
-           lowerUrl.includes('video.mjpg') ||
-           lowerUrl.includes('video.mjpeg') ||
-           lowerUrl.includes('snapshot.cgi') ||
-           lowerUrl.includes('image.jpg') ||
-           lowerUrl.includes('image.jpeg') ||
-           lowerUrl.includes('cam.jpg') ||
-           lowerUrl.includes('cam.jpeg') ||
-           lowerUrl.includes('stream.jpg') ||
-           lowerUrl.includes('stream.jpeg') ||
-           lowerUrl.includes('live.jpg') ||
-           lowerUrl.includes('live.jpeg') ||
-           lowerUrl.includes('axis-cgi/mjpg') ||
-           lowerUrl.includes('cgi-bin/mjpg') ||
-           (lowerUrl.startsWith('http') && !lowerUrl.startsWith('rtsp'));
+        lowerUrl.includes('.mjpeg') ||
+        lowerUrl.includes('mjpg/video') ||
+        lowerUrl.includes('mjpeg/video') ||
+        lowerUrl.includes('video.cgi') ||
+        lowerUrl.includes('video.mjpg') ||
+        lowerUrl.includes('video.mjpeg') ||
+        lowerUrl.includes('snapshot.cgi') ||
+        lowerUrl.includes('image.jpg') ||
+        lowerUrl.includes('image.jpeg') ||
+        lowerUrl.includes('cam.jpg') ||
+        lowerUrl.includes('cam.jpeg') ||
+        lowerUrl.includes('stream.jpg') ||
+        lowerUrl.includes('stream.jpeg') ||
+        lowerUrl.includes('live.jpg') ||
+        lowerUrl.includes('live.jpeg') ||
+        lowerUrl.includes('axis-cgi/mjpg') ||
+        lowerUrl.includes('cgi-bin/mjpg') ||
+        (lowerUrl.startsWith('http') && !lowerUrl.startsWith('rtsp'));
 };
 
 const formatMjpgUrl = (url) => {
@@ -1186,127 +1394,6 @@ const createMjpgIframePlayer = (url) => {
     container.style.width = '100%';
     container.style.height = '100%';
     container.style.position = 'relative';
-
-    // Check if we're on HTTPS and the URL is HTTP
-    const isHttpsPage = window.location.protocol === 'https:';
-    const isHttpUrl = url.startsWith('http:');
-
-    if (isHttpsPage && isHttpUrl) {
-        // Use Railway proxy for MJPG streams on HTTPS deployments
-        console.log('🔄 Using Railway proxy for MJPG stream on HTTPS');
-
-        // Create iframe with Railway proxy URL
-        const iframe = document.createElement('iframe');
-        iframe.className = 'mjpg-iframe-player';
-        iframe.frameBorder = '0';
-        iframe.width = '100%';
-        iframe.height = '100%';
-        iframe.allowFullscreen = true;
-        iframe.style.border = 'none';
-        iframe.style.display = 'block';
-
-        // Use Railway proxy for MJPG streaming
-        const railwayProxyUrl = `https://function-bun-production-255c.up.railway.app/cam?url=${encodeURIComponent(url)}`;
-        iframe.src = railwayProxyUrl;
-
-        console.log('🚂 Railway proxy URL:', railwayProxyUrl);
-
-        // Set up refresh mechanism for Railway proxy
-        let refreshInterval;
-        const refreshRate = 5000; // 5 seconds for proxy refresh
-
-        const refreshProxyIframe = () => {
-            const separator = railwayProxyUrl.includes('?') ? '&' : '?';
-            iframe.src = railwayProxyUrl + separator + 't=' + Date.now();
-            console.log('🔄 Refreshed Railway proxy MJPG iframe');
-        };
-
-        // Function to calculate and apply scaling for Railway proxy
-        const applyScaling = () => {
-            const containerRect = container.getBoundingClientRect();
-            const containerWidth = containerRect.width;
-            const containerHeight = containerRect.height;
-
-            // Skip if container has no size yet
-            if (containerWidth === 0 || containerHeight === 0) {
-                return;
-            }
-
-            // Assume 640x480 for MJPG streams (common default)
-            const streamWidth = 640;
-            const streamHeight = 480;
-
-            // Calculate scale factors
-            const scaleX = containerWidth / streamWidth;
-            const scaleY = containerHeight / streamHeight;
-
-            // Use the smaller scale to maintain aspect ratio and fit within container
-            const scaleFactor = Math.min(scaleX, scaleY);
-
-            // Apply scaling
-            container.style.setProperty('--scale-factor', scaleFactor);
-            container.classList.add('scale-to-fit');
-
-            console.log(`📐 Railway proxy MJPG scaling: container(${containerWidth.toFixed(0)}x${containerHeight.toFixed(0)}) stream(${streamWidth}x${streamHeight}) scale(${scaleFactor.toFixed(2)})`);
-        };
-
-        // Start refresh after initial load
-        iframe.onload = () => {
-            console.log('✅ Railway proxy MJPG iframe loaded, starting refresh');
-
-            // Apply scaling after a short delay to ensure container is sized
-            setTimeout(applyScaling, 100);
-
-            if (!refreshInterval) {
-                refreshInterval = setInterval(refreshProxyIframe, refreshRate);
-            }
-        };
-
-        // Add error handling for Railway proxy iframe
-        iframe.onerror = () => {
-            console.error('Railway proxy MJPG iframe failed to load:', railwayProxyUrl);
-            if (refreshInterval) {
-                clearInterval(refreshInterval);
-                refreshInterval = null;
-            }
-            container.innerHTML = `
-                <div class="video-error">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <p>Failed to load MJPG stream via Railway proxy</p>
-                    <small>${url}</small>
-                    <p style="margin-top: 10px; font-size: 12px; color: #94a3b8;">
-                        Railway proxy: ${railwayProxyUrl}
-                    </p>
-                </div>
-            `;
-        };
-
-        // Add resize observer to reapply scaling when container size changes
-        let resizeObserver;
-        if (window.ResizeObserver) {
-            resizeObserver = new ResizeObserver(() => {
-                applyScaling();
-            });
-            resizeObserver.observe(container);
-        }
-
-        // Store cleanup function
-        container.cleanup = () => {
-            if (refreshInterval) {
-                clearInterval(refreshInterval);
-                refreshInterval = null;
-                console.log('🛑 Stopped Railway proxy MJPG refresh');
-            }
-            if (resizeObserver) {
-                resizeObserver.disconnect();
-                console.log('🛑 Stopped Railway proxy resize observer');
-            }
-        };
-
-        container.appendChild(iframe);
-        console.log('Created Railway proxy MJPG iframe player for:', url);
-        return container;
-    }
 
     const iframe = document.createElement('iframe');
     iframe.className = 'mjpg-iframe-player';
@@ -1582,9 +1669,9 @@ const openVideoWindow = (url) => {
     } else {
         // Handle RTSP streams with existing player logic
         // Get the appropriate resolution based on global settings
-        let resolution = globalState.autoResolution
-            ? calculateOptimalResolution(videoContainer.clientWidth, videoContainer.clientHeight)
-            : globalState.manualResolution;
+        let resolution = globalState.autoResolution ?
+            calculateOptimalResolution(videoContainer.clientWidth, videoContainer.clientHeight) :
+            globalState.manualResolution;
 
         // Fallback to a safe value if calculation fails
         if (!resolution) resolution = "720x420";
@@ -1617,9 +1704,9 @@ const openVideoWindow = (url) => {
         });
 
         // Create initial player
-        const player = globalState.playerPreference === 'streamedian'
-            ? createStreamedianPlayer(cleanUrl, resolution)
-            : createFlashphonerPlayer(cleanUrl);
+        const player = globalState.playerPreference === 'streamedian' ?
+            createStreamedianPlayer(cleanUrl, resolution) :
+            createFlashphonerPlayer(cleanUrl);
 
         videoContainer.appendChild(player);
 
@@ -1788,7 +1875,7 @@ const startResize = (e, windowElement, direction) => {
         // Bring window to front
         const highestZIndex = Math.max(
             ...Array.from(document.querySelectorAll('.window'))
-                .map(w => parseInt(getComputedStyle(w).zIndex) || 0)
+            .map(w => parseInt(getComputedStyle(w).zIndex) || 0)
         );
         windowElement.style.zIndex = highestZIndex + 1;
 
@@ -1864,7 +1951,9 @@ async function fetchIPInfo(ip, windowElement) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ url: ipInfoUrl }),
+            body: JSON.stringify({
+                url: ipInfoUrl
+            }),
             signal: controller.signal
         });
 
@@ -1955,7 +2044,9 @@ async function fetchAndUpdateASN(ip, windowElement) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ url: asnUrl }),
+            body: JSON.stringify({
+                url: asnUrl
+            }),
             signal: controller.signal
         });
 
@@ -2144,8 +2235,8 @@ const initFaceDetection = async (imageElement, overlayElement) => {
             const toggle = document.getElementById('faceDetectionToggle');
             if (!toggle || !toggle.checked) {
                 overlayElement.innerHTML = '';
-        return;
-    }
+                return;
+            }
 
             // Check if elements still exist
             if (!document.body.contains(imageElement) || !document.body.contains(overlayElement)) {
@@ -2165,7 +2256,12 @@ const initFaceDetection = async (imageElement, overlayElement) => {
 
                 // Draw face boxes
                 detections.forEach(detection => {
-                    const { x, y, width, height } = detection.box;
+                    const {
+                        x,
+                        y,
+                        width,
+                        height
+                    } = detection.box;
 
                     const faceBox = document.createElement('div');
                     faceBox.className = 'face-detection-box';
@@ -2312,7 +2408,9 @@ const updateStateSection = () => {
     const stateView = document.getElementById('globalStateView');
     if (stateView) {
         // Create a copy of the state to display, but filter out large datasets
-        const displayState = { ...globalState };
+        const displayState = {
+            ...globalState
+        };
 
         // Don't show the full console log history
         if (displayState.consoleLog && displayState.consoleLog.length > 0) {
@@ -2639,7 +2737,7 @@ const setupResolutionControls = () => {
                         const videoContainer = windowElement.querySelector('.video-container');
                         const streamUrl = windowElement.dataset.streamUrl;
 
-                        if (streamUrl?.startsWith('rtsp://') && videoContainer) {
+                        if (streamUrl.startsWith('rtsp://') && videoContainer) {
                             const newResolution = calculateOptimalResolution(
                                 videoContainer.clientWidth,
                                 videoContainer.clientHeight
@@ -2678,9 +2776,9 @@ const setupResolutionControls = () => {
 
                     if (streamUrl?.startsWith('rtsp://')) {
                         updateRtspStreamResolution(windowElement, streamUrl, globalState.manualResolution);
-        }
-    }
-});
+                    }
+                }
+            });
 
             // Update the current selected camera display
             updateCurrentIpDisplay();
@@ -2715,9 +2813,9 @@ const updateRtspStreamResolution = (windowElement, streamUrl, resolution) => {
     const currentPlayer = playerSelect ? playerSelect.value : globalState.playerPreference;
 
     // Create new player with updated settings
-    const newPlayer = currentPlayer === 'streamedian'
-        ? createStreamedianPlayer(streamUrl, resolution)
-        : createFlashphonerPlayer(streamUrl);
+    const newPlayer = currentPlayer === 'streamedian' ?
+        createStreamedianPlayer(streamUrl, resolution) :
+        createFlashphonerPlayer(streamUrl);
 
     // Replace the existing player
     iframe.replaceWith(newPlayer);
@@ -2764,7 +2862,10 @@ const setupResizeObserver = (windowElement, videoContainer, url) => {
             }
 
             for (const entry of entries) {
-                const { width, height } = entry.contentRect;
+                const {
+                    width,
+                    height
+                } = entry.contentRect;
                 const newResolution = calculateOptimalResolution(width, height);
                 updateRtspStreamResolution(windowElement, url, newResolution);
 
@@ -2857,7 +2958,10 @@ const setupCurrentIPFunctionality = () => {
                 windowElement.style.zIndex = maxZIndex + 1;
 
                 // Scroll to window if needed
-                windowElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                windowElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
 
                 // Apply a highlight effect
                 windowElement.classList.add('highlight-window');
@@ -2936,7 +3040,10 @@ function extractCameraMetadata(windowElement) {
     // Check if window element exists
     if (!windowElement) {
         console.error('[extractCameraMetadata] Window element not found');
-        return { success: false, error: 'Window element not found' };
+        return {
+            success: false,
+            error: 'Window element not found'
+        };
     }
 
     // Get window ID - Fix: Use dataset.id instead of getAttribute('data-window-id')
@@ -2947,7 +3054,10 @@ function extractCameraMetadata(windowElement) {
 
     if (!windowId) {
         console.error('[extractCameraMetadata] Window ID not found');
-        return { success: false, error: 'Window ID not found' };
+        return {
+            success: false,
+            error: 'Window ID not found'
+        };
     }
     console.log(`[extractCameraMetadata] Processing window ID: ${windowId}`);
 
@@ -2957,7 +3067,10 @@ function extractCameraMetadata(windowElement) {
 
     if (!streamUrl) {
         console.error('[extractCameraMetadata] Stream URL not found');
-        return { success: false, error: 'Stream URL not found' };
+        return {
+            success: false,
+            error: 'Stream URL not found'
+        };
     }
     console.log(`[extractCameraMetadata] Stream URL: ${streamUrl}`);
 
@@ -3044,10 +3157,16 @@ function extractCameraMetadata(windowElement) {
         // Update UI with extracted metadata
         updateMetadataUI(windowElement, metadata);
 
-        return { success: true, metadata };
+        return {
+            success: true,
+            metadata
+        };
     } catch (error) {
         console.error('[extractCameraMetadata] Error extracting metadata:', error);
-        return { success: false, error: error.message };
+        return {
+            success: false,
+            error: error.message
+        };
     }
 }
 
@@ -3116,7 +3235,10 @@ function generateAlternativeStreams(originalUrl, ipAddress, rtspPaths) {
         return alternativeStreams;
     } catch (error) {
         console.error('[generateAlternativeStreams] Error generating alternative streams:', error);
-        return [{ url: originalUrl, notes: 'Original stream URL' }];
+        return [{
+            url: originalUrl,
+            notes: 'Original stream URL'
+        }];
     }
 }
 
@@ -3268,16 +3390,36 @@ function checkDefaultCredentials(manufacturer) {
         console.log(`[checkDefaultCredentials] Manufacturer not found in database, using generic credentials`);
 
         // Generate combinations from the credential database
-        const { usernames, passwords } = globalState.credentialDatabase;
+        const {
+            usernames,
+            passwords
+        } = globalState.credentialDatabase;
 
         // Generate top combinations based on common patterns
-        const topCombinations = [
-            { username: 'admin', password: 'admin' },
-            { username: 'admin', password: '123456' },
-            { username: 'admin', password: '' },
-            { username: 'admin', password: 'password' },
-            { username: 'root', password: 'root' },
-            { username: 'root', password: '12345' }
+        const topCombinations = [{
+                username: 'admin',
+                password: 'admin'
+            },
+            {
+                username: 'admin',
+                password: '123456'
+            },
+            {
+                username: 'admin',
+                password: ''
+            },
+            {
+                username: 'admin',
+                password: 'password'
+            },
+            {
+                username: 'root',
+                password: 'root'
+            },
+            {
+                username: 'root',
+                password: '12345'
+            }
         ];
 
         // Add top combinations first
@@ -3791,37 +3933,37 @@ const init = () => {
         }
 
         // Setup initial state
-    updateCameraCount();
-    updateClock();
+        updateCameraCount();
+        updateClock();
 
         // Start clock update interval
         const clockInterval = setInterval(updateClock, 1000);
 
-    // Load cameras from Pastebin
+        // Load cameras from Pastebin
         updateCameraListFromPastebin(API_ENDPOINTS.PASTEBIN)
             .catch(error => {
                 console.error('Failed to load camera list:', error);
                 showNotification('<i class="fas fa-exclamation-triangle"></i> Failed to load camera list', 'error');
             });
 
-    // Setup advanced mode button
+        // Setup advanced mode button
         const advancedModeButton = DOM.get('advancedModeButton');
         if (advancedModeButton) {
             advancedModeButton.addEventListener('click', openAdvancedDashboard);
-    }
+        }
 
         // Remove any existing overlay
-    removeOverlay();
-
-    // Setup observer to remove overlay if added
-    const observer = new MutationObserver(() => {
         removeOverlay();
-    });
 
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
+        // Setup observer to remove overlay if added
+        const observer = new MutationObserver(() => {
+            removeOverlay();
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
 
         // Store cleanup functions
         const cleanup = () => {
@@ -3838,7 +3980,7 @@ const init = () => {
         // Add cleanup on page unload
         window.addEventListener('unload', cleanup);
 
-    console.info('Application initialized successfully');
+        console.info('Application initialized successfully');
         return true;
     } catch (error) {
         console.error('Failed to initialize application:', error);
@@ -3848,7 +3990,7 @@ const init = () => {
 
 // Initialize application when DOM is ready
 if (document.readyState === 'loading') {
-document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', init);
 } else {
     init();
 }
@@ -4146,7 +4288,9 @@ const fetchIPInfoDirect = async (ip) => {
     try {
         const response = await fetch(API_ENDPOINTS.CORS_PROXY, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({
                 url: `${API_ENDPOINTS.IP_INFO}${ip}?fields=${API_ENDPOINTS.IP_INFO_FIELDS}`
             })
@@ -4220,7 +4364,9 @@ const checkIPReputation = async (ip) => {
                 }
             } catch (error) {
                 console.warn(`[checkIPReputation] Failed to check ${source}:`, error);
-                results.sources[source] = { error: error.message };
+                results.sources[source] = {
+                    error: error.message
+                };
             }
         }
 
@@ -4269,11 +4415,11 @@ const checkThreatIntelligence = async (ip, source) => {
                 // All other APIs require authentication or are blocked by CORS
                 return {
                     source: source || 'Multiple Sources',
-                    riskScore: 0,
-                    riskFactors: [],
-                    lastSeen: null,
-                    confidence: 0,
-                    note: 'API requires authentication or is blocked by CORS policy'
+                        riskScore: 0,
+                        riskFactors: [],
+                        lastSeen: null,
+                        confidence: 0,
+                        note: 'API requires authentication or is blocked by CORS policy'
                 };
         }
     } catch (error) {
@@ -4337,7 +4483,10 @@ const verifyWeatherCorrelation = async (ip, lat, lon) => {
 
     const results = {
         ip,
-        coordinates: { lat, lon },
+        coordinates: {
+            lat,
+            lon
+        },
         timestamp: new Date().toISOString(),
         weatherData: null,
         correlation: 'unknown',
@@ -4371,19 +4520,30 @@ const verifyWeatherCorrelation = async (ip, lat, lon) => {
  */
 const getRealWeatherData = async (lat, lon) => {
     // Try multiple weather APIs for better reliability
-    const weatherAPIs = [
-        {
+    const weatherAPIs = [{
             name: 'Open-Meteo',
             url: `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&wind_speed_unit=kmh`,
             parser: (data) => {
                 const current = data.current;
                 const weatherCodeMap = {
-                    0: 'Clear Sky', 1: 'Mainly Clear', 2: 'Partly Cloudy', 3: 'Overcast',
-                    45: 'Fog', 48: 'Depositing Rime Fog',
-                    51: 'Light Drizzle', 53: 'Moderate Drizzle', 55: 'Dense Drizzle',
-                    61: 'Slight Rain', 63: 'Moderate Rain', 65: 'Heavy Rain',
-                    71: 'Slight Snow', 73: 'Moderate Snow', 75: 'Heavy Snow',
-                    80: 'Slight Rain Showers', 81: 'Moderate Rain Showers', 82: 'Violent Rain Showers'
+                    0: 'Clear Sky',
+                    1: 'Mainly Clear',
+                    2: 'Partly Cloudy',
+                    3: 'Overcast',
+                    45: 'Fog',
+                    48: 'Depositing Rime Fog',
+                    51: 'Light Drizzle',
+                    53: 'Moderate Drizzle',
+                    55: 'Dense Drizzle',
+                    61: 'Slight Rain',
+                    63: 'Moderate Rain',
+                    65: 'Heavy Rain',
+                    71: 'Slight Snow',
+                    73: 'Moderate Snow',
+                    75: 'Heavy Snow',
+                    80: 'Slight Rain Showers',
+                    81: 'Moderate Rain Showers',
+                    82: 'Violent Rain Showers'
                 };
                 return {
                     condition: weatherCodeMap[current.weather_code] || 'Unknown',
@@ -4747,7 +4907,9 @@ const setupNetworkDiscoveryHandlers = (windowElement, streamUrl) => {
             const networkData = globalState.rawData.networkDiscovery[ip];
             if (networkData) {
                 const dataStr = JSON.stringify(networkData, null, 2);
-                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const dataBlob = new Blob([dataStr], {
+                    type: 'application/json'
+                });
                 const url = URL.createObjectURL(dataBlob);
                 const link = document.createElement('a');
                 link.href = url;
@@ -4962,13 +5124,25 @@ const getPortRiskLevel = (port) => {
     const lowRiskPorts = [80, 443, 554, 8000, 8080, 8443];
 
     if (highRiskPorts.includes(port)) {
-        return { class: 'danger', text: 'High Risk' };
+        return {
+            class: 'danger',
+            text: 'High Risk'
+        };
     } else if (mediumRiskPorts.includes(port)) {
-        return { class: 'warning', text: 'Medium Risk' };
+        return {
+            class: 'warning',
+            text: 'Medium Risk'
+        };
     } else if (lowRiskPorts.includes(port)) {
-        return { class: 'secure', text: 'Low Risk' };
+        return {
+            class: 'secure',
+            text: 'Low Risk'
+        };
     } else {
-        return { class: 'warning', text: 'Unknown Risk' };
+        return {
+            class: 'warning',
+            text: 'Unknown Risk'
+        };
     }
 };
 
@@ -5104,7 +5278,9 @@ const setupInfoTabsScrolling = (windowElement) => {
         setTimeout(() => {
             infoTabs.style.scrollBehavior = 'auto';
         }, 150);
-    }, { passive: false });
+    }, {
+        passive: false
+    });
 
     // Middle mouse button drag scrolling
     let isMiddleMouseDown = false;
@@ -5159,7 +5335,9 @@ const setupInfoTabsScrolling = (windowElement) => {
     infoTabs.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].pageX - infoTabs.offsetLeft;
         touchScrollLeft = infoTabs.scrollLeft;
-    }, { passive: true });
+    }, {
+        passive: true
+    });
 
     infoTabs.addEventListener('touchmove', (e) => {
         if (!touchStartX) return;
@@ -5167,11 +5345,15 @@ const setupInfoTabsScrolling = (windowElement) => {
         const x = e.touches[0].pageX - infoTabs.offsetLeft;
         const walk = (x - touchStartX) * 1.5;
         infoTabs.scrollLeft = touchScrollLeft - walk;
-    }, { passive: true });
+    }, {
+        passive: true
+    });
 
     infoTabs.addEventListener('touchend', () => {
         touchStartX = 0;
-    }, { passive: true });
+    }, {
+        passive: true
+    });
 
     // Keyboard navigation support
     infoTabs.addEventListener('keydown', (e) => {
@@ -5238,7 +5420,10 @@ const setupInfoTabsScrolling = (windowElement) => {
     // Observe all tab buttons for class changes
     const tabButtons = infoTabs.querySelectorAll('.tab-button');
     tabButtons.forEach(button => {
-        observer.observe(button, { attributes: true, attributeFilter: ['class'] });
+        observer.observe(button, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
     });
 
     console.log('[setupInfoTabsScrolling] Enhanced scrolling enabled for info tabs');
@@ -5566,7 +5751,9 @@ const hideExportProgress = (windowElement) => {
  * Download file with given content
  */
 const downloadFile = (content, fileName, mimeType) => {
-    const blob = new Blob([content], { type: mimeType });
+    const blob = new Blob([content], {
+        type: mimeType
+    });
     const url = URL.createObjectURL(blob);
 
     const a = document.createElement('a');
@@ -5950,7 +6137,9 @@ const exportAllData = async (windowElement) => {
         fileName: fileName,
         timestamp: new Date().toISOString(),
         size: fileContent.length,
-        includeOptions: { all: true }
+        includeOptions: {
+            all: true
+        }
     });
 
     updateExportHistoryDisplay(windowElement);
@@ -6591,7 +6780,9 @@ const getTimezoneOffset = (timezone) => {
     try {
         const now = new Date();
         const utc = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
-        const targetTime = new Date(utc.toLocaleString('en-US', { timeZone: timezone }));
+        const targetTime = new Date(utc.toLocaleString('en-US', {
+            timeZone: timezone
+        }));
         const offsetMs = targetTime.getTime() - utc.getTime();
         const offsetHours = Math.round(offsetMs / (1000 * 60 * 60));
 
