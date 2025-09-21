@@ -14,6 +14,10 @@
         {
           "key": "Access-Control-Allow-Headers",
           "value": "Content-Type, Authorization, X-Requested-With"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: *; img-src 'self' data: blob: *; media-src 'self' data: blob: *; frame-src 'self' *; connect-src 'self' *;"
         }
       ]
     }

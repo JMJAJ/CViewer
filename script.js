@@ -1395,12 +1395,23 @@ const createMjpgIframePlayer = (url) => {
     container.style.height = '100%';
     container.style.position = 'relative';
 
+    // Check if we need to proxy HTTP streams on HTTPS
+    const isHttpsPage = window.location.protocol === 'https:';
+    const isHttpUrl = url.startsWith('http:');
+    let finalUrl = url;
+
+    if (isHttpsPage && isHttpUrl) {
+        // Use a CORS proxy for HTTP streams on HTTPS pages
+        finalUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`;
+        console.log('🔄 Using CORS proxy for HTTP MJPEG stream:', finalUrl);
+    }
+
     const iframe = document.createElement('iframe');
     iframe.className = 'mjpg-iframe-player';
     iframe.frameBorder = '0';
     iframe.width = '100%';
     iframe.height = '100%';
-    iframe.src = url;
+    iframe.src = finalUrl;
     iframe.allowFullscreen = true;
     iframe.style.border = 'none';
     iframe.style.display = 'block';
@@ -1410,8 +1421,8 @@ const createMjpgIframePlayer = (url) => {
     const refreshRate = 3000; // 3 seconds
 
     const refreshIframe = () => {
-        const separator = url.includes('?') ? '&' : '?';
-        iframe.src = url + separator + 't=' + Date.now();
+        const separator = finalUrl.includes('?') ? '&' : '?';
+        iframe.src = finalUrl + separator + 't=' + Date.now();
         console.log('🔄 Refreshed MJPG iframe');
     };
 
